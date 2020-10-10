@@ -20,22 +20,20 @@ public class LoginForm {
 		final TextBox passwordInput = new TextBox().addTo(panel);
 		passwordInput.setMask('*');
 		
-		panel.addComponent(new Label("I am a:"), GridLayout.createHorizontallyFilledLayoutData(2));
-		RadioBoxList<String> loginType = new RadioBoxList<String>();
-		loginType.addItem("Student");
-		loginType.addItem("Admin");
-		loginType.setCheckedItemIndex(0);
-		panel.addComponent(loginType, GridLayout.createHorizontallyFilledLayoutData(2));
+		panel.addComponent(new Label("I am a:"));
+        final ComboBox<String> loginTypeInput = new ComboBox<String>(Arrays.asList("Student", "Admin"), 0);
+		panel.addComponent(loginTypeInput, GridLayout.createHorizontallyFilledLayoutData(2));
 		
 		panel.addComponent(new EmptySpace(new TerminalSize(0, 0)));
 		new Button("Login", new Runnable() {
 			public void run() {
 				String username = usernameInput.getText();
 				String password = passwordInput.getText();
+				String loginType = loginTypeInput.getSelectedItem();
 				
 				status.setText("Login failed");
 				
-				System.out.println(String.format("%s %s",  username, password));
+				System.out.println(String.format("%s %s %s",  username, password, loginType));
 			}
 		}).addTo(panel);
 		
