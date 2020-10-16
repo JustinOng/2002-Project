@@ -9,9 +9,9 @@ import mystars.forms.Observer;
 import java.util.Arrays;
 
 public class LoginForm extends Observer {
-	private AbstractWindow window = new BasicWindow();
-
-	public LoginForm() {
+	public AbstractWindow getWindow() {
+		AbstractWindow window = new BasicWindow();
+		
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(2));
 
@@ -46,9 +46,7 @@ public class LoginForm extends Observer {
 		window.setTitle("Login");
 		window.addWindowListener(listener);
 		window.setHints(Arrays.asList(Window.Hint.CENTERED));
-	}
-
-	public AbstractWindow getWindow() {
+		
 		return window;
 	}
 
