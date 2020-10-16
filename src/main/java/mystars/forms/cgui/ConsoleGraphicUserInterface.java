@@ -1,6 +1,7 @@
 package mystars.forms.cgui;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.*;
@@ -16,6 +17,7 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	private MultiWindowTextGUI gui;
 
 	private LoginForm loginForm = new LoginForm();
+	private ItemSelectorForm itemSelectorForm = new ItemSelectorForm();
 
 	public ConsoleGraphicUserInterface(IUserInterfaceObserver observer) throws IOException {
 		Terminal terminal = new DefaultTerminalFactory().createTerminal();
@@ -25,9 +27,17 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 		gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
 
 		loginForm.addObserver(observer);
+		itemSelectorForm.addObserver(observer);
 	}
 
 	public void renderLoginForm() {
 		gui.addWindowAndWait(loginForm.getWindow());
+	}
+
+	public void renderItemSelectorForm(String itemType, List<String> items) {
+		itemSelectorForm.setItemType(itemType);
+		itemSelectorForm.setItemList(items);
+		
+		gui.addWindow(itemSelectorForm.getWindow());
 	}
 }
