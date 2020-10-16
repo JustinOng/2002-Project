@@ -1,50 +1,65 @@
-package mystars.forms;
+package mystars.forms.cgui;
 
-import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.gui2.*;
 
+import mystars.forms.IUserInterfaceObserver;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class LoginForm {
-	public static BasicWindow getWindow() {
+	private AbstractWindow window = new BasicWindow();
+	private ArrayList<IUserInterfaceObserver> observers = new ArrayList<IUserInterfaceObserver>();
+
+	public LoginForm() {
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(2));
-		
+
 		final Label status = new Label("");
 		panel.addComponent(status, GridLayout.createHorizontallyFilledLayoutData(2));
 
 		panel.addComponent(new Label("Username:"));
 		final TextBox usernameInput = new TextBox().addTo(panel);
-		
+
 		panel.addComponent(new Label("Password:"));
 		final TextBox passwordInput = new TextBox().addTo(panel);
 		passwordInput.setMask('*');
-		
+
 		panel.addComponent(new Label("I am a:"));
-        final ComboBox<String> loginTypeInput = new ComboBox<String>(Arrays.asList("Student", "Admin"), 0);
+		final ComboBox<String> loginTypeInput = new ComboBox<String>(Arrays.asList("Student", "Admin"), 0);
 		panel.addComponent(loginTypeInput, GridLayout.createHorizontallyFilledLayoutData(2));
-		
+
 		panel.addComponent(new EmptySpace(new TerminalSize(0, 0)));
 		new Button("Login", new Runnable() {
 			public void run() {
 				String username = usernameInput.getText();
 				String password = passwordInput.getText();
 				String loginType = loginTypeInput.getSelectedItem();
-				
-				status.setText("Login failed");
-				
-				System.out.println(String.format("%s %s %s",  username, password, loginType));
+
+				pushObserver(username, password, loginType);
 			}
 		}).addTo(panel);
-		
-		BasicWindow window = new BasicWindow();
+
 		window.setComponent(panel);
-		
+
 		KeyStrokeListener listener = new KeyStrokeListener();
 		window.setTitle("Login");
 		window.addWindowListener(listener);
-    	window.setHints(Arrays.asList(Window.Hint.CENTERED));
-		
+		window.setHints(Arrays.asList(Window.Hint.CENTERED));
+	}
+
+	public AbstractWindow getWindow() {
 		return window;
+	}
+
+	public void addObserver(IUserInterfaceObserver observer) {
+		this.observers.add(observer);
+	}
+
+	public void pushObserver(String username, String password, String loginType) {
+		for (IUserInterfaceObserver observer : this.observers) {
+			observer.onLogin(username, password, loginType);
+		}
 	}
 }

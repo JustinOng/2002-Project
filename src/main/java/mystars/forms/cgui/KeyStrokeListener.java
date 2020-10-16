@@ -1,4 +1,4 @@
-package mystars.forms;
+package mystars.forms.cgui;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 

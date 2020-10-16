@@ -1,27 +1,17 @@
 package mystars;
 
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.screen.TerminalScreen;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.Terminal;
-
-import mystars.forms.LoginForm;
-
-import com.googlecode.lanterna.gui2.*;
-
 import java.io.IOException;
 
-public class MySTARS {
+import mystars.forms.IUserInterfaceObserver;
+import mystars.forms.cgui.ConsoleGraphicUserInterface;
 
-	public static void main(String[] args) throws IOException {
-		Terminal terminal = new DefaultTerminalFactory().createTerminal();
-        Screen screen = new TerminalScreen(terminal);
-        screen.startScreen();
-        
-        final MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
-
-        gui.addWindowAndWait(LoginForm.getWindow());
+public class MySTARS implements IUserInterfaceObserver {
+	public MySTARS() throws IOException {
+		ConsoleGraphicUserInterface ui = new ConsoleGraphicUserInterface(this);
+		ui.renderLoginForm();
 	}
 
+	public void onLogin(String username, String password, String loginType) {
+		System.out.println(String.format("%s %s %s", username, password, loginType));
+	}
 }
