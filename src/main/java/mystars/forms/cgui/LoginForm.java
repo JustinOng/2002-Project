@@ -4,13 +4,12 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
 
 import mystars.forms.IUserInterfaceObserver;
+import mystars.forms.Observer;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
-public class LoginForm {
+public class LoginForm extends Observer {
 	private AbstractWindow window = new BasicWindow();
-	private ArrayList<IUserInterfaceObserver> observers = new ArrayList<IUserInterfaceObserver>();
 
 	public LoginForm() {
 		Panel panel = new Panel();
@@ -51,10 +50,6 @@ public class LoginForm {
 
 	public AbstractWindow getWindow() {
 		return window;
-	}
-
-	public void addObserver(IUserInterfaceObserver observer) {
-		this.observers.add(observer);
 	}
 
 	public void pushObserver(String username, String password, String loginType) {
