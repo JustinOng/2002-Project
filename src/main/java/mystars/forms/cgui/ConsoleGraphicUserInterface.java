@@ -20,6 +20,7 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	private ItemSelectorForm itemSelectorForm = new ItemSelectorForm();
 	private IndexSwopForm indexSwopForm = new IndexSwopForm();
 	private CreateStudentForm createStudentForm = new CreateStudentForm();
+	private CreateCourseForm createCourseForm = new CreateCourseForm();
 
 	public ConsoleGraphicUserInterface() throws IOException {
 		Terminal terminal = new DefaultTerminalFactory().createTerminal();
@@ -51,5 +52,9 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 
 	public CreateStudentResponse renderCreateStudentForm() {
 		return createStudentForm.getResponse(gui);
+	}
+	
+	public CreateCourseResponse renderCreateCourseForm() {
+		return createCourseForm.getResponse(gui);
 	}
 }

@@ -9,4 +9,5 @@ public interface IUserInterface {
 	public TextResponse renderItemSelectorForm(String itemType, List<String> items);
 	public TextResponse renderTextInput(String title, String description);
 	public CreateStudentResponse renderCreateStudentForm();
+	public CreateCourseResponse renderCreateCourseForm();
 }
