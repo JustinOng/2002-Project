@@ -1,6 +1,7 @@
 package mystars.forms.cgui;
 
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
@@ -27,13 +28,19 @@ public class CreateCourseForm {
 		final TextBox nameInput = new TextBox().addTo(panel);
 
 		panel.addComponent(new Label("School:"));
-		final ComboBox<String> schoolComboBox = new ComboBox<String>(Arrays.toString(School.values()).replaceAll("^.|.$", "").split(", ")).addTo(panel);
+		final ComboBox<String> schoolComboBox = new ComboBox<String>(
+				Arrays.toString(School.values()).replaceAll("^.|.$", "").split(", ")).addTo(panel);
+
+		panel.addComponent(new Label("AUs:"));
+		final TextBox auInput = new TextBox().addTo(panel);
+		auInput.setValidationPattern(Pattern.compile("^[0-9]+$"));
 
 		panel.addComponent(new EmptySpace(new TerminalSize(0, 0)));
 
 		new Button("Create", new Runnable() {
 			public void run() {
-				response = new CreateCourseResponse(codeInput.getText(), nameInput.getText(), School.valueOf(schoolComboBox.getText()));
+				response = new CreateCourseResponse(codeInput.getText(), nameInput.getText(),
+						School.valueOf(schoolComboBox.getText()), Integer.parseInt(auInput.getText()));
 				window.close();
 			}
 		}).addTo(panel);
