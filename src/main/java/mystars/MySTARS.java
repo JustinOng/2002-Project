@@ -13,8 +13,10 @@ public class MySTARS {
 //		LoginResponse response = ui.renderLoginForm();
 //		System.out.println(response.getUsername());
 //		SelectorResponse response = ui.renderStudentMenuForm(Arrays.asList("Course A", "Course B"));
-//		System.out.println(response.getSelected());
-		SelectorResponse response = ui.renderItemSelectorForm("Courses", Arrays.asList("Course A", "Course B"));
-		System.out.println(response.getSelected());
+//		System.out.println(response.getText());
+//		TextResponse response = ui.renderItemSelectorForm("Courses", Arrays.asList("Course A", "Course B"));
+//		System.out.println(response.getText());
+//		TextResponse response = ui.renderTextInput("Title!", "Description?");
+//		System.out.println(response.getText());
 	}
 }

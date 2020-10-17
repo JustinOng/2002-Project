@@ -9,10 +9,10 @@ import mystars.forms.*;
 
 public class ItemSelectorForm implements RadioBoxList.Listener {
 	private AbstractWindow window = new BasicWindow();
-	private SelectorResponse response;
+	private TextResponse response;
 	private List<String> items;
 	
-	public SelectorResponse getResponse(MultiWindowTextGUI gui, String title, List<String> items) {
+	public TextResponse getResponse(MultiWindowTextGUI gui, String title, List<String> items) {
 		this.items = items;
 
 		RadioBoxList<String> radioBoxList = new RadioBoxList<String>();
@@ -35,7 +35,7 @@ public class ItemSelectorForm implements RadioBoxList.Listener {
 	}
 
 	public void onSelectionChanged(int selectedIndex, int previousSelection) {
-		response = new SelectorResponse(items.get(selectedIndex));
+		response = new TextResponse(items.get(selectedIndex));
 		window.close();
 	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface IUserInterface {
 	public LoginResponse renderLoginForm();
-	public SelectorResponse renderStudentMenuForm(List<String> courses);
-	public SelectorResponse renderItemSelectorForm(String itemType, List<String> items);
+	public TextResponse renderStudentMenuForm(List<String> courses);
+	public TextResponse renderItemSelectorForm(String itemType, List<String> items);
+	public TextResponse renderTextInput(String title, String description);
 }

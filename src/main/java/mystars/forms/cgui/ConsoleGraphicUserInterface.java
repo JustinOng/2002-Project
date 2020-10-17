@@ -31,16 +31,13 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 		return loginForm.getResponse(gui);
 	}
 	
-	public SelectorResponse renderStudentMenuForm(List<String> courses) {
+	public TextResponse renderStudentMenuForm(List<String> courses) {
 		return studentMenuForm.getResponse(gui, courses);
 	}
 
-	public SelectorResponse renderItemSelectorForm(String itemType, List<String> items) {
+	public TextResponse renderItemSelectorForm(String itemType, List<String> items) {
 		return itemSelectorForm.getResponse(gui, itemType, items);
 	}
 
-	public void renderCourseInputForm() {
-		// TODO Auto-generated method stub
-		
 	}
 }
