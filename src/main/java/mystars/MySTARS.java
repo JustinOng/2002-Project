@@ -18,5 +18,7 @@ public class MySTARS {
 //		System.out.println(response.getText());
 //		TextResponse response = ui.renderTextInput("Title!", "Description?");
 //		System.out.println(response.getText());
+		IndexSwopResponse response = ui.renderIndexSwopForm();
+//		System.out.println(response.getText());
 	}
 }
