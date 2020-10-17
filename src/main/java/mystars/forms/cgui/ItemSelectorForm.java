@@ -5,17 +5,17 @@ import java.util.Arrays;
 
 import com.googlecode.lanterna.gui2.*;
 
-import mystars.forms.IUserInterfaceObserver;
-import mystars.forms.Observer;
+import mystars.forms.*;
 
-public class ItemSelectorForm extends Observer implements RadioBoxList.Listener {
-	private String itemLabel;
+public class ItemSelectorForm implements RadioBoxList.Listener {
+	private AbstractWindow window = new BasicWindow();
+	private SelectorResponse response;
 	private List<String> items;
+	
+	public SelectorResponse getResponse(MultiWindowTextGUI gui, String title, List<String> items) {
+		this.items = items;
 
-	public AbstractWindow getWindow() {
-		AbstractWindow window = new BasicWindow();
-
-		final RadioBoxList<String> radioBoxList = new RadioBoxList<String>();
+		RadioBoxList<String> radioBoxList = new RadioBoxList<String>();
 		radioBoxList.addListener(this);
 		for (String s : items) {
 			radioBoxList.addItem(s);
@@ -23,29 +23,19 @@ public class ItemSelectorForm extends Observer implements RadioBoxList.Listener 
 		
 		window.setComponent(radioBoxList);
 		
-		window.setTitle(itemLabel);
+		window.setTitle(title);
 		window.setHints(Arrays.asList(Window.Hint.CENTERED));
+		
 		KeyStrokeListener listener = new KeyStrokeListener();
 		window.addWindowListener(listener);
+		
+		gui.addWindowAndWait(window);
 
-		return window;
-	}
-
-	public void pushObserver(String item) {
-		for (IUserInterfaceObserver observer : this.observers) {
-			observer.onItemSelect(itemLabel, item);
-		}
-	}
-
-	public void setItemType(String itemType) {
-		this.itemLabel = itemType;
-	}
-
-	public void setItemList(List<String> items) {
-		this.items = items;
+		return response;
 	}
 
 	public void onSelectionChanged(int selectedIndex, int previousSelection) {
-		pushObserver(items.get(selectedIndex));
+		response = new SelectorResponse(items.get(selectedIndex));
+		window.close();
 	}
 }

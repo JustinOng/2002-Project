@@ -3,14 +3,15 @@ package mystars.forms.cgui;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
 
-import mystars.forms.IUserInterfaceObserver;
-import mystars.forms.Observer;
+import mystars.forms.*;
 
 import java.util.Arrays;
 
-public class LoginForm extends Observer {
-	public AbstractWindow getWindow() {
-		AbstractWindow window = new BasicWindow();
+public class LoginForm {
+	private LoginResponse response;
+	
+	public LoginResponse getResponse(MultiWindowTextGUI gui) {
+		final AbstractWindow window = new BasicWindow();
 		
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(2));
@@ -30,13 +31,15 @@ public class LoginForm extends Observer {
 		panel.addComponent(loginTypeInput, GridLayout.createHorizontallyFilledLayoutData(2));
 
 		panel.addComponent(new EmptySpace(new TerminalSize(0, 0)));
+		
 		new Button("Login", new Runnable() {
 			public void run() {
 				String username = usernameInput.getText();
 				String password = passwordInput.getText();
 				String loginType = loginTypeInput.getSelectedItem();
 
-				pushObserver(username, password, loginType);
+				response = new LoginResponse(username, password, loginType);
+				window.close();
 			}
 		}).addTo(panel);
 
@@ -47,12 +50,8 @@ public class LoginForm extends Observer {
 		window.addWindowListener(listener);
 		window.setHints(Arrays.asList(Window.Hint.CENTERED));
 		
-		return window;
-	}
-
-	public void pushObserver(String username, String password, String loginType) {
-		for (IUserInterfaceObserver observer : this.observers) {
-			observer.onLogin(username, password, loginType);
-		}
+		gui.addWindowAndWait(window);
+		
+		return response;
 	}
 }

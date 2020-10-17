@@ -10,34 +10,37 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
-import mystars.forms.IUserInterface;
-import mystars.forms.IUserInterfaceObserver;
+import mystars.forms.*;
 
 public class ConsoleGraphicUserInterface implements IUserInterface {
 	private MultiWindowTextGUI gui;
 
 	private LoginForm loginForm = new LoginForm();
+	private StudentMenuForm studentMenuForm = new StudentMenuForm();
 	private ItemSelectorForm itemSelectorForm = new ItemSelectorForm();
 
-	public ConsoleGraphicUserInterface(IUserInterfaceObserver observer) throws IOException {
+	public ConsoleGraphicUserInterface() throws IOException {
 		Terminal terminal = new DefaultTerminalFactory().createTerminal();
 		Screen screen = new TerminalScreen(terminal);
 		screen.startScreen();
 
 		gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
-
-		loginForm.addObserver(observer);
-		itemSelectorForm.addObserver(observer);
 	}
 
-	public void renderLoginForm() {
-		gui.addWindowAndWait(loginForm.getWindow());
+	public LoginResponse renderLoginForm() {
+		return loginForm.getResponse(gui);
+	}
+	
+	public SelectorResponse renderStudentMenuForm(List<String> courses) {
+		return studentMenuForm.getResponse(gui, courses);
 	}
 
-	public void renderItemSelectorForm(String itemType, List<String> items) {
-		itemSelectorForm.setItemType(itemType);
-		itemSelectorForm.setItemList(items);
+	public SelectorResponse renderItemSelectorForm(String itemType, List<String> items) {
+		return itemSelectorForm.getResponse(gui, itemType, items);
+	}
+
+	public void renderCourseInputForm() {
+		// TODO Auto-generated method stub
 		
-		gui.addWindow(itemSelectorForm.getWindow());
 	}
 }
