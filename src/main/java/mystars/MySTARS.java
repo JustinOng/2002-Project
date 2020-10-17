@@ -12,6 +12,8 @@ public class MySTARS {
 	public MySTARS() throws IOException {
 //		LoginResponse response = ui.renderLoginForm();
 //		System.out.println(response.getUsername());
+//		SelectorResponse response = ui.renderStudentMenuForm(Arrays.asList("Course A", "Course B"));
+//		System.out.println(response.getSelected());
 		SelectorResponse response = ui.renderItemSelectorForm("Courses", Arrays.asList("Course A", "Course B"));
 		System.out.println(response.getSelected());
 	}
