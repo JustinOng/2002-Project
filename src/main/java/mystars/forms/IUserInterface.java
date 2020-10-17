@@ -10,4 +10,5 @@ public interface IUserInterface {
 	public TextResponse renderTextInput(String title, String description);
 	public CreateStudentResponse renderCreateStudentForm();
 	public CreateCourseResponse renderCreateCourseForm();
+	public CreateIndexResponse renderCreateIndexForm();
 }
