@@ -39,8 +39,8 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 		return studentMenuForm.getResponse(gui, courses);
 	}
 
-	public TextResponse renderItemSelectorForm(String itemType, List<String> items) {
-		return itemSelectorForm.getResponse(gui, itemType, items);
+	public TextResponse renderItemSelectorForm(String title, List<String> items) {
+		return itemSelectorForm.getResponse(gui, title, items);
 	}
 
 	public TextResponse renderTextInput(String title, String description) {
