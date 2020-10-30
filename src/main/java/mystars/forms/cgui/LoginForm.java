@@ -10,13 +10,13 @@ import java.util.Arrays;
 public class LoginForm {
 	private LoginResponse response;
 	
-	public LoginResponse getResponse(MultiWindowTextGUI gui) {
+	public LoginResponse getResponse(MultiWindowTextGUI gui, String msg) {
 		final AbstractWindow window = new BasicWindow();
 		
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(2));
 
-		final Label status = new Label("");
+		final Label status = new Label(msg);
 		panel.addComponent(status, GridLayout.createHorizontallyFilledLayoutData(2));
 
 		panel.addComponent(new Label("Username:"));

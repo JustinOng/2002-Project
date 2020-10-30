@@ -31,8 +31,8 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 		gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
 	}
 
-	public LoginResponse renderLoginForm() {
-		return loginForm.getResponse(gui);
+	public LoginResponse renderLoginForm(String msg) {
+		return loginForm.getResponse(gui, msg);
 	}
 	
 	public TextResponse renderStudentMenuForm(List<String> courses) {
