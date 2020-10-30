@@ -1,6 +1,7 @@
 package mystars.entities;
 
 import mystars.enums.*;
+import mystars.exceptions.*;
 
 /**
  * <h1>Class: student</h1>
@@ -25,14 +26,15 @@ public class Student extends User {
 	 * 
 	 * @param name        The student's name.
 	 * @param matricNo    The student's matriculation number.
-	 * @param userName    The student's username.
+	 * @param username    The student's username.
 	 * @param password    The student's password.
 	 * @param gender      The student's gender.
 	 * @param nationality The student's nationality.
+	 * @throws UserAlreadyExistsException 
 	 */
-	public Student(String name, String matricNo, String userName, String password, Gender gender,
-			Nationality nationality) {
-		super(userName, password);
+	public Student(String name, String matricNo, String username, String password, Gender gender,
+			Nationality nationality) throws UserAlreadyExistsException {
+		super(username, password);
 		this.matricNo = matricNo;
 
 		this.gender = gender;

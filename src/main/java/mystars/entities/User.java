@@ -6,7 +6,7 @@ package mystars.entities;
  * This user class serves as the superclass for 'admin' and 'student'.
  * It manages the verification of a user's password when logging in.
  * 
- * @param userName The user name assigned to the admin or student user
+ * @param username The user name assigned to the admin or student user
  * instantiated by the subclasses.
  * 
  * @param passwordHash The hash of the password for an instance of the user

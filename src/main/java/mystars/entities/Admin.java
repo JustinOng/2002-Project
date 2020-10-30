@@ -1,6 +1,6 @@
 package mystars.entities;
 
-import mystars.exceptions.UserAlreadyExistsException;
+import mystars.exceptions.*;
 
 /**
  * <h1>Class: admin</h1>

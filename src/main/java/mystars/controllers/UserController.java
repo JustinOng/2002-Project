@@ -2,6 +2,7 @@ package mystars.controllers;
 
 import mystars.entities.*;
 import mystars.enums.*;
+import mystars.exceptions.*;
 
 /**
  * <h1>Class: userController</h1>
@@ -25,9 +26,10 @@ public class UserController {
 	 * @param password    The student's password.
 	 * @param gender      The student's gender.
 	 * @param nationality The student's nationality.
+	 * @throws UserAlreadyExistsException 
 	 */
 	public void createStudent(String name, String matricNo, String userName, String password, Gender gender,
-			Nationality nationality) {
+			Nationality nationality) throws UserAlreadyExistsException {
 		Student mystudent = new Student(name, matricNo, userName, password, gender, nationality);
 	}
 
