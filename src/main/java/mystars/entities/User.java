@@ -19,20 +19,23 @@ package mystars.entities;
  * names and their password hashes.  
  */
 
-import java.math.BigInteger;
+import java.util.*;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import java.util.HashMap;
 
-public class User {
-	protected String userName;
-	private String passwordHash;
+import mystars.exceptions.*;
+
+public abstract class User {
+	protected String username;
+	private byte[] passwordHash;
 	protected boolean isAdmin = false;
 
 	// Hashmap tables contain mapped key pair values.
-	HashMap<String, User> users = new HashMap<String, User>();
+	private static HashMap<String, User> users = new HashMap<String, User>();
 
 	/**
 	 * This method
@@ -42,8 +45,9 @@ public class User {
 	 * @param userName The user's username.
 	 * @param password Theuser's password.
 	 */
-	protected User(String userName, String password) {
-
+	protected User(String username, String password) {
+		this.username = username;
+		this.passwordHash = hashString(password);
 	}
 
 	/*
@@ -51,47 +55,22 @@ public class User {
 	 * for calculating password hash.
 	 */
 
-	public static byte[] getSHA(String input) throws NoSuchAlgorithmException {
+	private static byte[] hashString(String input) {
 		// Static getInstance method is called with hashing SHA
-		MessageDigest md = MessageDigest.getInstance("SHA-256");
+		MessageDigest md;
+		try {
+			md = MessageDigest.getInstance("SHA-256");
+		} catch (NoSuchAlgorithmException e) {
+			// convert to unchecked exception (since if it happens, treat it as fatal)
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
 
 		// digest() method called
 		// to calculate message digest of an input
 		// and return array of byte
 		return md.digest(input.getBytes(StandardCharsets.UTF_8));
 	}
-
-	public static String toHexString(byte[] hash) {
-		// Convert byte array into signum representation
-		BigInteger number = new BigInteger(1, hash);
-
-		// Convert message digest into hex value
-		StringBuilder hexString = new StringBuilder(number.toString(16));
-
-		// Pad with leading zeros
-		while (hexString.length() < 32) {
-			hexString.insert(0, '0');
-		}
-		return hexString.toString();
-	}
-
-	/**
-	 * This method calculates the hash of the user's password using the SHA-256
-	 * algorithm.
-	 * 
-	 * @param input The user's plain text password.
-	 * @return The SHA-256 hash of the user's password.
-	 */
-	protected String hashPassword(String input) {
-		// Try to compute the hash.
-		try {
-			return toHexString(getSHA(input));
-		}
-		// If the hash calculation fails.
-		catch (NoSuchAlgorithmException e) {
-			System.out.println("Exception thrown for incorrect algorithm: " + e);
-		}
-		return "Hash not successfully generated.";
 	}
 
 	/**
