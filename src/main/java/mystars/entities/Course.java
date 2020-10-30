@@ -85,6 +85,13 @@ public class Course {
 	public void register(Student student, int indexNo) throws IndexNotFoundException, StudentAlreadyEnrolledException {
 		// check if student is already registered
 		// MUST DO ON thurs IF NOT NO SLEEP
+		
+		for (Index i : indexes.values()) {
+			if (i.hasStudent(student)) {
+				throw new StudentAlreadyEnrolledException();
+			}
+		}
+		
 		Index index = getIndex(indexNo);
 		// add student to the specific course index of studentList
 		index.addStudent(student); // throw exception if there is no vacancy in index class
