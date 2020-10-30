@@ -1,5 +1,7 @@
 package mystars.entities;
 
+import mystars.exceptions.UserAlreadyExistsException;
+
 /**
  * <h1>Class: admin</h1>
  * 
@@ -11,13 +13,14 @@ public class Admin extends User
 	/**
 	 * This class is responsible for the creation of an administrator object.
 	 * 
-	 * @param userName The administrator's username.
+	 * @param username The administrator's username.
 	 * @param password The administrator's password.
 	 * @param isAdmin Boolean variable set to true as objects from this class have admin rights.
+	 * @throws UserAlreadyExistsException 
 	 */
-	public Admin(String userName, String password)
+	public Admin(String username, String password) throws UserAlreadyExistsException
 	{
-		super(userName, password);
+		super(username, password);
 		isAdmin = true;
 	}
 }
