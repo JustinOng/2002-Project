@@ -29,6 +29,7 @@ public class userController
 	public void createStudent(String name, String matricNo, String userName, String password, Gender gender, Nationality nationality)
 	{
 		student mystudent = new student(name, matricNo, userName, password, null, null);
+		System.out.println("New student " + name + " successfully added.");
 	}
 	
 	/**

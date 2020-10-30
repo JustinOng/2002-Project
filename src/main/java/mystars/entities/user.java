@@ -18,6 +18,7 @@ package mystars.entities;
  * names and their password hashes.  
  */
 
+//Libraries for the SHA-256 hashing function.
 import java.math.BigInteger;  
 import java.nio.charset.StandardCharsets; 
 import java.security.MessageDigest;  
@@ -44,7 +45,7 @@ public class user
 	 */
 	protected user(String userName, String password)
 	{
-		
+		this.userName = userName;
 	}
 	
 	/*
@@ -91,20 +92,21 @@ public class user
 		//Try to compute the hash.
 		try 
         {  
-            return toHexString(getSHA(input));
+			passwordHash = toHexString(getSHA(input));
+            return passwordHash;
         } 
         //If the hash calculation fails.
         catch (NoSuchAlgorithmException e) {
             System.out.println("Exception thrown for incorrect algorithm: " + e);  
         }
-		return "Hash not successfully generated.";
+		return "Password hash not successfully generated.";
 	}
 	
 	/**
 	 * This method
 	 * 
 	 * @param userName The user's username.
-	 * @param password Theuser's password. 
+	 * @param password The user's password. 
 	 */
 	public static user login(String userName, String password)
 	{
