@@ -64,10 +64,10 @@ public class Course {
 	}
 
 	public void createLesson(int indexNo, LessonType lessonType, Day day, String location, String groupNo,
-			boolean[] week, int period) throws IndexNotFoundException {
+			boolean[] week, int startPeriod, int endPeriod) throws IndexNotFoundException {
 		// no String courseCode i think
 		Index index = getIndex(indexNo);
-		index.createLesson(lessonType, day, location, groupNo, week, period);
+		index.createLesson(lessonType, day, location, groupNo, week, startPeriod, endPeriod);
 	}
 
 	public ArrayList<Student> getStudentList() {

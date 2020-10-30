@@ -22,8 +22,9 @@ public class Index {
 		this.waitlist = new ArrayList<Student>();
 	}
 
-	public void createLesson(LessonType type, Day day, String location, String groupNo, boolean[] week, int period) {
-		Lesson l = new Lesson(this, type, day, location, groupNo, week, period);
+	public void createLesson(LessonType type, Day day, String location, String groupNo, boolean[] week, int startPeriod,
+			int endPeriod) {
+		Lesson l = new Lesson(this, type, day, location, groupNo, week, startPeriod, endPeriod);
 		this.lessons.add(l);
 	}
 

@@ -30,9 +30,10 @@ public class CourseController {
 
 // Unsure about the parameters in the function are in the correct format
 	public void createLesson(String courseCode, int indexNo, LessonType lessonType, Day day, String location,
-			String groupNo, boolean[] week) {
+			String groupNo, boolean[] week, int startPeriod, int endPeriod)
+			throws CourseNotFoundException, IndexNotFoundException {
 		Course c = Course.getCourse(courseCode);
-		c.createLesson(indexNo, lessonType, day, location, groupNo, week);
+		c.createLesson(indexNo, lessonType, day, location, groupNo, week, startPeriod, endPeriod);
 	}
 
 	public void registerCourse(Student student, String courseCode, int indexNo)
@@ -42,7 +43,7 @@ public class CourseController {
 	}
 
 	public void dropCourse(Student student, int indexNo, String courseCode)
-			throws CourseNotFoundException, IndexNotFoundException {
+			throws CourseNotFoundException, IndexNotFoundException, StudentNotEnrolledException {
 		Course c = Course.getCourse(courseCode);
 		c.drop(student, indexNo);
 	}
