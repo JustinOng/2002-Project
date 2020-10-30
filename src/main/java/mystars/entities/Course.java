@@ -26,7 +26,7 @@ public class Course {
 	}
 
 // get the course according to the course code
-	public static Course getCourse(String courseCode) {
+	public static Course getCourse(String courseCode) throws CourseNotFoundException {
 		if (courses.containsKey(courseCode)) {
 			return courses.get(courseCode);
 		}
@@ -55,7 +55,7 @@ public class Course {
 		indexes.put(indexNo, index);
 	}
 
-	private Index getIndex(int indexNo) {
+	private Index getIndex(int indexNo) throws IndexNotFoundException {
 		if (indexes.containsKey(indexNo)) {
 			return indexes.get(indexNo);
 		}
@@ -64,7 +64,7 @@ public class Course {
 	}
 
 	public void createLesson(int indexNo, LessonType lessonType, Day day, String location, String groupNo,
-			boolean[] week, int period) {
+			boolean[] week, int period) throws IndexNotFoundException {
 		// no String courseCode i think
 		Index index = getIndex(indexNo);
 		index.createLesson(lessonType, day, location, groupNo, week, period);
@@ -82,7 +82,7 @@ public class Course {
 		return studentList;
 	}
 
-	public void register(Student student, int indexNo) {
+	public void register(Student student, int indexNo) throws IndexNotFoundException, StudentAlreadyEnrolledException {
 		// check if student is already registered
 		// MUST DO ON thurs IF NOT NO SLEEP
 		Index index = getIndex(indexNo);
@@ -90,7 +90,7 @@ public class Course {
 		index.addStudent(student); // throw exception if there is no vacancy in index class
 	}
 
-	public void drop(Student student, int indexNo) {
+	public void drop(Student student, int indexNo) throws IndexNotFoundException, StudentNotEnrolledException {
 		// exception case
 		// MUST DO ON thurs IF NOT NO SLEEP
 		// Do find the index which have the student, then do index.removestudent
@@ -99,7 +99,8 @@ public class Course {
 		index.removeStudent(student);
 	}
 
-	public void swopIndex(Student studentA, int indexNoA, Student studentB, int indexNoB) {
+	public void swopIndex(Student studentA, int indexNoA, Student studentB, int indexNoB)
+			throws IndexNotFoundException, StudentNotEnrolledException {
 		// check whether both student has index
 		// MUST DO ON thurs IF NOT NO SLEEP (sleeping bag?)
 		Index indexA = getIndex(indexNoA);
@@ -111,8 +112,13 @@ public class Course {
 
 		indexA.removeStudent(studentA, false); // false to prevent waitlist from triggering
 		indexB.removeStudent(studentB, false);
-		indexA.addStudent(studentB);
-		indexB.addStudent(studentA);
+		try {
+			indexA.addStudent(studentB);
+			indexB.addStudent(studentA);
+		} catch (StudentAlreadyEnrolledException e) {
+			// this should never happen - we just removed the students
+			e.printStackTrace();
+		}
 	}
 
 }

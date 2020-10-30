@@ -23,7 +23,7 @@ public class CourseController {
 		Course course = new Course(name, courseCode, School);
 	}
 
-	public void createIndex(String courseCode, int indexNo, int maxEnrolled) {
+	public void createIndex(String courseCode, int indexNo, int maxEnrolled) throws CourseNotFoundException {
 		Course c = Course.getCourse(courseCode);
 		c.createIndex(indexNo, maxEnrolled);
 	}
@@ -35,24 +35,28 @@ public class CourseController {
 		c.createLesson(indexNo, lessonType, day, location, groupNo, week);
 	}
 
-	public void registerCourse(Student student, String courseCode, int indexNo) {
+	public void registerCourse(Student student, String courseCode, int indexNo)
+			throws CourseNotFoundException, IndexNotFoundException, StudentAlreadyEnrolledException {
 		Course c = Course.getCourse(courseCode);
 		c.register(student, indexNo);
 	}
 
-	public void dropCourse(Student student, int indexNo, String courseCode) {
+	public void dropCourse(Student student, int indexNo, String courseCode)
+			throws CourseNotFoundException, IndexNotFoundException {
 		Course c = Course.getCourse(courseCode);
 		c.drop(student, indexNo);
 	}
 
-	public void changeIndex(String courseCode, Student student, int curIndexNo, int targetIndexNo) {
+	public void changeIndex(String courseCode, Student student, int curIndexNo, int targetIndexNo)
+			throws CourseNotFoundException, IndexNotFoundException, StudentAlreadyEnrolledException {
 		Course c = Course.getCourse(courseCode);
 		// Do we need to include condition before the code below
 		c.drop(student, curIndexNo);
 		c.register(student, targetIndexNo);
 	}
 
-	public void swopIndex(String courseCode, Student studentA, int indexNoA, Student studentB, int indexNoB) {
+	public void swopIndex(String courseCode, Student studentA, int indexNoA, Student studentB, int indexNoB)
+			throws CourseNotFoundException, IndexNotFoundException, StudentNotEnrolledException {
 		Course c = Course.getCourse(courseCode);
 		c.swopIndex(studentA, indexNoA, studentB, indexNoB);
 	}
