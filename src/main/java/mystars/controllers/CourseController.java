@@ -48,11 +48,9 @@ public class CourseController {
 	}
 
 	public void changeIndex(String courseCode, Student student, int curIndexNo, int targetIndexNo)
-			throws CourseNotFoundException, IndexNotFoundException, StudentAlreadyEnrolledException {
+			throws CourseNotFoundException, IndexNotFoundException, StudentNotEnrolledException, IndexFullException {
 		Course c = Course.getCourse(courseCode);
-		// Do we need to include condition before the code below
-		c.drop(student, curIndexNo);
-		c.register(student, targetIndexNo);
+		c.changeIndex(student, curIndexNo, targetIndexNo);
 	}
 
 	public void swopIndex(String courseCode, Student studentA, int indexNoA, Student studentB, int indexNoB)

@@ -128,4 +128,23 @@ public class Course {
 		}
 	}
 
+	public void changeIndex(Student student, int curIndexNo, int targetIndexNo)
+			throws IndexNotFoundException, IndexFullException, StudentNotEnrolledException {
+		Index indexCur = getIndex(curIndexNo);
+		Index indexTarget = getIndex(targetIndexNo);
+
+		if (indexTarget.getVacancies() == 0) {
+			// we explicitly want vacancies here so that the student cannot be swap to a waitlisted index
+			throw new IndexFullException();
+		}
+		
+		indexCur.removeStudent(student);
+		
+		try {
+			indexTarget.addStudent(student);
+		} catch (StudentAlreadyEnrolledException e) {
+			// this cannot happen - one Student cannot be enrolled in more than one index of the same course
+			e.printStackTrace();
+		}
+	}
 }
