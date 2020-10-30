@@ -48,6 +48,8 @@ public abstract class User {
 	protected User(String username, String password) {
 		this.username = username;
 		this.passwordHash = hashString(password);
+
+		users.put(username, this);
 	}
 
 	/*
@@ -71,16 +73,25 @@ public abstract class User {
 		// and return array of byte
 		return md.digest(input.getBytes(StandardCharsets.UTF_8));
 	}
-	}
 
 	/**
 	 * This method
 	 * 
 	 * @param userName The user's username.
 	 * @param password Theuser's password.
+	 * @throws InvalidLoginException
 	 */
-	public static User login(String userName, String password) {
-		return null;
+	public static User login(String username, String password) throws InvalidLoginException {
+		if (!users.containsKey(username)) {
+			throw new InvalidLoginException();
+		}
+
+		User user = users.get(username);
+		if (!user.login(password)) {
+			throw new InvalidLoginException();
+		}
+
+		return user;
 	}
 
 	/**
@@ -88,7 +99,7 @@ public abstract class User {
 	 * 
 	 * @param password The user's password.
 	 */
-	public User login(String password) {
-		return null;
+	public boolean login(String password) {
+		return Arrays.equals(hashString(password), this.passwordHash);
 	}
 }
