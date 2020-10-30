@@ -46,7 +46,7 @@ public class Index {
 			this.waitlist.add(student);
 		}
 	}
-	
+
 	public void removeStudent(Student student) throws StudentNotEnrolledException {
 		removeStudent(student, true);
 	}
@@ -61,8 +61,25 @@ public class Index {
 			this.enrolled.add(this.waitlist.remove(0));
 		}
 	}
-	
+
 	public boolean hasStudent(Student student) {
 		return this.enrolled.contains(student);
+	}
+
+	public boolean belongsToSameCourse(Index index) {
+		return this.course.equals(index.course);
+	}
+
+	public boolean clashesWith(Index index) {
+		// yes, this is inefficient, much smarter to handle clash in Timetable
+		for (Lesson l1 : lessons) {
+			for (Lesson l2 : index.lessons) {
+				if (l1.clashesWith(l2)) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 }
