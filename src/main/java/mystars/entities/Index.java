@@ -3,6 +3,7 @@ package mystars.entities;
 import java.util.ArrayList;
 
 import mystars.enums.*;
+import mystars.exceptions.*;
 
 public class Index {
 
@@ -13,13 +14,12 @@ public class Index {
 	private ArrayList<Student> enrolled;
 	private ArrayList<Student> waitlist;
 
-	public Index(Course course, int indexNo, int maxEnrolled, int maxWaitlist) {
+	public Index(Course course, int indexNo, int maxEnrolled) {
 		this.indexNo = indexNo;
 		this.course = course;
 		this.maxEnrolled = maxEnrolled;
-		this.maxWaitlist = maxWaitlist;
-		this.enrolled = new ArrayList<Student>;
-		this.waitlist = new ArrayList<Student>;
+		this.enrolled = new ArrayList<Student>();
+		this.waitlist = new ArrayList<Student>();
 	}
 
 	public void createLesson(LessonType type, Day day, String location, String groupNo, boolean[] week, int period) {
@@ -36,26 +36,33 @@ public class Index {
 	}
 
 	public void addStudent(Student student) {
-		try {
-			if (enrolled.size() < this.maxEnrolled) {
-				this.enrolled.add(student);
-			} else if (waitlist.size() < maxWaitlist) {
-				this.waitlist.add(student);
-			}
-		} catch (Exception e) {
-			throw e;
+		if (enrolled.contains(student)) {
+			throw new StudentAlreadyEnrolledException();
 		}
+
+		if (enrolled.size() < this.maxEnrolled) {
+			this.enrolled.add(student);
+		} else {
+			this.waitlist.add(student);
+		}
+	}
+	
+	public void removeStudent(Student student) {
+		removeStudent(student, true);
 	}
 
 	public void removeStudent(Student student, boolean allocateWaitlist) {
-		try {
-			this.enrolled.remove(student);
-		} catch (Exception e) {
-			System.out.println("Student not enrolled.");
+		if (!this.enrolled.contains(student)) {
+			throw new StudentNotEnrolledException();
 		}
+
+		this.enrolled.remove(student);
 		if (allocateWaitlist == true && this.waitlist.isEmpty() == false) {
 			this.enrolled.add(this.waitlist.remove(0));
 		}
 	}
-
+	
+	public boolean hasStudent(Student student) {
+		return this.enrolled.contains(student);
+	}
 }

@@ -2,8 +2,6 @@ package mystars.entities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Iterator;
 
 import mystars.enums.*;
 import mystars.exceptions.*;
@@ -32,7 +30,7 @@ public class Course {
 		if (courses.containsKey(courseCode)) {
 			return courses.get(courseCode);
 		}
-		
+
 		throw new CourseNotFoundException();
 	}
 
@@ -53,7 +51,7 @@ public class Course {
 
 	public void createIndex(int indexNo, int maxEnrolled) {
 		// ask why does create index only have 2 parameter but the index class have 6
-		Index index = new Index(indexNo, maxEnrolled);
+		Index index = new Index(this, indexNo, maxEnrolled);
 		indexes.put(indexNo, index);
 	}
 
@@ -101,53 +99,20 @@ public class Course {
 		index.removeStudent(student);
 	}
 
-	public void swopIndex(Student studentA, int indexA, Student studentB, int indexB) {
+	public void swopIndex(Student studentA, int indexNoA, Student studentB, int indexNoB) {
 		// check whether both student has index
 		// MUST DO ON thurs IF NOT NO SLEEP (sleeping bag?)
-		Index index1 = indexes.get(indexA);
-		Index index2 = indexes.get(indexB);
-		ArrayList<Student> StudentList1 = index1.getStudentList();
-		ArrayList<Student> StudentList2 = index2.getStudentList();
-		int compareValue1, compareValue2;
+		Index indexA = getIndex(indexNoA);
+		Index indexB = getIndex(indexNoB);
 
-		for (int i = 0; i < StudentList1.size(); i++) {
-			compareValue1 = (studentA.getName() == StudentList1.get(i)); // if same string return 0
-			try {
-				if (compareValue1 != 0) {
-
-					throw new ExceptionCourse(studentA.getName() + " not found in the index, " + index1);
-				}
-
-			} catch (ExceptionCourse e) {
-
-				System.err.print(e);
-
-			}
-
-		}
-		for (int i = 0; i < StudentList1.size(); i++) {
-			compareValue2 = (studentB.getName() == StudentList2.get(i)); // if same string return 0
-			try {
-				if (compareValue2 != 0) {
-					throw new ExceptionCourse(studentB.getName() + " not found in the index, " + index2);
-				}
-
-			} catch (ExceptionCourse e) {
-
-				System.err.print(e);
-			}
-
+		if (!indexA.hasStudent(studentA) || !indexB.hasStudent(studentB)) {
+			throw new StudentNotEnrolledException();
 		}
 
-		if ((compareValue1 == 0) && (compareValue2 == 0)) {
-
-			index1.removeStudent(studentA, false); // false to prevent waitlist from triggering
-			index2.removeStudent(studentB, false);
-			index1.addStudent(studentB);
-			index2.addStudent(studentA);
-
-		}
-
+		indexA.removeStudent(studentA, false); // false to prevent waitlist from triggering
+		indexB.removeStudent(studentB, false);
+		indexA.addStudent(studentB);
+		indexB.addStudent(studentA);
 	}
 
 }
