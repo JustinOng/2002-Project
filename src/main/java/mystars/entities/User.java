@@ -44,8 +44,13 @@ public abstract class User {
 	 * 
 	 * @param userName The user's username.
 	 * @param password Theuser's password.
+	 * @throws UserAlreadyExistsException 
 	 */
-	protected User(String username, String password) {
+	protected User(String username, String password) throws UserAlreadyExistsException {
+		if (users.containsKey(username)) {
+			throw new UserAlreadyExistsException();
+		}
+		
 		this.username = username;
 		this.passwordHash = hashString(password);
 
