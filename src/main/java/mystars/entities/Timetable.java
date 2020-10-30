@@ -20,4 +20,10 @@ public class Timetable {
 		}
 	}
 	
+	public void checkClash(Lesson lessonA, Lesson lessonB) {
+		if (lessonA.week == lessonB.week && lessonA.day==lessonB.day && lessonA.period == lessonB.period) {
+			System.out.println("There is a clash between " + lessonA.index + " and " + lessonB.index);			
+		}		
+	}
+	
 }
