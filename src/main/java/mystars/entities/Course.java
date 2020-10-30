@@ -6,17 +6,9 @@ import java.util.Map;
 import java.util.Iterator;
 
 import mystars.enums.*;
+import mystars.exceptions.*;
 
-/*
- * enum LessonType { Tutorial, Lecture, Lab, Semminar
- * 
- * }; enum Day { Monday, Tuesday, thursnesday, Thursday, Friday, Saturday,
- * Sunday
- * 
- * };
- */
-
-public class Course {// extends index{
+public class Course {
 	protected String name;
 	protected String courseCode;
 	protected School school;
@@ -37,9 +29,11 @@ public class Course {// extends index{
 
 // get the course according to the course code
 	public static Course getCourse(String courseCode) {
-
-		// get course code from HashMap
-		return courses.get(courseCode);
+		if (courses.containsKey(courseCode)) {
+			return courses.get(courseCode);
+		}
+		
+		throw new CourseNotFoundException();
 	}
 
 	// accessor method to get the name of the class course
@@ -63,10 +57,19 @@ public class Course {// extends index{
 		indexes.put(indexNo, index);
 	}
 
-	public void createLesson(int indexNo, LessonType lessonType, Day day, String location, String groupNo, boolean[13] week ) {
+	private Index getIndex(int indexNo) {
+		if (indexes.containsKey(indexNo)) {
+			return indexes.get(indexNo);
+		}
+
+		throw new IndexNotFoundException();
+	}
+
+	public void createLesson(int indexNo, LessonType lessonType, Day day, String location, String groupNo,
+			boolean[] week, int period) {
 		// no String courseCode i think
-		Index index1 = getIndex(indexNo);
-		index1.createLesson(indexNo, LessonType, day, location, groupNo, week[13]);
+		Index index = getIndex(indexNo);
+		index.createLesson(lessonType, day, location, groupNo, week, period);
 	}
 
 	public ArrayList<Student> getStudentList() {
@@ -84,19 +87,18 @@ public class Course {// extends index{
 	public void register(Student student, int indexNo) {
 		// check if student is already registered
 		// MUST DO ON thurs IF NOT NO SLEEP
-		Index index_register = indexes.get(indexNo);
+		Index index = getIndex(indexNo);
 		// add student to the specific course index of studentList
-		index_register.addStudent(student); // throw exception if there is no vacancy in index class
-
+		index.addStudent(student); // throw exception if there is no vacancy in index class
 	}
 
 	public void drop(Student student, int indexNo) {
 		// exception case
 		// MUST DO ON thurs IF NOT NO SLEEP
 		// Do find the index which have the student, then do index.removestudent
-		Index index_drop = indexes.get(indexNo);
+		Index index = getIndex(indexNo);
 		// remove student from the specific course index of studentList
-		index_drop.removeStudent(student);
+		index.removeStudent(student);
 	}
 
 	public void swopIndex(Student studentA, int indexA, Student studentB, int indexB) {
@@ -107,7 +109,7 @@ public class Course {// extends index{
 		ArrayList<Student> StudentList1 = index1.getStudentList();
 		ArrayList<Student> StudentList2 = index2.getStudentList();
 		int compareValue1, compareValue2;
-		
+
 		for (int i = 0; i < StudentList1.size(); i++) {
 			compareValue1 = (studentA.getName() == StudentList1.get(i)); // if same string return 0
 			try {
@@ -145,9 +147,7 @@ public class Course {// extends index{
 			index2.addStudent(studentA);
 
 		}
-		
 
 	}
 
-	
 }
