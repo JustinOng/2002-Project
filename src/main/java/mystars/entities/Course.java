@@ -1,11 +1,12 @@
+package mystars.entities;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Iterator;
 
-enum School {
-	SCSE
-};
+import mystars.enums.*;
+
 /*
  * enum LessonType { Tutorial, Lecture, Lab, Semminar
  * 
@@ -21,9 +22,9 @@ public class Course {// extends index{
 	protected School school;
 
 	// Creating HashMap for index
-	protected static HashMap<String, Course> courses = new HashMap<>();
+	protected static HashMap<String, Course> courses = new HashMap<String, Course>();
 
-	protected HashMap<Integer, Index> indexes = new HashMap<>();
+	protected HashMap<Integer, Index> indexes = new HashMap<Integer, Index>();
 	// empty array of student objects
 
 	// constructor of Course

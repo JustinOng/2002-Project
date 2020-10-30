@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
 
-import mystars.School;
+import mystars.enums.School;
 import mystars.forms.*;
 
 public class CreateCourseForm {

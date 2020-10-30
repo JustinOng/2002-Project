@@ -1,4 +1,4 @@
-package mystars;
+package mystars.enums;
 
 public enum School {
 	NBS,

@@ -1,6 +1,9 @@
-
+package mystars.controllers;
 
 import java.util.ArrayList;
+
+import mystars.enums.*;
+import mystars.entities.*;
 
 /* 1) courseManger will do all the condition and logic checking?
  * 2) Course is to just retrieve the date from the other classes?
@@ -13,7 +16,7 @@ import java.util.ArrayList;
  * 
  * */
 
-public class courseController {
+public class CourseController {
 	
 
 	public void createCourse(String name, String courseCode, School School) {

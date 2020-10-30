@@ -1,5 +1,4 @@
 package mystars.entities;
-import user;
 
 /**
  * <h1>Class: admin</h1>
@@ -7,7 +6,7 @@ import user;
  * This admin class inherits from the user class.
  */
 
-public class admin extends user
+public class Admin extends User
 {
 	/**
 	 * This class is responsible for the creation of an administrator object.
@@ -16,7 +15,7 @@ public class admin extends user
 	 * @param password The administrator's password.
 	 * @param isAdmin Boolean variable set to true as objects from this class have admin rights.
 	 */
-	public admin(String userName, String password)
+	public Admin(String userName, String password)
 	{
 		super(userName, password);
 		isAdmin = true;
