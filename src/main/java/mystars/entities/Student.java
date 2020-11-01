@@ -56,7 +56,7 @@ public class Student extends User {
 		return studentTimetable;
 	}
 
-	public String getMetricNo() {
+	public String getMatricNo() {
 		return matricNo;
 	}
 }
