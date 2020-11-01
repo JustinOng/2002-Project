@@ -1,24 +1,37 @@
 package mystars;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.*;
 
+import mystars.entities.*;
+import mystars.enums.*;
+import mystars.exceptions.*;
+import mystars.controllers.*;
 import mystars.forms.*;
 import mystars.forms.cgui.ConsoleGraphicUserInterface;
 
 public class MySTARS {
 	private IUserInterface ui = new ConsoleGraphicUserInterface();
+	private UserController userController = new UserController();
 
 	public MySTARS() throws IOException {
-//		LoginResponse response = ui.renderLoginForm();
-//		System.out.println(response.getUsername());
-//		SelectorResponse response = ui.renderStudentMenuForm(Arrays.asList("Course A", "Course B"));
-//		System.out.println(response.getText());
-//		TextResponse response = ui.renderItemSelectorForm("Courses", Arrays.asList("Course A", "Course B"));
-//		System.out.println(response.getText());
-//		TextResponse response = ui.renderTextInput("Title!", "Description?");
-//		System.out.println(response.getText());
-		IndexSwopResponse response = ui.renderIndexSwopForm();
-//		System.out.println(response.getText());
+	}
+
+	public void start() {
+		try {
+			new Student("user", "u12345", "user", "pass", Gender.Male, Nationality.Singaporean);
+		} catch (UserAlreadyExistsException e1) {
+		}
+
+		String msg = "";
+		while (true) {
+			LoginResponse response = ui.renderLoginForm(msg);
+			try {
+				userController.login(response.getUsername(), response.getPassword());
+				break;
+			} catch (InvalidLoginException e) {
+				msg = "Invalid login.";
+			}
+		}
 	}
 }

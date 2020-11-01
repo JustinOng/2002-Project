@@ -13,6 +13,9 @@ import mystars.exceptions.*;
  */
 
 public class UserController {
+	// should this be kept here or in MySTARS?
+	private User user;
+	
 	public UserController() {
 
 	}
@@ -22,7 +25,7 @@ public class UserController {
 	 * 
 	 * @param name        The student's name.
 	 * @param matricNo    The student's matriculation number.
-	 * @param userName    The student's username.
+	 * @param username    The student's username.
 	 * @param password    The student's password.
 	 * @param gender      The student's gender.
 	 * @param nationality The student's nationality.
@@ -36,10 +39,19 @@ public class UserController {
 	/**
 	 * This method manages the user's login.
 	 * 
-	 * @param userName The user's username.
+	 * @param username The user's username.
 	 * @param password The user's password.
+	 * @throws InvalidLoginException 
 	 */
-	public void login(String userName, String password) {
-
+	public void login(String username, String password) throws InvalidLoginException {
+		user = User.login(username, password);
+	}
+	
+	public boolean isLoggedInStudent() {
+		return user != null && user.getClass().equals(Student.class);
+	}
+	
+	public boolean isLoggedInAdmin() {
+		return user != null && user.getClass().equals(Admin.class);
 	}
 }
