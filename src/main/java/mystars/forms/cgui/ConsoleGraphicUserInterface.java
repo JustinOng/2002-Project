@@ -1,5 +1,6 @@
 package mystars.forms.cgui;
 
+import java.awt.Font;
 import java.io.IOException;
 import java.util.List;
 
@@ -9,6 +10,8 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
+import com.googlecode.lanterna.terminal.swing.SwingTerminalFontConfiguration;
 
 import mystars.forms.*;
 
@@ -24,7 +27,12 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	private CreateIndexForm createIndexForm = new CreateIndexForm();
 
 	public ConsoleGraphicUserInterface() throws IOException {
-		Terminal terminal = new DefaultTerminalFactory().createTerminal();
+		DefaultTerminalFactory factory = new DefaultTerminalFactory();
+	    SwingTerminalFontConfiguration config = new SwingTerminalFontConfiguration(true, AWTTerminalFontConfiguration.BoldMode.NOTHING, new Font("Consolas", Font.PLAIN, 20));
+	    
+	    factory.setTerminalEmulatorFontConfiguration(config);
+	    
+	    Terminal terminal = factory.createTerminal();
 		Screen screen = new TerminalScreen(terminal);
 		screen.startScreen();
 
