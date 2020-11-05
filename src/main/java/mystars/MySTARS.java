@@ -33,5 +33,17 @@ public class MySTARS {
 				msg = "Invalid login.";
 			}
 		}
+
+		if (userController.isLoggedInStudent()) {
+			loopStudent();
+		}
+	}
+	
+	private void loopStudent() {
+		while (true) {
+			StudentMenuResponse response = ui.renderStudentMenuForm(Arrays.asList("course A"));
+			
+			System.out.println(response.getSelected().name());
+		}
 	}
 }
