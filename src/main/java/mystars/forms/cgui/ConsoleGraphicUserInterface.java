@@ -43,7 +43,7 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 		return loginForm.getResponse(gui, msg);
 	}
 	
-	public TextResponse renderStudentMenuForm(List<String> courses) {
+	public StudentMenuResponse renderStudentMenuForm(List<String> courses) {
 		return studentMenuForm.getResponse(gui, courses);
 	}
 
