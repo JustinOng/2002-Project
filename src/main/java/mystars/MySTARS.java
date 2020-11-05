@@ -8,13 +8,13 @@ import mystars.enums.*;
 import mystars.exceptions.*;
 import mystars.controllers.*;
 import mystars.forms.*;
-import mystars.forms.cgui.ConsoleGraphicUserInterface;
 
 public class MySTARS {
-	private IUserInterface ui = new ConsoleGraphicUserInterface();
+	private IUserInterface ui;
 	private UserController userController = new UserController();
 
-	public MySTARS() throws IOException {
+	public MySTARS(IUserInterface ui) throws IOException {
+		this.ui = ui;
 	}
 
 	public void start() {
