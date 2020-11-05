@@ -26,19 +26,14 @@ public class LoginForm {
 		final TextBox passwordInput = new TextBox().addTo(panel);
 		passwordInput.setMask('*');
 
-		panel.addComponent(new Label("I am a:"));
-		final ComboBox<String> loginTypeInput = new ComboBox<String>(Arrays.asList("Student", "Admin"), 0);
-		panel.addComponent(loginTypeInput, GridLayout.createHorizontallyFilledLayoutData(2));
-
 		panel.addComponent(new EmptySpace(new TerminalSize(0, 0)));
 		
 		new Button("Login", new Runnable() {
 			public void run() {
 				String username = usernameInput.getText();
 				String password = passwordInput.getText();
-				String loginType = loginTypeInput.getSelectedItem();
 
-				response = new LoginResponse(username, password, loginType);
+				response = new LoginResponse(username, password);
 				window.close();
 			}
 		}).addTo(panel);
