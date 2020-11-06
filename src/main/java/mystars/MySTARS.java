@@ -69,17 +69,29 @@ public class MySTARS {
 				case Drop:
 					textResponse = ui.renderItemSelectorForm("Drop Course",
 							new ArrayList<String>(registeredInfo.keySet()));
+
+					if (textResponse == null)
+						break;
+
 					courseController.dropCourse(student, registeredInfo.get(textResponse.getText()));
 					break;
 				case Change:
 					textResponse = ui.renderItemSelectorForm("Select Course to Change Index",
 							new ArrayList<String>(registeredInfo.keySet()));
+
+					if (textResponse == null)
+						break;
+
 					String courseCode = registeredInfo.get(textResponse.getText());
-					
+
 					indexInfo = courseController.getIndexInfo(courseCode);
-					
-					textResponse = ui.renderItemSelectorForm("Select New Index", new ArrayList<String>(indexInfo.keySet()));
-					
+
+					textResponse = ui.renderItemSelectorForm("Select New Index",
+							new ArrayList<String>(indexInfo.keySet()));
+
+					if (textResponse == null)
+						break;
+
 					courseController.changeIndex(courseCode, student, indexInfo.get(textResponse.getText()));
 					break;
 				case Swop:

@@ -12,6 +12,8 @@ public class StudentMenuForm {
 
 	public StudentMenuResponse getResponse(MultiWindowTextGUI gui, List<String> courses) {
 		final AbstractWindow window = new BasicWindow();
+		
+		response = null;
 
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(4));

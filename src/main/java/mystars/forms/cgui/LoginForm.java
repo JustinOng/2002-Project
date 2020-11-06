@@ -13,6 +13,8 @@ public class LoginForm {
 	public LoginResponse getResponse(MultiWindowTextGUI gui, String msg) {
 		final AbstractWindow window = new BasicWindow();
 		
+		response = null;
+		
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(2));
 

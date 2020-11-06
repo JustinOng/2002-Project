@@ -14,6 +14,8 @@ public class CreateCourseForm {
 
 	public CreateCourseResponse getResponse(MultiWindowTextGUI gui) {
 		final AbstractWindow window = new BasicWindow();
+		
+		response = null;
 
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(2));
