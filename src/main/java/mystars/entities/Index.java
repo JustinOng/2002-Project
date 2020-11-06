@@ -1,6 +1,7 @@
 package mystars.entities;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import mystars.enums.*;
 import mystars.exceptions.*;
@@ -14,12 +15,20 @@ public class Index {
 	private ArrayList<Student> enrolled;
 	private ArrayList<Student> waitlist;
 
-	public Index(Course course, int indexNo, int maxEnrolled) {
+	protected HashMap<Integer, Index> indexes = new HashMap<Integer, Index>();
+
+	public Index(Course course, int indexNo, int maxEnrolled) throws IndexExistsException {
+		if (indexes.containsKey(indexNo)) {
+			throw new IndexExistsException();
+		}
+
 		this.indexNo = indexNo;
 		this.course = course;
 		this.maxEnrolled = maxEnrolled;
 		this.enrolled = new ArrayList<Student>();
 		this.waitlist = new ArrayList<Student>();
+		
+		indexes.put(indexNo, this);
 	}
 
 	public void createLesson(LessonType type, Day day, String location, String groupNo, boolean[] week, int startPeriod,
@@ -83,7 +92,7 @@ public class Index {
 
 		return false;
 	}
-	
+
 	public Course getCourse() {
 		return course;
 	}

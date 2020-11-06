@@ -19,11 +19,11 @@ import mystars.exceptions.*;
 
 public class CourseController {
 
-	public void createCourse(String name, String courseCode, School School) {
+	public void createCourse(String name, String courseCode, School School) throws CourseExistsException {
 		Course course = new Course(name, courseCode, School);
 	}
 
-	public void createIndex(String courseCode, int indexNo, int maxEnrolled) throws CourseNotFoundException {
+	public void createIndex(String courseCode, int indexNo, int maxEnrolled) throws CourseNotFoundException, IndexExistsException {
 		Course c = Course.getCourse(courseCode);
 		c.createIndex(indexNo, maxEnrolled);
 	}

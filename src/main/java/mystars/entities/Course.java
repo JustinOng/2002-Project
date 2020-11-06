@@ -18,7 +18,11 @@ public class Course {
 	// empty array of student objects
 
 	// constructor of Course
-	public Course(String name, String courseCode, School school) {
+	public Course(String name, String courseCode, School school) throws CourseExistsException {
+		if (courses.containsKey(courseCode)) {
+			throw new CourseExistsException();
+		}
+
 		this.name = name;
 		this.courseCode = courseCode;
 		this.school = school;
@@ -49,7 +53,7 @@ public class Course {
 		return this.school;
 	}
 
-	public void createIndex(int indexNo, int maxEnrolled) {
+	public void createIndex(int indexNo, int maxEnrolled) throws IndexExistsException {
 		// ask why does create index only have 2 parameter but the index class have 6
 		Index index = new Index(this, indexNo, maxEnrolled);
 		indexes.put(indexNo, index);
@@ -85,13 +89,13 @@ public class Course {
 	public void register(Student student, int indexNo) throws IndexNotFoundException, StudentAlreadyEnrolledException {
 		// check if student is already registered
 		// MUST DO ON thurs IF NOT NO SLEEP
-		
+
 		for (Index i : indexes.values()) {
 			if (i.hasStudent(student)) {
 				throw new StudentAlreadyEnrolledException();
 			}
 		}
-		
+
 		Index index = getIndex(indexNo);
 		// add student to the specific course index of studentList
 		index.addStudent(student); // throw exception if there is no vacancy in index class
@@ -134,20 +138,22 @@ public class Course {
 		Index indexTarget = getIndex(targetIndexNo);
 
 		if (indexTarget.getVacancies() == 0) {
-			// we explicitly want vacancies here so that the student cannot be swap to a waitlisted index
+			// we explicitly want vacancies here so that the student cannot be swap to a
+			// waitlisted index
 			throw new IndexFullException();
 		}
-		
+
 		indexCur.removeStudent(student);
-		
+
 		try {
 			indexTarget.addStudent(student);
 		} catch (StudentAlreadyEnrolledException e) {
-			// this cannot happen - one Student cannot be enrolled in more than one index of the same course
+			// this cannot happen - one Student cannot be enrolled in more than one index of
+			// the same course
 			e.printStackTrace();
 		}
 	}
-	
+
 	public String toString() {
 		return String.format("%s (%s)", name, courseCode);
 	}

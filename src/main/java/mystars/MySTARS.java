@@ -25,9 +25,8 @@ public class MySTARS {
 			Course c = new Course("Course", "C1", School.CSE);
 			c.createIndex(1, 5);
 
-			courseController.registerCourse(s, "C1", 1);
-		} catch (UserAlreadyExistsException | IndexNotFoundException | StudentAlreadyEnrolledException
-				| CourseNotFoundException | CourseAlreadyAddedException | IndexClashException e1) {
+//			courseController.registerCourse(s, "C1", 1);
+		} catch (UserAlreadyExistsException | CourseExistsException | IndexExistsException e1) {
 			e1.printStackTrace();
 		}
 
