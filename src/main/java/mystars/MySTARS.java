@@ -60,6 +60,14 @@ public class MySTARS {
 
 			switch (response.getSelected()) {
 			case Register:
+				int indexNo = ui.getInt("Register for Index", "Index No:");
+				
+				try {
+					courseController.registerCourse(student, indexNo);
+				} catch (CourseAlreadyAddedException | IndexClashException | StudentAlreadyEnrolledException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
 			case Drop:
 				break;

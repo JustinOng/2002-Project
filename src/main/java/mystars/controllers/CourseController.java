@@ -23,7 +23,8 @@ public class CourseController {
 		Course course = new Course(name, courseCode, School);
 	}
 
-	public void createIndex(String courseCode, int indexNo, int maxEnrolled) throws CourseNotFoundException, IndexExistsException {
+	public void createIndex(String courseCode, int indexNo, int maxEnrolled)
+			throws CourseNotFoundException, IndexExistsException {
 		Course c = Course.getCourse(courseCode);
 		c.createIndex(indexNo, maxEnrolled);
 	}
@@ -42,6 +43,13 @@ public class CourseController {
 		Index i = c.getIndex(indexNo);
 		student.getTimetable().addIndex(i);
 		c.register(student, indexNo);
+	}
+
+	public void registerCourse(Student student, int indexNo)
+			throws CourseAlreadyAddedException, IndexClashException, StudentAlreadyEnrolledException {
+		Index i = Index.getIndex(indexNo);
+		student.getTimetable().addIndex(i);
+		i.addStudent(student);
 	}
 
 	public void dropCourse(Student student, int indexNo, String courseCode)
