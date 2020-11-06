@@ -75,4 +75,8 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	public int getInt(String title, String description) {
 		return GetInputForm.getInt(gui, title, description);
 	}
+
+	public void renderDialog(String title, String msg) {
+		MessageDialog.showMessageDialog(gui, title, msg);
+	}
 }

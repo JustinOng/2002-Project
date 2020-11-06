@@ -13,4 +13,5 @@ public interface IUserInterface {
 	
 	public String getText(String title, String description);
 	public int getInt(String title, String description);
+	public void renderDialog(String title, String msg);
 }
