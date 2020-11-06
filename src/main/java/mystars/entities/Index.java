@@ -19,7 +19,7 @@ public class Index {
 
 	public Index(Course course, int indexNo, int maxEnrolled) throws AppException {
 		if (indexes.containsKey(indexNo)) {
-			throw new AppException(String.format("%d already exists", indexNo));
+			throw new AppException(String.format("Index %d already exists", indexNo));
 		}
 
 		this.indexNo = indexNo;
@@ -31,7 +31,10 @@ public class Index {
 		indexes.put(indexNo, this);
 	}
 	
-	public static Index getIndex(int indexNo) {
+	public static Index getIndex(int indexNo) throws AppException {
+		if (!indexes.containsKey(indexNo)) {
+			throw new AppException(String.format("Index %d does not exist", indexNo));
+		}
 		return indexes.get(indexNo);
 	}
 	

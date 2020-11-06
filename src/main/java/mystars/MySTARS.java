@@ -5,6 +5,7 @@ import java.util.*;
 
 import mystars.entities.*;
 import mystars.enums.*;
+import mystars.exceptions.AppException;
 import mystars.controllers.*;
 import mystars.forms.*;
 
@@ -63,9 +64,8 @@ public class MySTARS {
 				
 				try {
 					courseController.registerCourse(student, indexNo);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				} catch (AppException e) {
+					ui.renderDialog("Failed to add Index", e.getMessage());
 				}
 				break;
 			case Drop:
