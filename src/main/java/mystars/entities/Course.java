@@ -55,7 +55,7 @@ public class Course {
 		indexes.put(indexNo, index);
 	}
 
-	private Index getIndex(int indexNo) throws IndexNotFoundException {
+	public Index getIndex(int indexNo) throws IndexNotFoundException {
 		if (indexes.containsKey(indexNo)) {
 			return indexes.get(indexNo);
 		}
@@ -146,5 +146,9 @@ public class Course {
 			// this cannot happen - one Student cannot be enrolled in more than one index of the same course
 			e.printStackTrace();
 		}
+	}
+	
+	public String toString() {
+		return String.format("%s (%s)", name, courseCode);
 	}
 }

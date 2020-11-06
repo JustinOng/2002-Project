@@ -36,9 +36,11 @@ public class CourseController {
 		c.createLesson(indexNo, lessonType, day, location, groupNo, week, startPeriod, endPeriod);
 	}
 
-	public void registerCourse(Student student, String courseCode, int indexNo)
-			throws CourseNotFoundException, IndexNotFoundException, StudentAlreadyEnrolledException {
+	public void registerCourse(Student student, String courseCode, int indexNo) throws CourseNotFoundException,
+			IndexNotFoundException, StudentAlreadyEnrolledException, CourseAlreadyAddedException, IndexClashException {
 		Course c = Course.getCourse(courseCode);
+		Index i = c.getIndex(indexNo);
+		student.getTimetable().addIndex(i);
 		c.register(student, indexNo);
 	}
 
