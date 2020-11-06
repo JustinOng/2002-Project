@@ -60,9 +60,12 @@ public class CourseController {
 	public void changeIndex(String courseCode, Student student, int targetIndexNo) throws AppException {
 		Course course = Course.getCourse(courseCode);
 		Index curIndex = course.getStudentIndex(student);
+		Index newIndex = Index.getIndex(targetIndexNo);
 		
-		student.getTimetable().removeIndex(curIndex);
+		student.getTimetable().assertAddIndex(newIndex, curIndex);
 		course.changeIndex(student, targetIndexNo);
+		student.getTimetable().removeIndex(curIndex);
+		student.getTimetable().addIndex(newIndex);
 	}
 
 	public void swopIndex(String courseCode, Student studentA, int indexNoA, Student studentB, int indexNoB)
@@ -78,6 +81,18 @@ public class CourseController {
 			data.put(String.format("%s: %s", i.getCourse(), i), i.getCourse().getCourseCode());
 		}
 
+		return data;
+	}
+	
+	public HashMap<String, Integer> getIndexInfo(String courseCode) throws AppException {
+		HashMap<String, Integer> data = new HashMap<String, Integer>();
+		
+		Course course = Course.getCourse(courseCode);
+		
+		for (Index i : course.getIndexes()) {
+			data.put(i.toString(), i.getIndexNo());
+		}
+		
 		return data;
 	}
 }

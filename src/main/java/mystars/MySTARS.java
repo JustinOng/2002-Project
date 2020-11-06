@@ -49,6 +49,8 @@ public class MySTARS {
 
 	private void loopStudent() {
 		Student student = userController.getStudent();
+		TextResponse textResponse;
+		HashMap<String, Integer> indexInfo;
 
 		while (true) {
 			HashMap<String, String> registeredInfo = courseController.getRegisteredInfo(student);
@@ -65,11 +67,20 @@ public class MySTARS {
 					courseController.registerCourse(student, indexNo);
 					break;
 				case Drop:
-					TextResponse textResponse = ui.renderItemSelectorForm("Drop Course",
+					textResponse = ui.renderItemSelectorForm("Drop Course",
 							new ArrayList<String>(registeredInfo.keySet()));
 					courseController.dropCourse(student, registeredInfo.get(textResponse.getText()));
 					break;
 				case Change:
+					textResponse = ui.renderItemSelectorForm("Select Course to Change Index",
+							new ArrayList<String>(registeredInfo.keySet()));
+					String courseCode = registeredInfo.get(textResponse.getText());
+					
+					indexInfo = courseController.getIndexInfo(courseCode);
+					
+					textResponse = ui.renderItemSelectorForm("Select New Index", new ArrayList<String>(indexInfo.keySet()));
+					
+					courseController.changeIndex(courseCode, student, indexInfo.get(textResponse.getText()));
 					break;
 				case Swop:
 					break;

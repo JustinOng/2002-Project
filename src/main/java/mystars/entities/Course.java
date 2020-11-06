@@ -149,26 +149,18 @@ public class Course {
 		}
 	}
 
-	public void changeIndex(Student student, int curIndexNo, int targetIndexNo)
-			throws AppException {
-		Index indexCur = getIndex(curIndexNo);
+	public void changeIndex(Student student, int targetIndexNo) throws AppException {
+		Index indexCur = getStudentIndex(student);
 		Index indexTarget = getIndex(targetIndexNo);
 
 		if (indexTarget.getVacancies() == 0) {
 			// we explicitly want vacancies here so that the student cannot be swap to a
 			// waitlisted index
-			throw new AppException(String.format("%s has no more vacancies", indexTarget));
+			throw new AppException(String.format("Index %s has no more vacancies", indexTarget));
 		}
 
 		indexCur.removeStudent(student);
-
-		try {
-			indexTarget.addStudent(student);
-		} catch (AppException e) {
-			// this cannot happen - one Student cannot be enrolled in more than one index of
-			// the same course
-			e.printStackTrace();
-		}
+		indexTarget.addStudent(student);
 	}
 
 	public String toString() {
