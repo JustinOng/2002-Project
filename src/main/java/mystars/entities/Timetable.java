@@ -21,8 +21,8 @@ public class Timetable {
 		indexes.add(index);
 	}
 
-	public void removeIndex(int indexNo) {
-		indexes.remove(indexNo);
+	public void removeIndex(Index index) {
+		indexes.remove(index);
 	}
 	
 	public ArrayList<Index> getIndexes() {

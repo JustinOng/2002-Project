@@ -54,24 +54,28 @@ public class MySTARS {
 			HashMap<String, String> registeredInfo = courseController.getRegisteredInfo(student);
 			StudentMenuResponse response = ui.renderStudentMenuForm(new ArrayList<String>(registeredInfo.keySet()));
 
-			switch (response.getSelected()) {
-			case Register:
-				Integer indexNo = ui.getInt("Register for Index", "Index No:");
-				
-				if (indexNo == null) break;
-				
-				try {
+			try {
+				switch (response.getSelected()) {
+				case Register:
+					Integer indexNo = ui.getInt("Register for Index", "Index No:");
+
+					if (indexNo == null)
+						break;
+
 					courseController.registerCourse(student, indexNo);
-				} catch (AppException e) {
-					ui.renderDialog("Failed to add Index", e.getMessage());
+					break;
+				case Drop:
+					TextResponse textResponse = ui.renderItemSelectorForm("Drop Course",
+							new ArrayList<String>(registeredInfo.keySet()));
+					courseController.dropCourse(student, registeredInfo.get(textResponse.getText()));
+					break;
+				case Change:
+					break;
+				case Swop:
+					break;
 				}
-				break;
-			case Drop:
-				break;
-			case Change:
-				break;
-			case Swop:
-				break;
+			} catch (AppException e) {
+				ui.renderDialog("Error", e.getMessage());
 			}
 		}
 	}

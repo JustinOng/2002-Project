@@ -24,16 +24,14 @@ public class CourseController {
 		Course course = new Course(name, courseCode, School);
 	}
 
-	public void createIndex(String courseCode, int indexNo, int maxEnrolled)
-			throws AppException {
+	public void createIndex(String courseCode, int indexNo, int maxEnrolled) throws AppException {
 		Course c = Course.getCourse(courseCode);
 		c.createIndex(indexNo, maxEnrolled);
 	}
 
 // Unsure about the parameters in the function are in the correct format
 	public void createLesson(String courseCode, int indexNo, LessonType lessonType, Day day, String location,
-			String groupNo, boolean[] week, int startPeriod, int endPeriod)
-			throws AppException {
+			String groupNo, boolean[] week, int startPeriod, int endPeriod) throws AppException {
 		Course c = Course.getCourse(courseCode);
 		c.createLesson(indexNo, lessonType, day, location, groupNo, week, startPeriod, endPeriod);
 	}
@@ -45,25 +43,24 @@ public class CourseController {
 		c.register(student, indexNo);
 	}
 
-	public void registerCourse(Student student, int indexNo)
-			throws AppException {
+	public void registerCourse(Student student, int indexNo) throws AppException {
 		Index i = Index.getIndex(indexNo);
 		student.getTimetable().addIndex(i);
 		try {
 			i.getCourse().register(student, indexNo);
 		} catch (AppException e) {
+			student.getTimetable().removeIndex(i);
 			throw e;
 		}
 	}
 
-	public void dropCourse(Student student, int indexNo, String courseCode)
-			throws AppException {
-		Course c = Course.getCourse(courseCode);
-		c.drop(student, indexNo);
+	public void dropCourse(Student student, String courseCode) throws AppException {
+		Course course = Course.getCourse(courseCode);
+		Index index = course.drop(student);
+		student.getTimetable().removeIndex(index);
 	}
 
-	public void changeIndex(String courseCode, Student student, int curIndexNo, int targetIndexNo)
-			throws AppException {
+	public void changeIndex(String courseCode, Student student, int curIndexNo, int targetIndexNo) throws AppException {
 		Course c = Course.getCourse(courseCode);
 		c.changeIndex(student, curIndexNo, targetIndexNo);
 	}
@@ -73,14 +70,14 @@ public class CourseController {
 		Course c = Course.getCourse(courseCode);
 		c.swopIndex(studentA, indexNoA, studentB, indexNoB);
 	}
-	
+
 	public HashMap<String, String> getRegisteredInfo(Student student) {
 		HashMap<String, String> data = new HashMap<String, String>();
-		
-		for(Index i : student.getTimetable().getIndexes()) {
+
+		for (Index i : student.getTimetable().getIndexes()) {
 			data.put(String.format("%s: %s", i.getCourse(), i), i.getCourse().getCourseCode());
 		}
-		
+
 		return data;
 	}
 }

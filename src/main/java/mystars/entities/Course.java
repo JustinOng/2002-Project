@@ -102,13 +102,15 @@ public class Course {
 		index.addStudent(student); // throw AppException if there is no vacancy in index class
 	}
 
-	public void drop(Student student, int indexNo) throws AppException {
-		// AppException case
-		// MUST DO ON thurs IF NOT NO SLEEP
-		// Do find the index which have the student, then do index.removestudent
-		Index index = getIndex(indexNo);
-		// remove student from the specific course index of studentList
-		index.removeStudent(student);
+	public Index drop(Student student) throws AppException {
+		for (Index i : indexes.values()) {
+			if (!i.hasStudent(student)) continue;
+			
+			i.removeStudent(student);
+			return i;
+		}
+		
+		throw new AppException("Student is not enrolled in any index of this course");
 	}
 
 	public void swopIndex(Student studentA, int indexNoA, Student studentB, int indexNoB) throws AppException {
