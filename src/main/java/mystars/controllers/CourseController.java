@@ -44,14 +44,11 @@ public class CourseController {
 	}
 
 	public void registerCourse(Student student, int indexNo) throws AppException {
-		Index i = Index.getIndex(indexNo);
-		student.getTimetable().addIndex(i);
-		try {
-			i.getCourse().register(student, indexNo);
-		} catch (AppException e) {
-			student.getTimetable().removeIndex(i);
-			throw e;
-		}
+		Index index = Index.getIndex(indexNo);
+		student.getTimetable().assertAddIndex(index);
+		
+		index.getCourse().register(student, indexNo);
+		student.getTimetable().addIndex(index);
 	}
 
 	public void dropCourse(Student student, String courseCode) throws AppException {
@@ -60,9 +57,12 @@ public class CourseController {
 		student.getTimetable().removeIndex(index);
 	}
 
-	public void changeIndex(String courseCode, Student student, int curIndexNo, int targetIndexNo) throws AppException {
-		Course c = Course.getCourse(courseCode);
-		c.changeIndex(student, curIndexNo, targetIndexNo);
+	public void changeIndex(String courseCode, Student student, int targetIndexNo) throws AppException {
+		Course course = Course.getCourse(courseCode);
+		Index curIndex = course.getStudentIndex(student);
+		
+		student.getTimetable().removeIndex(curIndex);
+		course.changeIndex(student, targetIndexNo);
 	}
 
 	public void swopIndex(String courseCode, Student studentA, int indexNoA, Student studentB, int indexNoB)

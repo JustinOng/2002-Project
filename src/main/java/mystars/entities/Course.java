@@ -85,16 +85,35 @@ public class Course {
 
 		return studentList;
 	}
+	
+	public ArrayList<Index> getIndexes() {
+		return new ArrayList<Index>(indexes.values());
+	}
+
+	public Index findStudent(Student student) {
+		for (Index i : indexes.values()) {
+			if (i.hasStudent(student))
+				return i;
+		}
+
+		return null;
+	}
+
+	public Index getStudentIndex(Student student) throws AppException {
+		Index index = findStudent(student);
+		
+		if (index == null)
+			throw new AppException(String.format("Student %s is not enrolled in the course", student.getMatricNo()));
+		
+		return index;
+	}
 
 	public void register(Student student, int indexNo) throws AppException {
 		// check if student is already registered
 		// MUST DO ON thurs IF NOT NO SLEEP
 
-		for (Index i : indexes.values()) {
-			if (i.hasStudent(student)) {
-				throw new AppException(
-						String.format("Already registered for %s in %s", i, i.getCourse()));
-			}
+		if (findStudent(student) != null) {
+			throw new AppException(String.format("Already registered for %d in %s", indexNo, this));
 		}
 
 		Index index = getIndex(indexNo);
@@ -103,14 +122,10 @@ public class Course {
 	}
 
 	public Index drop(Student student) throws AppException {
-		for (Index i : indexes.values()) {
-			if (!i.hasStudent(student)) continue;
-			
-			i.removeStudent(student);
-			return i;
-		}
-		
-		throw new AppException("Student is not enrolled in any index of this course");
+		Index index = getStudentIndex(student);
+
+		index.removeStudent(student);
+		return index;
 	}
 
 	public void swopIndex(Student studentA, int indexNoA, Student studentB, int indexNoB) throws AppException {
