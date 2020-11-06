@@ -56,7 +56,9 @@ public class MySTARS {
 
 			switch (response.getSelected()) {
 			case Register:
-				int indexNo = ui.getInt("Register for Index", "Index No:");
+				Integer indexNo = ui.getInt("Register for Index", "Index No:");
+				
+				if (indexNo == null) break;
 				
 				try {
 					courseController.registerCourse(student, indexNo);

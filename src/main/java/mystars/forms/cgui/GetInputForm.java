@@ -13,10 +13,13 @@ public class GetInputForm {
 		return TextInputDialog.showDialog(gui, title, description, "");
 	}
 
-	public static int getInt(MultiWindowTextGUI gui, String title, String description) {
-		int val = Integer.parseInt(new TextInputDialogBuilder().setTitle(title).setDescription(description)
+	public static Integer getInt(MultiWindowTextGUI gui, String title, String description) {
+		String input = new TextInputDialogBuilder().setTitle(title).setDescription(description)
 				.setValidationPattern(Pattern.compile("^[0-9]+$"), "Inputs must be numerical!").build()
-				.showDialog(gui));
-		return val;
+				.showDialog(gui);
+		
+		if (input == null) return null;
+		
+		return Integer.parseInt(input);
 	}
 }

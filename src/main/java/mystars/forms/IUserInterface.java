@@ -12,6 +12,6 @@ public interface IUserInterface {
 	public CreateIndexResponse renderCreateIndexForm();
 	
 	public String getText(String title, String description);
-	public int getInt(String title, String description);
+	public Integer getInt(String title, String description);
 	public void renderDialog(String title, String msg);
 }

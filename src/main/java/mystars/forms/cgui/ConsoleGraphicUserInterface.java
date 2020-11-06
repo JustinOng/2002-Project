@@ -72,7 +72,7 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 		return GetInputForm.getText(gui, title, description);
 	}
 
-	public int getInt(String title, String description) {
+	public Integer getInt(String title, String description) {
 		return GetInputForm.getInt(gui, title, description);
 	}
 
