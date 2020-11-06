@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import mystars.enums.*;
-import mystars.exceptions.*;
 
 public class Course {
 	protected String name;
@@ -18,9 +17,9 @@ public class Course {
 	// empty array of student objects
 
 	// constructor of Course
-	public Course(String name, String courseCode, School school) throws CourseExistsException {
+	public Course(String name, String courseCode, School school) throws Exception {
 		if (courses.containsKey(courseCode)) {
-			throw new CourseExistsException();
+			throw new Exception(String.format("%s already exists", courseCode));
 		}
 
 		this.name = name;
@@ -30,12 +29,12 @@ public class Course {
 	}
 
 // get the course according to the course code
-	public static Course getCourse(String courseCode) throws CourseNotFoundException {
+	public static Course getCourse(String courseCode) throws Exception {
 		if (courses.containsKey(courseCode)) {
 			return courses.get(courseCode);
 		}
 
-		throw new CourseNotFoundException();
+		throw new Exception(String.format("%s is not a valid course code", courseCode));
 	}
 
 	// accessor method to get the name of the class course
@@ -53,22 +52,22 @@ public class Course {
 		return this.school;
 	}
 
-	public void createIndex(int indexNo, int maxEnrolled) throws IndexExistsException {
+	public void createIndex(int indexNo, int maxEnrolled) throws Exception {
 		// ask why does create index only have 2 parameter but the index class have 6
 		Index index = new Index(this, indexNo, maxEnrolled);
 		indexes.put(indexNo, index);
 	}
 
-	public Index getIndex(int indexNo) throws IndexNotFoundException {
+	public Index getIndex(int indexNo) throws Exception {
 		if (indexes.containsKey(indexNo)) {
 			return indexes.get(indexNo);
 		}
 
-		throw new IndexNotFoundException();
+		throw new Exception(String.format("Index %d was not found", indexNo));
 	}
 
 	public void createLesson(int indexNo, LessonType lessonType, Day day, String location, String groupNo,
-			boolean[] week, int startPeriod, int endPeriod) throws IndexNotFoundException {
+			boolean[] week, int startPeriod, int endPeriod) throws Exception {
 		// no String courseCode i think
 		Index index = getIndex(indexNo);
 		index.createLesson(lessonType, day, location, groupNo, week, startPeriod, endPeriod);
@@ -86,13 +85,14 @@ public class Course {
 		return studentList;
 	}
 
-	public void register(Student student, int indexNo) throws IndexNotFoundException, StudentAlreadyEnrolledException {
+	public void register(Student student, int indexNo) throws Exception {
 		// check if student is already registered
 		// MUST DO ON thurs IF NOT NO SLEEP
 
 		for (Index i : indexes.values()) {
 			if (i.hasStudent(student)) {
-				throw new StudentAlreadyEnrolledException();
+				throw new Exception(
+						String.format("Already registered for %s in %s", i, i.getCourse()));
 			}
 		}
 
@@ -101,7 +101,7 @@ public class Course {
 		index.addStudent(student); // throw exception if there is no vacancy in index class
 	}
 
-	public void drop(Student student, int indexNo) throws IndexNotFoundException, StudentNotEnrolledException {
+	public void drop(Student student, int indexNo) throws Exception {
 		// exception case
 		// MUST DO ON thurs IF NOT NO SLEEP
 		// Do find the index which have the student, then do index.removestudent
@@ -110,15 +110,14 @@ public class Course {
 		index.removeStudent(student);
 	}
 
-	public void swopIndex(Student studentA, int indexNoA, Student studentB, int indexNoB)
-			throws IndexNotFoundException, StudentNotEnrolledException {
+	public void swopIndex(Student studentA, int indexNoA, Student studentB, int indexNoB) throws Exception {
 		// check whether both student has index
 		// MUST DO ON thurs IF NOT NO SLEEP (sleeping bag?)
 		Index indexA = getIndex(indexNoA);
 		Index indexB = getIndex(indexNoB);
 
 		if (!indexA.hasStudent(studentA) || !indexB.hasStudent(studentB)) {
-			throw new StudentNotEnrolledException();
+			throw new Exception();
 		}
 
 		indexA.removeStudent(studentA, false); // false to prevent waitlist from triggering
@@ -126,28 +125,28 @@ public class Course {
 		try {
 			indexA.addStudent(studentB);
 			indexB.addStudent(studentA);
-		} catch (StudentAlreadyEnrolledException e) {
+		} catch (Exception e) {
 			// this should never happen - we just removed the students
 			e.printStackTrace();
 		}
 	}
 
 	public void changeIndex(Student student, int curIndexNo, int targetIndexNo)
-			throws IndexNotFoundException, IndexFullException, StudentNotEnrolledException {
+			throws Exception {
 		Index indexCur = getIndex(curIndexNo);
 		Index indexTarget = getIndex(targetIndexNo);
 
 		if (indexTarget.getVacancies() == 0) {
 			// we explicitly want vacancies here so that the student cannot be swap to a
 			// waitlisted index
-			throw new IndexFullException();
+			throw new Exception(String.format("%s has no more vacancies", indexTarget));
 		}
 
 		indexCur.removeStudent(student);
 
 		try {
 			indexTarget.addStudent(student);
-		} catch (StudentAlreadyEnrolledException e) {
+		} catch (Exception e) {
 			// this cannot happen - one Student cannot be enrolled in more than one index of
 			// the same course
 			e.printStackTrace();

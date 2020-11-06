@@ -1,7 +1,5 @@
 package mystars.entities;
 
-import mystars.exceptions.*;
-
 /**
  * <h1>Class: admin</h1>
  * 
@@ -18,7 +16,7 @@ public class Admin extends User
 	 * @param isAdmin Boolean variable set to true as objects from this class have admin rights.
 	 * @throws UserAlreadyExistsException 
 	 */
-	public Admin(String username, String password) throws UserAlreadyExistsException
+	public Admin(String username, String password) throws Exception
 	{
 		super(username, password);
 		isAdmin = true;

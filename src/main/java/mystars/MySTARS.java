@@ -5,7 +5,6 @@ import java.util.*;
 
 import mystars.entities.*;
 import mystars.enums.*;
-import mystars.exceptions.*;
 import mystars.controllers.*;
 import mystars.forms.*;
 
@@ -26,7 +25,7 @@ public class MySTARS {
 			c.createIndex(1, 5);
 
 //			courseController.registerCourse(s, "C1", 1);
-		} catch (UserAlreadyExistsException | CourseExistsException | IndexExistsException e1) {
+		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 
@@ -36,7 +35,7 @@ public class MySTARS {
 			try {
 				userController.login(response.getUsername(), response.getPassword());
 				break;
-			} catch (InvalidLoginException e) {
+			} catch (Exception e) {
 				msg = "Invalid login.";
 			}
 		}
@@ -64,7 +63,7 @@ public class MySTARS {
 				
 				try {
 					courseController.registerCourse(student, indexNo);
-				} catch (CourseAlreadyAddedException | IndexClashException | StudentAlreadyEnrolledException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

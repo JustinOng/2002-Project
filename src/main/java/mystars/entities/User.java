@@ -27,8 +27,6 @@ import java.security.NoSuchAlgorithmException;
 
 import java.util.HashMap;
 
-import mystars.exceptions.*;
-
 public abstract class User {
 	protected String username;
 	private byte[] passwordHash;
@@ -46,9 +44,9 @@ public abstract class User {
 	 * @param password Theuser's password.
 	 * @throws UserAlreadyExistsException 
 	 */
-	protected User(String username, String password) throws UserAlreadyExistsException {
+	protected User(String username, String password) throws Exception {
 		if (users.containsKey(username)) {
-			throw new UserAlreadyExistsException();
+			throw new Exception(String.format("%s already exists", username));
 		}
 		
 		this.username = username;
@@ -86,14 +84,14 @@ public abstract class User {
 	 * @param password Theuser's password.
 	 * @throws InvalidLoginException
 	 */
-	public static User login(String username, String password) throws InvalidLoginException {
+	public static User login(String username, String password) throws Exception {
 		if (!users.containsKey(username)) {
-			throw new InvalidLoginException();
+			throw new Exception("Invalid login");
 		}
 
 		User user = users.get(username);
 		if (!user.login(password)) {
-			throw new InvalidLoginException();
+			throw new Exception("Invalid login");
 		}
 
 		return user;

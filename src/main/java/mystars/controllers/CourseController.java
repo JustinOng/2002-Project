@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import mystars.enums.*;
 import mystars.entities.*;
-import mystars.exceptions.*;
 
 /* 1) courseManger will do all the condition and logic checking?
  * 2) Course is to just retrieve the date from the other classes?
@@ -19,12 +18,12 @@ import mystars.exceptions.*;
 
 public class CourseController {
 
-	public void createCourse(String name, String courseCode, School School) throws CourseExistsException {
+	public void createCourse(String name, String courseCode, School School) throws Exception {
 		Course course = new Course(name, courseCode, School);
 	}
 
 	public void createIndex(String courseCode, int indexNo, int maxEnrolled)
-			throws CourseNotFoundException, IndexExistsException {
+			throws Exception {
 		Course c = Course.getCourse(courseCode);
 		c.createIndex(indexNo, maxEnrolled);
 	}
@@ -32,13 +31,12 @@ public class CourseController {
 // Unsure about the parameters in the function are in the correct format
 	public void createLesson(String courseCode, int indexNo, LessonType lessonType, Day day, String location,
 			String groupNo, boolean[] week, int startPeriod, int endPeriod)
-			throws CourseNotFoundException, IndexNotFoundException {
+			throws Exception {
 		Course c = Course.getCourse(courseCode);
 		c.createLesson(indexNo, lessonType, day, location, groupNo, week, startPeriod, endPeriod);
 	}
 
-	public void registerCourse(Student student, String courseCode, int indexNo) throws CourseNotFoundException,
-			IndexNotFoundException, StudentAlreadyEnrolledException, CourseAlreadyAddedException, IndexClashException {
+	public void registerCourse(Student student, String courseCode, int indexNo) throws Exception {
 		Course c = Course.getCourse(courseCode);
 		Index i = c.getIndex(indexNo);
 		student.getTimetable().addIndex(i);
@@ -46,26 +44,26 @@ public class CourseController {
 	}
 
 	public void registerCourse(Student student, int indexNo)
-			throws CourseAlreadyAddedException, IndexClashException, StudentAlreadyEnrolledException {
+			throws Exception {
 		Index i = Index.getIndex(indexNo);
 		student.getTimetable().addIndex(i);
 		i.addStudent(student);
 	}
 
 	public void dropCourse(Student student, int indexNo, String courseCode)
-			throws CourseNotFoundException, IndexNotFoundException, StudentNotEnrolledException {
+			throws Exception {
 		Course c = Course.getCourse(courseCode);
 		c.drop(student, indexNo);
 	}
 
 	public void changeIndex(String courseCode, Student student, int curIndexNo, int targetIndexNo)
-			throws CourseNotFoundException, IndexNotFoundException, StudentNotEnrolledException, IndexFullException {
+			throws Exception {
 		Course c = Course.getCourse(courseCode);
 		c.changeIndex(student, curIndexNo, targetIndexNo);
 	}
 
 	public void swopIndex(String courseCode, Student studentA, int indexNoA, Student studentB, int indexNoB)
-			throws CourseNotFoundException, IndexNotFoundException, StudentNotEnrolledException {
+			throws Exception {
 		Course c = Course.getCourse(courseCode);
 		c.swopIndex(studentA, indexNoA, studentB, indexNoB);
 	}

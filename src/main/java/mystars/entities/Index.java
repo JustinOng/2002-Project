@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import mystars.enums.*;
-import mystars.exceptions.*;
 
 public class Index {
 
@@ -17,9 +16,9 @@ public class Index {
 
 	protected static HashMap<Integer, Index> indexes = new HashMap<Integer, Index>();
 
-	public Index(Course course, int indexNo, int maxEnrolled) throws IndexExistsException {
+	public Index(Course course, int indexNo, int maxEnrolled) throws Exception {
 		if (indexes.containsKey(indexNo)) {
-			throw new IndexExistsException();
+			throw new Exception(String.format("%d already exists", indexNo));
 		}
 
 		this.indexNo = indexNo;
@@ -33,6 +32,10 @@ public class Index {
 	
 	public static Index getIndex(int indexNo) {
 		return indexes.get(indexNo);
+	}
+	
+	public int getIndexNo() {
+		return indexNo;
 	}
 
 	public void createLesson(LessonType type, Day day, String location, String groupNo, boolean[] week, int startPeriod,
@@ -49,9 +52,9 @@ public class Index {
 		return enrolled;
 	}
 
-	public void addStudent(Student student) throws StudentAlreadyEnrolledException {
+	public void addStudent(Student student) throws Exception {
 		if (enrolled.contains(student)) {
-			throw new StudentAlreadyEnrolledException();
+			throw new Exception("Already enrolled");
 		}
 
 		if (enrolled.size() < this.maxEnrolled) {
@@ -61,16 +64,14 @@ public class Index {
 		}
 	}
 
-	public void removeStudent(Student student) throws StudentNotEnrolledException {
+	public void removeStudent(Student student) throws Exception {
 		removeStudent(student, true);
 	}
 
-	public void removeStudent(Student student, boolean allocateWaitlist) throws StudentNotEnrolledException {
-		if (!this.enrolled.contains(student)) {
-			throw new StudentNotEnrolledException();
+	public void removeStudent(Student student, boolean allocateWaitlist) {
+		if (this.enrolled.contains(student)) {
+			this.enrolled.remove(student);
 		}
-
-		this.enrolled.remove(student);
 		if (allocateWaitlist == true && this.waitlist.isEmpty() == false) {
 			this.enrolled.add(this.waitlist.remove(0));
 		}
@@ -99,5 +100,9 @@ public class Index {
 
 	public Course getCourse() {
 		return course;
+	}
+	
+	public String toString() {
+		return String.format("Index %d", indexNo);
 	}
 }

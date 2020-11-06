@@ -2,7 +2,6 @@ package mystars.controllers;
 
 import mystars.entities.*;
 import mystars.enums.*;
-import mystars.exceptions.*;
 
 /**
  * <h1>Class: userController</h1>
@@ -32,7 +31,7 @@ public class UserController {
 	 * @throws UserAlreadyExistsException 
 	 */
 	public void createStudent(String name, String matricNo, String userName, String password, Gender gender,
-			Nationality nationality) throws UserAlreadyExistsException {
+			Nationality nationality) throws Exception {
 		Student mystudent = new Student(name, matricNo, userName, password, gender, nationality);
 	}
 
@@ -43,7 +42,7 @@ public class UserController {
 	 * @param password The user's password.
 	 * @throws InvalidLoginException 
 	 */
-	public void login(String username, String password) throws InvalidLoginException {
+	public void login(String username, String password) throws Exception {
 		user = User.login(username, password);
 	}
 	
@@ -56,7 +55,7 @@ public class UserController {
 			return (Student) user;
 		}
 		
-		throw new WrongUserTypeException();
+		throw new RuntimeException();
 	}
 	
 	public boolean isLoggedInAdmin() {
@@ -68,6 +67,6 @@ public class UserController {
 			return (Admin) user;
 		}
 		
-		throw new WrongUserTypeException();
+		throw new RuntimeException();
 	}
 }
