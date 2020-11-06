@@ -2,17 +2,19 @@ package mystars.entities;
 
 import java.util.ArrayList;
 
+import mystars.exceptions.AppException;
+
 public class Timetable {
 	private ArrayList<Index> indexes = new ArrayList<Index>();
 
-	public void addIndex(Index index) throws Exception {
+	public void addIndex(Index index) throws AppException {
 		for (Index i : indexes) {
 			if (i.belongsToSameCourse(index)) {
-				throw new Exception(String.format("Already registered for %s in %s", i, index.getCourse()));
+				throw new AppException(String.format("Already registered for %s in %s", i, index.getCourse()));
 			}
 
 			if (i.clashesWith(index)) {
-				throw new Exception(String.format("Clashes with %s", i.toString()));
+				throw new AppException(String.format("Clashes with %s", i.toString()));
 			}
 		}
 

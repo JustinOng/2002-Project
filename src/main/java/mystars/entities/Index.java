@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import mystars.enums.*;
+import mystars.exceptions.AppException;
 
 public class Index {
 
@@ -16,9 +17,9 @@ public class Index {
 
 	protected static HashMap<Integer, Index> indexes = new HashMap<Integer, Index>();
 
-	public Index(Course course, int indexNo, int maxEnrolled) throws Exception {
+	public Index(Course course, int indexNo, int maxEnrolled) throws AppException {
 		if (indexes.containsKey(indexNo)) {
-			throw new Exception(String.format("%d already exists", indexNo));
+			throw new AppException(String.format("%d already exists", indexNo));
 		}
 
 		this.indexNo = indexNo;
@@ -52,9 +53,9 @@ public class Index {
 		return enrolled;
 	}
 
-	public void addStudent(Student student) throws Exception {
+	public void addStudent(Student student) throws AppException {
 		if (enrolled.contains(student)) {
-			throw new Exception("Already enrolled");
+			throw new AppException("Already enrolled");
 		}
 
 		if (enrolled.size() < this.maxEnrolled) {
@@ -64,7 +65,7 @@ public class Index {
 		}
 	}
 
-	public void removeStudent(Student student) throws Exception {
+	public void removeStudent(Student student) throws AppException {
 		removeStudent(student, true);
 	}
 

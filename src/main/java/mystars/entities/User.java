@@ -27,6 +27,8 @@ import java.security.NoSuchAlgorithmException;
 
 import java.util.HashMap;
 
+import mystars.exceptions.AppException;
+
 public abstract class User {
 	protected String username;
 	private byte[] passwordHash;
@@ -44,9 +46,9 @@ public abstract class User {
 	 * @param password Theuser's password.
 	 * @throws UserAlreadyExistsException 
 	 */
-	protected User(String username, String password) throws Exception {
+	protected User(String username, String password) throws AppException {
 		if (users.containsKey(username)) {
-			throw new Exception(String.format("%s already exists", username));
+			throw new AppException(String.format("%s already exists", username));
 		}
 		
 		this.username = username;
@@ -66,7 +68,7 @@ public abstract class User {
 		try {
 			md = MessageDigest.getInstance("SHA-256");
 		} catch (NoSuchAlgorithmException e) {
-			// convert to unchecked exception (since if it happens, treat it as fatal)
+			// convert to unchecked AppException (since if it happens, treat it as fatal)
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
@@ -84,14 +86,14 @@ public abstract class User {
 	 * @param password Theuser's password.
 	 * @throws InvalidLoginException
 	 */
-	public static User login(String username, String password) throws Exception {
+	public static User login(String username, String password) throws AppException {
 		if (!users.containsKey(username)) {
-			throw new Exception("Invalid login");
+			throw new AppException("Invalid login");
 		}
 
 		User user = users.get(username);
 		if (!user.login(password)) {
-			throw new Exception("Invalid login");
+			throw new AppException("Invalid login");
 		}
 
 		return user;

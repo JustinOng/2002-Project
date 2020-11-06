@@ -3,6 +3,7 @@ package mystars.entities;
 import java.util.ArrayList;
 
 import mystars.enums.*;
+import mystars.exceptions.AppException;
 
 /**
  * <h1>Class: student</h1>
@@ -34,7 +35,7 @@ public class Student extends User {
 	 * @throws UserAlreadyExistsException 
 	 */
 	public Student(String name, String matricNo, String username, String password, Gender gender,
-			Nationality nationality) throws Exception {
+			Nationality nationality) throws AppException {
 		super(username, password);
 		this.matricNo = matricNo;
 
