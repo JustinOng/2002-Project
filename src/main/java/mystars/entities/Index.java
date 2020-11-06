@@ -56,7 +56,7 @@ public class Index {
 		return enrolled;
 	}
 
-	public void addStudent(Student student) throws AppException {
+	protected void addStudent(Student student) throws AppException {
 		if (enrolled.contains(student)) {
 			throw new AppException("Already enrolled");
 		}
@@ -68,11 +68,11 @@ public class Index {
 		}
 	}
 
-	public void removeStudent(Student student) throws AppException {
+	protected void removeStudent(Student student) throws AppException {
 		removeStudent(student, true);
 	}
 
-	public void removeStudent(Student student, boolean allocateWaitlist) {
+	protected void removeStudent(Student student, boolean allocateWaitlist) {
 		if (this.enrolled.contains(student)) {
 			this.enrolled.remove(student);
 		}

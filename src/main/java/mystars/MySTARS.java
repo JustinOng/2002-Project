@@ -24,6 +24,7 @@ public class MySTARS {
 
 			Course c = new Course("Course", "C1", School.CSE);
 			c.createIndex(1, 5);
+			c.createIndex(2, 5);
 
 //			courseController.registerCourse(s, "C1", 1);
 		} catch (Exception e1) {

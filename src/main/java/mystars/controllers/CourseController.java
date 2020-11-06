@@ -46,7 +46,11 @@ public class CourseController {
 			throws AppException {
 		Index i = Index.getIndex(indexNo);
 		student.getTimetable().addIndex(i);
-		i.addStudent(student);
+		try {
+			i.getCourse().register(student, indexNo);
+		} catch (AppException e) {
+			throw e;
+		}
 	}
 
 	public void dropCourse(Student student, int indexNo, String courseCode)
