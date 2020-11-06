@@ -15,7 +15,7 @@ public class Index {
 	private ArrayList<Student> enrolled;
 	private ArrayList<Student> waitlist;
 
-	protected HashMap<Integer, Index> indexes = new HashMap<Integer, Index>();
+	protected static HashMap<Integer, Index> indexes = new HashMap<Integer, Index>();
 
 	public Index(Course course, int indexNo, int maxEnrolled) throws IndexExistsException {
 		if (indexes.containsKey(indexNo)) {
@@ -29,6 +29,10 @@ public class Index {
 		this.waitlist = new ArrayList<Student>();
 		
 		indexes.put(indexNo, this);
+	}
+	
+	public static Index getIndex(int indexNo) {
+		return indexes.get(indexNo);
 	}
 
 	public void createLesson(LessonType type, Day day, String location, String groupNo, boolean[] week, int startPeriod,

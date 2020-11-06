@@ -7,8 +7,10 @@ public interface IUserInterface {
 	public StudentMenuResponse renderStudentMenuForm(List<String> courses);
 	public IndexSwopResponse renderIndexSwopForm();
 	public TextResponse renderItemSelectorForm(String title, List<String> items);
-	public TextResponse renderTextInput(String title, String description);
 	public CreateStudentResponse renderCreateStudentForm();
 	public CreateCourseResponse renderCreateCourseForm();
 	public CreateIndexResponse renderCreateIndexForm();
+	
+	public String getText(String title, String description);
+	public int getInt(String title, String description);
 }
