@@ -1,5 +1,7 @@
 package mystars.entities;
 
+import java.util.ArrayList;
+
 import mystars.enums.*;
 import mystars.exceptions.*;
 
@@ -54,6 +56,10 @@ public class Student extends User {
 	// This class returns the student's timetable object.
 	public Timetable getTimetable() {
 		return studentTimetable;
+	}
+	
+	public ArrayList<Course> getRegisteredCourses() {
+		return studentTimetable.getCourses();
 	}
 
 	public String getMatricNo() {

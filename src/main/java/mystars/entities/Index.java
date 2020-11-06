@@ -83,4 +83,8 @@ public class Index {
 
 		return false;
 	}
+	
+	public Course getCourse() {
+		return course;
+	}
 }

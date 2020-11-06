@@ -12,6 +12,7 @@ import mystars.forms.*;
 public class MySTARS {
 	private IUserInterface ui;
 	private UserController userController = new UserController();
+	private CourseController courseController = new CourseController();
 
 	public MySTARS(IUserInterface ui) throws IOException {
 		this.ui = ui;
@@ -19,8 +20,15 @@ public class MySTARS {
 
 	public void start() {
 		try {
-			new Student("user", "u12345", "user", "pass", Gender.Male, Nationality.Singaporean);
-		} catch (UserAlreadyExistsException e1) {
+			Student s = new Student("user", "u12345", "user", "pass", Gender.Male, Nationality.Singaporean);
+
+			Course c = new Course("Course", "C1", School.CSE);
+			c.createIndex(1, 5);
+
+			courseController.registerCourse(s, "C1", 1);
+		} catch (UserAlreadyExistsException | IndexNotFoundException | StudentAlreadyEnrolledException
+				| CourseNotFoundException | CourseAlreadyAddedException | IndexClashException e1) {
+			e1.printStackTrace();
 		}
 
 		String msg = "";
@@ -38,12 +46,29 @@ public class MySTARS {
 			loopStudent();
 		}
 	}
-	
+
 	private void loopStudent() {
+		Student student = userController.getStudent();
+
 		while (true) {
-			StudentMenuResponse response = ui.renderStudentMenuForm(Arrays.asList("course A"));
-			
-			System.out.println(response.getSelected().name());
+			ArrayList<String> registeredCourses = new ArrayList<String>();
+
+			for (Course c : student.getRegisteredCourses()) {
+				registeredCourses.add(c.toString());
+			}
+
+			StudentMenuResponse response = ui.renderStudentMenuForm(registeredCourses);
+
+			switch (response.getSelected()) {
+			case Register:
+				break;
+			case Drop:
+				break;
+			case Change:
+				break;
+			case Swop:
+				break;
+			}
 		}
 	}
 }

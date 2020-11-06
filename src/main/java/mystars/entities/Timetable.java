@@ -24,4 +24,13 @@ public class Timetable {
 	public void removeIndex(int indexNo) {
 		indexes.remove(indexNo);
 	}
+	
+	public ArrayList<Course> getCourses() {
+		ArrayList<Course> courses = new ArrayList<Course>();
+		for(Index i : indexes) {
+			courses.add(i.getCourse());
+		}
+		
+		return courses;
+	}
 }

@@ -48,10 +48,26 @@ public class UserController {
 	}
 	
 	public boolean isLoggedInStudent() {
-		return user != null && user.getClass().equals(Student.class);
+		return user != null && user instanceof Student;
+	}
+	
+	public Student getStudent() {
+		if (user instanceof Student) {
+			return (Student) user;
+		}
+		
+		throw new WrongUserTypeException();
 	}
 	
 	public boolean isLoggedInAdmin() {
-		return user != null && user.getClass().equals(Admin.class);
+		return user != null && user instanceof Admin;
+	}
+	
+	public Admin getAdmin() {
+		if (user instanceof Admin) {
+			return (Admin) user;
+		}
+		
+		throw new WrongUserTypeException();
 	}
 }
