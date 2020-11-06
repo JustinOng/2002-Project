@@ -44,7 +44,7 @@ public class Course {
 	}
 
 	// accessor method to get the course code of the class course
-	public String courseCode() {
+	public String getCourseCode() {
 		return this.courseCode;
 	}
 

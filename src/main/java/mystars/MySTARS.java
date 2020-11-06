@@ -51,13 +51,8 @@ public class MySTARS {
 		Student student = userController.getStudent();
 
 		while (true) {
-			ArrayList<String> registeredInfo = new ArrayList<String>();
-
-			for (Index i : student.getRegisteredIndexes()) {
-				registeredInfo.add(String.format("%s: %s", i.getCourse(), i));
-			}
-
-			StudentMenuResponse response = ui.renderStudentMenuForm(registeredInfo);
+			HashMap<String, String> registeredInfo = courseController.getRegisteredInfo(student);
+			StudentMenuResponse response = ui.renderStudentMenuForm(new ArrayList<String>(registeredInfo.keySet()));
 
 			switch (response.getSelected()) {
 			case Register:

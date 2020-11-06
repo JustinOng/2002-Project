@@ -57,14 +57,6 @@ public class Student extends User {
 	public Timetable getTimetable() {
 		return studentTimetable;
 	}
-	
-	public ArrayList<Course> getRegisteredCourses() {
-		return studentTimetable.getCourses();
-	}
-	
-	public ArrayList<Index> getRegisteredIndexes() {
-		return studentTimetable.getIndexes();
-	}
 
 	public String getMatricNo() {
 		return matricNo;

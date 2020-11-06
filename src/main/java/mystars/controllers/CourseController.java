@@ -1,6 +1,9 @@
 package mystars.controllers;
 
 import mystars.enums.*;
+
+import java.util.HashMap;
+
 import mystars.entities.*;
 import mystars.exceptions.AppException;
 
@@ -69,5 +72,15 @@ public class CourseController {
 			throws AppException {
 		Course c = Course.getCourse(courseCode);
 		c.swopIndex(studentA, indexNoA, studentB, indexNoB);
+	}
+	
+	public HashMap<String, String> getRegisteredInfo(Student student) {
+		HashMap<String, String> data = new HashMap<String, String>();
+		
+		for(Index i : student.getTimetable().getIndexes()) {
+			data.put(String.format("%s: %s", i.getCourse(), i), i.getCourse().getCourseCode());
+		}
+		
+		return data;
 	}
 }
