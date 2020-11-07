@@ -6,33 +6,32 @@ import java.util.HashMap;
 import mystars.enums.*;
 import mystars.exceptions.AppException;
 
-public class Course {
+public class Course extends Entity {
+	private static final long serialVersionUID = 1L;
+	
 	protected String name;
 	protected String courseCode;
 	protected School school;
 
-	// Creating HashMap for index
-	protected static HashMap<String, Course> courses = new HashMap<String, Course>();
-
 	protected HashMap<Integer, Index> indexes = new HashMap<Integer, Index>();
-	// empty array of student objects
 
 	// constructor of Course
 	public Course(String name, String courseCode, School school) throws AppException {
-		if (courses.containsKey(courseCode)) {
+		if (get(courseCode) != null) {
 			throw new AppException(String.format("%s already exists", courseCode));
 		}
 
 		this.name = name;
 		this.courseCode = courseCode;
 		this.school = school;
-		courses.put(courseCode, this);
+		store(courseCode, this);
 	}
 
 // get the course according to the course code
 	public static Course getCourse(String courseCode) throws AppException {
-		if (courses.containsKey(courseCode)) {
-			return courses.get(courseCode);
+		Course course = (Course) get(courseCode);
+		if (course != null) {
+			return course;
 		}
 
 		throw new AppException(String.format("%s is not a valid course code", courseCode));

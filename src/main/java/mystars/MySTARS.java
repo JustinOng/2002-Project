@@ -11,6 +11,7 @@ import mystars.forms.*;
 
 public class MySTARS {
 	private IUserInterface ui;
+	private StorageController storageController = new StorageController("data");
 	private UserController userController = new UserController();
 	private CourseController courseController = new CourseController();
 

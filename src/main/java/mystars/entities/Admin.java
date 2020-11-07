@@ -8,6 +8,8 @@ package mystars.entities;
 
 public class Admin extends User
 {
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * This class is responsible for the creation of an administrator object.
 	 * 

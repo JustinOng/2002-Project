@@ -1,13 +1,12 @@
 package mystars.entities;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import mystars.enums.*;
 import mystars.exceptions.AppException;
 
-public class Index {
-
+public class Index extends Entity {
+	private static final long serialVersionUID = 1L;
 	private Course course;
 	private int indexNo;
 	private ArrayList<Lesson> lessons;
@@ -15,10 +14,8 @@ public class Index {
 	private ArrayList<Student> enrolled;
 	private ArrayList<Student> waitlist;
 
-	protected static HashMap<Integer, Index> indexes = new HashMap<Integer, Index>();
-
 	public Index(Course course, int indexNo, int maxEnrolled) throws AppException {
-		if (indexes.containsKey(indexNo)) {
+		if (get(indexNo) != null) {
 			throw new AppException(String.format("Index %d already exists", indexNo));
 		}
 
@@ -28,14 +25,17 @@ public class Index {
 		this.enrolled = new ArrayList<Student>();
 		this.waitlist = new ArrayList<Student>();
 		
-		indexes.put(indexNo, this);
+		store(indexNo, this);
 	}
 	
 	public static Index getIndex(int indexNo) throws AppException {
-		if (!indexes.containsKey(indexNo)) {
-			throw new AppException(String.format("Index %d does not exist", indexNo));
+		Index index = (Index) get(indexNo);
+		
+		if (index != null) {
+			return index;
 		}
-		return indexes.get(indexNo);
+		
+		throw new AppException(String.format("Index %d does not exist", indexNo));
 	}
 	
 	public int getIndexNo() {

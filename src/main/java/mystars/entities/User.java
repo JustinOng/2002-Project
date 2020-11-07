@@ -25,17 +25,13 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import java.util.HashMap;
-
 import mystars.exceptions.AppException;
 
-public abstract class User {
+public abstract class User extends Entity {
+	private static final long serialVersionUID = 1L;
 	protected String username;
 	private byte[] passwordHash;
 	protected boolean isAdmin = false;
-
-	// Hashmap tables contain mapped key pair values.
-	private static HashMap<String, User> users = new HashMap<String, User>();
 
 	/**
 	 * This method
@@ -47,14 +43,14 @@ public abstract class User {
 	 * @throws UserAlreadyExistsException 
 	 */
 	protected User(String username, String password) throws AppException {
-		if (users.containsKey(username)) {
+		if (get(username) != null) {
 			throw new AppException(String.format("%s already exists", username));
 		}
 		
 		this.username = username;
 		this.passwordHash = hashString(password);
 
-		users.put(username, this);
+		store(username, this);
 	}
 
 	/*
@@ -87,11 +83,11 @@ public abstract class User {
 	 * @throws InvalidLoginException
 	 */
 	public static User login(String username, String password) throws AppException {
-		if (!users.containsKey(username)) {
+		if (get(username) == null) {
 			throw new AppException("Invalid login");
 		}
 
-		User user = users.get(username);
+		User user = (User) get(username);
 		if (!user.login(password)) {
 			throw new AppException("Invalid login");
 		}

@@ -1,7 +1,5 @@
 package mystars.entities;
 
-import java.util.ArrayList;
-
 import mystars.enums.*;
 import mystars.exceptions.AppException;
 
@@ -13,6 +11,7 @@ import mystars.exceptions.AppException;
  */
 
 public class Student extends User {
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private String matricNo;
 

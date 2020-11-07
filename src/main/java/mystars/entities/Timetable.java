@@ -1,10 +1,13 @@
 package mystars.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import mystars.exceptions.AppException;
 
-public class Timetable {
+public class Timetable implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private ArrayList<Index> indexes = new ArrayList<Index>();
 
 	public void addIndex(Index index) throws AppException {
