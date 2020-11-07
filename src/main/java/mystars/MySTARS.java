@@ -5,7 +5,7 @@ import java.util.*;
 
 import mystars.entities.*;
 import mystars.enums.*;
-import mystars.exceptions.AppException;
+import mystars.exceptions.*;
 import mystars.controllers.*;
 import mystars.forms.*;
 
@@ -31,19 +31,26 @@ public class MySTARS {
 			e1.printStackTrace();
 		}
 
-		String msg = "";
-		while (true) {
-			LoginResponse response = ui.renderLoginForm(msg);
-			try {
-				userController.login(response.getUsername(), response.getPassword());
-				break;
-			} catch (Exception e) {
-				msg = "Invalid login.";
-			}
-		}
+		try {
+			String msg = "";
+			while (true) {
+				LoginResponse response = ui.renderLoginForm(msg);
 
-		if (userController.isLoggedInStudent()) {
-			loopStudent();
+				if (response == null)
+					continue;
+				try {
+					userController.login(response.getUsername(), response.getPassword());
+					break;
+				} catch (Exception e) {
+					msg = "Invalid login.";
+				}
+			}
+
+			if (userController.isLoggedInStudent()) {
+				loopStudent();
+			}
+		} catch (UIException e) {
+
 		}
 	}
 
@@ -55,6 +62,10 @@ public class MySTARS {
 		while (true) {
 			HashMap<String, String> registeredInfo = courseController.getRegisteredInfo(student);
 			StudentMenuResponse response = ui.renderStudentMenuForm(new ArrayList<String>(registeredInfo.keySet()));
+
+			if (response == null) {
+				continue;
+			}
 
 			try {
 				switch (response.getSelected()) {

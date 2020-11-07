@@ -37,13 +37,13 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 		Screen screen = new TerminalScreen(terminal);
 		screen.startScreen();
 
-		gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
+		gui = new AppUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
 	}
 
 	public LoginResponse renderLoginForm(String msg) {
 		return loginForm.getResponse(gui, msg);
 	}
-	
+
 	public StudentMenuResponse renderStudentMenuForm(List<String> courses) {
 		return studentMenuForm.getResponse(gui, courses);
 	}
@@ -51,7 +51,7 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	public TextResponse renderItemSelectorForm(String title, List<String> items) {
 		return itemSelectorForm.getResponse(gui, title, items);
 	}
-	
+
 	public IndexSwopResponse renderIndexSwopForm() {
 		return indexSwopForm.getResponse(gui);
 	}
@@ -59,11 +59,11 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	public CreateStudentResponse renderCreateStudentForm() {
 		return createStudentForm.getResponse(gui);
 	}
-	
+
 	public CreateCourseResponse renderCreateCourseForm() {
 		return createCourseForm.getResponse(gui);
 	}
-	
+
 	public CreateIndexResponse renderCreateIndexForm() {
 		return createIndexForm.getResponse(gui);
 	}
