@@ -12,10 +12,7 @@ import mystars.exceptions.AppException;
  * 
  */
 
-public class UserController {
-	// should this be kept here or in MySTARS?
-	private User user;
-	
+public class UserController {	
 	public UserController() {
 
 	}
@@ -43,31 +40,15 @@ public class UserController {
 	 * @param password The user's password.
 	 * @throws InvalidLoginException 
 	 */
-	public void login(String username, String password) throws AppException {
-		user = User.login(username, password);
+	public User login(String username, String password) throws AppException {
+		return User.login(username, password);
 	}
 	
-	public boolean isLoggedInStudent() {
-		return user != null && user instanceof Student;
+	public boolean isStudent(User user) {
+		return user instanceof Student;
 	}
 	
-	public Student getStudent() {
-		if (user instanceof Student) {
-			return (Student) user;
-		}
-		
-		throw new RuntimeException();
-	}
-	
-	public boolean isLoggedInAdmin() {
-		return user != null && user instanceof Admin;
-	}
-	
-	public Admin getAdmin() {
-		if (user instanceof Admin) {
-			return (Admin) user;
-		}
-		
-		throw new RuntimeException();
+	public boolean isAdmin(User user) {
+		return user instanceof Admin;
 	}
 }

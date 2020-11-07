@@ -15,6 +15,8 @@ public class MySTARS {
 	private UserController userController = new UserController();
 	private CourseController courseController = new CourseController();
 
+	private User user;
+
 	public MySTARS(IUserInterface ui) throws IOException {
 		this.ui = ui;
 	}
@@ -39,14 +41,14 @@ public class MySTARS {
 				if (response == null)
 					continue;
 				try {
-					userController.login(response.getUsername(), response.getPassword());
+					user = userController.login(response.getUsername(), response.getPassword());
 					break;
 				} catch (AppException e) {
 					ui.renderDialog("Login Failed", e.getMessage());
 				}
 			}
 
-			if (userController.isLoggedInStudent()) {
+			if (userController.isStudent(user)) {
 				loopStudent();
 			}
 		} catch (UIException e) {
@@ -55,7 +57,7 @@ public class MySTARS {
 	}
 
 	private void loopStudent() {
-		Student student = userController.getStudent();
+		Student student = (Student) user;
 		TextResponse textResponse;
 		HashMap<String, Integer> indexInfo;
 
