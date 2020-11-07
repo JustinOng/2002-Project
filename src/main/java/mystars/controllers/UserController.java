@@ -2,6 +2,7 @@ package mystars.controllers;
 
 import mystars.entities.*;
 import mystars.enums.*;
+import mystars.exceptions.AppException;
 
 /**
  * <h1>Class: userController</h1>
@@ -42,7 +43,7 @@ public class UserController {
 	 * @param password The user's password.
 	 * @throws InvalidLoginException 
 	 */
-	public void login(String username, String password) throws Exception {
+	public void login(String username, String password) throws AppException {
 		user = User.login(username, password);
 	}
 	

@@ -33,17 +33,16 @@ public class MySTARS {
 		}
 
 		try {
-			String msg = "";
 			while (true) {
-				LoginResponse response = ui.renderLoginForm(msg);
+				LoginResponse response = ui.renderLoginForm();
 
 				if (response == null)
 					continue;
 				try {
 					userController.login(response.getUsername(), response.getPassword());
 					break;
-				} catch (Exception e) {
-					msg = "Invalid login.";
+				} catch (AppException e) {
+					ui.renderDialog("Login Failed", e.getMessage());
 				}
 			}
 

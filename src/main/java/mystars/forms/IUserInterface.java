@@ -3,7 +3,7 @@ package mystars.forms;
 import java.util.List;
 
 public interface IUserInterface {
-	public LoginResponse renderLoginForm(String msg);
+	public LoginResponse renderLoginForm();
 	public StudentMenuResponse renderStudentMenuForm(List<String> courses);
 	public IndexSwopResponse renderIndexSwopForm();
 	public TextResponse renderItemSelectorForm(String title, List<String> items);

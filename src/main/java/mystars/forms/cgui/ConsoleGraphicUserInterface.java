@@ -40,8 +40,8 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 		gui = new AppUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
 	}
 
-	public LoginResponse renderLoginForm(String msg) {
-		return loginForm.getResponse(gui, msg);
+	public LoginResponse renderLoginForm() {
+		return loginForm.getResponse(gui);
 	}
 
 	public StudentMenuResponse renderStudentMenuForm(List<String> courses) {
