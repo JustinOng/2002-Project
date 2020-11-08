@@ -23,7 +23,8 @@ public class MySTARS {
 
 	public void start() {
 		try {
-			Student s = new Student("user", "u12345", "user", "pass", Gender.Male, Nationality.Singaporean);
+			new Student("user", "u12345", "1", "1", Gender.Male, Nationality.Singaporean);
+			new Student("user", "u12345", "2", "2", Gender.Male, Nationality.Singaporean);
 
 			Course c = new Course("Course", "C1", School.CSE);
 			c.createIndex(1, 5);
@@ -108,6 +109,18 @@ public class MySTARS {
 					courseController.changeIndex(courseCode, student, indexInfo.get(textResponse.getText()));
 					break;
 				case Swop:
+					IndexSwopResponse isResponse = ui.renderIndexSwopForm();
+
+					if (isResponse == null)
+						break;
+
+					User targetUser = userController.login(isResponse.getUsername(), isResponse.getPassword());
+					if (!userController.isStudent(targetUser)) {
+						throw new AppException("Invalid peer");
+					}
+
+					courseController.swopIndex(student, isResponse.getIndexA(), (Student) targetUser,
+							isResponse.getIndexB());
 					break;
 				}
 			} catch (AppException e) {

@@ -130,22 +130,26 @@ public class Course extends Entity {
 	public void swopIndex(Student studentA, int indexNoA, Student studentB, int indexNoB) throws AppException {
 		// check whether both student has index
 		// MUST DO ON thurs IF NOT NO SLEEP (sleeping bag?)
+		
+		if (indexNoA == indexNoB) {
+			throw new AppException("Both indexes must be different");
+		}
+		
 		Index indexA = getIndex(indexNoA);
 		Index indexB = getIndex(indexNoB);
 
-		if (!indexA.hasStudent(studentA) || !indexB.hasStudent(studentB)) {
-			throw new AppException();
+		if (!indexA.hasStudent(studentA)) {
+			throw new AppException(String.format("%s is not enrolled in index %d", studentA.getMatricNo(), indexNoA));
+		}
+		
+		if (!indexB.hasStudent(studentB)) {
+			throw new AppException(String.format("%s is not enrolled in index %d", studentB.getMatricNo(), indexNoB));
 		}
 
 		indexA.removeStudent(studentA, false); // false to prevent waitlist from triggering
 		indexB.removeStudent(studentB, false);
-		try {
-			indexA.addStudent(studentB);
-			indexB.addStudent(studentA);
-		} catch (AppException e) {
-			// this should never happen - we just removed the students
-			e.printStackTrace();
-		}
+		indexA.addStudent(studentB);
+		indexB.addStudent(studentA);
 	}
 
 	public void changeIndex(Student student, int targetIndexNo) throws AppException {

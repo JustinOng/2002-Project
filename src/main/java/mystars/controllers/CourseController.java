@@ -68,10 +68,24 @@ public class CourseController {
 		student.getTimetable().addIndex(newIndex);
 	}
 
-	public void swopIndex(String courseCode, Student studentA, int indexNoA, Student studentB, int indexNoB)
+	public void swopIndex(Student studentA, int indexNoA, Student studentB, int indexNoB)
 			throws AppException {
-		Course c = Course.getCourse(courseCode);
-		c.swopIndex(studentA, indexNoA, studentB, indexNoB);
+		if (studentA == studentB) throw new AppException("You cannot swap modules with yourself");		
+		
+		Index indexA = Index.getIndex(indexNoA);
+		Index indexB = Index.getIndex(indexNoB);
+		
+		if (indexA.getCourse() != indexB.getCourse()) throw new AppException("Both indexes must be from the same course");
+		
+		studentA.getTimetable().assertAddIndex(indexB, indexA);
+		studentB.getTimetable().assertAddIndex(indexA, indexB);
+		
+		indexA.getCourse().swopIndex(studentA, indexNoA, studentB, indexNoB);
+		
+		studentA.getTimetable().removeIndex(indexA);
+		studentB.getTimetable().removeIndex(indexB);
+		studentA.getTimetable().addIndex(indexB);
+		studentB.getTimetable().addIndex(indexA);
 	}
 
 	public HashMap<String, String> getRegisteredInfo(Student student) {
