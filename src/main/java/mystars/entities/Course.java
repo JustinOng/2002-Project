@@ -17,19 +17,19 @@ public class Course extends Entity {
 
 	// constructor of Course
 	public Course(String name, String courseCode, School school) throws AppException {
-		if (get(courseCode) != null) {
+		if (get("course", courseCode) != null) {
 			throw new AppException(String.format("%s already exists", courseCode));
 		}
 
 		this.name = name;
 		this.courseCode = courseCode;
 		this.school = school;
-		store(courseCode, this);
+		store("course", courseCode, this);
 	}
 
 // get the course according to the course code
 	public static Course getCourse(String courseCode) throws AppException {
-		Course course = (Course) get(courseCode);
+		Course course = (Course) get("course", courseCode);
 		if (course != null) {
 			return course;
 		}

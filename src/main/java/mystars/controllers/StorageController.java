@@ -10,9 +10,7 @@ public class StorageController {
 		
 		loadFromDisk();
 		
-		User.setStorage("user", storage);
-		Course.setStorage("course", storage);
-		Index.setStorage("index", storage);
+		Entity.setStorage(storage);
 		
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			public void run() {

@@ -43,14 +43,14 @@ public abstract class User extends Entity {
 	 * @throws UserAlreadyExistsException 
 	 */
 	protected User(String username, String password) throws AppException {
-		if (get(username) != null) {
+		if (get("user", username) != null) {
 			throw new AppException(String.format("%s already exists", username));
 		}
 		
 		this.username = username;
 		this.passwordHash = hashString(password);
 
-		store(username, this);
+		store("user", username, this);
 	}
 
 	/*
@@ -83,11 +83,11 @@ public abstract class User extends Entity {
 	 * @throws InvalidLoginException
 	 */
 	public static User login(String username, String password) throws AppException {
-		if (get(username) == null) {
+		if (get("user", username) == null) {
 			throw new AppException("Invalid login");
 		}
 
-		User user = (User) get(username);
+		User user = (User) get("user", username);
 		if (!user.login(password)) {
 			throw new AppException("Invalid login");
 		}

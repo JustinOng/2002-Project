@@ -15,7 +15,7 @@ public class Index extends Entity {
 	private ArrayList<Student> waitlist;
 
 	public Index(Course course, int indexNo, int maxEnrolled) throws AppException {
-		if (get(indexNo) != null) {
+		if (get("index", indexNo) != null) {
 			throw new AppException(String.format("Index %d already exists", indexNo));
 		}
 
@@ -25,11 +25,11 @@ public class Index extends Entity {
 		this.enrolled = new ArrayList<Student>();
 		this.waitlist = new ArrayList<Student>();
 		
-		store(indexNo, this);
+		store("index", indexNo, this);
 	}
 	
 	public static Index getIndex(int indexNo) throws AppException {
-		Index index = (Index) get(indexNo);
+		Index index = (Index) get("index", indexNo);
 		
 		if (index != null) {
 			return index;
