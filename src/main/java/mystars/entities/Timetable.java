@@ -40,7 +40,7 @@ public class Timetable implements Serializable {
 				throw new AppException(String.format("Already registered for %s in %s", i, i.getCourse()));
 			}
 
-			if (i.belongsToSameCourse(add)) {
+			if (i.clashesWith(add)) {
 				throw new AppException(String.format("Clashes with %s", i.toString()));
 			}
 		}
