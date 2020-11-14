@@ -17,7 +17,7 @@ import mystars.exceptions.AppException;
  */
 public class Course extends Entity {
 	/**
-	 * Serialization of the course ID
+	 * Serialization of the course ID.
 	 */
 	private static final long serialVersionUID = 1L;
 
