@@ -24,7 +24,7 @@ public class Timetable implements Serializable {
 	/**
 	 * Add a course index to the student's registered course.
 	 * 
-	 * @param index
+	 * @param index The course index to be added.
 	 * @throws AppException
 	 */
 	public void addIndex(Index index) throws AppException {
@@ -92,7 +92,7 @@ public class Timetable implements Serializable {
 	/**
 	 * Remove an index from the student's registered course.
 	 * 
-	 * @param index The target course index to be removed.
+	 * @param index The course index to be removed.
 	 */
 	public void removeIndex(Index index) {
 		indexes.remove(index);
