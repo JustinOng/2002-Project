@@ -5,10 +5,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.HashMap;
 
 public class FileStorage implements IStorage {
-	private HashMap<String, HashMap<String, Entity>> storage = new HashMap<>();
+	private HashMap<String, HashMap<String, Serializable>> storage = new HashMap<>();
 	private String filename;
 
 	public FileStorage(String filename) {
@@ -16,7 +17,7 @@ public class FileStorage implements IStorage {
 	}
 
 	@Override
-	public void store(String type, String id, Entity e) {
+	public void store(String type, String id, Serializable e) {
 		if (!storage.containsKey(type)) {
 			storage.put(type, new HashMap<>());
 		}
@@ -25,7 +26,7 @@ public class FileStorage implements IStorage {
 	}
 
 	@Override
-	public Entity get(String type, String id) {
+	public Serializable get(String type, String id) {
 		if (!storage.containsKey(type) || !storage.get(type).containsKey(id)) {
 			return null;
 		}
@@ -47,7 +48,7 @@ public class FileStorage implements IStorage {
 	public void loadFromDisk() {
 		try {
 			ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename));
-			storage = (HashMap<String, HashMap<String, Entity>>) in.readObject();
+			storage = (HashMap<String, HashMap<String, Serializable>>) in.readObject();
 			in.close();
 		} catch (IOException | ClassNotFoundException e) {
 			storage = new HashMap<>();
