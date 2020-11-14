@@ -29,8 +29,12 @@ public class UserController {
 	 * @throws UserAlreadyExistsException 
 	 */
 	public void createStudent(String name, String matricNo, String userName, String password, Gender gender,
-			Nationality nationality) throws Exception {
-		Student mystudent = new Student(name, matricNo, userName, password, gender, nationality);
+			Nationality nationality) throws AppException {
+		new Student(name, matricNo, userName, password, gender, nationality);
+	}
+	
+	public void createAdmin(String username, String password) throws AppException {
+		new Admin(username, password);
 	}
 
 	/**

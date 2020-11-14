@@ -23,6 +23,7 @@ public class MySTARS {
 
 	public void start() {
 		try {
+			new Admin("admin", "1");
 			new Student("user", "u12345", "1", "1", Gender.Male, Nationality.Singaporean);
 			new Student("user", "u12345", "2", "2", Gender.Male, Nationality.Singaporean);
 
@@ -51,6 +52,8 @@ public class MySTARS {
 
 			if (userController.isStudent(user)) {
 				loopStudent();
+			} else if (userController.isAdmin(user)) {
+				loopAdmin();
 			}
 		} catch (UIException e) {
 
@@ -126,6 +129,47 @@ public class MySTARS {
 			} catch (AppException e) {
 				ui.renderDialog("Error", e.getMessage());
 			}
+		}
+	}
+
+	private void loopAdmin() {
+		while (true) {
+			AdminMenuResponse response = ui.renderAdminMenuForm();
+
+			if (response == null) {
+				continue;
+			}
+
+//			try {
+			switch (response.getSelected()) {
+			case EditStudentAccessPeriod:
+				AccessPeriodResponse accessResponse = ui
+						.renderAccessPeriodForm(userController.getStudentAccessPeriod());
+				
+				if (accessResponse == null) {
+					continue;
+				}
+				
+				userController.setStudentAccessPeriod(accessResponse.getStart(), accessResponse.getEnd());
+
+				ui.renderDialog("Student Access Period", "Changed successfully");
+				break;
+			case CheckIndexVacancies:
+				break;
+			case CreateStudent:
+				break;
+			case CreateUpdateCourse:
+				break;
+			case ListStudentsByCourse:
+				break;
+			case ListStudentsByIndex:
+				break;
+			default:
+				break;
+			}
+//			} catch (AppException e) {
+//				ui.renderDialog("Error", e.getMessage());
+//			}
 		}
 	}
 }

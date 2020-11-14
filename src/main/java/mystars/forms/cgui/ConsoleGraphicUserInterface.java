@@ -21,6 +21,7 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 
 	private LoginForm loginForm = new LoginForm();
 	private StudentMenuForm studentMenuForm = new StudentMenuForm();
+	private AdminMenuForm adminMenuForm = new AdminMenuForm();
 	private ItemSelectorForm itemSelectorForm = new ItemSelectorForm();
 	private IndexSwopForm indexSwopForm = new IndexSwopForm();
 	private CreateStudentForm createStudentForm = new CreateStudentForm();
@@ -78,5 +79,9 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 
 	public void renderDialog(String title, String msg) {
 		MessageDialog.showMessageDialog(gui, title, msg);
+	}
+
+	public AdminMenuResponse renderAdminMenuForm() {
+		return adminMenuForm.getResponse(gui);
 	}
 }
