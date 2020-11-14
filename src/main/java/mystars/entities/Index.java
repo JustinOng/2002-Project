@@ -9,7 +9,7 @@ public class Index extends Entity {
 	private static final long serialVersionUID = 1L;
 	private Course course;
 	private int indexNo;
-	private ArrayList<Lesson> lessons;
+	private ArrayList<Lesson> lessons = new ArrayList<Lesson>();
 	private int maxEnrolled;
 	private ArrayList<Student> enrolled;
 	private ArrayList<Student> waitlist;
