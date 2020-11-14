@@ -35,17 +35,11 @@ public class CreateStudentForm {
 		final TextBox matricNoInput = new TextBox().addTo(panel);
 
 		panel.addComponent(new Label("Gender:"));
-		final ComboBox<String> genderBox = new ComboBox<String>();
-		for (String s : genders) {
-			genderBox.addItem(s);
-		}
+		final ComboBox<String> genderBox = new ComboBox<String>(genders);
 		panel.addComponent(genderBox);
 
 		panel.addComponent(new Label("Nationality:"));
-		final ComboBox<String> nationalityBox = new ComboBox<String>();
-		for (String s : nationalities) {
-			nationalityBox.addItem(s);
-		}
+		final ComboBox<String> nationalityBox = new ComboBox<String>(nationalities);
 		panel.addComponent(nationalityBox);
 
 		panel.addComponent(new EmptySpace(new TerminalSize(0, 0)));
