@@ -1,7 +1,6 @@
 package mystars.forms.cgui;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 import com.googlecode.lanterna.TerminalSize;
@@ -14,6 +13,8 @@ public class IndexSwopForm {
 
 	public IndexSwopResponse getResponse(MultiWindowTextGUI gui) {
 		final AbstractWindow window = new BasicWindow();
+		
+		response = null;
 
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(2));

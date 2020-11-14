@@ -13,11 +13,10 @@ public class LoginForm {
 	public LoginResponse getResponse(MultiWindowTextGUI gui) {
 		final AbstractWindow window = new BasicWindow();
 		
+		response = null;
+		
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(2));
-
-		final Label status = new Label("");
-		panel.addComponent(status, GridLayout.createHorizontallyFilledLayoutData(2));
 
 		panel.addComponent(new Label("Username:"));
 		final TextBox usernameInput = new TextBox().addTo(panel);
@@ -26,19 +25,14 @@ public class LoginForm {
 		final TextBox passwordInput = new TextBox().addTo(panel);
 		passwordInput.setMask('*');
 
-		panel.addComponent(new Label("I am a:"));
-		final ComboBox<String> loginTypeInput = new ComboBox<String>(Arrays.asList("Student", "Admin"), 0);
-		panel.addComponent(loginTypeInput, GridLayout.createHorizontallyFilledLayoutData(2));
-
 		panel.addComponent(new EmptySpace(new TerminalSize(0, 0)));
 		
 		new Button("Login", new Runnable() {
 			public void run() {
 				String username = usernameInput.getText();
 				String password = passwordInput.getText();
-				String loginType = loginTypeInput.getSelectedItem();
 
-				response = new LoginResponse(username, password, loginType);
+				response = new LoginResponse(username, password);
 				window.close();
 			}
 		}).addTo(panel);

@@ -3,12 +3,10 @@ package mystars.forms;
 public class LoginResponse {
 	private final String username;
 	private final String password;
-	private final String loginType;
 
-	public LoginResponse(String username, String password, String loginType) {
+	public LoginResponse(String username, String password) {
 		this.username = username;
 		this.password = password;
-		this.loginType = loginType;
 	}
 
 	public String getUsername() {
@@ -17,9 +15,5 @@ public class LoginResponse {
 
 	public String getPassword() {
 		return password;
-	}
-
-	public String getLoginType() {
-		return loginType;
 	}
 }

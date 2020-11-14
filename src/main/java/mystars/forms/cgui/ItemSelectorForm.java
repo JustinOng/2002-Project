@@ -13,6 +13,8 @@ public class ItemSelectorForm implements RadioBoxList.Listener {
 	private List<String> items;
 	
 	public TextResponse getResponse(MultiWindowTextGUI gui, String title, List<String> items) {
+		response = null;
+		
 		this.items = items;
 
 		RadioBoxList<String> radioBoxList = new RadioBoxList<String>();

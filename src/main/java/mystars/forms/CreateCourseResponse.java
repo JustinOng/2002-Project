@@ -1,6 +1,6 @@
 package mystars.forms;
 
-import mystars.School;
+import mystars.enums.School;
 
 public class CreateCourseResponse {
 	private final String code;

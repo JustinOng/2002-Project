@@ -8,10 +8,12 @@ import com.googlecode.lanterna.gui2.*;
 import mystars.forms.*;
 
 public class StudentMenuForm {
-	private TextResponse response;
+	private StudentMenuResponse response;
 
-	public TextResponse getResponse(MultiWindowTextGUI gui, List<String> courses) {
+	public StudentMenuResponse getResponse(MultiWindowTextGUI gui, List<String> courses) {
 		final AbstractWindow window = new BasicWindow();
+		
+		response = null;
 
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(4));
@@ -26,7 +28,7 @@ public class StudentMenuForm {
 		
 		new Button("Register Course", new Runnable() {
 			public void run() {
-				response = new TextResponse("register");
+				response = new StudentMenuResponse(StudentMenuResponse.Selected.Register);
 				window.close();
 			}
 		}).addTo(panel);
@@ -34,21 +36,21 @@ public class StudentMenuForm {
 		if (courses != null) {
 			new Button("Drop Course", new Runnable() {
 				public void run() {
-					response = new TextResponse("drop");
+					response = new StudentMenuResponse(StudentMenuResponse.Selected.Drop);
 					window.close();
 				}
 			}).addTo(panel);
 			
 			new Button("Change Index", new Runnable() {
 				public void run() {
-					response = new TextResponse("change");
+					response = new StudentMenuResponse(StudentMenuResponse.Selected.Change);
 					window.close();
 				}
 			}).addTo(panel);
 			
 			new Button("Swop Index", new Runnable() {
 				public void run() {
-					response = new TextResponse("swop");
+					response = new StudentMenuResponse(StudentMenuResponse.Selected.Swop);
 					window.close();
 				}
 			}).addTo(panel);
