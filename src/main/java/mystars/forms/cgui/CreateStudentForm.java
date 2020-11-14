@@ -1,6 +1,7 @@
 package mystars.forms.cgui;
 
 import java.util.Arrays;
+import java.util.List;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
@@ -10,9 +11,9 @@ import mystars.forms.*;
 public class CreateStudentForm {
 	private CreateStudentResponse response;
 
-	public CreateStudentResponse getResponse(MultiWindowTextGUI gui) {
+	public CreateStudentResponse getResponse(MultiWindowTextGUI gui, List<String> genders, List<String> nationalities) {
 		final AbstractWindow window = new BasicWindow();
-		
+
 		response = null;
 
 		Panel panel = new Panel();
@@ -33,18 +34,27 @@ public class CreateStudentForm {
 		panel.addComponent(new Label("Matric. No.:"));
 		final TextBox matricNoInput = new TextBox().addTo(panel);
 
-		panel.addComponent(new Label("Major:"));
-		final TextBox majorInput = new TextBox().addTo(panel);
+		panel.addComponent(new Label("Gender:"));
+		final ComboBox<String> genderBox = new ComboBox<String>();
+		for (String s : genders) {
+			genderBox.addItem(s);
+		}
+		panel.addComponent(genderBox);
 
 		panel.addComponent(new Label("Nationality:"));
-		final TextBox nationalityInput = new TextBox().addTo(panel);
+		final ComboBox<String> nationalityBox = new ComboBox<String>();
+		for (String s : nationalities) {
+			nationalityBox.addItem(s);
+		}
+		panel.addComponent(nationalityBox);
 
 		panel.addComponent(new EmptySpace(new TerminalSize(0, 0)));
 
 		new Button("Create", new Runnable() {
 			public void run() {
 				response = new CreateStudentResponse(usernameInput.getText(), passwordInput.getText(),
-						nameInput.getText(), matricNoInput.getText(), majorInput.getText(), nationalityInput.getText());
+						nameInput.getText(), matricNoInput.getText(), genderBox.getSelectedItem(),
+						nationalityBox.getSelectedItem());
 				window.close();
 			}
 		}).addTo(panel);

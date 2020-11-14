@@ -8,7 +8,7 @@ public interface IUserInterface {
 	public AdminMenuResponse renderAdminMenuForm();
 	public IndexSwopResponse renderIndexSwopForm();
 	public TextResponse renderItemSelectorForm(String title, List<String> items);
-	public CreateStudentResponse renderCreateStudentForm();
+	public CreateStudentResponse renderCreateStudentForm(List<String> genders, List<String> nationalities);
 	public CreateCourseResponse renderCreateCourseForm();
 	public CreateIndexResponse renderCreateIndexForm();
 	public AccessPeriodResponse renderAccessPeriodForm(String curAccessPeriod);

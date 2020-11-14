@@ -2,6 +2,8 @@ package mystars;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import mystars.entities.*;
 import mystars.enums.*;
@@ -140,36 +142,52 @@ public class MySTARS {
 				continue;
 			}
 
-//			try {
-			switch (response.getSelected()) {
-			case EditStudentAccessPeriod:
-				AccessPeriodResponse accessResponse = ui
-						.renderAccessPeriodForm(userController.getStudentAccessPeriod());
-				
-				if (accessResponse == null) {
-					continue;
-				}
-				
-				userController.setStudentAccessPeriod(accessResponse.getStart(), accessResponse.getEnd());
+			try {
+				switch (response.getSelected()) {
+				case EditStudentAccessPeriod:
+					AccessPeriodResponse accessResponse = ui
+							.renderAccessPeriodForm(userController.getStudentAccessPeriod());
 
-				ui.renderDialog("Student Access Period", "Changed successfully");
-				break;
-			case CheckIndexVacancies:
-				break;
-			case CreateStudent:
-				break;
-			case CreateUpdateCourse:
-				break;
-			case ListStudentsByCourse:
-				break;
-			case ListStudentsByIndex:
-				break;
-			default:
-				break;
+					if (accessResponse == null) {
+						continue;
+					}
+
+					userController.setStudentAccessPeriod(accessResponse.getStart(), accessResponse.getEnd());
+
+					ui.renderDialog("Student Access Period", "Changed successfully");
+					break;
+				case CheckIndexVacancies:
+					break;
+				case CreateStudent:
+					// https://stackoverflow.com/a/29465971
+					List<String> genders = Stream.of(Gender.values()).map(Enum::name).collect(Collectors.toList());
+					List<String> nationalities = Stream.of(Nationality.values()).map(Enum::name)
+							.collect(Collectors.toList());
+					CreateStudentResponse studentResponse = ui.renderCreateStudentForm(genders, nationalities);
+
+					if (studentResponse == null) {
+						continue;
+					}
+
+					Gender gender = Gender.valueOf(studentResponse.getGender());
+					Nationality nationality = Nationality.valueOf(studentResponse.getNationality());
+
+					userController.createStudent(studentResponse.getName(), studentResponse.getMatricNo(),
+							studentResponse.getUsername(), studentResponse.getPassword(), gender, nationality);
+
+					break;
+				case CreateUpdateCourse:
+					break;
+				case ListStudentsByCourse:
+					break;
+				case ListStudentsByIndex:
+					break;
+				default:
+					break;
+				}
+			} catch (AppException e) {
+				ui.renderDialog("Error", e.getMessage());
 			}
-//			} catch (AppException e) {
-//				ui.renderDialog("Error", e.getMessage());
-//			}
 		}
 	}
 }
