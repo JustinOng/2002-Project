@@ -32,9 +32,9 @@ public class AdminMenuForm {
 			}
 		}).addTo(panel);
 		
-		new Button("Create/Update Course", new Runnable() {
+		new Button("Create Course", new Runnable() {
 			public void run() {
-				response = new AdminMenuResponse(AdminMenuResponse.Selected.CreateUpdateCourse);
+				response = new AdminMenuResponse(AdminMenuResponse.Selected.CreateCourse);
 				window.close();
 			}
 		}).addTo(panel);

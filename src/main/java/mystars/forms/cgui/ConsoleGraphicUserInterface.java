@@ -62,8 +62,8 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 		return createStudentForm.getResponse(gui, genders, nationalities);
 	}
 
-	public CreateCourseResponse renderCreateCourseForm() {
-		return createCourseForm.getResponse(gui);
+	public CreateCourseResponse renderCreateCourseForm(List<String> schools) {
+		return createCourseForm.getResponse(gui, schools);
 	}
 
 	public CreateIndexResponse renderCreateIndexForm() {

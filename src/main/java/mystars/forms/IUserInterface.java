@@ -9,7 +9,7 @@ public interface IUserInterface {
 	public IndexSwopResponse renderIndexSwopForm();
 	public TextResponse renderItemSelectorForm(String title, List<String> items);
 	public CreateStudentResponse renderCreateStudentForm(List<String> genders, List<String> nationalities);
-	public CreateCourseResponse renderCreateCourseForm();
+	public CreateCourseResponse renderCreateCourseForm(List<String> schools);
 	public CreateIndexResponse renderCreateIndexForm();
 	public AccessPeriodResponse renderAccessPeriodForm(String curAccessPeriod);
 	

@@ -175,8 +175,19 @@ public class MySTARS {
 					userController.createStudent(studentResponse.getName(), studentResponse.getMatricNo(),
 							studentResponse.getUsername(), studentResponse.getPassword(), gender, nationality);
 
+					ui.renderDialog("Student Creation", "Student created successfully");
 					break;
-				case CreateUpdateCourse:
+				case CreateCourse:
+					List<String> schools = Stream.of(School.values()).map(Enum::name).collect(Collectors.toList());
+					CreateCourseResponse courseResponse = ui.renderCreateCourseForm(schools);
+					
+					if (courseResponse == null) {
+						continue;
+					}
+					
+					courseController.createCourse(courseResponse.getName(), courseResponse.getCode(), courseResponse.getSchool());
+
+					ui.renderDialog("Course Creation", "Course created successfully");
 					break;
 				case ListStudentsByCourse:
 					break;
