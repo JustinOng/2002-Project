@@ -27,6 +27,7 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	private CreateStudentForm createStudentForm = new CreateStudentForm();
 	private CreateCourseForm createCourseForm = new CreateCourseForm();
 	private CreateIndexForm createIndexForm = new CreateIndexForm();
+	private AccessPeriodForm accessPeriodForm = new AccessPeriodForm(); 
 
 	public ConsoleGraphicUserInterface() throws IOException {
 		DefaultTerminalFactory factory = new DefaultTerminalFactory();
@@ -83,5 +84,9 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 
 	public AdminMenuResponse renderAdminMenuForm() {
 		return adminMenuForm.getResponse(gui);
+	}
+
+	public AccessPeriodResponse renderAccessPeriodForm(String curAccessPeriod) {
+		return accessPeriodForm.getResponse(gui, curAccessPeriod);
 	}
 }

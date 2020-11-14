@@ -1,5 +1,7 @@
 package mystars.controllers;
 
+import java.time.LocalDateTime;
+
 import mystars.entities.*;
 import mystars.enums.*;
 import mystars.exceptions.AppException;
@@ -54,5 +56,13 @@ public class UserController {
 	
 	public boolean isAdmin(User user) {
 		return user instanceof Admin;
+	}
+	
+	public void setStudentAccessPeriod(LocalDateTime start, LocalDateTime end) {
+		Student.setAccessPeriod(start, end);
+	}
+	
+	public String getStudentAccessPeriod() {
+		return Student.getAccessPeriod();
 	}
 }

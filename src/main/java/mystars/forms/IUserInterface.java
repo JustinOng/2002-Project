@@ -11,6 +11,7 @@ public interface IUserInterface {
 	public CreateStudentResponse renderCreateStudentForm();
 	public CreateCourseResponse renderCreateCourseForm();
 	public CreateIndexResponse renderCreateIndexForm();
+	public AccessPeriodResponse renderAccessPeriodForm(String curAccessPeriod);
 	
 	public String getText(String title, String description);
 	public Integer getInt(String title, String description);

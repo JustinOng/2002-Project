@@ -99,8 +99,9 @@ public abstract class User extends Entity {
 	 * This method
 	 * 
 	 * @param password The user's password.
+	 * @throws AppException 
 	 */
-	public boolean login(String password) {
+	public boolean login(String password) throws AppException {
 		return Arrays.equals(hashString(password), this.passwordHash);
 	}
 }
