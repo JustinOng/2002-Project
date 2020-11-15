@@ -26,8 +26,8 @@ public class MySTARS {
 	public void start() {
 		try {
 			new Admin("admin", "1");
-			new Student("user", "u12345", "1", "1", Gender.Male, Nationality.Singaporean);
-			new Student("user", "u12345", "2", "2", Gender.Male, Nationality.Singaporean);
+			new Student("user1", "u12345", "1", "1", Gender.Male, Nationality.Singaporean);
+			new Student("user2", "u12345", "2", "2", Gender.Male, Nationality.Singaporean);
 
 			Course c = new Course("Course", "C1", School.CSE);
 			c.createIndex(1, 5);
@@ -287,7 +287,7 @@ public class MySTARS {
 					break;
 				case ListStudents:
 					displayStudents(String.format("Students registered for Index %d", indexNo),
-							courseController.getStudentsByCourse(courseCode));
+							courseController.getStudentsByIndex(indexNo));
 					break;
 				default:
 					break;
