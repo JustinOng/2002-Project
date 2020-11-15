@@ -156,8 +156,6 @@ public class MySTARS {
 
 					ui.renderDialog("Student Access Period", "Changed successfully");
 					break;
-				case CheckIndexVacancies:
-					break;
 				case CreateStudent:
 					// https://stackoverflow.com/a/29465971
 					List<String> genders = Stream.of(Gender.values()).map(Enum::name).collect(Collectors.toList());
@@ -180,22 +178,70 @@ public class MySTARS {
 				case CreateCourse:
 					List<String> schools = Stream.of(School.values()).map(Enum::name).collect(Collectors.toList());
 					CreateCourseResponse courseResponse = ui.renderCreateCourseForm(schools);
-					
+
 					if (courseResponse == null) {
 						continue;
 					}
-					
-					courseController.createCourse(courseResponse.getName(), courseResponse.getCode(), courseResponse.getSchool());
+
+					courseController.createCourse(courseResponse.getName(), courseResponse.getCode(),
+							courseResponse.getSchool());
 
 					ui.renderDialog("Course Creation", "Course created successfully");
 					break;
-				case ListStudentsByCourse:
+				case ManageCourses:
+					loopCourseMangement();
+				default:
 					break;
-				case ListStudentsByIndex:
+				}
+			} catch (AppException e) {
+				ui.renderDialog("Error", e.getMessage());
+			}
+		}
+	}
+
+	private void loopCourseMangement() {
+		while (true) {
+			HashMap<String, String> courses = new HashMap<String, String>();
+			for (Course course : courseController.getAllCourses()) {
+				courses.put(course.toString(), course.getCourseCode());
+			}
+
+			try {
+				CourseManagementResponse courseMgmtResponse = ui
+						.renderCourseManagementForm(new ArrayList<String>(courses.keySet()));
+
+				if (courseMgmtResponse == null) {
+					break;
+				}
+				
+				String courseCode = courses.get(courseMgmtResponse.getCourseName());
+
+				switch (courseMgmtResponse.getSelected()) {
+				case CreateIndex:
+					CreateIndexResponse indexResponse = ui.renderCreateIndexForm(courseCode);
+
+					if (indexResponse == null) {
+						continue;
+					}
+
+					courseController.createIndex(courseCode, indexResponse.getNumber(),
+							indexResponse.getMaxEnrolled());
+
+					ui.renderDialog("Index Creation", "Index created successfully");
+					break;
+				case ListStudents:
+					break;
+				case ManageIndexes:
 					break;
 				default:
 					break;
 				}
+				break;
+			} catch (AppException e) {
+				ui.renderDialog("Error", e.getMessage());
+			}
+		}
+	}
 			} catch (AppException e) {
 				ui.renderDialog("Error", e.getMessage());
 			}

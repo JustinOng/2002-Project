@@ -39,23 +39,9 @@ public class AdminMenuForm {
 			}
 		}).addTo(panel);
 		
-		new Button("Check Index Vacancies", new Runnable() {
+		new Button("Manage Courses", new Runnable() {
 			public void run() {
-				response = new AdminMenuResponse(AdminMenuResponse.Selected.CheckIndexVacancies);
-				window.close();
-			}
-		}).addTo(panel);
-		
-		new Button("List Students By Index", new Runnable() {
-			public void run() {
-				response = new AdminMenuResponse(AdminMenuResponse.Selected.ListStudentsByIndex);
-				window.close();
-			}
-		}).addTo(panel);
-		
-		new Button("List Students By Course", new Runnable() {
-			public void run() {
-				response = new AdminMenuResponse(AdminMenuResponse.Selected.ListStudentsByCourse);
+				response = new AdminMenuResponse(AdminMenuResponse.Selected.ManageCourses);
 				window.close();
 			}
 		}).addTo(panel);

@@ -1,6 +1,7 @@
 package mystars.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public abstract class Entity implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,6 +23,10 @@ public abstract class Entity implements Serializable {
 		if (storage == null) throw new IllegalStateException("Storage not configured");
 		
 		return storage.get(storageId, id); 
+	}
+	
+	protected static ArrayList<Serializable> getAll(String storageId) {
+		return storage.getAll(storageId);
 	}
 	
 	public static void setStorage(IStorage _storage) {

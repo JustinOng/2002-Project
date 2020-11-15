@@ -12,6 +12,7 @@ public interface IUserInterface {
 	public CreateCourseResponse renderCreateCourseForm(List<String> schools);
 	public CreateIndexResponse renderCreateIndexForm();
 	public AccessPeriodResponse renderAccessPeriodForm(String curAccessPeriod);
+	public CourseManagementResponse renderCourseManagementForm(List<String> courses);
 	
 	public String getText(String title, String description);
 	public Integer getInt(String title, String description);

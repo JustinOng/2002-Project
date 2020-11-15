@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class FileStorage implements IStorage {
@@ -32,6 +33,10 @@ public class FileStorage implements IStorage {
 		}
 
 		return storage.get(type).get(id);
+	}
+	
+	public ArrayList<Serializable> getAll(String type) {
+		return new ArrayList<Serializable>(storage.get(type).values());
 	}
 
 	public void writeToDisk() {

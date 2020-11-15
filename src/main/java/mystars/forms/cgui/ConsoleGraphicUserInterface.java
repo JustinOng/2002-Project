@@ -27,7 +27,8 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	private CreateStudentForm createStudentForm = new CreateStudentForm();
 	private CreateCourseForm createCourseForm = new CreateCourseForm();
 	private CreateIndexForm createIndexForm = new CreateIndexForm();
-	private AccessPeriodForm accessPeriodForm = new AccessPeriodForm(); 
+	private AccessPeriodForm accessPeriodForm = new AccessPeriodForm();
+	private CourseManagementForm courseManagementForm = new CourseManagementForm();
 
 	public ConsoleGraphicUserInterface() throws IOException {
 		DefaultTerminalFactory factory = new DefaultTerminalFactory();
@@ -66,8 +67,8 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 		return createCourseForm.getResponse(gui, schools);
 	}
 
-	public CreateIndexResponse renderCreateIndexForm() {
-		return createIndexForm.getResponse(gui);
+	public CreateIndexResponse renderCreateIndexForm(String course) {
+		return createIndexForm.getResponse(gui, course);
 	}
 
 	public String getText(String title, String description) {
@@ -88,5 +89,9 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 
 	public AccessPeriodResponse renderAccessPeriodForm(String curAccessPeriod) {
 		return accessPeriodForm.getResponse(gui, curAccessPeriod);
+	}
+
+	public CourseManagementResponse renderCourseManagementForm(List<String> courses) {
+		return courseManagementForm.getResponse(gui, courses);
 	}
 }
