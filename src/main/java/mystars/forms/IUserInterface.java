@@ -19,4 +19,5 @@ public interface IUserInterface {
 	public String getText(String title, String description);
 	public Integer getInt(String title, String description);
 	public void renderDialog(String title, String msg);
+	public void renderStudentList(String title, List<String[]> students);
 }

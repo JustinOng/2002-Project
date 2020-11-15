@@ -104,4 +104,8 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	public CreateLessonResponse renderCreateLessonForm(String index, List<String> lessonType, List<String> days) {
 		return createLessonForm.getResponse(gui, index, lessonType, days);
 	}
+
+	public void renderStudentList(String title, List<String[]> students) {
+		DisplayStudentList.show(gui, title, students);
+	}
 }

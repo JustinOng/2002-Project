@@ -205,4 +205,12 @@ public class CourseController {
 
 		return data;
 	}
+	
+	public List<Student> getStudentsByCourse(String courseCode) throws AppException {
+		return Course.getCourse(courseCode).getStudentList();
+	}
+	
+	public List<Student> getStudentsByIndex(int indexNo) throws AppException {
+		return Index.getIndex(indexNo).getStudentList();
+	}
 }

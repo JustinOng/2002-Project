@@ -228,6 +228,8 @@ public class MySTARS {
 					ui.renderDialog("Index Creation", "Index created successfully");
 					break;
 				case ListStudents:
+					displayStudents("Students registered for " + courseCode,
+							courseController.getStudentsByCourse(courseCode));
 					break;
 				case ManageIndexes:
 					loopIndexManagement(courseCode);
@@ -266,23 +268,26 @@ public class MySTARS {
 			try {
 				switch (indexMgmtResponse.getSelected()) {
 				case CreateLesson:
-					List<String> lessonTypes = Stream.of(LessonType.values()).map(Enum::name).collect(Collectors.toList());
+					List<String> lessonTypes = Stream.of(LessonType.values()).map(Enum::name)
+							.collect(Collectors.toList());
 					List<String> days = Stream.of(Day.values()).map(Enum::name).collect(Collectors.toList());
 					CreateLessonResponse lessonResponse = ui.renderCreateLessonForm(String.format("Index %d", indexNo),
 							lessonTypes, days);
-	
+
 					if (lessonResponse == null) {
 						continue;
 					}
-	
+
 					LessonType lessonType = LessonType.valueOf(lessonResponse.getLessonType());
 					Day day = Day.valueOf(lessonResponse.getDay());
-	
+
 					courseController.createLesson(courseCode, indexNo, lessonType, day, lessonResponse.getLocation(),
 							lessonResponse.getGroupNo(), lessonResponse.getWeeks(), lessonResponse.getStartPeriod(),
 							lessonResponse.getEndPeriod());
 					break;
 				case ListStudents:
+					displayStudents(String.format("Students registered for Index %d", indexNo),
+							courseController.getStudentsByCourse(courseCode));
 					break;
 				default:
 					break;
@@ -291,5 +296,14 @@ public class MySTARS {
 				ui.renderDialog("Error", e.getMessage());
 			}
 		}
+	}
+
+	private void displayStudents(String title, List<Student> students) {
+		List<String[]> data = new ArrayList<>();
+		for (Student s : students) {
+			data.add(new String[] { s.getName(), s.getGender().toString(), s.getNationality().toString() });
+		}
+
+		ui.renderStudentList(title, data);
 	}
 }

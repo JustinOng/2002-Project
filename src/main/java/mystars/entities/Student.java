@@ -101,4 +101,8 @@ public class Student extends User {
 	public String getMatricNo() {
 		return matricNo;
 	}
+	
+	public Nationality getNationality() {
+		return nationality;
+	}
 }
