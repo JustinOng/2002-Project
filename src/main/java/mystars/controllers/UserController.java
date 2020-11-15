@@ -12,7 +12,7 @@ import mystars.exceptions.AppException;
 
 public class UserController {	
 	/**
-	 * 
+	 * Class constructor.
 	 */
 	public UserController() {
 

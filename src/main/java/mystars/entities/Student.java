@@ -6,7 +6,7 @@ import mystars.exceptions.AppException;
 /**
  * <h1>Class: Student</h1>
  * 
- * This student class inherits from the user class.
+ * This student class inherits from the user class, and is responsible for the creation of a new student object.
  */
 
 public class Student extends User {
@@ -51,7 +51,6 @@ public class Student extends User {
 			Nationality nationality) throws AppException {
 		super(username, password);
 		this.matricNo = matricNo;
-
 		this.gender = gender;
 		this.nationality = nationality;
 	}
@@ -72,6 +71,15 @@ public class Student extends User {
 	 */
 	public Gender getGender() {
 		return gender;
+	}
+	
+	/**
+	 * Returns the student's nationality as a category from the Nationality enum.
+	 * 
+	 * @return The student's nationality.
+	 */
+	public Nationality getNationality() {
+		return nationality;
 	}
 
 	/**

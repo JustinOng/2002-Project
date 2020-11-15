@@ -7,12 +7,10 @@ import mystars.enums.*;
 /**
  * <h1>Class: Lesson</h1>
  *
- *
- * This lesson class defines the blueprint of a lesson property. It also checks
- * instances where two objects of a different lesson clashes.
+ * This Lesson class defines the blueprint of a lesson property.
+ * It also checks instances where two objects of a different lesson clashes.
  *
  */
-
 public class Lesson implements Serializable {
 	/**
 	 * Serialization of the course ID
@@ -20,48 +18,47 @@ public class Lesson implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * The index that the lesson belongs to.
+	 * Index that the lesson belongs to.
 	 */
 	private Index index;
 
 	/**
-	 * The type of lesson for this instance (i.e. lecture/tutorial/lab).
+	 * Type of lesson for this instance (i.e. lecture/tutorial/lab).
 	 */
 	private LessonType lessonType;
 
 	/**
-	 * The day of the week the lesson is conducted.
+	 * Day of the week the lesson is conducted.
 	 */
 	private Day day;
 
 	/**
-	 * The location where the lesson is conducted.
+	 * Location where the lesson is conducted.
 	 */
 	private String location;
 
 	/**
-	 * The group number assigned to the particular lesson (applicable for tutorials & labs).
+	 * Group number assigned to the particular lesson (applicable for tutorials & labs).
 	 */
 	private String groupNo;
 
 	/**
-	 * The specific weeks the lesson will be conducted.
+	 * Specific weeks the lesson will be conducted.
 	 */
 	private boolean[] weeks;
 
 	/**
-	 * The commencement time for the lesson.
+	 * Starting time for the lesson.
 	 */
 	private int startPeriod;
 
 	/**
-	 * The conclusion time for the lesson.
+	 * Ending time for the lesson.
 	 */
 	private int endPeriod;
 
 	/**
-	 * Constructor for Lesson. This class is responsible for the creation of a lesson
-	 * object.
+	 * Constructor for Lesson. This class is responsible for the creation of a lesson object.
 	 * 
 	 * @param index      	The Lesson's index.
 	 * @param lessonType 	The Lesson's Type.
@@ -85,9 +82,9 @@ public class Lesson implements Serializable {
 	}
 
 	/**
-	 * Check for clashes between lessons
+	 * Check for clashes between lessons.
 	 * 
-	 * @return true if there are clashes and false if there are none
+	 * @return true if there are clashes and false if there are none.
 	 */
 	public boolean clashesWith(Lesson l) {
 		// loop through every week.

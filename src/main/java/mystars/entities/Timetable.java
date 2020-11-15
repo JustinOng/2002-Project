@@ -8,7 +8,7 @@ import mystars.exceptions.AppException;
 /**
  * <h1>Class: Timetable</h1>
  * 
- * This class implements the student's timetable.
+ * This Timetable class implements the student's timetable.
  */
 public class Timetable implements Serializable {
 	/**

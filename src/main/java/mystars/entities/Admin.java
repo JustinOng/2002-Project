@@ -13,7 +13,7 @@ public class Admin extends User {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * This class is responsible for the creation of an administrator object.
+	 * This class inherits from the user class and is responsible for the creation of an administrator object.
 	 * 
 	 * @param username 	The administrator's username.
 	 * @param password 	The administrator's password.

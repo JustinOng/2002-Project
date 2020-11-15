@@ -1,5 +1,10 @@
 package mystars.enums;
 
-public enum Gender {
-	Male, Female;
+/**
+ * This enum contains the options for the user's gender.
+ */
+public enum Gender
+{
+	Male,
+	Female;
 }

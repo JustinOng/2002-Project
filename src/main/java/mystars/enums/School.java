@@ -1,6 +1,10 @@
 package mystars.enums;
 
-public enum School {
+/**
+ * This enum contains the options for the student's school.
+ */
+public enum School
+{
 	NBS,
 	CBE,
 	CEE,
@@ -14,5 +18,5 @@ public enum School {
 	WKW,
 	SBS,
 	SPMS,
-	ASE
+	ASE;
 }

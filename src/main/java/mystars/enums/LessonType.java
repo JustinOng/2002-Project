@@ -1,8 +1,12 @@
 package mystars.enums;
 
-public enum LessonType {
+/**
+ * This enum contains the options for student's lesson type.
+ */
+public enum LessonType
+{
 	Lecture,
 	Tutorial,
 	Lab,
-	Seminar
+	Seminar;
 }

@@ -1,5 +1,9 @@
 package mystars.enums;
 
-public enum Nationality {
+/**
+ * This enum contains the options for the student's nationality.
+ */
+public enum Nationality
+{
 	Singaporean;
 }
