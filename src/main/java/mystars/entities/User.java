@@ -101,8 +101,9 @@ public abstract class User extends Entity {
 	 * 
 	 * @param password 	The user's password.
 	 * @return 			Boolean value indicating if the hash of the entered password matches the stored hash.
+	 * @throws AppException If the login failed
 	 */
-	public boolean login(String password) {
+	public boolean login(String password) throws AppException {
 		return Arrays.equals(hashString(password), this.passwordHash);
 	}
 }
