@@ -2,7 +2,7 @@ package mystars.forms;
 
 public class IndexManagementResponse {
 	public enum Selected {
-		CreateLesson, ManageLessons, ListStudents
+		CreateLesson, ListStudents
 	};
 
 	private final Selected selected;

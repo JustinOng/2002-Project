@@ -27,6 +27,7 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	private CreateStudentForm createStudentForm = new CreateStudentForm();
 	private CreateCourseForm createCourseForm = new CreateCourseForm();
 	private CreateIndexForm createIndexForm = new CreateIndexForm();
+	private CreateLessonForm createLessonForm = new CreateLessonForm();
 	private AccessPeriodForm accessPeriodForm = new AccessPeriodForm();
 	private CourseManagementForm courseManagementForm = new CourseManagementForm();
 	private IndexManagementForm indexManagementForm = new IndexManagementForm();
@@ -98,5 +99,9 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 
 	public IndexManagementResponse renderIndexManagementForm(String courseCode, List<String> indexes) {
 		return indexManagementForm.getResponse(gui, courseCode, indexes);
+	}
+
+	public CreateLessonResponse renderCreateLessonForm(String index, List<String> lessonType, List<String> days) {
+		return createLessonForm.getResponse(gui, index, lessonType, days);
 	}
 }

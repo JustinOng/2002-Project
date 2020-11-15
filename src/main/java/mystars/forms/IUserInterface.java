@@ -11,6 +11,7 @@ public interface IUserInterface {
 	public CreateStudentResponse renderCreateStudentForm(List<String> genders, List<String> nationalities);
 	public CreateCourseResponse renderCreateCourseForm(List<String> schools);
 	public CreateIndexResponse renderCreateIndexForm(String course);
+	public CreateLessonResponse renderCreateLessonForm(String index, List<String> lessonType, List<String> days);
 	public AccessPeriodResponse renderAccessPeriodForm(String curAccessPeriod);
 	public CourseManagementResponse renderCourseManagementForm(List<String> courses);
 	public IndexManagementResponse renderIndexManagementForm(String courseCode, List<String> indexes);

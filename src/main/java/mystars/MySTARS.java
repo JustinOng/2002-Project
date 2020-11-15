@@ -205,17 +205,16 @@ public class MySTARS {
 			for (Course course : courseController.getAllCourses()) {
 				courses.put(course.toString(), course.getCourseCode());
 			}
+			CourseManagementResponse courseMgmtResponse = ui
+					.renderCourseManagementForm(new ArrayList<String>(courses.keySet()));
+
+			if (courseMgmtResponse == null) {
+				break;
+			}
+
+			String courseCode = courses.get(courseMgmtResponse.getCourseName());
 
 			try {
-				CourseManagementResponse courseMgmtResponse = ui
-						.renderCourseManagementForm(new ArrayList<String>(courses.keySet()));
-
-				if (courseMgmtResponse == null) {
-					break;
-				}
-				
-				String courseCode = courses.get(courseMgmtResponse.getCourseName());
-
 				switch (courseMgmtResponse.getSelected()) {
 				case CreateIndex:
 					CreateIndexResponse indexResponse = ui.renderCreateIndexForm(courseCode);
@@ -224,8 +223,7 @@ public class MySTARS {
 						continue;
 					}
 
-					courseController.createIndex(courseCode, indexResponse.getNumber(),
-							indexResponse.getMaxEnrolled());
+					courseController.createIndex(courseCode, indexResponse.getNumber(), indexResponse.getMaxEnrolled());
 
 					ui.renderDialog("Index Creation", "Index created successfully");
 					break;
@@ -243,7 +241,7 @@ public class MySTARS {
 			}
 		}
 	}
-	
+
 	private void loopIndexManagement(String courseCode) {
 		while (true) {
 			HashMap<String, Integer> indexes = new HashMap<String, Integer>();
@@ -255,24 +253,42 @@ public class MySTARS {
 				ui.renderDialog("Error", e.getMessage());
 				return;
 			}
-			
-			IndexManagementResponse indexMgmtResponse = ui.renderIndexManagementForm(courseCode, new ArrayList<String>(indexes.keySet()));
-			
+
+			IndexManagementResponse indexMgmtResponse = ui.renderIndexManagementForm(courseCode,
+					new ArrayList<String>(indexes.keySet()));
+
 			if (indexMgmtResponse == null) {
 				break;
 			}
-			
+
 			int indexNo = indexes.get(indexMgmtResponse.getIndex());
-			
-			switch(indexMgmtResponse.getSelected()) {
-			case CreateLesson:
-				break;
-			case ListStudents:
-				break;
-			case ManageLessons:
-				break;
-			default:
-				break;
+
+			try {
+				switch (indexMgmtResponse.getSelected()) {
+				case CreateLesson:
+					List<String> lessonTypes = Stream.of(LessonType.values()).map(Enum::name).collect(Collectors.toList());
+					List<String> days = Stream.of(Day.values()).map(Enum::name).collect(Collectors.toList());
+					CreateLessonResponse lessonResponse = ui.renderCreateLessonForm(String.format("Index %d", indexNo),
+							lessonTypes, days);
+	
+					if (lessonResponse == null) {
+						continue;
+					}
+	
+					LessonType lessonType = LessonType.valueOf(lessonResponse.getLessonType());
+					Day day = Day.valueOf(lessonResponse.getDay());
+	
+					courseController.createLesson(courseCode, indexNo, lessonType, day, lessonResponse.getLocation(),
+							lessonResponse.getGroupNo(), lessonResponse.getWeeks(), lessonResponse.getStartPeriod(),
+							lessonResponse.getEndPeriod());
+					break;
+				case ListStudents:
+					break;
+				default:
+					break;
+				}
+			} catch (AppException e) {
+				ui.renderDialog("Error", e.getMessage());
 			}
 		}
 	}

@@ -29,13 +29,6 @@ public class IndexManagementForm {
 			}
 		}).addTo(panel);
 		
-		new Button("Manage Lessons", new Runnable() {
-			public void run() {
-				response = new IndexManagementResponse(indexBox.getSelectedItem(), IndexManagementResponse.Selected.ManageLessons);
-				window.close();
-			}
-		}).addTo(panel);
-		
 		new Button("List Students", new Runnable() {
 			public void run() {
 				response = new IndexManagementResponse(indexBox.getSelectedItem(), IndexManagementResponse.Selected.ListStudents);
