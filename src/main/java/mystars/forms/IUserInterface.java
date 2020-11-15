@@ -10,9 +10,10 @@ public interface IUserInterface {
 	public TextResponse renderItemSelectorForm(String title, List<String> items);
 	public CreateStudentResponse renderCreateStudentForm(List<String> genders, List<String> nationalities);
 	public CreateCourseResponse renderCreateCourseForm(List<String> schools);
-	public CreateIndexResponse renderCreateIndexForm();
+	public CreateIndexResponse renderCreateIndexForm(String course);
 	public AccessPeriodResponse renderAccessPeriodForm(String curAccessPeriod);
 	public CourseManagementResponse renderCourseManagementForm(List<String> courses);
+	public IndexManagementResponse renderIndexManagementForm(String courseCode, List<String> indexes);
 	
 	public String getText(String title, String description);
 	public Integer getInt(String title, String description);

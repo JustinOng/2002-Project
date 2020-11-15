@@ -29,6 +29,7 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	private CreateIndexForm createIndexForm = new CreateIndexForm();
 	private AccessPeriodForm accessPeriodForm = new AccessPeriodForm();
 	private CourseManagementForm courseManagementForm = new CourseManagementForm();
+	private IndexManagementForm indexManagementForm = new IndexManagementForm();
 
 	public ConsoleGraphicUserInterface() throws IOException {
 		DefaultTerminalFactory factory = new DefaultTerminalFactory();
@@ -93,5 +94,9 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 
 	public CourseManagementResponse renderCourseManagementForm(List<String> courses) {
 		return courseManagementForm.getResponse(gui, courses);
+	}
+
+	public IndexManagementResponse renderIndexManagementForm(String courseCode, List<String> indexes) {
+		return indexManagementForm.getResponse(gui, courseCode, indexes);
 	}
 }

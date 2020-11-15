@@ -48,6 +48,11 @@ public class CourseController {
 	public List<Course> getAllCourses() {
 		return Course.getAllCourses();
 	}
+	
+	public List<Index> getAllIndexes(String courseCode) throws AppException {
+		Course course = Course.getCourse(courseCode);
+		return course.getIndexes();
+	}
 
 	/**
 	 * This method creates a new lesson.

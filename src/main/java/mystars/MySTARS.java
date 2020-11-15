@@ -232,6 +232,7 @@ public class MySTARS {
 				case ListStudents:
 					break;
 				case ManageIndexes:
+					loopIndexManagement(courseCode);
 					break;
 				default:
 					break;
@@ -242,8 +243,36 @@ public class MySTARS {
 			}
 		}
 	}
+	
+	private void loopIndexManagement(String courseCode) {
+		while (true) {
+			HashMap<String, Integer> indexes = new HashMap<String, Integer>();
+			try {
+				for (Index index : courseController.getAllIndexes(courseCode)) {
+					indexes.put(index.toString(), index.getIndexNo());
+				}
 			} catch (AppException e) {
 				ui.renderDialog("Error", e.getMessage());
+				return;
+			}
+			
+			IndexManagementResponse indexMgmtResponse = ui.renderIndexManagementForm(courseCode, new ArrayList<String>(indexes.keySet()));
+			
+			if (indexMgmtResponse == null) {
+				break;
+			}
+			
+			int indexNo = indexes.get(indexMgmtResponse.getIndex());
+			
+			switch(indexMgmtResponse.getSelected()) {
+			case CreateLesson:
+				break;
+			case ListStudents:
+				break;
+			case ManageLessons:
+				break;
+			default:
+				break;
 			}
 		}
 	}
