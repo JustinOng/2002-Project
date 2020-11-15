@@ -15,8 +15,6 @@ import mystars.exceptions.AppException;
 
 public class Student extends User {
 	private static final long serialVersionUID = 1L;
-	private static LocalDateTime accessPeriodStart = LocalDateTime.now();
-	private static LocalDateTime accessPeriodEnd = LocalDateTime.now();
 	private String name;
 	private String matricNo;
 
@@ -41,6 +39,7 @@ public class Student extends User {
 	public Student(String name, String matricNo, String username, String password, Gender gender,
 			Nationality nationality) throws AppException {
 		super(username, password);
+		this.name = name;
 		this.matricNo = matricNo;
 
 		this.gender = gender;
