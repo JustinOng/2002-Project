@@ -65,10 +65,14 @@ public class MySTARS {
 	private void loopStudent() {
 		Student student = (Student) user;
 		TextResponse textResponse;
-		HashMap<String, Integer> indexInfo;
+		HashMap<String, Integer> indexInfo = new HashMap<>();
 
 		while (true) {
-			HashMap<String, String> registeredInfo = courseController.getRegisteredInfo(student);
+			HashMap<String, String> registeredInfo = new HashMap<>();
+			for (Index index : courseController.getStudentIndexes(student)) {
+				registeredInfo.put(String.format("%s: %s", index.getCourse(), index), index.getCourse().getCourseCode());
+			}
+			
 			StudentMenuResponse response = ui.renderStudentMenuForm(new ArrayList<String>(registeredInfo.keySet()));
 
 			if (response == null) {
@@ -103,7 +107,9 @@ public class MySTARS {
 
 					String courseCode = registeredInfo.get(textResponse.getText());
 
-					indexInfo = courseController.getIndexInfo(courseCode);
+					for (Index index : courseController.getCourseIndexes(courseCode)) {
+						indexInfo.put(index.toString(), index.getIndexNo());
+					}
 
 					textResponse = ui.renderItemSelectorForm("Select New Index",
 							new ArrayList<String>(indexInfo.keySet()));

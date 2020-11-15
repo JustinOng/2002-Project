@@ -2,6 +2,7 @@ package mystars.controllers;
 
 import mystars.enums.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -44,11 +45,11 @@ public class CourseController {
 		Course c = Course.getCourse(courseCode);
 		c.createIndex(indexNo, maxEnrolled);
 	}
-	
+
 	public List<Course> getAllCourses() {
 		return Course.getAllCourses();
 	}
-	
+
 	public List<Index> getAllIndexes(String courseCode) throws AppException {
 		Course course = Course.getCourse(courseCode);
 		return course.getIndexes();
@@ -184,36 +185,28 @@ public class CourseController {
 		studentB.getTimetable().addIndex(indexA);
 	}
 
-	public HashMap<String, String> getRegisteredInfo(Student student) {
-		HashMap<String, String> data = new HashMap<String, String>();
+	public List<Index> getStudentIndexes(Student student) {
+		List<Index> indexes = new ArrayList<Index>();
 
-		for (Index i : student.getTimetable().getIndexes()) {
-			data.put(String.format("%s: %s", i.getCourse(), i), i.getCourse().getCourseCode());
+		for (Index index : student.getTimetable().getIndexes()) {
+			indexes.add(index);
 		}
 
-		return data;
+		return indexes;
 	}
 
-	public HashMap<String, Integer> getIndexInfo(String courseCode) throws AppException {
-		HashMap<String, Integer> data = new HashMap<String, Integer>();
-
-		Course course = Course.getCourse(courseCode);
-
-		for (Index i : course.getIndexes()) {
-			data.put(i.toString(), i.getIndexNo());
-		}
-
-		return data;
+	public List<Index> getCourseIndexes(String courseCode) throws AppException {
+		return Course.getCourse(courseCode).getIndexes();
 	}
-	
+
 	public List<Student> getStudentsByCourse(String courseCode) throws AppException {
 		return Course.getCourse(courseCode).getStudentList();
 	}
-	
+
 	public List<Student> getStudentsByIndex(int indexNo) throws AppException {
 		return Index.getIndex(indexNo).getStudentList();
 	}
-	
+
 	public int getVacancies(int indexNo) throws AppException {
 		return Index.getIndex(indexNo).getVacancies();
 	}
