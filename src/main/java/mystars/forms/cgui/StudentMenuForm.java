@@ -33,7 +33,7 @@ public class StudentMenuForm {
 			}
 		}).addTo(panel);
 		
-		if (courses != null) {
+		if (courses != null && courses.size() > 0) {
 			new Button("Drop Course", new Runnable() {
 				public void run() {
 					response = new StudentMenuResponse(StudentMenuResponse.Selected.Drop);
