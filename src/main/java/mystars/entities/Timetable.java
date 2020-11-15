@@ -12,20 +12,20 @@ import mystars.exceptions.AppException;
  */
 public class Timetable implements Serializable {
 	/**
-	 * Serialization of the course ID.
+	 * ID for versioning of serialized data.
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
-	 * The arraylist storing the indexes of courses the student is registered for.
+	 * List of indexes added to this timetable
 	 */
 	private ArrayList<Index> indexes = new ArrayList<Index>();
 
 	/**
-	 * Add a course index to the student's registered course.
+	 * Adds an index to this timetable
 	 * 
-	 * @param index The course index to be added.
-	 * @throws AppException
+	 * @param index The index to be added.
+	 * @throws AppException if the index clashes with any already added index
 	 */
 	public void addIndex(Index index) throws AppException {
 		assertAddIndex(index);
@@ -33,21 +33,24 @@ public class Timetable implements Serializable {
 	}
 
 	/**
-	 * Check if the index can be added to a student's registered course.
+	 * Check if {@code add} can be added to this timetable without any clash
 	 * 
-	 * @param add 	The course index to be checked for adding.
-	 * @return		Boolean value indicating if the course index was successfully added.
+	 * @param add Index to be added
+	 * @return {@code true} if {@code add} can be added without any clash
+	 * @return {@code false} otherwise
 	 */
 	public boolean canAddIndex(Index add) {
 		return canAddIndex(add, null);
 	}
 
 	/**
-	 * Check if a student's current course index can be swopped with another index of the same course.
+	 * Check if {@code add} can be added to this timetable without any clash after
+	 * removing {@code remove}
 	 * 
-	 * @param add		The course index to be checked for adding.
-	 * @param remove	The course index to be checked removing.
-	 * @return			Boolean value indicating if the index swop was successful.
+	 * @param add    Index to be added
+	 * @param remove Index to be removed
+	 * @return {@code true} if {@code add} can be added without any clash
+	 * @return {@code false} otherwise
 	 */
 	public boolean canAddIndex(Index add, Index remove) {
 		try {
@@ -57,28 +60,33 @@ public class Timetable implements Serializable {
 			return false;
 		}
 	}
-	
+
 	/**
-	 * Add a course index to the student's registered course.
+	 * Check if {@code add} can be added to this timetable without any clash
 	 * 
-	 * @param add The course index to be added.
-	 * @throws AppException
+	 * @param add Index to be added
+	 * @throws AppException if there will be a clash
 	 */
 	public void assertAddIndex(Index add) throws AppException {
 		assertAddIndex(add, null);
 	}
-	
+
 	/**
-	 * Swop a student's course index for another index in the same course.
+	 * Check if {@code add} can be added to this timetable without any clash after
+	 * removing {@code remove}
 	 * 
-	 * @param add		The course index to be added.
-	 * @param remove	The course index to be removed.
-	 * @throws AppException
+	 * @param add    Index to be added
+	 * @param remove Index to be removed
+	 * @throws AppException if another index of the same course of {@code add} has
+	 *                      already been added
+	 * @throws AppException if adding {@code add} would result in a clash with
+	 *                      another index
 	 */
 	public void assertAddIndex(Index add, Index remove) throws AppException {
 		for (Index i : indexes) {
-			if (i == remove) continue;
-				
+			if (i == remove)
+				continue;
+
 			if (i.belongsToSameCourse(add)) {
 				throw new AppException(String.format("Already registered for %s in %s", i, i.getCourse()));
 			}
@@ -90,27 +98,27 @@ public class Timetable implements Serializable {
 	}
 
 	/**
-	 * Remove an index from the student's registered course.
+	 * Remove an index from this timetable
 	 * 
-	 * @param index The course index to be removed.
+	 * @param index Index to be removed.
 	 */
 	public void removeIndex(Index index) {
 		indexes.remove(index);
 	}
 
 	/**
-	 * Returns the indexes arraylist of the student's registered course indexes.
+	 * Returns a list of indexes added to this timetable
 	 * 
-	 * @return Arraylist of the student's registered course indexes.
+	 * @return a list of indexes added to this timetable
 	 */
 	public ArrayList<Index> getIndexes() {
 		return indexes;
 	}
 
 	/**
-	 * Return an arraylist of the student's registered courses.
+	 * Returns a list of courses of indexes added to this timetable
 	 * 
-	 * @return Arraylist of the student's registered courses.
+	 * @return a list of courses of indexes added to this timetable
 	 */
 	public ArrayList<Course> getCourses() {
 		ArrayList<Course> courses = new ArrayList<Course>();
