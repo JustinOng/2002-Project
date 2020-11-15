@@ -11,16 +11,13 @@ import mystars.forms.*;
 public class CreateIndexForm {
 	private CreateIndexResponse response;
 	
-	public CreateIndexResponse getResponse(MultiWindowTextGUI gui) {
+	public CreateIndexResponse getResponse(MultiWindowTextGUI gui, String course) {
 		final AbstractWindow window = new BasicWindow();
 		
 		response = null;
 
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(2));
-
-		final Label status = new Label("");
-		panel.addComponent(status, GridLayout.createHorizontallyFilledLayoutData(2));
 
 		panel.addComponent(new Label("Number:"));
 		final TextBox numberInput = new TextBox().addTo(panel);
@@ -42,7 +39,7 @@ public class CreateIndexForm {
 		window.setComponent(panel);
 
 		KeyStrokeListener listener = new KeyStrokeListener();
-		window.setTitle("Create Index");
+		window.setTitle("Create Index on " + course);
 		window.addWindowListener(listener);
 		window.setHints(Arrays.asList(Window.Hint.CENTERED));
 

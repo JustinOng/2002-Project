@@ -1,5 +1,7 @@
 package mystars.controllers;
 
+import java.time.LocalDateTime;
+
 import mystars.entities.*;
 import mystars.enums.*;
 import mystars.exceptions.AppException;
@@ -30,8 +32,12 @@ public class UserController {
 	 * @throws UserAlreadyExistsException If there already exists a user with the same username.
 	 */
 	public void createStudent(String name, String matricNo, String userName, String password, Gender gender,
-			Nationality nationality) throws Exception {
-		Student mystudent = new Student(name, matricNo, userName, password, gender, nationality);
+			Nationality nationality) throws AppException {
+		new Student(name, matricNo, userName, password, gender, nationality);
+	}
+	
+	public void createAdmin(String username, String password) throws AppException {
+		new Admin(username, password);
 	}
 
 	/**
@@ -63,5 +69,13 @@ public class UserController {
 	 */
 	public boolean isAdmin(User user) {
 		return user instanceof Admin;
+	}
+	
+	public void setStudentAccessPeriod(LocalDateTime start, LocalDateTime end) {
+		Student.setAccessPeriod(start, end);
+	}
+	
+	public String getStudentAccessPeriod() {
+		return Student.getAccessPeriod();
 	}
 }

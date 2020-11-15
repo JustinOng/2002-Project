@@ -3,6 +3,7 @@ package mystars.controllers;
 import mystars.enums.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 import mystars.entities.*;
 import mystars.exceptions.AppException;
@@ -42,6 +43,15 @@ public class CourseController {
 	public void createIndex(String courseCode, int indexNo, int maxEnrolled) throws AppException {
 		Course c = Course.getCourse(courseCode);
 		c.createIndex(indexNo, maxEnrolled);
+	}
+	
+	public List<Course> getAllCourses() {
+		return Course.getAllCourses();
+	}
+	
+	public List<Index> getAllIndexes(String courseCode) throws AppException {
+		Course course = Course.getCourse(courseCode);
+		return course.getIndexes();
 	}
 
 	/**
@@ -194,5 +204,13 @@ public class CourseController {
 		}
 
 		return data;
+	}
+	
+	public List<Student> getStudentsByCourse(String courseCode) throws AppException {
+		return Course.getCourse(courseCode).getStudentList();
+	}
+	
+	public List<Student> getStudentsByIndex(int indexNo) throws AppException {
+		return Index.getIndex(indexNo).getStudentList();
 	}
 }

@@ -153,6 +153,16 @@ public class Course extends Entity {
 	}
 
 	/**
+	 * Retrieves all courses
+	 * 
+	 * @return list of all courses
+	 */
+	@SuppressWarnings("unchecked")
+	public static ArrayList<Course> getAllCourses() {
+		return (ArrayList<Course>)(ArrayList<?>) getAll("course");
+	}
+
+	/**
 	 * Getting all of the students that registered in the course
 	 * 
 	 * @return studentList This method returns all of the students that registered

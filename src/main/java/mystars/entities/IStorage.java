@@ -1,24 +1,15 @@
 package mystars.entities;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 /**
  * This Istorage interface contains the abstract methods for storing and retrieving data to and from entities.
  *
  */
 public interface IStorage
 {
-	/**
-	 * 
-	 * @param type
-	 * @param id
-	 * @param e
-	 */
-	public void store(String type, String id, Entity e);
-	
-	/**
-	 * 
-	 * @param type
-	 * @param id
-	 * @return
-	 */
-	public Entity get(String type, String id);
+	public void store(String type, String id, Serializable e);
+	public Serializable get(String type, String id);
+	public ArrayList<Serializable> getAll(String type);
 }

@@ -1,6 +1,7 @@
 package mystars.forms.cgui;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import com.googlecode.lanterna.TerminalSize;
@@ -12,16 +13,13 @@ import mystars.forms.*;
 public class CreateCourseForm {
 	private CreateCourseResponse response;
 
-	public CreateCourseResponse getResponse(MultiWindowTextGUI gui) {
+	public CreateCourseResponse getResponse(MultiWindowTextGUI gui, List<String> schools) {
 		final AbstractWindow window = new BasicWindow();
 		
 		response = null;
 
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(2));
-
-		final Label status = new Label("");
-		panel.addComponent(status, GridLayout.createHorizontallyFilledLayoutData(2));
 
 		panel.addComponent(new Label("Code:"));
 		final TextBox codeInput = new TextBox().addTo(panel);
@@ -30,8 +28,7 @@ public class CreateCourseForm {
 		final TextBox nameInput = new TextBox().addTo(panel);
 
 		panel.addComponent(new Label("School:"));
-		final ComboBox<String> schoolComboBox = new ComboBox<String>(
-				Arrays.toString(School.values()).replaceAll("^.|.$", "").split(", ")).addTo(panel);
+		final ComboBox<String> schoolComboBox = new ComboBox<String>(schools).addTo(panel);
 
 		panel.addComponent(new Label("AUs:"));
 		final TextBox auInput = new TextBox().addTo(panel);

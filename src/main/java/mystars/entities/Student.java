@@ -1,5 +1,8 @@
 package mystars.entities;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import mystars.enums.*;
 import mystars.exceptions.AppException;
 
@@ -50,9 +53,46 @@ public class Student extends User {
 	public Student(String name, String matricNo, String username, String password, Gender gender,
 			Nationality nationality) throws AppException {
 		super(username, password);
+		this.name = name;
 		this.matricNo = matricNo;
 		this.gender = gender;
 		this.nationality = nationality;
+	}
+
+	@Override
+	public boolean login(String password) throws AppException {
+		if (!canLogin()) {
+			throw new AppException("User is not allowed to login right now");
+		}
+
+		return super.login(password);
+	}
+
+	private boolean canLogin() {
+		LocalDateTime now = LocalDateTime.now();
+		LocalDateTime accessPeriodStart = (LocalDateTime) get("student-accessperiod", "start");
+		LocalDateTime accessPeriodEnd = (LocalDateTime) get("student-accessperiod", "end");
+
+		if (accessPeriodStart == null || accessPeriodEnd == null)
+			return false;
+
+		return (now.isAfter(accessPeriodStart) && now.isBefore(accessPeriodEnd));
+	}
+
+	public static void setAccessPeriod(LocalDateTime start, LocalDateTime end) {
+		store("student-accessperiod", "start", start);
+		store("student-accessperiod", "end", end);
+	}
+
+	public static String getAccessPeriod() {
+		LocalDateTime accessPeriodStart = (LocalDateTime) get("student-accessperiod", "start");
+		LocalDateTime accessPeriodEnd = (LocalDateTime) get("student-accessperiod", "end");
+
+		if (accessPeriodStart == null || accessPeriodEnd == null)
+			return null;
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+		return String.format("%s to %s", formatter.format(accessPeriodStart), formatter.format(accessPeriodEnd));
 	}
 
 	/**
@@ -98,5 +138,9 @@ public class Student extends User {
 	 */
 	public String getMatricNo() {
 		return matricNo;
+	}
+	
+	public Nationality getNationality() {
+		return nationality;
 	}
 }

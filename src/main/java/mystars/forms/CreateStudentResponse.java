@@ -5,16 +5,16 @@ public class CreateStudentResponse {
 	private final String password;
 	private final String name;
 	private final String matricNo;
-	private final String major;
+	private final String gender;
 	private final String nationality;
 
-	public CreateStudentResponse(String username, String password, String name, String matricNo, String major,
+	public CreateStudentResponse(String username, String password, String name, String matricNo, String gender,
 			String nationality) {
 		this.username = username;
 		this.password = password;
 		this.name = name;
 		this.matricNo = matricNo;
-		this.major = major;
+		this.gender = gender;
 		this.nationality = nationality;
 	}
 
@@ -34,8 +34,8 @@ public class CreateStudentResponse {
 		return matricNo;
 	}
 
-	public String getMajor() {
-		return major;
+	public String getGender() {
+		return gender;
 	}
 
 	public String getNationality() {
