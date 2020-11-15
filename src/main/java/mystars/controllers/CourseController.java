@@ -213,4 +213,8 @@ public class CourseController {
 	public List<Student> getStudentsByIndex(int indexNo) throws AppException {
 		return Index.getIndex(indexNo).getStudentList();
 	}
+	
+	public int getVacancies(int indexNo) throws AppException {
+		return Index.getIndex(indexNo).getVacancies();
+	}
 }

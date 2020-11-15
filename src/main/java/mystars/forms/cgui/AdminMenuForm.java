@@ -45,6 +45,13 @@ public class AdminMenuForm {
 				window.close();
 			}
 		}).addTo(panel);
+		
+		new Button("List Vacancies", new Runnable() {
+			public void run() {
+				response = new AdminMenuResponse(AdminMenuResponse.Selected.ListVacancies);
+				window.close();
+			}
+		}).addTo(panel);
 
 		window.setComponent(panel);
 

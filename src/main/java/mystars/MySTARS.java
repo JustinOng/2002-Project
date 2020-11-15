@@ -190,6 +190,12 @@ public class MySTARS {
 					break;
 				case ManageCourses:
 					loopCourseMangement();
+					break;
+				case ListVacancies:
+					int indexNo = ui.getInt("List vacancies", "Index No:");
+					ui.renderDialog(String.format("Index %d", indexNo),
+							String.format("%d vacancies", courseController.getVacancies(indexNo)));
+					break;
 				default:
 					break;
 				}
