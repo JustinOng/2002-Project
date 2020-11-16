@@ -1,7 +1,6 @@
 package mystars.forms.cgui;
 
 import java.util.Arrays;
-import java.util.List;
 
 import com.googlecode.lanterna.gui2.*;
 

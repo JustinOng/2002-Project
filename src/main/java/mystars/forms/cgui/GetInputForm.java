@@ -6,8 +6,6 @@ import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.gui2.dialogs.TextInputDialog;
 import com.googlecode.lanterna.gui2.dialogs.TextInputDialogBuilder;
 
-import mystars.forms.*;
-
 public class GetInputForm {
 	public static String getText(MultiWindowTextGUI gui, String title, String description) {
 		return TextInputDialog.showDialog(gui, title, description, "");
