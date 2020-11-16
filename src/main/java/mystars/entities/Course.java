@@ -159,7 +159,7 @@ public class Course extends Entity {
 	 */
 	@SuppressWarnings("unchecked")
 	public static ArrayList<Course> getAllCourses() {
-		return (ArrayList<Course>)(ArrayList<?>) getAll("course");
+		return (ArrayList<Course>) (ArrayList<?>) getAll("course");
 	}
 
 	/**
@@ -224,16 +224,18 @@ public class Course extends Entity {
 	 * 
 	 * @param student The student to be registered in the index
 	 * @param indexNo The index that the student is to be registered to
+	 * @return {@code true} if student was successfully registered
+	 * @return {@code false} if the student was placed on the waitlist
 	 * @throws AppException if the student is already registered for index indexNo
 	 */
-	public void register(Student student, int indexNo) throws AppException {
+	public boolean register(Student student, int indexNo) throws AppException {
 
 		if (findStudent(student) != null) {
 			throw new AppException(String.format("Already registered for %d in %s", indexNo, this));
 		}
 
 		Index index = getIndex(indexNo);
-		index.addStudent(student);
+		return index.addStudent(student);
 	}
 
 	/**

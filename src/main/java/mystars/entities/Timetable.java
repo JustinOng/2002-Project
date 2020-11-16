@@ -165,4 +165,18 @@ public class Timetable implements Serializable {
 		}
 		return courses;
 	}
+
+	public List<Registration> getRegistrations() {
+		return registrations;
+	}
+
+	public void setRegistered(Index index) {
+		for (Registration reg : registrations) {
+			if (reg.getIndex() == index) {
+				System.out.printf("Marking %s as registered\n", index);
+				reg.setRegistered();
+				return;
+			}
+		}
+	}
 }

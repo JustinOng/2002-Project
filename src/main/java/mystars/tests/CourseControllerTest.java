@@ -2,6 +2,8 @@ package mystars.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +18,7 @@ class CourseControllerTest {
 
 	CourseControllerTest() throws AppException {
 		Entity.setStorage(storage);
+		controller.start();
 	}
 
 	@BeforeEach
@@ -44,7 +47,21 @@ class CourseControllerTest {
 
 		assertTrue(Index.getIndex(1).hasStudent(student), "index enrolled should contain student");
 		assertTrue(student.getTimetable().getIndexes().contains(Index.getIndex(1)),
-				"student's timetable should contain student");
+				"student's timetable should contain index 1");
+	}
+
+	@Test
+	void test_dropping() throws AppException {
+		Student student = new Student("name", "matric no", "user", "password", Gender.Male, Nationality.Singaporean);
+		controller.createCourse("course name", "CZ0001", School.CSE);
+
+		controller.createIndex("CZ0001", 1, 1);
+		controller.registerCourse(student, 1);
+		controller.dropCourse(student, "CZ0001");
+
+		assertFalse(Index.getIndex(1).hasStudent(student), "index should no longer contain student");
+		assertFalse(student.getTimetable().getIndexes().contains(Index.getIndex(1)),
+				"student's timetable should no longer contain index 1");
 	}
 
 	@Test
@@ -72,5 +89,29 @@ class CourseControllerTest {
 				"studentA should have indexB in their timetable");
 		assertTrue(studentB.getTimetable().getIndexes().contains(Index.getIndex(1)),
 				"studentB should have indexA in their timetable");
+	}
+
+	@Test
+	void test_waitlist() throws AppException {
+		Student studentA = new Student("name", "matric no", "userA", "password", Gender.Male, Nationality.Singaporean);
+		Student studentB = new Student("name", "matric no", "userB", "password", Gender.Male, Nationality.Singaporean);
+
+		controller.createCourse("course name", "CZ0001", School.CSE);
+		controller.createIndex("CZ0001", 1, 1);
+
+		assertTrue(controller.registerCourse(studentA, 1), "student A should have registered successfully");
+		assertFalse(controller.registerCourse(studentB, 1), "student B should have been placed on the waitlist");
+
+		assertFalse(Index.getIndex(1).hasStudent(studentB), "student B should not be enrolled");
+		List<Registration> registrations = studentB.getTimetable().getRegistrations();
+		assertEquals(registrations.size(), 1, "student B should be registered for only one index");
+		assertTrue(registrations.get(0).getStatus() == Registration.Status.Waitlist, "student B should be on the waitlist for index 1");
+
+		controller.dropCourse(studentA, "CZ0001");
+
+		assertTrue(Index.getIndex(1).hasStudent(studentB), "student B should be registered");
+		registrations = studentB.getTimetable().getRegistrations();
+		assertEquals(registrations.size(), 1, "student B should be registered for only one index");
+		assertTrue(registrations.get(0).getStatus() == Registration.Status.Registered, "student B should be registered for index 1");
 	}
 }

@@ -18,6 +18,13 @@ import mystars.exceptions.AppException;
  */
 
 public class CourseController {
+	public void start() {
+		Index.registerObserver((Index index, Student student) -> {
+			student.getTimetable().setRegistered(index);
+			System.out.printf("Setting %s as registered\n", index);
+		}, Index.Event.AllocatedWaitlist);
+	}
+
 	/**
 	 * Creates a new course.
 	 * 
@@ -102,6 +109,8 @@ public class CourseController {
 	 * 
 	 * @param student Student to register
 	 * @param indexNo Identifier of Index
+	 * @return {@code true} if student was successfully registered
+	 * @return {@code false} if student was placed on the waitlist
 	 * @throws AppException if no index identified by {@code indexNo} is found
 	 * @throws AppException if {@code student} has already been registered for the
 	 *                      index identified by {@code indexNo}
@@ -109,12 +118,14 @@ public class CourseController {
 	 *                      other indexes that {@code student} is already registered
 	 *                      for
 	 */
-	public void registerCourse(Student student, int indexNo) throws AppException {
+	public boolean registerCourse(Student student, int indexNo) throws AppException {
 		Index index = Index.getIndex(indexNo);
 		student.getTimetable().assertAddIndex(index);
 
-		index.getCourse().register(student, indexNo);
-		student.getTimetable().addIndex(index);
+		boolean registered = index.getCourse().register(student, indexNo);
+		student.getTimetable().addIndex(index, !registered);
+		
+		return registered;
 	}
 
 	/**
@@ -254,6 +265,7 @@ public class CourseController {
 
 	/**
 	 * Returns the number of vacancies in the index identified by {@code indexNo}
+	 * 
 	 * @param indexNo Identifier of Index
 	 * @return number of vacancies in the index identified by {@code indexNo}
 	 * @throws AppException if no index identified by {@code indexNo} is found

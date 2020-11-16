@@ -25,6 +25,7 @@ public class MySTARS {
 
 	public void start() {
 		storageController.start();
+		courseController.start();
 
 		try {
 			new Admin("admin", "1");
@@ -32,8 +33,8 @@ public class MySTARS {
 			new Student("user2", "u12345", "2", "2", Gender.Male, Nationality.Singaporean);
 
 			Course c = new Course("Course", "C1", School.CSE);
-			c.createIndex(1, 5);
-			c.createIndex(2, 5);
+			c.createIndex(1, 1);
+			c.createIndex(2, 1);
 
 //			courseController.registerCourse(s, "C1", 1);
 		} catch (Exception e1) {
@@ -90,7 +91,13 @@ public class MySTARS {
 					if (indexNo == null)
 						break;
 
-					courseController.registerCourse(student, indexNo);
+					if (courseController.registerCourse(student, indexNo)) {
+						ui.renderDialog("Registration",
+								String.format("You have successfully registered for Index %d", indexNo));
+					} else {
+						ui.renderDialog("Registration",
+								String.format("You have been placed on the waitlist for Index %d", indexNo));
+					}
 					break;
 				case Drop:
 					textResponse = ui.renderItemSelectorForm("Drop Course",
