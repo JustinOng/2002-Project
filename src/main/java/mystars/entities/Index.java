@@ -52,11 +52,17 @@ public class Index extends Entity {
 	 */
 	private ArrayList<Student> waitlist;
 
+	/**
+	 * Events which can be observed on this class
+	 */
 	public enum Event {
 		AllocatedWaitlist
 	}
 
-	// https://stackoverflow.com/a/43192755
+	/**
+	 * Callback function to be executed when event happens
+	 * https://stackoverflow.com/a/43192755
+	 */
 	public interface IndexCallback {
 		void run(Index index, Student student);
 	}
@@ -258,6 +264,11 @@ public class Index extends Entity {
 		return String.format("Index %d", indexNo);
 	}
 
+	/**
+	 * Register a listener for a particular event
+	 * @param callback Function to execute when the event identified by {@code evt} occurs
+	 * @param evt Event to register the listener for
+	 */
 	public static void registerObserver(IndexCallback callback, Event evt) {
 		if (!observers.containsKey(evt)) {
 			observers.put(evt, new ArrayList<>());
@@ -266,6 +277,12 @@ public class Index extends Entity {
 		observers.get(evt).add(callback);
 	}
 
+	/**
+	 * Trigger the event identified by {@code evt}
+	 * @param evt Event to trigger
+	 * @param index Index on which the event occurred
+	 * @param student Student on which the event occurred
+	 */
 	private static void notify(Event evt, Index index, Student student) {
 		List<IndexCallback> callbacks = observers.get(evt);
 

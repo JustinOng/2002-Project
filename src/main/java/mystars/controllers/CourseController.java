@@ -21,7 +21,6 @@ public class CourseController {
 	public void start() {
 		Index.registerObserver((Index index, Student student) -> {
 			student.getTimetable().setRegistered(index);
-			System.out.printf("Setting %s as registered\n", index);
 		}, Index.Event.AllocatedWaitlist);
 	}
 

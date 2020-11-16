@@ -166,14 +166,24 @@ public class Timetable implements Serializable {
 		return courses;
 	}
 
+	/**
+	 * Returns a list of Registrations (Index + Status) belonging to this timetable
+	 * 
+	 * @return a list of Registrations (Index + Status) belonging to this timetable
+	 */
 	public List<Registration> getRegistrations() {
 		return registrations;
 	}
 
+	/**
+	 * Marks the provided index as Registered. Used to indicate that a student has
+	 * been allocated an Index after being on the waitlist
+	 * 
+	 * @param index Index to mark as Registered
+	 */
 	public void setRegistered(Index index) {
 		for (Registration reg : registrations) {
 			if (reg.getIndex() == index) {
-				System.out.printf("Marking %s as registered\n", index);
 				reg.setRegistered();
 				return;
 			}
