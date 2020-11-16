@@ -10,6 +10,9 @@ import mystars.exceptions.AppException;
 
 public class Admin extends User
 {
+	/**
+	 * Serialization of the course ID.
+	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
