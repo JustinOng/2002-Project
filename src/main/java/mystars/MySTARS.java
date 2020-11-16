@@ -24,6 +24,8 @@ public class MySTARS {
 	}
 
 	public void start() {
+		storageController.start();
+
 		try {
 			new Admin("admin", "1");
 			new Student("user1", "u12345", "1", "1", Gender.Male, Nationality.Singaporean);
@@ -70,9 +72,10 @@ public class MySTARS {
 		while (true) {
 			HashMap<String, String> registeredInfo = new HashMap<>();
 			for (Index index : courseController.getStudentIndexes(student)) {
-				registeredInfo.put(String.format("%s: %s", index.getCourse(), index), index.getCourse().getCourseCode());
+				registeredInfo.put(String.format("%s: %s", index.getCourse(), index),
+						index.getCourse().getCourseCode());
 			}
-			
+
 			StudentMenuResponse response = ui.renderStudentMenuForm(new ArrayList<String>(registeredInfo.keySet()));
 
 			if (response == null) {

@@ -3,44 +3,50 @@ package mystars.controllers;
 import mystars.entities.*;
 
 /**
- * This StorageController class manages the storage and retrieving of the object data files to and from disk.
+ * This StorageController class manages the storage and application specific
+ * configuration for MySTARS
  *
  */
 public class StorageController {
 	/**
-	 * Create a new filestorage object.
+	 * Storage that will be used to persist data
 	 */
 	private FileStorage storage;
-	
+
 	/**
-	 * Assigns the file storage object to a file on the disk based on the file path,
-	 * before calling the methods to read the data from the file.
+	 * Creates a new StorageController and configures the storage
 	 * 
-	 * @param filename The path to the file stored on disk.
+	 * @param filename Name of file to persist data to
 	 */
 	public StorageController(String filename) {
 		storage = new FileStorage(filename);
-		
+	}
+
+	/**
+	 * Loads data from disk (if already exists) and configure shutdown hook to
+	 * persist data on exit
+	 */
+	public void start() {
 		loadFromDisk();
-		
+
 		Entity.setStorage(storage);
-		
+
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			public void run() {
 				writeToDisk();
 			}
 		});
 	}
-	
+
 	/**
-	 * Calls the method that writes data to the file on disk.
+	 * Write data to disk
 	 */
 	public void writeToDisk() {
 		storage.writeToDisk();
 	}
 
 	/**
-	 * Calls the method that reads data from the file on disk.
+	 * Load data from disk
 	 */
 	public void loadFromDisk() {
 		storage.loadFromDisk();
