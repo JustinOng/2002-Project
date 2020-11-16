@@ -115,4 +115,40 @@ public class Lesson implements Serializable {
 		// if there is no conclusive clashes, return false.
 		return false;
 	}
+
+	/**
+	 * Retrieves the group number of this lesson
+	 * 
+	 * @return the group number of this lesson
+	 */
+	public String getGroupNo() {
+		return groupNo;
+	}
+
+	/**
+	 * Retrieves the Index that this lesson belongs to
+	 * 
+	 * @return the Index that this lesson belongs to
+	 */
+	public Index getIndex() {
+		return index;
+	}
+
+	/**
+	 * Retrieves the lesson type of this lesson
+	 * 
+	 * @return the lesson type of this lesson
+	 */
+	public LessonType getLessonType() {
+		return lessonType;
+	}
+
+	/**
+	 * Retrieves the location where this lesson will be held
+	 * 
+	 * @return the location where this lesson will be held
+	 */
+	public String getLocation() {
+		return location;
+	}
 }
