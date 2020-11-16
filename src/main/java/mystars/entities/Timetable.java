@@ -2,6 +2,7 @@ package mystars.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import mystars.exceptions.AppException;
 
@@ -17,19 +18,38 @@ public class Timetable implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * List of indexes added to this timetable
+	 * List of indexes added to this timetable. Registration is used to hold an
+	 * extra "status" property to signify whether the user is on the waitlist or has
+	 * directly registered
 	 */
-	private ArrayList<Index> indexes = new ArrayList<Index>();
+	private List<Registration> registrations = new ArrayList<>();
 
 	/**
-	 * Adds an index to this timetable
+	 * Adds an index to this timetable with status Registered
 	 * 
-	 * @param index The index to be added.
+	 * @param index Index to be added.
 	 * @throws AppException if the index clashes with any already added index
 	 */
 	public void addIndex(Index index) throws AppException {
+		addIndex(index, false);
+	}
+
+	/**
+	 * Adds an index to this timetable with status controlled by the
+	 * {@code waitlist} parameter
+	 * 
+	 * @param index    Index to be added
+	 * @param waitlist {@code true} if index should be added with status waitlist,
+	 *                 {@code false} otherwise
+	 * @throws AppException if the index clashes with any already added index
+	 */
+	public void addIndex(Index index, boolean waitlist) throws AppException {
 		assertAddIndex(index);
-		indexes.add(index);
+		if (waitlist) {
+			registrations.add(new Registration(index, Registration.Status.Waitlist));
+		} else {
+			registrations.add(new Registration(index, Registration.Status.Registered));
+		}
 	}
 
 	/**
@@ -83,7 +103,8 @@ public class Timetable implements Serializable {
 	 *                      another index
 	 */
 	public void assertAddIndex(Index add, Index remove) throws AppException {
-		for (Index i : indexes) {
+		for (Registration reg : registrations) {
+			Index i = reg.getIndex();
 			if (i == remove)
 				continue;
 
@@ -103,7 +124,19 @@ public class Timetable implements Serializable {
 	 * @param index Index to be removed.
 	 */
 	public void removeIndex(Index index) {
-		indexes.remove(index);
+		Registration remove = null;
+		for (Registration reg : registrations) {
+			if (reg.getIndex() == index) {
+				remove = reg;
+				break;
+			}
+		}
+
+		if (remove == null) {
+			return;
+		}
+
+		registrations.remove(remove);
 	}
 
 	/**
@@ -111,7 +144,12 @@ public class Timetable implements Serializable {
 	 * 
 	 * @return a list of indexes added to this timetable
 	 */
-	public ArrayList<Index> getIndexes() {
+	public List<Index> getIndexes() {
+		List<Index> indexes = new ArrayList<>();
+		for (Registration reg : registrations) {
+			indexes.add(reg.getIndex());
+		}
+
 		return indexes;
 	}
 
@@ -120,10 +158,10 @@ public class Timetable implements Serializable {
 	 * 
 	 * @return a list of courses of indexes added to this timetable
 	 */
-	public ArrayList<Course> getCourses() {
-		ArrayList<Course> courses = new ArrayList<Course>();
-		for (Index i : indexes) {
-			courses.add(i.getCourse());
+	public List<Course> getCourses() {
+		List<Course> courses = new ArrayList<Course>();
+		for (Registration reg : registrations) {
+			courses.add(reg.getIndex().getCourse());
 		}
 		return courses;
 	}
