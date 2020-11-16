@@ -36,7 +36,7 @@ class CourseControllerTest {
 		Student student = new Student("name", "matric no", "user", "password", Gender.Male, Nationality.Singaporean);
 		controller.createCourse("course name", "CZ0001", School.CSE);
 
-		assertThrows(AppException.class, () -> controller.registerCourse(student, "CE0001", 0),
+		assertThrows(AppException.class, () -> controller.registerCourse(student, 0),
 				"registering for non existent index");
 
 		controller.createIndex("CZ0001", 1, 1);
@@ -60,8 +60,8 @@ class CourseControllerTest {
 		assertThrows(AppException.class, () -> controller.swopIndex(studentA, 2, studentB, 1),
 				"students must have the index they want to swop");
 
-		controller.registerCourse(studentA, "CZ0001", 1);
-		controller.registerCourse(studentB, "CZ0001", 2);
+		controller.registerCourse(studentA, 1);
+		controller.registerCourse(studentB, 2);
 
 		controller.swopIndex(studentA, 1, studentB, 2);
 

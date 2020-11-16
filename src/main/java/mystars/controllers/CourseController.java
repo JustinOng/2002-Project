@@ -77,13 +77,6 @@ public class CourseController {
 		c.createLesson(indexNo, lessonType, day, location, groupNo, week, startPeriod, endPeriod);
 	}
 
-	public void registerCourse(Student student, String courseCode, int indexNo) throws AppException {
-		Course c = Course.getCourse(courseCode);
-		Index i = c.getIndex(indexNo);
-		student.getTimetable().addIndex(i);
-		c.register(student, indexNo);
-	}
-
 	/**
 	 * This method register the student to a course.
 	 * 
