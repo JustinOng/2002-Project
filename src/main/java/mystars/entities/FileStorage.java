@@ -9,40 +9,77 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * <h1>Class: FileStorage</h1>
+ * 
+ * This class
+ */
 public class FileStorage implements IStorage {
+	/**
+	 * A hashmap storage object containing key value pairs for the serializable data.
+	 */
 	private HashMap<String, HashMap<String, Serializable>> storage = new HashMap<>();
+	
+	/**
+	 * The name of the file stored on disk.
+	 */
 	private String filename;
 
+	/**
+	 * Returns the name of the file stored on disk.
+	 * 
+	 * @param filename The name of the file stored on disk.
+	 */
 	public FileStorage(String filename) {
 		this.filename = filename;
 	}
 
 	@Override
+	/**
+	 * Stores a serializable data object into the storage object with the corresponding type and ID.
+	 * If no storage object exists, one is created.
+	 */
 	public void store(String type, String id, Serializable e) {
 		if (!storage.containsKey(type)) {
 			storage.put(type, new HashMap<>());
 		}
-
 		storage.get(type).put(id, e);
 	}
 
 	@Override
+	/**
+	 * Retrieves an entry from a storage object based on its ID.
+	 * 
+	 * @return The storage object's entries matching the type and ID.
+	 */
 	public Serializable get(String type, String id) {
 		if (!storage.containsKey(type) || !storage.get(type).containsKey(id)) {
 			return null;
 		}
-
 		return storage.get(type).get(id);
 	}
 	
+	/**
+	 * Returns an Arraylist containing all the entries corresponding to the ID in the storage object.
+	 * 
+	 * @return The Arraylist of the storage object entries matching the type values.
+	 */
 	public ArrayList<Serializable> getAll(String type) {
 		return new ArrayList<Serializable>(storage.get(type).values());
 	}
 
+	/**
+	 * Writes data to disk.
+	 */
 	public void writeToDisk() {
 		try {
+			// Create a new object output stream using the filename.
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename));
+			
+			// Write the serializable data of the object to it.
 			out.writeObject(storage);
+			
+			// Close the stream when done.
 			out.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -50,10 +87,18 @@ public class FileStorage implements IStorage {
 	}
 
 	@SuppressWarnings("unchecked")
+	/**
+	 * Reads data from disk.
+	 */
 	public void loadFromDisk() {
 		try {
+			// Create a new object input stream using the filename.
 			ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename));
+			
+			// Read in the serializable data to a hashmap object.
 			storage = (HashMap<String, HashMap<String, Serializable>>) in.readObject();
+			
+			// Close the stream when done.
 			in.close();
 		} catch (IOException | ClassNotFoundException e) {
 			storage = new HashMap<>();

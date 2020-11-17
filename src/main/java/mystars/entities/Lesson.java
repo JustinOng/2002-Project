@@ -7,8 +7,7 @@ import mystars.enums.*;
 /**
  * <h1>Class: Lesson</h1>
  *
- * Represents a Lesson, eg a Tutorial held on Monday between 0830-0930
- *
+ * This class represents a Lesson. Eg: A Tutorial held on Monday between 0830-0930.
  */
 public class Lesson implements Serializable {
 	/**
@@ -17,28 +16,27 @@ public class Lesson implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Index that the lesson belongs to.
+	 * The index that the lesson belongs to.
 	 */
 	private Index index;
 
 	/**
-	 * Type of lesson for this instance (i.e. lecture/tutorial/lab).
+	 * The type of lesson for this instance (i.e. lecture/tutorial/lab).
 	 */
 	private LessonType lessonType;
 
 	/**
-	 * Day of the week the lesson is conducted.
+	 * The day of the week the lesson is conducted.
 	 */
 	private Day day;
 
 	/**
-	 * Location where the lesson is conducted.
+	 * The location where the lesson is conducted.
 	 */
 	private String location;
 
 	/**
-	 * Group number assigned to the particular lesson (applicable for tutorials &
-	 * labs).
+	 * The group number assigned to the particular lesson (applicable for tutorials & labs).
 	 */
 	private String groupNo;
 
@@ -63,7 +61,7 @@ public class Lesson implements Serializable {
 	private int endPeriod;
 
 	/**
-	 * Creates new Lesson.
+	 * Creates a new Lesson.
 	 * 
 	 * @param index       The Lesson's index.
 	 * @param lessonType  The Lesson's Type.
@@ -87,11 +85,11 @@ public class Lesson implements Serializable {
 	}
 
 	/**
-	 * Check for clashes between the current instance and {@code lesson}
+	 * Check for clashes between the current instance and {@code lesson}.
 	 * 
-	 * @param lesson Another lesson to compare against
-	 * @return {@code true} if there are clashes
-	 * @return {@code false} otherwise
+	 * @param lesson 			Another lesson to compare against.
+	 * @return {@code true} 	If there are clashes.
+	 * @return {@code false}	If there are no clashes.
 	 */
 	public boolean clashesWith(Lesson lesson) {
 		// loop through every week.
@@ -117,36 +115,36 @@ public class Lesson implements Serializable {
 	}
 
 	/**
-	 * Retrieves the group number of this lesson
+	 * Retrieves the group number of this lesson.
 	 * 
-	 * @return the group number of this lesson
+	 * @return The group number of this lesson.
 	 */
 	public String getGroupNo() {
 		return groupNo;
 	}
 
 	/**
-	 * Retrieves the Index that this lesson belongs to
+	 * Retrieves the Index that this lesson belongs to.
 	 * 
-	 * @return the Index that this lesson belongs to
+	 * @return The Index that this lesson belongs to.
 	 */
 	public Index getIndex() {
 		return index;
 	}
 
 	/**
-	 * Retrieves the lesson type of this lesson
+	 * Retrieves the lesson type of this lesson.
 	 * 
-	 * @return the lesson type of this lesson
+	 * @return The lesson type of this lesson.
 	 */
 	public LessonType getLessonType() {
 		return lessonType;
 	}
 
 	/**
-	 * Retrieves the location where this lesson will be held
+	 * Retrieves the location where this lesson will be held.
 	 * 
-	 * @return the location where this lesson will be held
+	 * @return The location where this lesson will be held.
 	 */
 	public String getLocation() {
 		return location;

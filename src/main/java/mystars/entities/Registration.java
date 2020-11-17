@@ -3,38 +3,38 @@ package mystars.entities;
 import java.io.Serializable;
 
 /**
- * Represents one index added to a timetable. Tracks current status of this
- * relationship
- *
+ * <h1>Class: Registration</h1>
+ * 
+ * This class represents one index added to a timetable and tracks the current status of this relationship.
  */
 public class Registration implements Serializable {
 	/**
-	 * ID for versioning of serialized data.
+	 * Serialization of the course ID.
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Possible states of this Registration
+	 * Possible states of this Registration.
 	 */
 	public enum Status {
 		Registered, Waitlist
 	}
 
 	/**
-	 * Index this Registration is for
+	 * The index this Registration is for.
 	 */
 	private Index index;
 
 	/**
-	 * Status of this Registration
+	 * The status of this Registration.
 	 */
 	private Status status;
 
 	/**
-	 * Creates new instance of Registration
+	 * Creates a new instance of Registration.
 	 * 
-	 * @param index  Index of this Registration
-	 * @param status Status of this Registration
+	 * @param index  The index of this Registration
+	 * @param status The sStatus of this Registration
 	 */
 	public Registration(Index index, Status status) {
 		this.index = index;
@@ -42,25 +42,25 @@ public class Registration implements Serializable {
 	}
 
 	/**
-	 * Mark this registration as Registered
+	 * Mark this registration as Registered.
 	 */
 	public void setRegistered() {
 		status = Status.Registered;
 	}
 
 	/**
-	 * Retrieves index of this relationship
+	 * Retrieves the index of this relationship.
 	 * 
-	 * @return index of this relationship
+	 * @return The index of this relationship.
 	 */
 	public Index getIndex() {
 		return index;
 	}
 
 	/**
-	 * * Retrieves status of this relationship
+	 * * Retrieves the status of this relationship.
 	 * 
-	 * @return status of this relationship
+	 * @return The status of this relationship.
 	 */
 	public Status getStatus() {
 		return status;

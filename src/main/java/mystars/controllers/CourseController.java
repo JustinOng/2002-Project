@@ -9,12 +9,11 @@ import mystars.entities.*;
 import mystars.exceptions.AppException;
 
 /**
- * <h1>Class: courseController</h1>
+ * <h1>Class: CourseController</h1>
  * 
  * This courseController class manages the creation of course, course index and
  * lesson. In addition, it manages registration of course and dropping of
  * course. It also manages the changing of index and swopping of index.
- * 
  */
 
 public class CourseController {

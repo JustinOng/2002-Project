@@ -9,7 +9,7 @@ import mystars.exceptions.AppException;
 /**
  * <h1>Class: Timetable</h1>
  * 
- * This Timetable class implements the student's timetable.
+ * This class implements the student's timetable.
  */
 public class Timetable implements Serializable {
 	/**
@@ -27,8 +27,8 @@ public class Timetable implements Serializable {
 	/**
 	 * Adds an index to this timetable with status Registered
 	 * 
-	 * @param index Index to be added.
-	 * @throws AppException if the index clashes with any already added index
+	 * @param index 		The index to be added.
+	 * @throws AppException If the index clashes with any already added index
 	 */
 	public void addIndex(Index index) throws AppException {
 		addIndex(index, false);
@@ -36,12 +36,12 @@ public class Timetable implements Serializable {
 
 	/**
 	 * Adds an index to this timetable with status controlled by the
-	 * {@code waitlist} parameter
+	 * {@code waitlist} parameter.
 	 * 
-	 * @param index    Index to be added
-	 * @param waitlist {@code true} if index should be added with status waitlist,
-	 *                 {@code false} otherwise
-	 * @throws AppException if the index clashes with any already added index
+	 * @param index    		Index to be added.
+	 * @param waitlist 		{@code true} if index should be added with status waitlist,
+	 *                 		{@code false} otherwise.
+	 * @throws AppException If the index clashes with any already added index.
 	 */
 	public void addIndex(Index index, boolean waitlist) throws AppException {
 		assertAddIndex(index);
@@ -53,24 +53,23 @@ public class Timetable implements Serializable {
 	}
 
 	/**
-	 * Check if {@code add} can be added to this timetable without any clash
+	 * Check if {@code add} can be added to this timetable without any clash.
 	 * 
-	 * @param add Index to be added
-	 * @return {@code true} if {@code add} can be added without any clash
-	 * @return {@code false} otherwise
+	 * @param add 	The index to be added.
+	 * @return 		{@code true} if {@code add} can be added without any clash.
+	 * @return 		{@code false} otherwise.
 	 */
 	public boolean canAddIndex(Index add) {
 		return canAddIndex(add, null);
 	}
 
 	/**
-	 * Check if {@code add} can be added to this timetable without any clash after
-	 * removing {@code remove}
+	 * Check if {@code add} can be added to this timetable without any clash after removing {@code remove}.
 	 * 
-	 * @param add    Index to be added
-	 * @param remove Index to be removed
-	 * @return {@code true} if {@code add} can be added without any clash
-	 * @return {@code false} otherwise
+	 * @param add    	The index to be added.
+	 * @param remove 	The index to be removed.
+	 * @return 			{@code true} if {@code add} can be added without any clash.
+	 * @return 			{@code false} otherwise.
 	 */
 	public boolean canAddIndex(Index add, Index remove) {
 		try {
@@ -82,25 +81,22 @@ public class Timetable implements Serializable {
 	}
 
 	/**
-	 * Check if {@code add} can be added to this timetable without any clash
+	 * Check if {@code add} can be added to this timetable without any clash.
 	 * 
-	 * @param add Index to be added
-	 * @throws AppException if there will be a clash
+	 * @param add 			The index to be added.
+	 * @throws AppException If there will be a clash.
 	 */
 	public void assertAddIndex(Index add) throws AppException {
 		assertAddIndex(add, null);
 	}
 
 	/**
-	 * Check if {@code add} can be added to this timetable without any clash after
-	 * removing {@code remove}
+	 * Check if {@code add} can be added to this timetable without any clash after removing {@code remove}.
 	 * 
-	 * @param add    Index to be added
-	 * @param remove Index to be removed
-	 * @throws AppException if another index of the same course of {@code add} has
-	 *                      already been added
-	 * @throws AppException if adding {@code add} would result in a clash with
-	 *                      another index
+	 * @param add    		The index to be added.
+	 * @param remove 		The index to be removed.
+	 * @throws AppException If another index of the same course of {@code add} has already been added.
+	 * @throws AppException If adding {@code add} would result in a clash with another index.
 	 */
 	public void assertAddIndex(Index add, Index remove) throws AppException {
 		for (Registration reg : registrations) {
@@ -119,9 +115,9 @@ public class Timetable implements Serializable {
 	}
 
 	/**
-	 * Remove an index from this timetable
+	 * Remove an index from this timetable.
 	 * 
-	 * @param index Index to be removed.
+	 * @param index The index to be removed..
 	 */
 	public void removeIndex(Index index) {
 		Registration remove = null;
@@ -135,28 +131,26 @@ public class Timetable implements Serializable {
 		if (remove == null) {
 			return;
 		}
-
 		registrations.remove(remove);
 	}
 
 	/**
-	 * Returns a list of indexes added to this timetable
+	 * Returns the list of indexes added to this timetable.
 	 * 
-	 * @return a list of indexes added to this timetable
+	 * @return The list of indexes added to this timetable.
 	 */
 	public List<Index> getIndexes() {
 		List<Index> indexes = new ArrayList<>();
 		for (Registration reg : registrations) {
 			indexes.add(reg.getIndex());
 		}
-
 		return indexes;
 	}
 
 	/**
-	 * Returns a list of courses of indexes added to this timetable
+	 * Returns the list of courses of indexes added to this timetable
 	 * 
-	 * @return a list of courses of indexes added to this timetable
+	 * @return The list of courses of indexes added to this timetable
 	 */
 	public List<Course> getCourses() {
 		List<Course> courses = new ArrayList<Course>();
@@ -167,9 +161,9 @@ public class Timetable implements Serializable {
 	}
 
 	/**
-	 * Returns a list of Registrations (Index + Status) belonging to this timetable
+	 * Returns the list of Registrations (Index + Status) belonging to this timetable
 	 * 
-	 * @return a list of Registrations (Index + Status) belonging to this timetable
+	 * @return The list of Registrations (Index + Status) belonging to this timetable
 	 */
 	public List<Registration> getRegistrations() {
 		return registrations;
@@ -177,9 +171,9 @@ public class Timetable implements Serializable {
 
 	/**
 	 * Marks the provided index as Registered. Used to indicate that a student has
-	 * been allocated an Index after being on the waitlist
+	 * been allocated an Index after being on the waitlist.
 	 * 
-	 * @param index Index to mark as Registered
+	 * @param index The index to mark as Registered.
 	 */
 	public void setRegistered(Index index) {
 		for (Registration reg : registrations) {

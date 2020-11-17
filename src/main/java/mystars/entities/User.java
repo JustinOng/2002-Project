@@ -34,6 +34,7 @@ public abstract class User extends Entity {
 	
 	/**
 	 * Boolean variable to determine if a user has admin rights.
+	 * Students do not have admin rights. Administrators have admin rights.
 	 */
 	protected boolean isAdmin = false;
 
@@ -79,8 +80,8 @@ public abstract class User extends Entity {
 	/**
 	 * Validates a user's login by verifying that their username and password matches the entry in the database.
 	 * 
-	 * @param userName The user's username.
-	 * @param password The user's password.
+	 * @param userName 				The user's username.
+	 * @param password 				The user's password.
 	 * @throws InvalidLoginException If the login is unsuccessful due to incorrect username or password.
 	 * @return The user object of the user successfully logging in.
 	 */
@@ -99,8 +100,8 @@ public abstract class User extends Entity {
 	/**
 	 * Compare the hash of the user's entered password with the password hash stored for that user in the database.
 	 * 
-	 * @param password 	The user's password.
-	 * @return 			Boolean value indicating if the hash of the entered password matches the stored hash.
+	 * @param password 		The user's password.
+	 * @return 				Boolean value indicating if the hash of the entered password matches the stored hash.
 	 * @throws AppException If the login failed
 	 */
 	public boolean login(String password) throws AppException {

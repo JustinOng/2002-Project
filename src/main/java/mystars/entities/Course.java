@@ -8,12 +8,8 @@ import mystars.exceptions.AppException;
 
 /**
  * <h1>Class: Course</h1>
- *
- *
- * This course class manages the logic courseController. It performs all the
- * function that are required for courseController. It inherits from the Entity
- * Class.
- *
+ * 
+ * This class performs all the functions required for courseController. It inherits from the Entity class.
  */
 public class Course extends Entity {
 	/**

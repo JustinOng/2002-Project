@@ -9,7 +9,8 @@ import mystars.exceptions.AppException;
 /**
  * <h1>Class: Student</h1>
  * 
- * This student class inherits from the user class, and is responsible for the creation of a new student object.
+ * This class manages the creation of student objects from user objects.
+ * It inherits from the user class.
  */
 
 public class Student extends User {
@@ -60,14 +61,23 @@ public class Student extends User {
 	}
 
 	@Override
+	/**
+	 * Determines if a student is able to login by calling the method to check if the
+	 * current date and time are within the MySTARS access period.
+	 */
 	public boolean login(String password) throws AppException {
 		if (!canLogin()) {
 			throw new AppException("User is not allowed to login right now");
 		}
-
 		return super.login(password);
 	}
 
+	/**
+	 * Determines if a student can login to MySTARS based on whether the 
+	 * current date and time is within the access period. 
+	 * 
+	 * @return Boolean value indicating if the student is allowed to login.
+	 */
 	private boolean canLogin() {
 		LocalDateTime now = LocalDateTime.now();
 		LocalDateTime accessPeriodStart = (LocalDateTime) get("student-accessperiod", "start");
@@ -79,11 +89,22 @@ public class Student extends User {
 		return (now.isAfter(accessPeriodStart) && now.isBefore(accessPeriodEnd));
 	}
 
+	/**
+	 * Set the access period start and end date and times for the student object.
+	 * 
+	 * @param start The starting date and time of MySTARS access period.
+	 * @param end	The ending date and time of MySTARS access period.
+	 */
 	public static void setAccessPeriod(LocalDateTime start, LocalDateTime end) {
 		store("student-accessperiod", "start", start);
 		store("student-accessperiod", "end", end);
 	}
 
+	/**
+	 * Retrieves the access period for students to manage their courses.
+	 * 
+	 * @return The range of date and time values that the access period is available.
+	 */
 	public static String getAccessPeriod() {
 		LocalDateTime accessPeriodStart = (LocalDateTime) get("student-accessperiod", "start");
 		LocalDateTime accessPeriodEnd = (LocalDateTime) get("student-accessperiod", "end");

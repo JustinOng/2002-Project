@@ -3,9 +3,10 @@ package mystars.entities;
 import mystars.exceptions.AppException;
 
 /**
- * <h1>Class: admin</h1>
+ * <h1>Class: Admin</h1>
  * 
- * This admin class inherits from the user class.
+ * This class manages the creation of administrator objects from user objects.
+ * It inherits from the user class.
  */
 
 public class Admin extends User

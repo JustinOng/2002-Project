@@ -7,7 +7,6 @@ import java.util.ArrayList;
  * <h1>Class: Entity</h1>
  * 
  * This class implements the entities used in the MySTARS program.
- *
  */
 public abstract class Entity implements Serializable {
 	/**
@@ -45,7 +44,7 @@ public abstract class Entity implements Serializable {
 	}
 	
 	/**
-	 * (Overloaded method)
+	 * (Overloaded method) Retrieves an entry from a storage object based on its ID.
 	 * 
 	 * @param storageId The ID corresponding to the storage object.
 	 * @param id		The ID corresponding to an entry in the storage object.
@@ -56,6 +55,7 @@ public abstract class Entity implements Serializable {
 	}
 	
 	/**
+	 * (Overloaded method) Retrieves an entry from a storage object based on its ID.
 	 * Throws an exception if the storage object is not yet created or configured.
 	 * 
 	 * @param storageId	The ID corresponding to the storage object.
@@ -68,7 +68,7 @@ public abstract class Entity implements Serializable {
 	}
 	
 	/**
-	 * Returns an Arraylist containing all the entries corresponding to the ID in the current entity's storage object.
+	 * Returns an Arraylist containing all the entries corresponding to the ID in the entity's storage object.
 	 * 
 	 * @param storageId The ID of the storage object to be retrieved.
 	 * @return 			The Arraylist of the storage object entries matching the ID.
