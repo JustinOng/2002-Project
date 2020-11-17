@@ -2,6 +2,7 @@ package mystars.entities;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import mystars.enums.*;
 import mystars.exceptions.AppException;
@@ -166,5 +167,22 @@ public class Student extends User {
 	 */
 	public String getMatricNo() {
 		return matricNo;
+	}
+
+	/**
+	 * Retrieves all students
+	 * 
+	 * @return list of all students
+	 */
+	public static ArrayList<Student> getAllStudents() {
+		ArrayList<Student> students = new ArrayList<>();
+
+		for (User user : User.getAllUsers()) {
+			if (user instanceof Student) {
+				students.add((Student) user);
+			}
+		}
+
+		return students;
 	}
 }

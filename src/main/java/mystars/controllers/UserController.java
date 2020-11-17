@@ -1,6 +1,7 @@
 package mystars.controllers;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import mystars.entities.*;
 import mystars.enums.*;
@@ -94,5 +95,14 @@ public class UserController {
 	 */
 	public String getStudentAccessPeriod() {
 		return Student.getAccessPeriod();
+	}
+
+	/**
+	 * Retrieves all students
+	 * 
+	 * @return list of all students
+	 */
+	public ArrayList<Student> getAllStudents() {
+		return Student.getAllStudents();
 	}
 }

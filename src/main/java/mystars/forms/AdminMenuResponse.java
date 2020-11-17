@@ -2,7 +2,7 @@ package mystars.forms;
 
 public class AdminMenuResponse {
 	public enum Selected {
-		EditStudentAccessPeriod, CreateStudent, CreateCourse, ManageCourses, ListVacancies
+		EditStudentAccessPeriod, CreateStudent, CreateCourse, ManageCourses, ListVacancies, ListStudents
 	};
 
 	private final Selected selected;

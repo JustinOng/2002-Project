@@ -212,6 +212,8 @@ public class MySTARS {
 					ui.renderDialog(String.format("Index %d", indexNo), String.format("%d/%d vacancies/max enrolled",
 							courseController.getVacancies(indexNo), courseController.getMaxEnrolled(indexNo)));
 					break;
+				case ListStudents:
+					displayStudents("All Students", userController.getAllStudents());
 				default:
 					break;
 				}
