@@ -9,7 +9,8 @@ import mystars.exceptions.AppException;
 /**
  * <h1>Class: Student</h1>
  * 
- * This student class inherits from the user class, and is responsible for the creation of a new student object.
+ * This student class inherits from the user class, and is responsible for the
+ * creation of a new student object.
  */
 
 public class Student extends User {
@@ -17,19 +18,20 @@ public class Student extends User {
 	 * Serialization of the course ID.
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * The name of the student.
 	 */
 	private String name;
-	
+
 	/**
 	 * The matriculation number of the student.
 	 */
 	private String matricNo;
 
 	/**
-	 * Create an instance of the gender and nationality enum as defined in the package: 'mystars.enums'.
+	 * Create an instance of the gender and nationality enum as defined in the
+	 * package: 'mystars.enums'.
 	 */
 	private Gender gender;
 	private Nationality nationality;
@@ -48,7 +50,8 @@ public class Student extends User {
 	 * @param password    The student's password.
 	 * @param gender      The student's gender.
 	 * @param nationality The student's nationality.
-	 * @throws UserAlreadyExistsException If there already exists a user with the same username.
+	 * @throws UserAlreadyExistsException If there already exists a user with the
+	 *                                    same username.
 	 */
 	public Student(String name, String matricNo, String username, String password, Gender gender,
 			Nationality nationality) throws AppException {
@@ -59,6 +62,10 @@ public class Student extends User {
 		this.nationality = nationality;
 	}
 
+	/**
+	 * Override the base login to only allow the student to login if the current
+	 * time is within the configured access period
+	 */
 	@Override
 	public boolean login(String password) throws AppException {
 		if (!canLogin()) {
@@ -68,6 +75,14 @@ public class Student extends User {
 		return super.login(password);
 	}
 
+	/**
+	 * Determine whether a student is allowed to login based on the current time and
+	 * access period configured. If the access period is not configured, this
+	 * function always returns false
+	 * 
+	 * @return {@code true} if the student is allowed to login
+	 * @return {@code false} otherwise
+	 */
 	private boolean canLogin() {
 		LocalDateTime now = LocalDateTime.now();
 		LocalDateTime accessPeriodStart = (LocalDateTime) get("student-accessperiod", "start");
@@ -79,11 +94,24 @@ public class Student extends User {
 		return (now.isAfter(accessPeriodStart) && now.isBefore(accessPeriodEnd));
 	}
 
+	/**
+	 * Sets the period in which students are allowed to login
+	 * 
+	 * @param start start of the window in which students are allowed to login
+	 * @param end   end of the window in which students are allowed to login
+	 */
 	public static void setAccessPeriod(LocalDateTime start, LocalDateTime end) {
 		store("student-accessperiod", "start", start);
 		store("student-accessperiod", "end", end);
 	}
 
+	/**
+	 * Retrieve the period in which students are allowed to login as a string
+	 * 
+	 * @return "yyyy-mm-ddThh:mm:ss to yyyy-mm-ddThh:mm:ss" if a access period is
+	 *         set
+	 * @return {@code null} otherwise
+	 */
 	public static String getAccessPeriod() {
 		LocalDateTime accessPeriodStart = (LocalDateTime) get("student-accessperiod", "start");
 		LocalDateTime accessPeriodEnd = (LocalDateTime) get("student-accessperiod", "end");
@@ -112,7 +140,7 @@ public class Student extends User {
 	public Gender getGender() {
 		return gender;
 	}
-	
+
 	/**
 	 * Returns the student's nationality as a category from the Nationality enum.
 	 * 
