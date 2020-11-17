@@ -1,9 +1,10 @@
 package mystars.exceptions;
 
 /**
+ * <h1>Class: UIException</h1>
+ * 
  * This class inherits from Java's built in Runtime Exception class to handle general exceptions
  * that may occur during the running of the user interface of this program.
- *
  */
 public class UIException extends RuntimeException {
 	/**

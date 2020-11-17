@@ -1,6 +1,8 @@
 package mystars.exceptions;
 
 /**
+ * <h1>Class: AppException</h1>
+ * 
  * This class inherits from Java's built in Exception class to handle general exceptions
  * that may occur during the running of this program.
  */
