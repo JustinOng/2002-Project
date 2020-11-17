@@ -123,7 +123,7 @@ public class CourseController {
 
 		boolean registered = index.getCourse().register(student, indexNo);
 		student.getTimetable().addIndex(index, !registered);
-		
+
 		return registered;
 	}
 
@@ -271,5 +271,17 @@ public class CourseController {
 	 */
 	public int getVacancies(int indexNo) throws AppException {
 		return Index.getIndex(indexNo).getVacancies();
+	}
+
+	/**
+	 * Returns the maximum number of students enrolled in the index identified by
+	 * {@code indexNo}
+	 * 
+	 * @param indexNo Identifier of Index
+	 * @return maximum number of students enrolledin the index identified by {@code indexNo}
+	 * @throws AppException if no index identified by {@code indexNo} is found
+	 */
+	public int getMaxEnrolled(int indexNo) throws AppException {
+		return Index.getIndex(indexNo).getMaxEnrolled();
 	}
 }

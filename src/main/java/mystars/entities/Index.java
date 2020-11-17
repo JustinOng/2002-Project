@@ -146,6 +146,14 @@ public class Index extends Entity {
 	public int getVacancies() {
 		return this.maxEnrolled - enrolled.size();
 	}
+	
+	/**
+	 * Gets the maximum number of enrolled students for this Index
+	 * @return the maximum number of enrolled students for this Index
+	 */
+	public int getMaxEnrolled() {
+		return this.maxEnrolled;
+	}
 
 	/**
 	 * Getting all of the students that enrolled in the Index
