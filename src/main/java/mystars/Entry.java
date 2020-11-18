@@ -51,6 +51,7 @@ public class Entry {
 
 		MySTARS app = new MySTARS(new ConsoleGraphicUserInterface(), notifier);
 		app.start();
+		app.loop();
 	}
 
 	public static INotifyStudent createNotifier(Properties config) {

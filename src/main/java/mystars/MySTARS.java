@@ -51,7 +51,7 @@ public class MySTARS {
 	/**
 	 * Creates new instance of MySTARS with UI and notification mechanism to use
 	 * 
-	 * @param ui     UI to be used to interact with user
+	 * @param ui       UI to be used to interact with user
 	 * @param notifier Instance to use to notify students
 	 */
 	public MySTARS(IUserInterface ui, INotifyStudent notifier) {
@@ -60,9 +60,7 @@ public class MySTARS {
 	}
 
 	/**
-	 * Calls the created controller and its related objects declared above to start
-	 * the MySTARS program. Prompts the user to login with their credentials through
-	 * the user interface's login form.
+	 * Performs initialisation
 	 */
 	public void start() {
 		storageController.start();
@@ -73,10 +71,16 @@ public class MySTARS {
 				storageController.writeToDisk();
 			}
 		});
-		
+	}
+
+	/**
+	 * Main UI loop
+	 */
+	public void loop() {
 		if (notifier != null) {
 			courseController.registerIndexObserver((Index index, Student student) -> {
-				notifier.notify(student, "Allocation of waitlisted Index", String.format("You have been allocated your waitlisted index %d ", index.getIndexNo()));
+				notifier.notify(student, "Allocation of waitlisted Index",
+						String.format("You have been allocated your waitlisted index %d ", index.getIndexNo()));
 			}, Index.Event.AllocatedWaitlist);
 		}
 
