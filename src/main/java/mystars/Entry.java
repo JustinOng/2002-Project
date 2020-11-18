@@ -22,9 +22,12 @@ public class Entry {
 	 */
 	public static void main(String[] args) throws IOException {
 		String configFile = "app.properties";
-
-		if (args.length > 0) {
-			configFile = args[0];
+		String indexDataFile = null;
+		
+		for (String arg : args) {
+			if (arg.startsWith("--config=")) {
+				configFile = arg.replaceFirst("--config=", "");
+			}
 		}
 
 		INotifyStudent notifier = null;
