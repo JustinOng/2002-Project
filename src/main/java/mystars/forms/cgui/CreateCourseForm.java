@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 
 import mystars.forms.*;
 
@@ -55,8 +56,28 @@ public class CreateCourseForm {
 
 		new Button("Create", new Runnable() {
 			public void run() {
-				response = new CreateCourseResponse(codeInput.getText(), nameInput.getText(), schoolComboBox.getText(),
-						Integer.parseInt(auInput.getText()));
+				String code = codeInput.getText();
+				String name = nameInput.getText();
+
+				if (code.isBlank()) {
+					MessageDialog.showMessageDialog(gui, "Error", "Code cannot be blank!");
+					return;
+				}
+
+				if (name.isBlank()) {
+					MessageDialog.showMessageDialog(gui, "Error", "Name cannot be blank!");
+					return;
+				}
+
+				int au;
+				try {
+					au = Integer.parseInt(auInput.getText());
+				} catch (NumberFormatException e) {
+					MessageDialog.showMessageDialog(gui, "Error", "AUs have to be a valid number");
+					return;
+				}
+
+				response = new CreateCourseResponse(code, name, schoolComboBox.getText(), au);
 				window.close();
 			}
 		}).addTo(panel);
