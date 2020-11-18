@@ -73,7 +73,7 @@ public class CreateCourseForm {
 				try {
 					au = Integer.parseInt(auInput.getText());
 				} catch (NumberFormatException e) {
-					MessageDialog.showMessageDialog(gui, "Error", "AUs have to be a valid number");
+					MessageDialog.showMessageDialog(gui, "Error", "Error parsing number");
 					return;
 				}
 

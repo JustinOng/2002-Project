@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 
 import mystars.forms.*;
 
@@ -37,7 +38,7 @@ public class CreateIndexForm {
 		panel.setLayoutManager(new GridLayout(2));
 
 		// Insert textboxes, labels and buttons as required.
-		panel.addComponent(new Label("Number:"));
+		panel.addComponent(new Label("Index Number:"));
 		final TextBox numberInput = new TextBox().addTo(panel);
 		numberInput.setValidationPattern(Pattern.compile("^[0-9]+$"));
 
@@ -49,7 +50,16 @@ public class CreateIndexForm {
 
 		new Button("Create", new Runnable() {
 			public void run() {
-				response = new CreateIndexResponse(Integer.parseInt(numberInput.getText()), Integer.parseInt(maxEnrolledInput.getText()));
+				int indexNumber, maxEnrolled;
+				
+				try {
+					indexNumber = Integer.parseInt(numberInput.getText());
+					maxEnrolled = Integer.parseInt(maxEnrolledInput.getText());
+				} catch (NumberFormatException e) {
+					MessageDialog.showMessageDialog(gui, "Error", "Error parsing number");
+					return;
+				}
+				response = new CreateIndexResponse(indexNumber, maxEnrolled);
 				window.close();
 			}
 		}).addTo(panel);
