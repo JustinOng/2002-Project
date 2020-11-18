@@ -47,6 +47,14 @@ public class Course extends Entity {
 	 * @throws AppException If the courseCode already existed.
 	 */
 	public Course(String name, String courseCode, School school) throws AppException {
+		if (name.isBlank()) {
+			throw new AppException("name cannot be blank");
+		}
+
+		if (courseCode.isBlank()) {
+			throw new AppException("courseCode cannot be blank");
+		}
+
 		if (get("course", courseCode) != null) {
 			throw new AppException(String.format("%s already exists", courseCode));
 		}
