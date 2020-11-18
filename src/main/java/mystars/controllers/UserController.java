@@ -13,7 +13,6 @@ import mystars.exceptions.AppException;
  * This userController class manages the creation of a new student, and the
  * logins of students or administrators.
  */
-
 public class UserController {
 	/**
 	 * Class constructor.
@@ -31,14 +30,20 @@ public class UserController {
 	 * @param password    The student's password.
 	 * @param gender      The student's gender.
 	 * @param nationality The student's nationality.
-	 * @throws UserAlreadyExistsException If there already exists a user with the
-	 *                                    same username.
+	 * @throws UserAlreadyExistsException If there already exists a student with the same username.
 	 */
 	public void createStudent(String name, String matricNo, String userName, String password, Gender gender,
 			Nationality nationality) throws AppException {
 		new Student(name, matricNo, userName, password, gender, nationality);
 	}
 
+	/**
+	 * Create a new administrator object.
+	 * 
+	 * @param username		The admin's username.
+	 * @param password		The admin's password.
+	 * @throws AppException	If the administrator object cannot be created.
+	 */
 	public void createAdmin(String username, String password) throws AppException {
 		new Admin(username, password);
 	}

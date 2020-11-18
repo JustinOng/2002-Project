@@ -51,6 +51,11 @@ public class Index extends Entity {
 	private ArrayList<Student> waitlist;
 
 	/**
+	 * The ArrayList containing index call backs when they occur.
+	 */
+	private static Map<Event, ArrayList<IndexCallback>> observers = new HashMap<Event, ArrayList<IndexCallback>>();
+	
+	/**
 	 * The events which can be observed on this class.
 	 */
 	public enum Event {
@@ -64,8 +69,6 @@ public class Index extends Entity {
 	public interface IndexCallback {
 		void run(Index index, Student student);
 	}
-
-	private static Map<Event, ArrayList<IndexCallback>> observers = new HashMap<Event, ArrayList<IndexCallback>>();
 
 	/**
 	 * Constructor for Index. This class is responsible for the creation of an index object.

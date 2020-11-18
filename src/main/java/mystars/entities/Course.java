@@ -38,8 +38,7 @@ public class Course extends Entity {
 	protected HashMap<Integer, Index> indexes = new HashMap<Integer, Index>();
 
 	/**
-	 * Constructor for Course This class is responsible for the creation of a course
-	 * object.
+	 * Sets the parameters of the course.
 	 * 
 	 * @param name       The Course's name.
 	 * @param courseCode The Course Code.
@@ -58,11 +57,10 @@ public class Course extends Entity {
 	}
 
 	/**
-	 * Gets Course from a course code input
+	 * Gets the course from a course code input.
 	 * 
-	 * @param courseCode This parameter is the course's course code.
-	 * @return Course This returns the Course that corresponds the course code
-	 *         input.
+	 * @param courseCode 	This parameter is the course's course code.
+	 * @return Course 		This returns the Course that corresponds the course code input.
 	 * @throws AppException If the courseCode does not exist.
 	 */
 	public static Course getCourse(String courseCode) throws AppException {
@@ -70,32 +68,31 @@ public class Course extends Entity {
 		if (course != null) {
 			return course;
 		}
-
 		throw new AppException(String.format("%s is not a valid course code", courseCode));
 	}
 
 	/**
-	 * Gets Course's name.
+	 * Returns the course name.
 	 * 
-	 * @return name This returns the Course's name.
+	 * @return name The Course name.
 	 */
 	public String getName() {
 		return this.name;
 	}
 
 	/**
-	 * Gets the course's course code.
+	 * Returns the course code.
 	 * 
-	 * @return courseCode This returns the courseCode.
+	 * @return courseCode The course code.
 	 */
 	public String getCourseCode() {
 		return this.courseCode;
 	}
 
 	/**
-	 * Gets the Course's School
+	 * Returns the school the course belongs to.
 	 * 
-	 * @return school This returns the Course's school.
+	 * @return school The school the course belongs to.
 	 */
 	public School getSchool() {
 		return this.school;
@@ -103,10 +100,10 @@ public class Course extends Entity {
 
 	/**
 	 * Creates a new Index with the given index number and maximum enrolled number
-	 * of students and place it into the hash map for indexes
+	 * of students and place it into the hash map for indexes.
 	 * 
-	 * @param indexNo     The new Index's Index number
-	 * @param maxEnrolled The maximum enrolled students allowed for the new Index
+	 * @param indexNo     The new Index's Index number.
+	 * @param maxEnrolled The maximum enrolled students allowed for the new Index.
 	 */
 	public void createIndex(int indexNo, int maxEnrolled) throws AppException {
 		Index index = new Index(this, indexNo, maxEnrolled);
@@ -114,32 +111,31 @@ public class Course extends Entity {
 	}
 
 	/**
-	 * Gets the index object from this course if the index of the course exist
+	 * Gets the index object from this course if the index of the course exist.
 	 * 
-	 * @param indexNo The Index's index number
-	 * @return The object index according to the index number
-	 * @throws AppException If the index number is not found for the index
+	 * @param indexNo 	The Index's index number.
+	 * @return 			The object index according to the index number.
+	 * @throws AppException If the index number is not found for the index.
 	 */
 	public Index getIndex(int indexNo) throws AppException {
 		if (indexes.containsKey(indexNo)) {
 			return indexes.get(indexNo);
 		}
-
 		throw new AppException(String.format("Index %d was not found", indexNo));
 	}
 
 	/**
 	 * Creates a new lesson
 	 * 
-	 * @param indexNo     The index number that the lesson belongs to
-	 * @param lessonType  The lesson's lesson type
-	 * @param day         Which day the lesson is on
-	 * @param location    The location the lesson is at
-	 * @param groupNo     The group number the lesson belongs to
-	 * @param week        Whether the lesson falls on odd or even
-	 * @param startPeriod The starting time when the lesson begins
-	 * @param endPeriod   The ending time when the lesson begins
-	 * @throws AppException if the index number is not found in the index
+	 * @param indexNo     The index number that the lesson belongs to.
+	 * @param lessonType  The lesson's lesson type.
+	 * @param day         Which day the lesson is on.
+	 * @param location    The location the lesson is at.
+	 * @param groupNo     The group number the lesson belongs to.
+	 * @param week        Whether the lesson falls on odd or even.
+	 * @param startPeriod The starting time when the lesson begins.
+	 * @param endPeriod   The ending time when the lesson begins.
+	 * @throws AppException If the index number is not found in the index.
 	 */
 	public void createLesson(int indexNo, LessonType lessonType, Day day, String location, String groupNo,
 			boolean[] week, int startPeriod, int endPeriod) throws AppException {
@@ -149,9 +145,9 @@ public class Course extends Entity {
 	}
 
 	/**
-	 * Retrieves all courses
+	 * Returns the ArrayList of all the courses.
 	 * 
-	 * @return list of all courses
+	 * @return The ArrayList of all the courses.
 	 */
 	@SuppressWarnings("unchecked")
 	public static ArrayList<Course> getAllCourses() {
@@ -159,10 +155,9 @@ public class Course extends Entity {
 	}
 
 	/**
-	 * Getting all of the students that registered in the course
+	 * Returns a list of all the students that are registered in the course.
 	 * 
-	 * @return studentList This method returns all of the students that registered
-	 *         in the course as a new ArrayList
+	 * @return studentList Returns all of the students registered in the course as an ArrayList.
 	 */
 	public ArrayList<Student> getStudentList() {
 
@@ -176,20 +171,20 @@ public class Course extends Entity {
 	}
 
 	/**
-	 * Gets all the list of indexes that is from the course
+	 * Returns the list of all the indexes that is from the course.
 	 * 
-	 * @return A new Array List of indexes from the course
+	 * @return The Array List of all indexes from the course.
 	 */
 	public ArrayList<Index> getIndexes() {
 		return new ArrayList<Index>(indexes.values());
 	}
 
 	/**
-	 * Check if the student is in the index
+	 * Check if the student is in the course index.
 	 * 
-	 * @param student The student that you want check with
-	 * @return the index if the student is in the index
-	 * @return null if the student is not in the index
+	 * @param student 	The student that you want check with.
+	 * @return 			The index if the student is in the index.
+	 * @return null 	If the student is not in the index.
 	 */
 	public Index findStudent(Student student) {
 		for (Index i : indexes.values()) {
@@ -200,11 +195,11 @@ public class Course extends Entity {
 	}
 
 	/**
-	 * Gets the index that the student is in
+	 * Gets the course index that the student is in.
 	 * 
-	 * @param student The student that you want check with
-	 * @return the index if the student is in the index
-	 * @throws AppException if the student is not enrolled in the course
+	 * @param student 	The student that you want check with.
+	 * @return 			The index if the student is in the index.
+	 * @throws AppException If the student is not enrolled in the course.
 	 */
 	public Index getStudentIndex(Student student) throws AppException {
 		Index index = findStudent(student);
@@ -216,13 +211,13 @@ public class Course extends Entity {
 	}
 
 	/**
-	 * Registers the student in the target index
+	 * Registers the student in the target index.
 	 * 
-	 * @param student The student to be registered in the index
-	 * @param indexNo The index that the student is to be registered to
-	 * @return {@code true} if student was successfully registered
-	 * @return {@code false} if the student was placed on the waitlist
-	 * @throws AppException if the student is already registered for index indexNo
+	 * @param student 			The student to be registered in the index.
+	 * @param indexNo 			The index that the student is to be registered to.
+	 * @return {@code true} 	If student was successfully registered.
+	 * @return {@code false} 	If the student was placed on the waitlist.
+	 * @throws AppException 	If the student is already registered for index indexNo.
 	 */
 	public boolean register(Student student, int indexNo) throws AppException {
 
@@ -237,10 +232,9 @@ public class Course extends Entity {
 	/**
 	 * Drops the student from the target index.
 	 * 
-	 * @param student The student that wants to drop the index.
-	 * @return the current index if the dropping of index is successful.
-	 * @throws AppException if the student is not in the index that the student
-	 *                      wants to drop.
+	 * @param student 	The student that wants to drop the index.
+	 * @return 			The current index if the dropping of index is successful.
+	 * @throws AppException If the student is not in the index that the student wants to drop.
 	 */
 	public Index drop(Student student) throws AppException {
 		Index index = getStudentIndex(student);
@@ -249,15 +243,15 @@ public class Course extends Entity {
 	}
 
 	/**
-	 * Swop indexNoA of StudentA with indexNoB of StudentB
+	 * Swop indexNoA of StudentA with indexNoB of StudentB.
 	 * 
-	 * @param studentA The first student that wants to swop index
-	 * @param studentB The second student that wants to swop index
-	 * @param indexNoA The index that the first student wants to swop
-	 * @param indexNoB The other index that the second student wants to swop
-	 * @throws AppException If indexNoA and indexNoB is the same index
-	 * @throws AppException If studentA is not enrolled in indexNoA
-	 * @throws AppException If studentB is not enrolled in indexNoB
+	 * @param studentA 		The first student that wants to swop index.
+	 * @param studentB 		The second student that wants to swop index.
+	 * @param indexNoA 		The index that the first student wants to swop.
+	 * @param indexNoB 		The other index that the second student wants to swop.
+	 * @throws AppException If indexNoA and indexNoB is the same index.
+	 * @throws AppException If studentA is not enrolled in indexNoA.
+	 * @throws AppException If studentB is not enrolled in indexNoB.
 	 */
 	public void swopIndex(Student studentA, int indexNoA, Student studentB, int indexNoB) throws AppException {
 
@@ -283,13 +277,12 @@ public class Course extends Entity {
 	}
 
 	/**
-	 * This method changes the student's index from the current index to the
-	 * targeted index of targetIndexNo
-	 * 
-	 * @param student       The student that wants to change index
-	 * @param targetIndexNo The index number that the student wants to change to
-	 * @throws AppException If the student is not registered in the current index
-	 * @throws AppException If targetIndexNo is not found
+	 * This method changes the student's index from the current index to the targeted index of target index.
+	 *  
+	 * @param student       The student that wants to change index.
+	 * @param targetIndexNo The index number that the student wants to change to.
+	 * @throws AppException If the student is not registered in the current index.
+	 * @throws AppException If targetIndexNo is not found.
 	 * @throws AppException If targetIndexNo of the student has no more vacancies.
 	 */
 	public void changeIndex(Student student, int targetIndexNo) throws AppException {
@@ -307,9 +300,9 @@ public class Course extends Entity {
 	}
 
 	/**
-	 * Changes the course code name to a string format
+	 * Changes the course code name to a string format.
 	 * 
-	 * @return the course code as a string
+	 * @return The course code as a string.
 	 */
 	public String toString() {
 		return String.format("%s (%s)", name, courseCode);

@@ -11,12 +11,14 @@ import mystars.exceptions.AppException;
 /**
  * <h1>Class: CourseController</h1>
  * 
- * This courseController class manages the creation of course, course index and
- * lesson. In addition, it manages registration of course and dropping of
- * course. It also manages the changing of index and swopping of index.
+ * This courseController class manages the creation of course, course index and lesson. 
+ * It also manages the registration of course, dropping of course and swopping of index.
  */
 
 public class CourseController {
+	/**
+	 * Initializes the course controller object.
+	 */
 	public void start() {
 		Index.registerObserver((Index index, Student student) -> {
 			student.getTimetable().setRegistered(index);

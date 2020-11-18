@@ -65,7 +65,7 @@ public class Student extends User {
 
 	/**
 	 * Override the base login to only allow the student to login if the current
-	 * time is within the configured access period
+	 * time is within the configured access period.
 	 */
 	@Override
 	/**
@@ -82,10 +82,10 @@ public class Student extends User {
 	/**
 	 * Determine whether a student is allowed to login based on the current time and
 	 * access period configured. If the access period is not configured, this
-	 * function always returns false
+	 * function always returns false.
 	 * 
-	 * @return {@code true} if the student is allowed to login
-	 * @return {@code false} otherwise
+	 * @return {@code true} 	If the student is allowed to login.
+	 * @return {@code false}	If the student is not allowed to login.
 	 */
 	private boolean canLogin() {
 		LocalDateTime now = LocalDateTime.now();
@@ -110,11 +110,10 @@ public class Student extends User {
 	}
 
 	/**
-	 * Retrieve the period in which students are allowed to login as a string
+	 * Retrieve the period in which students are allowed to login as a string.
 	 * 
-	 * @return "yyyy-mm-ddThh:mm:ss to yyyy-mm-ddThh:mm:ss" if a access period is
-	 *         set
-	 * @return {@code null} otherwise
+	 * @return "yyyy-mm-ddThh:mm:ss to yyyy-mm-ddThh:mm:ss" if a access period is set.
+	 * @return {@code null} otherwise.
 	 */
 	public static String getAccessPeriod() {
 		LocalDateTime accessPeriodStart = (LocalDateTime) get("student-accessperiod", "start");
@@ -173,9 +172,9 @@ public class Student extends User {
 	}
 
 	/**
-	 * Retrieves all students
+	 * Returns a list of all the students.
 	 * 
-	 * @return list of all students
+	 * @return The list of all the students.
 	 */
 	public static ArrayList<Student> getAllStudents() {
 		ArrayList<Student> students = new ArrayList<>();
@@ -185,7 +184,6 @@ public class Student extends User {
 				students.add((Student) user);
 			}
 		}
-
 		return students;
 	}
 }
