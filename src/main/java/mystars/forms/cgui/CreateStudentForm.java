@@ -50,6 +50,9 @@ public class CreateStudentForm {
 		panel.addComponent(new Label("Name:"));
 		final TextBox nameInput = new TextBox().addTo(panel);
 
+		panel.addComponent(new Label("Email:"));
+		final TextBox emailInput = new TextBox().addTo(panel);
+
 		panel.addComponent(new Label("Matric. No.:"));
 		final TextBox matricNoInput = new TextBox().addTo(panel);
 
@@ -66,7 +69,7 @@ public class CreateStudentForm {
 		new Button("Create", new Runnable() {
 			public void run() {
 				response = new CreateStudentResponse(usernameInput.getText(), passwordInput.getText(),
-						nameInput.getText(), matricNoInput.getText(), genderBox.getSelectedItem(),
+						nameInput.getText(), emailInput.getText(), matricNoInput.getText(), genderBox.getSelectedItem(),
 						nationalityBox.getSelectedItem());
 				window.close();
 			}

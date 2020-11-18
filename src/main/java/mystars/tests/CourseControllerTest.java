@@ -71,7 +71,7 @@ class CourseControllerTest {
 	 */
 	void test_registration() throws AppException {
 		// Create a new student.
-		Student student = new Student("name", "matric no", "user", "password", Gender.Male, Nationality.Singaporean);
+		Student student = new Student("name", "email@example.com", "matric no", "user", "password", Gender.Male, Nationality.Singaporean);
 		
 		// Course controller creates the course.
 		controller.createCourse("course name", "CZ0001", School.CSE);
@@ -97,7 +97,7 @@ class CourseControllerTest {
 	 * @throws AppException Shows error message if any of the tests fail.
 	 */
 	void test_dropping() throws AppException {
-		Student student = new Student("name", "matric no", "user", "password", Gender.Male, Nationality.Singaporean);
+		Student student = new Student("name", "email@example.com", "matric no", "user", "password", Gender.Male, Nationality.Singaporean);
 		controller.createCourse("course name", "CZ0001", School.CSE);
 
 		// Create the new course index and register the student for it, before dropping the student from that index.
@@ -119,8 +119,8 @@ class CourseControllerTest {
 	 */
 	void test_swop() throws AppException {
 		// Create two new students to swop index with each other.
-		Student studentA = new Student("name", "matric no", "userA", "password", Gender.Male, Nationality.Singaporean);
-		Student studentB = new Student("name", "matric no", "userB", "password", Gender.Male, Nationality.Singaporean);
+		Student studentA = new Student("name", "email@example.com", "matric no", "userA", "password", Gender.Male, Nationality.Singaporean);
+		Student studentB = new Student("name", "email@example.com", "matric no", "userB", "password", Gender.Male, Nationality.Singaporean);
 
 		// Create the course with two separate indexes.
 		controller.createCourse("course name", "CZ0001", School.CSE);
@@ -157,8 +157,8 @@ class CourseControllerTest {
 	 */
 	void test_waitlist() throws AppException {
 		// Create two new students. One to be successfully allocated an index, with the other put on a waitlist.
-		Student studentA = new Student("name", "matric no", "userA", "password", Gender.Male, Nationality.Singaporean);
-		Student studentB = new Student("name", "matric no", "userB", "password", Gender.Male, Nationality.Singaporean);
+		Student studentA = new Student("name", "email@example.com", "matric no", "userA", "password", Gender.Male, Nationality.Singaporean);
+		Student studentB = new Student("name", "email@example.com", "matric no", "userB", "password", Gender.Male, Nationality.Singaporean);
 
 		// Create the course index.
 		controller.createCourse("course name", "CZ0001", School.CSE);

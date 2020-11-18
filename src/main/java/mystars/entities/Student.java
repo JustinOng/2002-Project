@@ -18,12 +18,17 @@ public class Student extends User {
 	/**
 	 * ID for versioning of serialized data.
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 
 	/**
 	 * The name of the student.
 	 */
 	private String name;
+
+	/**
+	 * The email address of the student.
+	 */
+	private String email;
 
 	/**
 	 * The matriculation number of the student.
@@ -46,18 +51,19 @@ public class Student extends User {
 	 * This class is responsible for the creation of a student object.
 	 * 
 	 * @param name        The student's name.
+	 * @param email       The student's email.
 	 * @param matricNo    The student's matriculation number.
 	 * @param username    The student's username.
 	 * @param password    The student's password.
 	 * @param gender      The student's gender.
 	 * @param nationality The student's nationality.
-	 * @throws UserAlreadyExistsException If there already exists a user with the
-	 *                                    same username.
+	 * @throws AppException If there already exists a user with the same username.
 	 */
-	public Student(String name, String matricNo, String username, String password, Gender gender,
+	public Student(String name, String email, String matricNo, String username, String password, Gender gender,
 			Nationality nationality) throws AppException {
 		super(username, password);
 		this.name = name;
+		this.email = email;
 		this.matricNo = matricNo;
 		this.gender = gender;
 		this.nationality = nationality;
@@ -65,13 +71,13 @@ public class Student extends User {
 
 	/**
 	 * Override the base login to only allow the student to login if the current
-	 * time is within the configured access period.
+	 * time is within the configured access period
+	 * 
+	 * @throws AppException if the student is not allowed to login right now
+	 * @return {@code true} if the student has logged in successfully
+	 * @return {@code false} otherwise
 	 */
 	@Override
-	/**
-	 * Determines if a student is able to login by calling the method to check if the
-	 * current date and time are within the MySTARS access period.
-	 */
 	public boolean login(String password) throws AppException {
 		if (!canLogin()) {
 			throw new AppException("User is not allowed to login right now");
@@ -102,7 +108,7 @@ public class Student extends User {
 	 * Set the access period start and end date and times for the student object.
 	 * 
 	 * @param start The starting date and time of MySTARS access period.
-	 * @param end	The ending date and time of MySTARS access period.
+	 * @param end   The ending date and time of MySTARS access period.
 	 */
 	public static void setAccessPeriod(LocalDateTime start, LocalDateTime end) {
 		store("student-accessperiod", "start", start);
@@ -133,6 +139,15 @@ public class Student extends User {
 	 */
 	public String getName() {
 		return name;
+	}
+
+	/**
+	 * Return the student's email address.
+	 * 
+	 * @return The student's email.
+	 */
+	public String getEmail() {
+		return email;
 	}
 
 	/**

@@ -1,6 +1,5 @@
 package mystars;
 
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -10,6 +9,7 @@ import mystars.enums.*;
 import mystars.exceptions.*;
 import mystars.controllers.*;
 import mystars.forms.*;
+import mystars.notifications.INotifyStudent;
 
 /**
  * <h1>Class: MySTARS</h1>
@@ -21,6 +21,11 @@ public class MySTARS {
 	 * UI that will be used
 	 */
 	private IUserInterface ui;
+
+	/**
+	 * Notification method that will be used to notify students
+	 */
+	private INotifyStudent notifier;
 
 	/**
 	 * Create a new storage controller object to handle data persistence
@@ -44,14 +49,14 @@ public class MySTARS {
 	private User user;
 
 	/**
-	 * Creates new instance of MySTARS, configuring the UI that will be used to
-	 * interact with the user
+	 * Creates new instance of MySTARS with UI and notification mechanism to use
 	 * 
-	 * @param ui The user interface object being passed in.
-	 * @throws IOException
+	 * @param ui     UI to be used to interact with user
+	 * @param notifier Instance to use to notify students
 	 */
-	public MySTARS(IUserInterface ui) throws IOException {
+	public MySTARS(IUserInterface ui, INotifyStudent notifier) {
 		this.ui = ui;
+		this.notifier = notifier;
 	}
 
 	/**
@@ -68,12 +73,20 @@ public class MySTARS {
 				storageController.writeToDisk();
 			}
 		});
+		
+		if (notifier != null) {
+			courseController.registerIndexObserver((Index index, Student student) -> {
+				notifier.notify(student, "Allocation of waitlisted Index", String.format("You have been allocated your waitlisted index %d ", index.getIndexNo()));
+			}, Index.Event.AllocatedWaitlist);
+		}
 
 		try {
 			// Create new administrator and student objects.
 			new Admin("admin", "1");
-			new Student("user1", "u12345", "1", "1", Gender.Male, Nationality.Singaporean);
-			new Student("user2", "u12345", "2", "2", Gender.Male, Nationality.Singaporean);
+			new Student("user1", "starsnotifications2021s1+user1@gmail.com", "u12345", "1", "1", Gender.Male,
+					Nationality.Singaporean);
+			new Student("user2", "starsnotifications2021s1+user2@gmail.com", "u12345", "2", "2", Gender.Male,
+					Nationality.Singaporean);
 
 			// Create new courses and indexes.
 			Course c = new Course("Course", "C1", School.CSE);
@@ -256,8 +269,9 @@ public class MySTARS {
 					Gender gender = Gender.valueOf(studentResponse.getGender());
 					Nationality nationality = Nationality.valueOf(studentResponse.getNationality());
 
-					userController.createStudent(studentResponse.getName(), studentResponse.getMatricNo(),
-							studentResponse.getUsername(), studentResponse.getPassword(), gender, nationality);
+					userController.createStudent(studentResponse.getName(), studentResponse.getEmail(),
+							studentResponse.getMatricNo(), studentResponse.getUsername(), studentResponse.getPassword(),
+							gender, nationality);
 
 					ui.renderDialog("Student Creation", "Student created successfully");
 					break;

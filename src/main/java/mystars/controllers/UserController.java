@@ -25,6 +25,7 @@ public class UserController {
 	 * Create a new student object.
 	 * 
 	 * @param name        The student's name.
+	 * @param email       The student's email.
 	 * @param matricNo    The student's matriculation number.
 	 * @param username    The student's username.
 	 * @param password    The student's password.
@@ -32,9 +33,9 @@ public class UserController {
 	 * @param nationality The student's nationality.
 	 * @throws UserAlreadyExistsException If there already exists a student with the same username.
 	 */
-	public void createStudent(String name, String matricNo, String userName, String password, Gender gender,
-			Nationality nationality) throws AppException {
-		new Student(name, matricNo, userName, password, gender, nationality);
+	public void createStudent(String name, String email, String matricNo, String userName, String password,
+			Gender gender, Nationality nationality) throws AppException {
+		new Student(name, email, matricNo, userName, password, gender, nationality);
 	}
 
 	/**
