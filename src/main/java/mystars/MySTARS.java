@@ -272,7 +272,7 @@ public class MySTARS {
 					}
 
 					courseController.createCourse(courseResponse.getName(), courseResponse.getCode(),
-							courseResponse.getSchool());
+							School.valueOf(courseResponse.getSchool()));
 
 					ui.renderDialog("Course Creation", "Course created successfully");
 					break;
