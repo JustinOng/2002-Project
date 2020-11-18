@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public abstract class Entity implements Serializable {
 	/**
-	 * Serialization of the course ID.
+	 * ID for versioning of serialized data.
 	 */
 	private static final long serialVersionUID = 1L;
 	
