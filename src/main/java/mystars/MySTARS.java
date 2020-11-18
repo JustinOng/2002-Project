@@ -60,6 +60,12 @@ public class MySTARS {
 		storageController.start();
 		courseController.start();
 
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			public void run() {
+				storageController.writeToDisk();
+			}
+		});
+
 		try {
 			// Create new administrator and student objects.
 			new Admin("admin", "1");
