@@ -9,22 +9,22 @@ import mystars.enums.School;
  */
 public class CreateCourseResponse {
 	/**
-	 * Stores the course code.
+	 * The course code.
 	 */
 	private final String code;
 	
 	/**
-	 * Stores the course name.
+	 * The course name.
 	 */
 	private final String name;
 	
 	/**
-	 * Stores the school object that the course belongs to.
+	 * The school object that the course belongs to.
 	 */
 	private final School school;
 	
 	/**
-	 * Stores the academic units awarded by the course.
+	 * The academic units awarded by the course.
 	 */
 	private final int au;
 	

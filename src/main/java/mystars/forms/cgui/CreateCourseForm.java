@@ -10,17 +10,35 @@ import com.googlecode.lanterna.gui2.*;
 import mystars.enums.School;
 import mystars.forms.*;
 
+/**
+ * <h1>Class: CreateCourseForm</h1>
+ * 
+ * This class manages the user interface for the course creation form.
+ */
 public class CreateCourseForm {
+	/**
+	 *  The response object for the course creation form.
+	 */
 	private CreateCourseResponse response;
 
+	/**
+	 * Sets the parameters for the graphical user interface administrators 
+	 * will use when creating courses.
+	 * 
+	 * @param gui		The graphical user interface object.
+	 * @param schools	The list of schools.
+	 * @return			The course creation form response object.
+	 */
 	public CreateCourseResponse getResponse(MultiWindowTextGUI gui, List<String> schools) {
 		final AbstractWindow window = new BasicWindow();
 		
 		response = null;
 
+		// Create new Jpanel object and set the layout as a grid.
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(2));
 
+		// Insert textboxes, labels and buttons as required.
 		panel.addComponent(new Label("Code:"));
 		final TextBox codeInput = new TextBox().addTo(panel);
 

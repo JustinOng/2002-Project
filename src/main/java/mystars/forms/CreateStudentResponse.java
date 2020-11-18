@@ -7,32 +7,32 @@ package mystars.forms;
  */
 public class CreateStudentResponse {
 	/**
-	 * Store the student's username.
+	 * The student's username.
 	 */
 	private final String username;
 	
 	/**
-	 * Store the student's password hash.
+	 * The student's password hash.
 	 */
 	private final String password;
 	
 	/**
-	 * Store the student's name.
+	 * The student's name.
 	 */
 	private final String name;
 	
 	/**
-	 * Store the student's matriculation number.
+	 * The student's matriculation number.
 	 */
 	private final String matricNo;
 	
 	/**
-	 * Store the student's gender.
+	 * The student's gender.
 	 */
 	private final String gender;
 	
 	/**
-	 * Store the student's nationality.
+	 * The student's nationality.
 	 */
 	private final String nationality;
 

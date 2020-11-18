@@ -15,12 +15,12 @@ public class IndexManagementResponse {
 	};
 
 	/**
-	 * Stores the selected object.
+	 * The selected object.
 	 */
 	private final Selected selected;
 	
 	/**
-	 * Stores the course index.
+	 * The course index.
 	 */
 	private final String index;
 

@@ -17,7 +17,7 @@ public class StudentMenuResponse {
 	};
 	
 	/**
-	 * Stores the selected object.
+	 * The selected object.
 	 */
 	private final Selected selected;
 	

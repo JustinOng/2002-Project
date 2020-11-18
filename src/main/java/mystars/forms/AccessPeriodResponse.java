@@ -9,12 +9,12 @@ import java.time.LocalDateTime;
  */
 public class AccessPeriodResponse {
 	/**
-	 * To store the starting date and time of the access period.
+	 * The starting date and time of the access period.
 	 */
 	private final LocalDateTime start;
 	
 	/**
-	 * To store the ending date and time for the access period.
+	 * The ending date and time for the access period.
 	 */
 	private final LocalDateTime end;
 

@@ -8,17 +8,36 @@ import com.googlecode.lanterna.gui2.*;
 
 import mystars.forms.*;
 
+/**
+ * <h1>Class: CreateStudentForm</h1>
+ * 
+ * This manages the user interface for the creation of new student form.
+ */
 public class CreateStudentForm {
+	/**
+	 * The response object for the creation of new student form.
+	 */
 	private CreateStudentResponse response;
 
+	/**
+	 * Sets the parameters for the graphical user interface administrators 
+	 * will use when creating new students.
+	 * 
+	 * @param gui			The graphical user interface object.
+	 * @param genders		The gender of the student.
+	 * @param nationalities	The nationality of the student.
+	 * @return				The creation of new student form response object.
+	 */
 	public CreateStudentResponse getResponse(MultiWindowTextGUI gui, List<String> genders, List<String> nationalities) {
 		final AbstractWindow window = new BasicWindow();
 
 		response = null;
 
+		// Create new Jpanel object and set the layout as a grid.
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(2));
 
+		// Insert textboxes, labels and buttons as required.
 		final Label status = new Label("");
 		panel.addComponent(status, GridLayout.createHorizontallyFilledLayoutData(2));
 

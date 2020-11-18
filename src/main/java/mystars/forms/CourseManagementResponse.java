@@ -16,12 +16,12 @@ public class CourseManagementResponse {
 	};
 
 	/**
-	 * Stores the selected object.
+	 * The selected object.
 	 */
 	private final Selected selected;
 	
 	/**
-	 * Stores the course name.
+	 * The course name.
 	 */
 	private final String courseName;
 

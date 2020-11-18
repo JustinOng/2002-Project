@@ -10,17 +10,36 @@ import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 
 import mystars.forms.*;
 
+/**
+ * <h1>Class: AccessPeriodForm</h1>
+ * 
+ * This class manages user interface for the access period form.
+ */
 public class AccessPeriodForm {
+	/**
+	 * The response object for the access period form.
+	 */
 	private AccessPeriodResponse response;
 
+	/**
+	 * Sets the parameters for the graphical user interface administrators will use when
+	 * setting or modifying the access period starting and ending date and time.
+	 * Checks for invalid date range.
+	 * 
+	 * @param gui				The graphical user interface object.
+	 * @param curAccessPeriod	The current access period.
+	 * @return					The access period response object.
+	 */
 	public AccessPeriodResponse getResponse(MultiWindowTextGUI gui, String curAccessPeriod) {
 		final AbstractWindow window = new BasicWindow();
 
 		response = null;
 
+		// Create new Jpanel object and set the layout as a grid.
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(2));
 
+		// Insert textboxes, labels and buttons as required.
 		if (curAccessPeriod == null) {
 			final Label status = new Label("Enter datetime eg 2020-01-01T08:00:00");
 			panel.addComponent(status, GridLayout.createHorizontallyFilledLayoutData(2));

@@ -7,12 +7,12 @@ package mystars.forms;
  */
 public class LoginResponse {
 	/**
-	 * Stores the user's username.
+	 * The user's username.
 	 */
 	private final String username;
 	
 	/**
-	 * Stores the user's password hash.
+	 * The user's password hash.
 	 */
 	private final String password;
 

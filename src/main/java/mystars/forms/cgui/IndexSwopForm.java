@@ -8,17 +8,35 @@ import com.googlecode.lanterna.gui2.*;
 
 import mystars.forms.*;
 
+/**
+ * <h1>Class: IndexSwopForm</h1>
+ * 
+ * This class manages the user interface for the form for swopping of 
+ * course indexes between two students.
+ */
 public class IndexSwopForm {
+	/**
+	 * The response object for the index swopping form.
+	 */
 	private IndexSwopResponse response;
 
+	/**
+	 * Sets the parameters for the graphical user interface students will
+	 * use when swopping their course index with another student.
+	 * 
+	 * @param gui	The graphical user interface object.
+	 * @return		The index swopping form response object.
+	 */
 	public IndexSwopResponse getResponse(MultiWindowTextGUI gui) {
 		final AbstractWindow window = new BasicWindow();
 		
 		response = null;
 
+		// Create new Jpanel object and set the layout as a grid.
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(2));
 
+		// Insert textboxes, labels and buttons as required.
 		final Label status = new Label("");
 		panel.addComponent(status, GridLayout.createHorizontallyFilledLayoutData(2));
 

@@ -7,12 +7,12 @@ package mystars.forms;
  */
 public class CreateIndexResponse {
 	/**
-	 * Stores the course index number.
+	 * The course index number.
 	 */
 	private final int number;
 	
 	/**
-	 * Stores the maximum number of students that can be enrolled into the course index.
+	 * The maximum number of students that can be enrolled into the course index.
 	 */
 	private final int maxEnrolled;
 	

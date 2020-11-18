@@ -7,22 +7,22 @@ package mystars.forms;
  */
 public class IndexSwopResponse {
 	/**
-	 * Stores the index to be given up for the swop.
+	 * The index to be given up for the swop.
 	 */
 	private final int indexA;
 	
 	/**
-	 * Stores the index to be received from the swop.
+	 * The index to be received from the swop.
 	 */
 	private final int indexB;
 	
 	/**
-	 * Stores the student's username.
+	 * The student's username.
 	 */
 	private final String username;
 	
 	/**
-	 * Stores the student's password hash.
+	 * The student's password hash.
 	 */
 	private final String password;
 	

@@ -7,37 +7,37 @@ package mystars.forms;
  */
 public class CreateLessonResponse {
 	/**
-	 * Stores the lesson type: Lecture, Tutorial or Lab.
+	 * The lesson type: Lecture, Tutorial or Lab.
 	 */
 	private final String lessonType;
 	
 	/**
-	 * Stores the day of the week the lesson is held on.
+	 * The day of the week the lesson is held on.
 	 */
 	private final String day;
 	
 	/**
-	 * Stores the location that the lesson is held at.
+	 * The location that the lesson is held at.
 	 */
 	private final String location;
 	
 	/**
-	 * Stores the group number of the lesson the student is assigned to.
+	 * The group number of the lesson the student is assigned to.
 	 */
 	private final String groupNo;
 	
 	/**
-	 * Stores the weeks of the semester when the lesson will be held.
+	 * The weeks of the semester when the lesson will be held.
 	 */
 	private final boolean[] weeks;
 	
 	/**
-	 * Stores the starting time of the lesson.
+	 * The starting time of the lesson.
 	 */
 	private final int startPeriod;
 	
 	/**
-	 * Stores the ending time of the lesson.
+	 * The ending time of the lesson.
 	 */
 	private final int endPeriod;
 	

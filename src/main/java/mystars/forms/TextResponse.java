@@ -7,7 +7,7 @@ package mystars.forms;
  */
 public class TextResponse {
 	/**
-	 * Stores the text to be displayed.
+	 * The text to be displayed.
 	 */
 	private final String text;
 	

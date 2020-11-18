@@ -7,17 +7,34 @@ import com.googlecode.lanterna.gui2.*;
 
 import mystars.forms.*;
 
+/**
+ * <h1>Class: StudentMenuForm</h1>
+ * 
+ * This class manages the user interface for the student menu form.
+ */
 public class StudentMenuForm {
+	/**
+	 * The response object for the student menu form.
+	 */
 	private StudentMenuResponse response;
 
+	/**
+	 * Sets the parameters for the graphical user interface students will use when using MySTARS.
+	 * 
+	 * @param gui		The graphical user interface object.
+	 * @param courses	The list of courses that students can register for.
+	 * @return			The student menu form response object.
+	 */
 	public StudentMenuResponse getResponse(MultiWindowTextGUI gui, List<String> courses) {
 		final AbstractWindow window = new BasicWindow();
 		
 		response = null;
 
+		// Create new Jpanel object and set the layout as a grid.
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(4));
 
+		// Insert textboxes, labels and buttons as required.
 		if (courses != null) {
 			panel.addComponent(new Label("Registered Courses:\r\n" + String.join("\r\n", courses)),
 					GridLayout.createHorizontallyFilledLayoutData(5));

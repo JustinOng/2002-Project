@@ -10,18 +10,38 @@ import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 
 import mystars.forms.*;
 
+/**
+ * <h1>Class: CreateLessonForm</h1>
+ * 
+ * This class manages the user interface for the course index lesson creation form.
+ */
 public class CreateLessonForm {
+	/**
+	 * The response object for the course index lesson creation form.
+	 */
 	private CreateLessonResponse response;
 
+	/**
+	 * Sets the parameters for the graphical user interface administrators 
+	 * will use when creating course index lessons.
+	 * 
+	 * @param gui			The graphical user interface object.
+	 * @param index			The index of the course.
+	 * @param lessonType	The lesson type of the index: Lecture, Tutorial or Lab.
+	 * @param days			The days of the week which the lesson will be conducted.
+	 * @return				The course index lesson creation form response object.
+	 */
 	public CreateLessonResponse getResponse(MultiWindowTextGUI gui, String index, List<String> lessonType,
 			List<String> days) {
 		final AbstractWindow window = new BasicWindow();
 
 		response = null;
 
+		// Create new Jpanel object and set the layout as a grid.
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(2));
 
+		// Insert textboxes, labels and buttons as required.
 		panel.addComponent(new Label("Lesson Type:"));
 		final ComboBox<String> typeComboBox = new ComboBox<String>(lessonType).addTo(panel);
 
