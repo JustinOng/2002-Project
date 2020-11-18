@@ -29,7 +29,8 @@ public class CourseController {
 	 * @param name       The course's name.
 	 * @param courseCode The course's code.
 	 * @param school     The course's school.
-	 * @throws AppException If courseCode already exist.
+	 * @throws AppException if another course identified by {@code courseCode} already exists
+	 * @throws AppException if invalid parameters are passed to the constructor of Course
 	 */
 
 	public void createCourse(String name, String courseCode, School school) throws AppException {
@@ -43,6 +44,7 @@ public class CourseController {
 	 * @param indexNo     Index number of the new index
 	 * @param maxEnrolled The maximum number of students enrolled in the new index
 	 * @throws AppException if no course identified by {@code courseCode} is found
+	 * @throws AppException if invalid parameters are passed to the constructor of Index
 	 */
 
 	public void createIndex(String courseCode, int indexNo, int maxEnrolled) throws AppException {
@@ -94,6 +96,7 @@ public class CourseController {
 	 *                    {@code startPeriod}.
 	 * @throws AppException if no course identified by {@code courseCode} is found
 	 * @throws AppException if no index identified by {@code indexNo} is found
+	 * @throws AppException if invalid parameters are passed to the constructor of Lesson
 	 */
 
 	public void createLesson(String courseCode, int indexNo, LessonType lessonType, Day day, String location,

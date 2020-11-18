@@ -132,9 +132,10 @@ public class Index extends Entity {
 	 * @param week        The list of weeks the lesson will be conducted on.
 	 * @param startPeriod The period the lessons commences.
 	 * @param endPeriod   The period the lessons concludes.
+	 * @throws AppException if invalid parameters are passed to the constructor of Lesson
 	 */
 	public void createLesson(LessonType type, Day day, String location, String groupNo, boolean[] week, int startPeriod,
-			int endPeriod) {
+			int endPeriod) throws AppException {
 		Lesson l = new Lesson(this, type, day, location, groupNo, week, startPeriod, endPeriod);
 		this.lessons.add(l);
 	}

@@ -115,6 +115,7 @@ public class Course extends Entity {
 	 * 
 	 * @param indexNo     The new Index's Index number
 	 * @param maxEnrolled The maximum enrolled students allowed for the new Index
+	 * @throws AppException if invalid parameters are passed to the constructor of Index
 	 */
 	public void createIndex(int indexNo, int maxEnrolled) throws AppException {
 		Index index = new Index(this, indexNo, maxEnrolled);
@@ -148,6 +149,7 @@ public class Course extends Entity {
 	 * @param startPeriod The starting time when the lesson begins
 	 * @param endPeriod   The ending time when the lesson begins
 	 * @throws AppException if the index number is not found in the index
+	 * @throws AppException if invalid parameters are passed to the constructor of Lesson
 	 */
 	public void createLesson(int indexNo, LessonType lessonType, Day day, String location, String groupNo,
 			boolean[] week, int startPeriod, int endPeriod) throws AppException {
