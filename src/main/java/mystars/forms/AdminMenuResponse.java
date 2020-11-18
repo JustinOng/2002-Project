@@ -10,11 +10,7 @@ public class AdminMenuResponse {
 	 * Enum containing the options available to administrators.
 	 */
 	public enum Selected {
-		EditStudentAccessPeriod,
-		CreateStudent,
-		CreateCourse,
-		ManageCourses,
-		ListVacancies
+		EditStudentAccessPeriod, CreateStudent, CreateCourse, ManageCourses, ListVacancies, ListStudents
 	};
 
 	/**

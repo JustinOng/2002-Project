@@ -2,6 +2,7 @@ package mystars.entities;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import mystars.enums.*;
 import mystars.exceptions.AppException;
@@ -9,8 +10,8 @@ import mystars.exceptions.AppException;
 /**
  * <h1>Class: Student</h1>
  * 
- * This class manages the creation of student objects from user objects.
- * It inherits from the user class.
+ * This student class inherits from the user class, and is responsible for the
+ * creation of a new student object.
  */
 
 public class Student extends User {
@@ -18,19 +19,20 @@ public class Student extends User {
 	 * Serialization of the course ID.
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * The name of the student.
 	 */
 	private String name;
-	
+
 	/**
 	 * The matriculation number of the student.
 	 */
 	private String matricNo;
 
 	/**
-	 * Create an instance of the gender and nationality enum as defined in the package: 'mystars.enums'.
+	 * Create an instance of the gender and nationality enum as defined in the
+	 * package: 'mystars.enums'.
 	 */
 	private Gender gender;
 	private Nationality nationality;
@@ -49,7 +51,8 @@ public class Student extends User {
 	 * @param password    The student's password.
 	 * @param gender      The student's gender.
 	 * @param nationality The student's nationality.
-	 * @throws UserAlreadyExistsException If there already exists a user with the same username.
+	 * @throws UserAlreadyExistsException If there already exists a user with the
+	 *                                    same username.
 	 */
 	public Student(String name, String matricNo, String username, String password, Gender gender,
 			Nationality nationality) throws AppException {
@@ -60,6 +63,10 @@ public class Student extends User {
 		this.nationality = nationality;
 	}
 
+	/**
+	 * Override the base login to only allow the student to login if the current
+	 * time is within the configured access period
+	 */
 	@Override
 	/**
 	 * Determines if a student is able to login by calling the method to check if the
@@ -73,10 +80,12 @@ public class Student extends User {
 	}
 
 	/**
-	 * Determines if a student can login to MySTARS based on whether the 
-	 * current date and time is within the access period. 
+	 * Determine whether a student is allowed to login based on the current time and
+	 * access period configured. If the access period is not configured, this
+	 * function always returns false
 	 * 
-	 * @return Boolean value indicating if the student is allowed to login.
+	 * @return {@code true} if the student is allowed to login
+	 * @return {@code false} otherwise
 	 */
 	private boolean canLogin() {
 		LocalDateTime now = LocalDateTime.now();
@@ -101,9 +110,11 @@ public class Student extends User {
 	}
 
 	/**
-	 * Retrieves the access period for students to manage their courses.
+	 * Retrieve the period in which students are allowed to login as a string
 	 * 
-	 * @return The range of date and time values that the access period is available.
+	 * @return "yyyy-mm-ddThh:mm:ss to yyyy-mm-ddThh:mm:ss" if a access period is
+	 *         set
+	 * @return {@code null} otherwise
 	 */
 	public static String getAccessPeriod() {
 		LocalDateTime accessPeriodStart = (LocalDateTime) get("student-accessperiod", "start");
@@ -133,7 +144,7 @@ public class Student extends User {
 	public Gender getGender() {
 		return gender;
 	}
-	
+
 	/**
 	 * Returns the student's nationality as a category from the Nationality enum.
 	 * 
@@ -159,5 +170,22 @@ public class Student extends User {
 	 */
 	public String getMatricNo() {
 		return matricNo;
+	}
+
+	/**
+	 * Retrieves all students
+	 * 
+	 * @return list of all students
+	 */
+	public static ArrayList<Student> getAllStudents() {
+		ArrayList<Student> students = new ArrayList<>();
+
+		for (User user : User.getAllUsers()) {
+			if (user instanceof Student) {
+				students.add((Student) user);
+			}
+		}
+
+		return students;
 	}
 }
