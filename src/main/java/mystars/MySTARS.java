@@ -274,9 +274,11 @@ public class MySTARS {
 				// List the number of vacancies in a course index.
 				case ListVacancies:
 					int indexNo = ui.getInt("List vacancies", "Index No:");
-					ui.renderDialog(String.format("Index %d", indexNo),
-							String.format("%d vacancies", courseController.getVacancies(indexNo)));
+					ui.renderDialog(String.format("Index %d", indexNo), String.format("%d/%d vacancies/max enrolled",
+							courseController.getVacancies(indexNo), courseController.getMaxEnrolled(indexNo)));
 					break;
+				case ListStudents:
+					displayStudents("All Students", userController.getAllStudents());
 				default:
 					break;
 				}

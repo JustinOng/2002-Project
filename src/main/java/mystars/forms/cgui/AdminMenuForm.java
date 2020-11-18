@@ -67,6 +67,13 @@ public class AdminMenuForm {
 				window.close();
 			}
 		}).addTo(panel);
+		
+		new Button("List Students", new Runnable() {
+			public void run() {
+				response = new AdminMenuResponse(AdminMenuResponse.Selected.ListStudents);
+				window.close();
+			}
+		}).addTo(panel);
 
 		window.setComponent(panel);
 
