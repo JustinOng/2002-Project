@@ -80,6 +80,19 @@ public class CreateLessonForm {
 
 		new Button("Create", new Runnable() {
 			public void run() {
+				String location = locationInput.getText();
+				String group = groupInput.getText();
+				
+				if (location.isBlank()) {
+					MessageDialog.showMessageDialog(gui, "Error", "Location cannot be blank");
+					return;
+				}
+				
+				if (group.isBlank()) {
+					MessageDialog.showMessageDialog(gui, "Error", "Group cannot be blank");
+					return;
+				}
+				
 				int start = startComboBox.getSelectedIndex();
 				int end = endComboBox.getSelectedIndex();
 				
@@ -94,7 +107,7 @@ public class CreateLessonForm {
 				}
 				
 				response = new CreateLessonResponse(typeComboBox.getSelectedItem(), dayComboBox.getSelectedItem(),
-						locationInput.getText(), groupInput.getText(), weeks, startComboBox.getSelectedIndex(),
+						location, group, weeks, startComboBox.getSelectedIndex(),
 						endComboBox.getSelectedIndex());
 				window.close();
 			}

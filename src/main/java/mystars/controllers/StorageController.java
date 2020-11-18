@@ -23,18 +23,12 @@ public class StorageController {
 	}
 
 	/**
-	 * Loads data from disk (if already exists) and configure shutdown hook to persist data on exit.
+	 * Loads data from disk and attach storage to entities
 	 */
 	public void start() {
 		loadFromDisk();
 
 		Entity.setStorage(storage);
-
-		Runtime.getRuntime().addShutdownHook(new Thread() {
-			public void run() {
-				writeToDisk();
-			}
-		});
 	}
 
 	/**

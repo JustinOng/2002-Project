@@ -79,6 +79,14 @@ public class Index extends Entity {
 	 * @throws AppException If the indexNo already existed.
 	 */
 	public Index(Course course, int indexNo, int maxEnrolled) throws AppException {
+		if (indexNo < 0) {
+			throw new AppException("Index Number has to be larger than 0");
+		}
+		
+		if (maxEnrolled <= 0) {
+			throw new AppException("Maximum Number of enrolled students has to be greater than 0");
+		}
+		
 		if (get("index", indexNo) != null) {
 			throw new AppException(String.format("Index %d already exists", indexNo));
 		}
@@ -127,9 +135,10 @@ public class Index extends Entity {
 	 * @param week        The list of weeks the lesson will be conducted on.
 	 * @param startPeriod The period the lessons commences.
 	 * @param endPeriod   The period the lessons concludes.
+	 * @throws AppException if invalid parameters are passed to the constructor of Lesson
 	 */
 	public void createLesson(LessonType type, Day day, String location, String groupNo, boolean[] week, int startPeriod,
-			int endPeriod) {
+			int endPeriod) throws AppException {
 		Lesson l = new Lesson(this, type, day, location, groupNo, week, startPeriod, endPeriod);
 		this.lessons.add(l);
 	}

@@ -3,15 +3,17 @@ package mystars.entities;
 import java.io.Serializable;
 
 import mystars.enums.*;
+import mystars.exceptions.AppException;
 
 /**
  * <h1>Class: Lesson</h1>
  *
- * This class represents a Lesson. Eg: A Tutorial held on Monday between 0830-0930.
+ * This class represents a Lesson. Eg: A Tutorial held on Monday between
+ * 0830-0930.
  */
 public class Lesson implements Serializable {
 	/**
-	 * Serialization of the course ID
+	 * ID for versioning of serialized data.
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -36,7 +38,8 @@ public class Lesson implements Serializable {
 	private String location;
 
 	/**
-	 * The group number assigned to the particular lesson (applicable for tutorials & labs).
+	 * The group number assigned to the particular lesson (applicable for tutorials
+	 * & labs).
 	 */
 	private String groupNo;
 
@@ -71,9 +74,23 @@ public class Lesson implements Serializable {
 	 * @param weeks       The Lesson's week.
 	 * @param startPeriod The Lesson's start period.
 	 * @param endPeriod   The Lesson's end period.
+	 * @throws AppException
 	 */
 	public Lesson(Index index, LessonType lessonType, Day day, String groupNo, String location, boolean[] weeks,
-			int startPeriod, int endPeriod) {
+			int startPeriod, int endPeriod) throws AppException {
+		
+		if (groupNo.isBlank()) {
+			throw new AppException("Group number cannot be blank");
+		}
+		
+		if (location.isBlank()) {
+			throw new AppException("Location cannot be blank");
+		}
+		
+		if (weeks.length != 13) {
+			throw new AppException("Weeks must have length 13");
+		}
+
 		this.index = index;
 		this.lessonType = lessonType;
 		this.day = day;
@@ -87,9 +104,9 @@ public class Lesson implements Serializable {
 	/**
 	 * Check for clashes between the current instance and {@code lesson}.
 	 * 
-	 * @param lesson 			Another lesson to compare against.
-	 * @return {@code true} 	If there are clashes.
-	 * @return {@code false}	If there are no clashes.
+	 * @param lesson Another lesson to compare against.
+	 * @return {@code true} If there are clashes.
+	 * @return {@code false} If there are no clashes.
 	 */
 	public boolean clashesWith(Lesson lesson) {
 		// loop through every week.

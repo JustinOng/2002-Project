@@ -1,7 +1,5 @@
 package mystars.forms;
 
-import mystars.enums.School;
-
 /**
  * <h1>Class: CreateCourseResponse</h1>
  * 
@@ -21,7 +19,7 @@ public class CreateCourseResponse {
 	/**
 	 * The school object that the course belongs to.
 	 */
-	private final School school;
+	private final String school;
 	
 	/**
 	 * The academic units awarded by the course.
@@ -35,7 +33,7 @@ public class CreateCourseResponse {
 	 * @param school	The school the course belongs to.
 	 * @param au		The academic units awarded by the course.
 	 */
-	public CreateCourseResponse(String code, String name, School school, int au) {
+	public CreateCourseResponse(String code, String name, String school, int au) {
 		this.code = code;
 		this.name = name;
 		this.school = school;
@@ -65,7 +63,7 @@ public class CreateCourseResponse {
 	 * 
 	 * @return The school the course belongs to.
 	 */
-	public School getSchool() {
+	public String getSchool() {
 		return school;
 	}
 	

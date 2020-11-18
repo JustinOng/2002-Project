@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 
-import mystars.enums.School;
 import mystars.forms.*;
 
 /**
@@ -17,21 +17,21 @@ import mystars.forms.*;
  */
 public class CreateCourseForm {
 	/**
-	 *  The response object for the course creation form.
+	 * The response object for the course creation form.
 	 */
 	private CreateCourseResponse response;
 
 	/**
-	 * Sets the parameters for the graphical user interface administrators 
-	 * will use when creating courses.
+	 * Sets the parameters for the graphical user interface administrators will use
+	 * when creating courses.
 	 * 
-	 * @param gui		The graphical user interface object.
-	 * @param schools	The list of schools.
-	 * @return			The course creation form response object.
+	 * @param gui     The graphical user interface object.
+	 * @param schools The list of schools.
+	 * @return The course creation form response object.
 	 */
 	public CreateCourseResponse getResponse(MultiWindowTextGUI gui, List<String> schools) {
 		final AbstractWindow window = new BasicWindow();
-		
+
 		response = null;
 
 		// Create new Jpanel object and set the layout as a grid.
@@ -56,8 +56,28 @@ public class CreateCourseForm {
 
 		new Button("Create", new Runnable() {
 			public void run() {
-				response = new CreateCourseResponse(codeInput.getText(), nameInput.getText(),
-						School.valueOf(schoolComboBox.getText()), Integer.parseInt(auInput.getText()));
+				String code = codeInput.getText();
+				String name = nameInput.getText();
+
+				if (code.isBlank()) {
+					MessageDialog.showMessageDialog(gui, "Error", "Code cannot be blank!");
+					return;
+				}
+
+				if (name.isBlank()) {
+					MessageDialog.showMessageDialog(gui, "Error", "Name cannot be blank!");
+					return;
+				}
+
+				int au;
+				try {
+					au = Integer.parseInt(auInput.getText());
+				} catch (NumberFormatException e) {
+					MessageDialog.showMessageDialog(gui, "Error", "Error parsing number");
+					return;
+				}
+
+				response = new CreateCourseResponse(code, name, schoolComboBox.getText(), au);
 				window.close();
 			}
 		}).addTo(panel);
