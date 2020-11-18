@@ -9,7 +9,8 @@ import mystars.exceptions.AppException;
 /**
  * <h1>Class: Course</h1>
  * 
- * This class performs all the functions required for courseController. It inherits from the Entity class.
+ * This class performs all the functions required for courseController. It
+ * inherits from the Entity class.
  */
 public class Course extends Entity {
 	/**
@@ -33,6 +34,11 @@ public class Course extends Entity {
 	protected School school;
 
 	/**
+	 * Number of AUs this Course is worth
+	 */
+	protected int au;
+
+	/**
 	 * A hash map of Index according to the index number in the hash Map.
 	 */
 	protected HashMap<Integer, Index> indexes = new HashMap<Integer, Index>();
@@ -44,9 +50,10 @@ public class Course extends Entity {
 	 * @param name       The Course's name.
 	 * @param courseCode The Course Code.
 	 * @param school     The Course's school.
+	 * @param au         The number of AUs this Course is worth
 	 * @throws AppException If the courseCode already existed.
 	 */
-	public Course(String name, String courseCode, School school) throws AppException {
+	public Course(String name, String courseCode, School school, int au) throws AppException {
 		if (name.isBlank()) {
 			throw new AppException("name cannot be blank");
 		}
@@ -62,6 +69,7 @@ public class Course extends Entity {
 		this.name = name;
 		this.courseCode = courseCode;
 		this.school = school;
+		this.au = au;
 		store("course", courseCode, this);
 	}
 
@@ -108,6 +116,14 @@ public class Course extends Entity {
 	public School getSchool() {
 		return this.school;
 	}
+	
+	/**
+	 * Gets the number of AUs this Course is worth
+	 * @return the number of AUs this Course is worth
+	 */
+	public int getAu() {
+		return this.au;
+	}
 
 	/**
 	 * Creates a new Index with the given index number and maximum enrolled number
@@ -115,7 +131,8 @@ public class Course extends Entity {
 	 * 
 	 * @param indexNo     The new Index's Index number
 	 * @param maxEnrolled The maximum enrolled students allowed for the new Index
-	 * @throws AppException if invalid parameters are passed to the constructor of Index
+	 * @throws AppException if invalid parameters are passed to the constructor of
+	 *                      Index
 	 */
 	public void createIndex(int indexNo, int maxEnrolled) throws AppException {
 		Index index = new Index(this, indexNo, maxEnrolled);
@@ -149,7 +166,8 @@ public class Course extends Entity {
 	 * @param startPeriod The starting time when the lesson begins
 	 * @param endPeriod   The ending time when the lesson begins
 	 * @throws AppException if the index number is not found in the index
-	 * @throws AppException if invalid parameters are passed to the constructor of Lesson
+	 * @throws AppException if invalid parameters are passed to the constructor of
+	 *                      Lesson
 	 */
 	public void createLesson(int indexNo, LessonType lessonType, Day day, String location, String groupNo,
 			boolean[] week, int startPeriod, int endPeriod) throws AppException {

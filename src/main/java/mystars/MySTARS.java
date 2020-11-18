@@ -93,7 +93,7 @@ public class MySTARS {
 					Nationality.Singaporean);
 
 			// Create new courses and indexes.
-			Course c = new Course("Course", "C1", School.CSE);
+			Course c = new Course("Course", "C1", School.CSE, 1);
 			c.createIndex(1, 1);
 			c.createIndex(2, 1);
 
@@ -290,7 +290,7 @@ public class MySTARS {
 					}
 
 					courseController.createCourse(courseResponse.getName(), courseResponse.getCode(),
-							School.valueOf(courseResponse.getSchool()));
+							School.valueOf(courseResponse.getSchool()), courseResponse.getAu());
 
 					ui.renderDialog("Course Creation", "Course created successfully");
 					break;

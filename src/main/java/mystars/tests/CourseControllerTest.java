@@ -59,7 +59,7 @@ class CourseControllerTest {
 		String courseCode = "CZ0001";
 		
 		// Course controller creates the course.
-		controller.createCourse("course name", courseCode, School.CSE);
+		controller.createCourse("course name", courseCode, School.CSE, 1);
 		Course.getCourse(courseCode);
 	}
 
@@ -74,7 +74,7 @@ class CourseControllerTest {
 		Student student = new Student("name", "email@example.com", "matric no", "user", "password", Gender.Male, Nationality.Singaporean);
 		
 		// Course controller creates the course.
-		controller.createCourse("course name", "CZ0001", School.CSE);
+		controller.createCourse("course name", "CZ0001", School.CSE, 1);
 
 		// Exception handling if student tries to register for course that does not exist.
 		assertThrows(AppException.class, () -> controller.registerCourse(student, 0),
@@ -98,7 +98,7 @@ class CourseControllerTest {
 	 */
 	void test_dropping() throws AppException {
 		Student student = new Student("name", "email@example.com", "matric no", "user", "password", Gender.Male, Nationality.Singaporean);
-		controller.createCourse("course name", "CZ0001", School.CSE);
+		controller.createCourse("course name", "CZ0001", School.CSE, 1);
 
 		// Create the new course index and register the student for it, before dropping the student from that index.
 		controller.createIndex("CZ0001", 1, 1);
@@ -123,7 +123,7 @@ class CourseControllerTest {
 		Student studentB = new Student("name", "email@example.com", "matric no", "userB", "password", Gender.Male, Nationality.Singaporean);
 
 		// Create the course with two separate indexes.
-		controller.createCourse("course name", "CZ0001", School.CSE);
+		controller.createCourse("course name", "CZ0001", School.CSE, 1);
 		controller.createIndex("CZ0001", 1, 1);
 		controller.createIndex("CZ0001", 2, 1);
 
@@ -161,7 +161,7 @@ class CourseControllerTest {
 		Student studentB = new Student("name", "email@example.com", "matric no", "userB", "password", Gender.Male, Nationality.Singaporean);
 
 		// Create the course index.
-		controller.createCourse("course name", "CZ0001", School.CSE);
+		controller.createCourse("course name", "CZ0001", School.CSE, 1);
 		controller.createIndex("CZ0001", 1, 1);
 
 		assertTrue(controller.registerCourse(studentA, 1), "student A should have registered successfully");
