@@ -18,32 +18,34 @@ import mystars.forms.*;
  */
 public class MySTARS {
 	/**
-	 * Create a new user interface object.
+	 * UI that will be used
 	 */
 	private IUserInterface ui;
-	
+
 	/**
-	 * Create a new storage controller object.
+	 * Create a new storage controller object to handle data persistence
 	 */
 	private StorageController storageController = new StorageController("data");
-	
+
 	/**
-	 * Create a new user controller object.
+	 * Create a new user controller object to handle user-related operations
 	 */
 	private UserController userController = new UserController();
-	
+
 	/**
-	 * Create a new course controller object.
+	 * Create a new course controller object to handle course/index/lesson related
+	 * operations
 	 */
 	private CourseController courseController = new CourseController();
 
 	/**
-	 * Create a new user object.
+	 * Currently logged in user.
 	 */
 	private User user;
 
 	/**
-	 * Assigns the user interface object being passed in to the current object.
+	 * Creates new instance of MySTARS, configuring the UI that will be used to
+	 * interact with the user
 	 * 
 	 * @param ui The user interface object being passed in.
 	 * @throws IOException
@@ -53,8 +55,9 @@ public class MySTARS {
 	}
 
 	/**
-	 * Calls the created controller and its related objects declared above to start the MySTARS program.
-	 * Prompts the user to login with their credentials through the user interface's login form.
+	 * Calls the created controller and its related objects declared above to start
+	 * the MySTARS program. Prompts the user to login with their credentials through
+	 * the user interface's login form.
 	 */
 	public void start() {
 		storageController.start();
@@ -119,7 +122,7 @@ public class MySTARS {
 
 		while (true) {
 			HashMap<String, String> registeredInfo = new HashMap<>();
-			
+
 			// List the course registration information for the student.
 			// Includes which courses and indexes he/she has registered for.
 			for (Index index : courseController.getStudentIndexes(student)) {
@@ -134,7 +137,7 @@ public class MySTARS {
 
 			try {
 				switch (response.getSelected()) {
-				
+
 				// Register for course.
 				case Register:
 					Integer indexNo = ui.getInt("Register for Index", "Index No:");
@@ -151,7 +154,7 @@ public class MySTARS {
 								String.format("You have been placed on the waitlist for Index %d", indexNo));
 					}
 					break;
-					
+
 				// Drop course.
 				case Drop:
 					textResponse = ui.renderItemSelectorForm("Drop Course",
@@ -162,7 +165,7 @@ public class MySTARS {
 
 					courseController.dropCourse(student, registeredInfo.get(textResponse.getText()));
 					break;
-					
+
 				// Change course index.
 				case Change:
 					textResponse = ui.renderItemSelectorForm("Select Course to Change Index",
@@ -184,7 +187,7 @@ public class MySTARS {
 
 					courseController.changeIndex(courseCode, student, indexInfo.get(textResponse.getText()));
 					break;
-					
+
 				// Swop course index with another student.
 				case Swop:
 					IndexSwopResponse isResponse = ui.renderIndexSwopForm();
@@ -192,7 +195,8 @@ public class MySTARS {
 					if (isResponse == null)
 						break;
 
-					// Get the login credentials of the peer student whose index is to be swapped with.
+					// Get the login credentials of the peer student whose index is to be swapped
+					// with.
 					User targetUser = userController.login(isResponse.getUsername(), isResponse.getPassword());
 					if (!userController.isStudent(targetUser)) {
 						throw new AppException("Invalid peer");
@@ -209,7 +213,8 @@ public class MySTARS {
 
 	/**
 	 * Manages the actions that can be performed by administrators. Actions include:
-	 * Edit student access period, create student, create course, manage course, list vacancies.
+	 * Edit student access period, create student, create course, manage course,
+	 * list vacancies.
 	 */
 	private void loopAdmin() {
 		while (true) {
@@ -221,7 +226,7 @@ public class MySTARS {
 
 			try {
 				switch (response.getSelected()) {
-				
+
 				// Edit the access period for MySTARS.
 				case EditStudentAccessPeriod:
 					AccessPeriodResponse accessResponse = ui
@@ -235,7 +240,7 @@ public class MySTARS {
 
 					ui.renderDialog("Student Access Period", "Changed successfully");
 					break;
-					
+
 				// Create a new student with all of that student's required information.
 				case CreateStudent:
 					// https://stackoverflow.com/a/29465971
@@ -256,7 +261,7 @@ public class MySTARS {
 
 					ui.renderDialog("Student Creation", "Student created successfully");
 					break;
-					
+
 				// Create a new course.
 				case CreateCourse:
 					List<String> schools = Stream.of(School.values()).map(Enum::name).collect(Collectors.toList());
@@ -271,12 +276,12 @@ public class MySTARS {
 
 					ui.renderDialog("Course Creation", "Course created successfully");
 					break;
-					
+
 				// Manage an existing course.
 				case ManageCourses:
 					loopCourseMangement();
 					break;
-					
+
 				// List the number of vacancies in a course index.
 				case ListVacancies:
 					int indexNo = ui.getInt("List vacancies", "Index No:");
@@ -301,7 +306,7 @@ public class MySTARS {
 	private void loopCourseMangement() {
 		while (true) {
 			HashMap<String, String> courses = new HashMap<String, String>();
-			
+
 			// Display information about the selected course.
 			for (Course course : courseController.getAllCourses()) {
 				courses.put(course.toString(), course.getCourseCode());
@@ -317,7 +322,7 @@ public class MySTARS {
 
 			try {
 				switch (courseMgmtResponse.getSelected()) {
-				
+
 				// Create a new index for the course.
 				case CreateIndex:
 					CreateIndexResponse indexResponse = ui.renderCreateIndexForm(courseCode);
@@ -330,14 +335,14 @@ public class MySTARS {
 
 					ui.renderDialog("Index Creation", "Index created successfully");
 					break;
-					
+
 				// List all the students registered for a course index.
 				case ListStudents:
 					displayStudents("Students registered for " + courseCode,
 							courseController.getStudentsByCourse(courseCode));
 					break;
-					
-				// Manage a course's indexes.	
+
+				// Manage a course's indexes.
 				case ManageIndexes:
 					loopIndexManagement(courseCode);
 					break;
@@ -355,12 +360,13 @@ public class MySTARS {
 	 * Manages the actions that can be performed on a course index. Actions include:
 	 * Create lesson, list students.
 	 * 
-	 * @param courseCode The course course of this index object.
+	 * @param courseCode Specifies the course on which we will perform index
+	 *                   management
 	 */
 	private void loopIndexManagement(String courseCode) {
 		while (true) {
 			HashMap<String, Integer> indexes = new HashMap<String, Integer>();
-			
+
 			// Display all the indexes of the selected course.
 			try {
 				for (Index index : courseController.getAllIndexes(courseCode)) {
@@ -380,7 +386,7 @@ public class MySTARS {
 
 			try {
 				switch (indexMgmtResponse.getSelected()) {
-				
+
 				// Create a new index lesson.
 				case CreateLesson:
 					List<String> lessonTypes = Stream.of(LessonType.values()).map(Enum::name)
@@ -399,7 +405,7 @@ public class MySTARS {
 							lessonResponse.getGroupNo(), lessonResponse.getWeeks(), lessonResponse.getStartPeriod(),
 							lessonResponse.getEndPeriod());
 					break;
-					
+
 				// List all the students registered for an index.
 				case ListStudents:
 					displayStudents(String.format("Students registered for Index %d", indexNo),
@@ -415,14 +421,14 @@ public class MySTARS {
 	}
 
 	/**
-	 * Displays a titled list of all the students and their information using an ArrayList through the user interface.
+	 * Displays a titled list of all the students and their information
 	 * 
-	 * @param title 	The title of the list.
-	 * @param students	The list of students.
+	 * @param title    Title to use when displaying the list
+	 * @param students The list of students.
 	 */
 	private void displayStudents(String title, List<Student> students) {
 		List<String[]> data = new ArrayList<>();
-		
+
 		// For each student, get and display their information.
 		for (Student s : students) {
 			data.add(new String[] { s.getName(), s.getGender().toString(), s.getNationality().toString() });

@@ -1,7 +1,7 @@
 package mystars.forms;
 
 /**
- * <h1>Class: Textresponse</h1>
+ * <h1>Class: TextResponse</h1>
  * 
  * This class manages the text in the form being displayed in the user interface.
  */
