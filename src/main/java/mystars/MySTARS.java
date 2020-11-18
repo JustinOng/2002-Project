@@ -72,8 +72,8 @@ public class MySTARS {
 		try {
 			// Create new administrator and student objects.
 			new Admin("admin", "1");
-			new Student("user1", "u12345", "1", "1", Gender.Male, Nationality.Singaporean);
-			new Student("user2", "u12345", "2", "2", Gender.Male, Nationality.Singaporean);
+			new Student("user1", "starsnotifications2021s1+user1@gmail.com", "u12345", "1", "1", Gender.Male, Nationality.Singaporean);
+			new Student("user2", "starsnotifications2021s1+user2@gmail.com", "u12345", "2", "2", Gender.Male, Nationality.Singaporean);
 
 			// Create new courses and indexes.
 			Course c = new Course("Course", "C1", School.CSE);
@@ -256,7 +256,7 @@ public class MySTARS {
 					Gender gender = Gender.valueOf(studentResponse.getGender());
 					Nationality nationality = Nationality.valueOf(studentResponse.getNationality());
 
-					userController.createStudent(studentResponse.getName(), studentResponse.getMatricNo(),
+					userController.createStudent(studentResponse.getName(), studentResponse.getEmail(), studentResponse.getMatricNo(),
 							studentResponse.getUsername(), studentResponse.getPassword(), gender, nationality);
 
 					ui.renderDialog("Student Creation", "Student created successfully");
