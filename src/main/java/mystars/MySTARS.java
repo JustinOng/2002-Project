@@ -18,22 +18,22 @@ import mystars.notifications.INotifyStudent;
  */
 public class MySTARS {
 	/**
-	 * UI that will be used
+	 * User interface that will be used.
 	 */
 	private IUserInterface ui;
 
 	/**
-	 * Notification method that will be used to notify students
+	 * Notification method that will be used to notify students.
 	 */
 	private INotifyStudent notifier;
 
 	/**
-	 * Create a new storage controller object to handle data persistence
+	 * Create a new storage controller object to handle data persistence.
 	 */
 	private StorageController storageController = new StorageController("data");
 
 	/**
-	 * Create a new user controller object to handle user-related operations
+	 * Create a new user controller object to handle user-related operations.
 	 */
 	private UserController userController = new UserController();
 
@@ -49,10 +49,10 @@ public class MySTARS {
 	private User user;
 
 	/**
-	 * Creates new instance of MySTARS with UI and notification mechanism to use
+	 * Creates new instance of MySTARS with UI and notification mechanism to use.
 	 * 
-	 * @param ui     UI to be used to interact with user
-	 * @param notifier Instance to use to notify students
+	 * @param ui     	User interface to be used to interact with user.
+	 * @param notifier 	Instance to use to notify students.
 	 */
 	public MySTARS(IUserInterface ui, INotifyStudent notifier) {
 		this.ui = ui;
@@ -60,9 +60,9 @@ public class MySTARS {
 	}
 
 	/**
-	 * Calls the created controller and its related objects declared above to start
-	 * the MySTARS program. Prompts the user to login with their credentials through
-	 * the user interface's login form.
+	 * Calls the created controller and its related objects declared above to start the MySTARS program.
+	 * Prompts the user to login with their credentials through the user interface's login form.
+	 * Notifies students if they have been allocated an index that was previously on their waitlist.
 	 */
 	public void start() {
 		storageController.start();
@@ -93,7 +93,7 @@ public class MySTARS {
 			c.createIndex(1, 1);
 			c.createIndex(2, 1);
 
-//			courseController.registerCourse(s, "C1", 1);
+			// courseController.registerCourse(s, "C1", 1);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -113,7 +113,7 @@ public class MySTARS {
 				}
 			}
 
-			// check if the user is either an instance of student or administrators.
+			// Check if the user is either an instance of student or administrators.
 			if (userController.isStudent(user)) {
 				loopStudent();
 			} else if (userController.isAdmin(user)) {
