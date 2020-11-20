@@ -69,6 +69,10 @@ public class MySTARS {
 		courseController.start();
 
 		Runtime.getRuntime().addShutdownHook(new Thread() {
+			
+			/**
+			 * Saves all the object data to disk.
+			 */
 			public void run() {
 				storageController.writeToDisk();
 			}
@@ -83,9 +87,9 @@ public class MySTARS {
 		try {
 			// Create new administrator and student objects.
 			new Admin("admin", "1");
-			new Student("user1", "starsnotifications2021s1+user1@gmail.com", "u12345", "1", "1", Gender.Male,
+			new Student("student1", "starsnotifications2021s1+student1@gmail.com", "u12345", "student1", "1", Gender.Male,
 					Nationality.Singaporean);
-			new Student("user2", "starsnotifications2021s1+user2@gmail.com", "u12345", "2", "2", Gender.Male,
+			new Student("student2", "starsnotifications2021s1+student2@gmail.com", "u67890", "student2", "2", Gender.Female,
 					Nationality.Singaporean);
 
 			// Create new courses and indexes.

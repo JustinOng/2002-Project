@@ -12,11 +12,24 @@ import javax.mail.internet.MimeMessage;
 
 import mystars.entities.Student;
 
+/**
+ * <h1>Class: EmailNotifier</h1>
+ * 
+ * This class sends an email to the student to notify them of changes to their course registration.
+ */
 public class EmailNotifier implements INotifyStudent {
 	private Properties props = new Properties();
 	private String username;
 	private String password;
 
+	/**
+	 * This class sets the parameters for the email notifier object,
+	 * 
+	 * @param username	The student's username.
+	 * @param password	The student's password.
+	 * @param smtpHost	The SMTP hostname.
+	 * @param smtpPort	The SMTP port number.
+	 */
 	public EmailNotifier(String username, String password, String smtpHost, String smtpPort) {
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
@@ -28,10 +41,10 @@ public class EmailNotifier implements INotifyStudent {
 	}
 
 	/**
-	 * Notify {@code student} with the given {@code title} and {@code message}
+	 * Notify a student {@code student} with the given title {@code title} and message {@code message}.
 	 * 
-	 * @returns {@code true} if succesful
-	 * @returns {@code false} otherwise
+	 * @returns {@code true} 	If the notification was successful.
+	 * @returns {@code false}	If the notification was not successful.
 	 */
 	@Override
 	public boolean notify(Student student, String title, String message) {
@@ -39,15 +52,14 @@ public class EmailNotifier implements INotifyStudent {
 	}
 
 	/**
-	 * Sends an email to {@code email} with subject {@code subject} and body
-	 * {@code body}
+	 * Sends an email to an address {@code email} with the subject {@code subject} and body {@code body}
 	 * 
-	 * @param email Email address to send to
-	 * @param title Title of the email
-	 * @param body  Body of the email
+	 * @param email The email address to send to.
+	 * @param title The title of the email.
+	 * @param body  The body of the email.
 	 * 
-	 * @return {@code true} if successful
-	 * @return {@code false} otherwise
+	 * @return {@code true} 	If the email was sent successfully.
+	 * @return {@code false} 	If the email was not sent successfully.
 	 */
 	public boolean sendEmail(String email, String subject, String body) {
 		System.out.println(String.format("Sending email to %s with subject=%s, body=%s", email, subject, body));
@@ -60,7 +72,8 @@ public class EmailNotifier implements INotifyStudent {
 		Message message = new MimeMessage(session);
 		try {
 			message.setFrom(new InternetAddress(username));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email)); // to be added an email addr
+			// An email address is to be added here.
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
 			message.setSubject(subject);
 			message.setText(body);
 
@@ -71,7 +84,6 @@ public class EmailNotifier implements INotifyStudent {
 			System.err.println("Failed to send email");
 			e.printStackTrace();
 		}
-
 		return false;
 	}
 }
