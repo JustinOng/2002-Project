@@ -238,7 +238,6 @@ public class Course extends Entity {
 	 * @throws AppException if the student is already registered for index indexNo
 	 */
 	public boolean register(Student student, int indexNo) throws AppException {
-
 		if (findStudent(student) != null) {
 			throw new AppException(String.format("Already registered for %d in %s", indexNo, this));
 		}
@@ -281,11 +280,11 @@ public class Course extends Entity {
 		Index indexA = getIndex(indexNoA);
 		Index indexB = getIndex(indexNoB);
 
-		if (!indexA.hasStudent(studentA)) {
+		if (!indexA.hasEnrolledStudent(studentA)) {
 			throw new AppException(String.format("%s is not enrolled in index %d", studentA.getMatricNo(), indexNoA));
 		}
 
-		if (!indexB.hasStudent(studentB)) {
+		if (!indexB.hasEnrolledStudent(studentB)) {
 			throw new AppException(String.format("%s is not enrolled in index %d", studentB.getMatricNo(), indexNoB));
 		}
 

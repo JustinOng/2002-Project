@@ -209,23 +209,35 @@ public class Index extends Entity {
 	 * @param allocateWaitlist 	Check if student is allocated to waitlist.
 	 */
 	protected void removeStudent(Student student, boolean allocateWaitlist) {
-		this.enrolled.remove(student);
-
-		// if allocateWaitlist and waitlist has students, shift firest student in
-		// waitlist to enrolled.
-		if (allocateWaitlist && !this.waitlist.isEmpty()) {
-			Student waitlistStudent = this.waitlist.remove(0);
-			this.enrolled.add(waitlistStudent);
-			notify(Event.AllocatedWaitlist, this, waitlistStudent);
+		if (this.enrolled.remove(student)) {
+			// if allocateWaitlist and waitlist has students, shift first student in
+			// waitlist to enrolled.
+			if (allocateWaitlist && !this.waitlist.isEmpty()) {
+				Student waitlistStudent = this.waitlist.remove(0);
+				this.enrolled.add(waitlistStudent);
+				notify(Event.AllocatedWaitlist, this, waitlistStudent);
+			}
+		} else {
+			this.waitlist.remove(student);
 		}
 	}
 
 	/**
-	 * Check if the student is enrolled.
+	 * Check if the student is enrolled or on the waitlist for this index
 	 * 
-	 * @param student The student to be checked if he/she is an element in array list of enrolled students.
+	 * @param student The student to be checked
+	 * @return {@code true} if {@code student} is enrolled or on the waitlist
 	 */
 	public boolean hasStudent(Student student) {
+		return this.enrolled.contains(student) || this.waitlist.contains(student);
+	}
+	
+	/**
+	 * Check if the student is enrolled in this index
+	 * @param student The student to be checked
+	 * @return {@code true} if {@code student} is enrolled in this index
+	 */
+	public boolean hasEnrolledStudent(Student student) {
 		return this.enrolled.contains(student);
 	}
 
