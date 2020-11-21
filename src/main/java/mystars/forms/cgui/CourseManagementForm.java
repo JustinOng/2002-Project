@@ -19,12 +19,12 @@ public class CourseManagementForm {
 	private CourseManagementResponse response;
 
 	/**
-	 * Sets the parameters for the graphical user interface administrators 
-	 * will use when managing courses.
+	 * Sets the parameters for the graphical user interface administrators will use
+	 * when managing courses.
 	 * 
-	 * @param gui		The graphical user interface object.
-	 * @param courses	The list of courses.
-	 * @return			The course management form response object.
+	 * @param gui     The graphical user interface object.
+	 * @param courses The list of courses.
+	 * @return The course management form response object.
 	 */
 	public CourseManagementResponse getResponse(MultiWindowTextGUI gui, List<String> courses) {
 		final AbstractWindow window = new BasicWindow();

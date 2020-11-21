@@ -108,7 +108,7 @@ public class MySTARS {
 			while (true) {
 				while (true) {
 					LoginResponse response = ui.renderLoginForm();
-	
+
 					if (response == null)
 						continue;
 					try {
@@ -119,7 +119,7 @@ public class MySTARS {
 						ui.renderDialog("Login Failed", e.getMessage());
 					}
 				}
-	
+
 				// Check if the user is either an instance of student or administrators.
 				if (userController.isStudent(user)) {
 					loopStudent();
@@ -144,18 +144,18 @@ public class MySTARS {
 		while (true) {
 			// map of human-friendly course description:course code
 			HashMap<String, String> registeredInfo = new HashMap<>();
-			for (Registration reg: courseController.getStudentRegistrations(student)) {
+			for (Registration reg : courseController.getStudentRegistrations(student)) {
 				Index index = reg.getIndex();
-				
+
 				if (reg.getStatus() == Registration.Status.Waitlist) {
 					registeredInfo.put(String.format("%s: %s (Waitlist)", index.getCourse(), index),
 							index.getCourse().getCourseCode());
 				} else {
 					registeredInfo.put(String.format("%s: %s", index.getCourse(), index),
-						index.getCourse().getCourseCode());
+							index.getCourse().getCourseCode());
 				}
 			}
-			
+
 			StudentMenuResponse response = ui.renderStudentMenuForm(new ArrayList<String>(registeredInfo.keySet()));
 
 			if (response == null) {
@@ -421,12 +421,12 @@ public class MySTARS {
 				ui.renderDialog("Error", e.getMessage());
 				return;
 			}
-			
+
 			if (indexes.size() == 0) {
 				ui.renderDialog("Index Management", String.format("%s has no indexes", courseCode));
 				return;
 			}
-			
+
 			IndexManagementResponse indexMgmtResponse = ui.renderIndexManagementForm(courseCode,
 					new ArrayList<String>(indexes.keySet()));
 

@@ -1,24 +1,24 @@
 package mystars.forms;
 
 /**
- * <h1>Class: IndexManagementResponse</h1> 
+ * <h1>Class: IndexManagementResponse</h1>
  * 
- * This class manages the the form for the management of course indexes with the relevant options.
+ * This class manages the the form for the management of course indexes with the
+ * relevant options.
  */
 public class IndexManagementResponse {
 	/**
-	 * Enum containing the options for managing course indexes. 
+	 * Enum containing the options for managing course indexes.
 	 */
 	public enum Selected {
-		CreateLesson,
-		ListStudents
+		CreateLesson, ListStudents
 	};
 
 	/**
 	 * The selected object.
 	 */
 	private final Selected selected;
-	
+
 	/**
 	 * The course index.
 	 */
@@ -27,14 +27,14 @@ public class IndexManagementResponse {
 	/**
 	 * Sets the course index and the selected object.
 	 * 
-	 * @param index		The course index.
-	 * @param selected	The selected object.
+	 * @param index    The course index.
+	 * @param selected The selected object.
 	 */
 	public IndexManagementResponse(String index, Selected selected) {
 		this.index = index;
 		this.selected = selected;
 	}
-	
+
 	/**
 	 * Returns the course index.
 	 * 

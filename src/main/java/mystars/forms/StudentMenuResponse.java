@@ -7,21 +7,17 @@ package mystars.forms;
  */
 public class StudentMenuResponse {
 	/**
-	 *Enum containing the options for students to manage their courses.
+	 * Enum containing the options for students to manage their courses.
 	 */
 	public enum Selected {
-		Register,
-		Drop,
-		Change,
-		Swop,
-		Logout
+		Register, Drop, Change, Swop, Logout
 	};
-	
+
 	/**
 	 * The selected object.
 	 */
 	private final Selected selected;
-	
+
 	/**
 	 * Sets the selected object.
 	 * 
@@ -30,7 +26,7 @@ public class StudentMenuResponse {
 	public StudentMenuResponse(Selected selected) {
 		this.selected = selected;
 	}
-	
+
 	/**
 	 * Returns the selected object.
 	 * 

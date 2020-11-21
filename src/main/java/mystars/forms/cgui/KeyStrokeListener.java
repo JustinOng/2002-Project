@@ -22,25 +22,25 @@ public class KeyStrokeListener implements WindowListener {
 			basePane.close();
 		}
 	}
-	
+
 	/**
 	 * When the user enters invalid keystrokes.
 	 */
 	public void onUnhandledInput(Window basePane, KeyStroke keyStroke, AtomicBoolean hasBeenHandled) {
 		return;
 	}
-	
+
 	/**
 	 * When the window position is moved.
 	 */
 	public void onMoved(Window window, TerminalPosition oldPosition, TerminalPosition newPosition) {
 		return;
-    }
+	}
 
 	/**
 	 * When the window position is resized.
 	 */
-    public void onResized(Window window, TerminalSize oldSize, TerminalSize newSize) {
-        // return;
-    }
+	public void onResized(Window window, TerminalSize oldSize, TerminalSize newSize) {
+		// return;
+	}
 }

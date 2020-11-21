@@ -20,13 +20,13 @@ public class CreateStudentForm {
 	private CreateStudentResponse response;
 
 	/**
-	 * Sets the parameters for the graphical user interface administrators 
-	 * will use when creating new students.
+	 * Sets the parameters for the graphical user interface administrators will use
+	 * when creating new students.
 	 * 
-	 * @param gui			The graphical user interface object.
-	 * @param genders		The gender of the student.
-	 * @param nationalities	The nationality of the student.
-	 * @return				The creation of new student form response object.
+	 * @param gui           The graphical user interface object.
+	 * @param genders       The gender of the student.
+	 * @param nationalities The nationality of the student.
+	 * @return The creation of new student form response object.
 	 */
 	public CreateStudentResponse getResponse(MultiWindowTextGUI gui, List<String> genders, List<String> nationalities) {
 		final AbstractWindow window = new BasicWindow();

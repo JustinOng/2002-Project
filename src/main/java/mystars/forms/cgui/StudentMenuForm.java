@@ -19,15 +19,16 @@ public class StudentMenuForm {
 	private StudentMenuResponse response;
 
 	/**
-	 * Sets the parameters for the graphical user interface students will use when using MySTARS.
+	 * Sets the parameters for the graphical user interface students will use when
+	 * using MySTARS.
 	 * 
-	 * @param gui		The graphical user interface object.
-	 * @param courses	The list of courses that students can register for.
-	 * @return			The student menu form response object.
+	 * @param gui     The graphical user interface object.
+	 * @param courses The list of courses that students can register for.
+	 * @return The student menu form response object.
 	 */
 	public StudentMenuResponse getResponse(MultiWindowTextGUI gui, List<String> courses) {
 		final AbstractWindow window = new BasicWindow();
-		
+
 		response = null;
 
 		// Create new Jpanel object and set the layout as a grid.
@@ -42,14 +43,14 @@ public class StudentMenuForm {
 			panel.addComponent(new Label("No currently registered courses"),
 					GridLayout.createHorizontallyFilledLayoutData(5));
 		}
-		
+
 		new Button("Register Course", new Runnable() {
 			public void run() {
 				response = new StudentMenuResponse(StudentMenuResponse.Selected.Register);
 				window.close();
 			}
 		}).addTo(panel);
-		
+
 		if (courses != null && courses.size() > 0) {
 			new Button("Drop Course", new Runnable() {
 				public void run() {
@@ -57,21 +58,21 @@ public class StudentMenuForm {
 					window.close();
 				}
 			}).addTo(panel);
-			
+
 			new Button("Change Index", new Runnable() {
 				public void run() {
 					response = new StudentMenuResponse(StudentMenuResponse.Selected.Change);
 					window.close();
 				}
 			}).addTo(panel);
-			
+
 			new Button("Swop Index", new Runnable() {
 				public void run() {
 					response = new StudentMenuResponse(StudentMenuResponse.Selected.Swop);
 					window.close();
 				}
 			}).addTo(panel);
-			
+
 			new Button("Logout", new Runnable() {
 				public void run() {
 					response = new StudentMenuResponse(StudentMenuResponse.Selected.Logout);
@@ -84,7 +85,7 @@ public class StudentMenuForm {
 
 		window.setTitle("Student Menu");
 		window.setHints(Arrays.asList(Window.Hint.CENTERED));
-		
+
 		gui.addWindowAndWait(window);
 
 		return response;

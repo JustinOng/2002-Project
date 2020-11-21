@@ -5,7 +5,8 @@ import mystars.entities.*;
 /**
  * <h1>Class: StorageController</h1>
  * 
- * This StorageController class manages the storage and application specific configuration for MySTARS.
+ * This StorageController class manages the storage and application specific
+ * configuration for MySTARS.
  */
 public class StorageController {
 	/**

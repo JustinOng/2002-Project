@@ -27,7 +27,7 @@ public class Timetable implements Serializable {
 	/**
 	 * Adds an index to this timetable with status Registered
 	 * 
-	 * @param index 		The index to be added.
+	 * @param index The index to be added.
 	 * @throws AppException If the index clashes with any already added index
 	 */
 	public void addIndex(Index index) throws AppException {
@@ -38,9 +38,9 @@ public class Timetable implements Serializable {
 	 * Adds an index to this timetable with status controlled by the
 	 * {@code waitlist} parameter.
 	 * 
-	 * @param index    		Index to be added.
-	 * @param waitlist 		{@code true} if index should be added with status waitlist,
-	 *                 		{@code false} otherwise.
+	 * @param index    Index to be added.
+	 * @param waitlist {@code true} if index should be added with status waitlist,
+	 *                 {@code false} otherwise.
 	 * @throws AppException If the index clashes with any already added index.
 	 */
 	public void addIndex(Index index, boolean waitlist) throws AppException {
@@ -55,19 +55,22 @@ public class Timetable implements Serializable {
 	/**
 	 * Check if {@code add} can be added to this timetable without any clash.
 	 * 
-	 * @param add 	The index to be added.
-	 * @return 		{@code true} if {@code add} can be added without any clash, or {@code false} otherwise.
+	 * @param add The index to be added.
+	 * @return {@code true} if {@code add} can be added without any clash, or
+	 *         {@code false} otherwise.
 	 */
 	public boolean canAddIndex(Index add) {
 		return canAddIndex(add, null);
 	}
 
 	/**
-	 * Check if {@code add} can be added to this timetable without any clash after removing {@code remove}.
+	 * Check if {@code add} can be added to this timetable without any clash after
+	 * removing {@code remove}.
 	 * 
-	 * @param add    	The index to be added.
-	 * @param remove 	The index to be removed.
-	 * @return 			{@code true} if {@code add} can be added without any clash, or {@code false} otherwise.
+	 * @param add    The index to be added.
+	 * @param remove The index to be removed.
+	 * @return {@code true} if {@code add} can be added without any clash, or
+	 *         {@code false} otherwise.
 	 */
 	public boolean canAddIndex(Index add, Index remove) {
 		try {
@@ -81,7 +84,7 @@ public class Timetable implements Serializable {
 	/**
 	 * Check if {@code add} can be added to this timetable without any clash.
 	 * 
-	 * @param add 			The index to be added.
+	 * @param add The index to be added.
 	 * @throws AppException If there will be a clash.
 	 */
 	public void assertAddIndex(Index add) throws AppException {
@@ -89,12 +92,15 @@ public class Timetable implements Serializable {
 	}
 
 	/**
-	 * Check if {@code add} can be added to this timetable without any clash after removing {@code remove}.
+	 * Check if {@code add} can be added to this timetable without any clash after
+	 * removing {@code remove}.
 	 * 
-	 * @param add    		The index to be added.
-	 * @param remove 		The index to be removed.
-	 * @throws AppException If another index of the same course of {@code add} has already been added.
-	 * @throws AppException If adding {@code add} would result in a clash with another index.
+	 * @param add    The index to be added.
+	 * @param remove The index to be removed.
+	 * @throws AppException If another index of the same course of {@code add} has
+	 *                      already been added.
+	 * @throws AppException If adding {@code add} would result in a clash with
+	 *                      another index.
 	 */
 	public void assertAddIndex(Index add, Index remove) throws AppException {
 		for (Registration reg : registrations) {
@@ -159,9 +165,11 @@ public class Timetable implements Serializable {
 	}
 
 	/**
-	 * Returns the list of Registrations (Index + Status) belonging to this timetable
+	 * Returns the list of Registrations (Index + Status) belonging to this
+	 * timetable
 	 * 
-	 * @return The list of Registrations (Index + Status) belonging to this timetable
+	 * @return The list of Registrations (Index + Status) belonging to this
+	 *         timetable
 	 */
 	public List<Registration> getRegistrations() {
 		return registrations;

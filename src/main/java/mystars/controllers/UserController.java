@@ -31,7 +31,8 @@ public class UserController {
 	 * @param password    The student's password.
 	 * @param gender      The student's gender.
 	 * @param nationality The student's nationality.
-	 * @throws AppException If there already exists a student with the same username.
+	 * @throws AppException If there already exists a student with the same
+	 *                      username.
 	 */
 	public void createStudent(String name, String email, String matricNo, String username, String password,
 			Gender gender, Nationality nationality) throws AppException {
@@ -41,9 +42,9 @@ public class UserController {
 	/**
 	 * Create a new administrator object.
 	 * 
-	 * @param username		The admin's username.
-	 * @param password		The admin's password.
-	 * @throws AppException	If the administrator object cannot be created.
+	 * @param username The admin's username.
+	 * @param password The admin's password.
+	 * @throws AppException If the administrator object cannot be created.
 	 */
 	public void createAdmin(String username, String password) throws AppException {
 		new Admin(username, password);
@@ -54,8 +55,8 @@ public class UserController {
 	 * 
 	 * @param username The user's username.
 	 * @param password The user's password.
-	 * @throws AppException If the login is unsuccessful due to incorrect
-	 *                               username or password.
+	 * @throws AppException If the login is unsuccessful due to incorrect username
+	 *                      or password.
 	 * @return The user object of the user successfully logging in.
 	 */
 	public User login(String username, String password) throws AppException {
@@ -66,7 +67,8 @@ public class UserController {
 	 * Check if the user is a student.
 	 * 
 	 * @param user User to be checked
-	 * @return {@code true} if {@code user} is an student, or {@code false} otherwise
+	 * @return {@code true} if {@code user} is an student, or {@code false}
+	 *         otherwise
 	 */
 	public boolean isStudent(User user) {
 		return user instanceof Student;

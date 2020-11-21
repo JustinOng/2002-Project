@@ -33,8 +33,8 @@ public abstract class User extends Entity {
 	private byte[] passwordHash;
 
 	/**
-	 * Boolean variable to determine if a user has admin rights.
-	 * Students do not have admin rights. Administrators have admin rights.
+	 * Boolean variable to determine if a user has admin rights. Students do not
+	 * have admin rights. Administrators have admin rights.
 	 */
 	protected boolean isAdmin = false;
 
@@ -44,8 +44,7 @@ public abstract class User extends Entity {
 	 * 
 	 * @param username The user's username.
 	 * @param password The user's password.
-	 * @throws AppException If there already exists a user with the
-	 *                                    same username.
+	 * @throws AppException If there already exists a user with the same username.
 	 */
 	protected User(String username, String password) throws AppException {
 		if (get("user", username) != null) {
@@ -86,8 +85,8 @@ public abstract class User extends Entity {
 	 * 
 	 * @param username The user's username.
 	 * @param password The user's password.
-	 * @throws AppException If the login is unsuccessful due to incorrect
-	 *                               username or password.
+	 * @throws AppException If the login is unsuccessful due to incorrect username
+	 *                      or password.
 	 * @return The user object of the user successfully logging in.
 	 */
 	public static User login(String username, String password) throws AppException {

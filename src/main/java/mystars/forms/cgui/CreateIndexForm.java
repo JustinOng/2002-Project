@@ -19,18 +19,18 @@ public class CreateIndexForm {
 	 * The response object for for the course index creation form.
 	 */
 	private CreateIndexResponse response;
-	
+
 	/**
-	 * Sets the parameters for the graphical user interface administrators 
-	 * will use when creating course indexes.
+	 * Sets the parameters for the graphical user interface administrators will use
+	 * when creating course indexes.
 	 * 
-	 * @param gui		The graphical user interface object.
-	 * @param course	The course name.
-	 * @return			The course index creation form response object.
+	 * @param gui    The graphical user interface object.
+	 * @param course The course name.
+	 * @return The course index creation form response object.
 	 */
 	public CreateIndexResponse getResponse(MultiWindowTextGUI gui, String course) {
 		final AbstractWindow window = new BasicWindow();
-		
+
 		response = null;
 
 		// Create new Jpanel object and set the layout as a grid.
@@ -51,7 +51,7 @@ public class CreateIndexForm {
 		new Button("Create", new Runnable() {
 			public void run() {
 				int indexNumber, maxEnrolled;
-				
+
 				try {
 					indexNumber = Integer.parseInt(numberInput.getText());
 					maxEnrolled = Integer.parseInt(maxEnrolledInput.getText());

@@ -10,7 +10,7 @@ public class LoginResponse {
 	 * The user's username.
 	 */
 	private final String username;
-	
+
 	/**
 	 * The user's password hash.
 	 */

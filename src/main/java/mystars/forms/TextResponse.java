@@ -3,14 +3,15 @@ package mystars.forms;
 /**
  * <h1>Class: TextResponse</h1>
  * 
- * This class manages the text in the form being displayed in the user interface.
+ * This class manages the text in the form being displayed in the user
+ * interface.
  */
 public class TextResponse {
 	/**
 	 * The text to be displayed.
 	 */
 	private final String text;
-	
+
 	/**
 	 * Sets the text to be displayed.
 	 * 
@@ -19,7 +20,7 @@ public class TextResponse {
 	public TextResponse(String text) {
 		this.text = text;
 	}
-	
+
 	/**
 	 * Returns the text to be displayed.
 	 * 

@@ -13,7 +13,8 @@ import mystars.forms.*;
 /**
  * <h1>Class: CreateLessonForm</h1>
  * 
- * This class manages the user interface for the course index lesson creation form.
+ * This class manages the user interface for the course index lesson creation
+ * form.
  */
 public class CreateLessonForm {
 	/**
@@ -22,14 +23,14 @@ public class CreateLessonForm {
 	private CreateLessonResponse response;
 
 	/**
-	 * Sets the parameters for the graphical user interface administrators 
-	 * will use when creating course index lessons.
+	 * Sets the parameters for the graphical user interface administrators will use
+	 * when creating course index lessons.
 	 * 
-	 * @param gui			The graphical user interface object.
-	 * @param index			The index of the course.
-	 * @param lessonType	The lesson type of the index: Lecture, Tutorial or Lab.
-	 * @param days			The days of the week which the lesson will be conducted.
-	 * @return				The course index lesson creation form response object.
+	 * @param gui        The graphical user interface object.
+	 * @param index      The index of the course.
+	 * @param lessonType The lesson type of the index: Lecture, Tutorial or Lab.
+	 * @param days       The days of the week which the lesson will be conducted.
+	 * @return The course index lesson creation form response object.
 	 */
 	public CreateLessonResponse getResponse(MultiWindowTextGUI gui, String index, List<String> lessonType,
 			List<String> days) {
@@ -82,33 +83,32 @@ public class CreateLessonForm {
 			public void run() {
 				String location = locationInput.getText();
 				String group = groupInput.getText();
-				
+
 				if (location.isBlank()) {
 					MessageDialog.showMessageDialog(gui, "Error", "Location cannot be blank");
 					return;
 				}
-				
+
 				if (group.isBlank()) {
 					MessageDialog.showMessageDialog(gui, "Error", "Group cannot be blank");
 					return;
 				}
-				
+
 				int start = startComboBox.getSelectedIndex();
 				int end = endComboBox.getSelectedIndex();
-				
+
 				if (start >= end) {
 					MessageDialog.showMessageDialog(gui, "Error", "Start time must be earlier than end time");
 					return;
 				}
-				
+
 				boolean[] weeks = new boolean[13];
 				for (int i = 0; i < 13; i++) {
 					weeks[i] = weekCheckBoxes.isChecked(i);
 				}
-				
+
 				response = new CreateLessonResponse(typeComboBox.getSelectedItem(), dayComboBox.getSelectedItem(),
-						location, group, weeks, startComboBox.getSelectedIndex(),
-						endComboBox.getSelectedIndex());
+						location, group, weeks, startComboBox.getSelectedIndex(), endComboBox.getSelectedIndex());
 				window.close();
 			}
 		}).addTo(panel);

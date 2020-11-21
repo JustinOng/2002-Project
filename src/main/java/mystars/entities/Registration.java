@@ -5,7 +5,8 @@ import java.io.Serializable;
 /**
  * <h1>Class: Registration</h1>
  * 
- * This class represents one index added to a timetable and tracks the current status of this relationship.
+ * This class represents one index added to a timetable and tracks the current
+ * status of this relationship.
  */
 public class Registration implements Serializable {
 	/**

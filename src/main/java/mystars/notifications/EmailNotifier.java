@@ -15,7 +15,8 @@ import mystars.entities.Student;
 /**
  * <h1>Class: EmailNotifier</h1>
  * 
- * This class sends an email to the student to notify them of changes to their course registration.
+ * This class sends an email to the student to notify them of changes to their
+ * course registration.
  */
 public class EmailNotifier implements INotifyStudent {
 	private Properties props = new Properties();
@@ -25,10 +26,10 @@ public class EmailNotifier implements INotifyStudent {
 	/**
 	 * This class sets the parameters for the email notifier object,
 	 * 
-	 * @param username	The student's username.
-	 * @param password	The student's password.
-	 * @param smtpHost	The SMTP hostname.
-	 * @param smtpPort	The SMTP port number.
+	 * @param username The student's username.
+	 * @param password The student's password.
+	 * @param smtpHost The SMTP hostname.
+	 * @param smtpPort The SMTP port number.
 	 */
 	public EmailNotifier(String username, String password, String smtpHost, String smtpPort) {
 		props.put("mail.smtp.auth", "true");
@@ -41,9 +42,11 @@ public class EmailNotifier implements INotifyStudent {
 	}
 
 	/**
-	 * Notify a student {@code student} with the given title {@code title} and message {@code message}.
+	 * Notify a student {@code student} with the given title {@code title} and
+	 * message {@code message}.
 	 * 
-	 * @return {@code true} 	If the notification was successful, or {@code false} otherwise
+	 * @return {@code true} If the notification was successful, or {@code false}
+	 *         otherwise
 	 */
 	@Override
 	public boolean notify(Student student, String title, String message) {
@@ -51,13 +54,15 @@ public class EmailNotifier implements INotifyStudent {
 	}
 
 	/**
-	 * Sends an email to an address {@code email} with the subject {@code subject} and body {@code body}
+	 * Sends an email to an address {@code email} with the subject {@code subject}
+	 * and body {@code body}
 	 * 
-	 * @param email The email address to send to.
+	 * @param email   The email address to send to.
 	 * @param subject The title of the email.
-	 * @param body  The body of the email.
+	 * @param body    The body of the email.
 	 * 
-	 * @return {@code true} 	If the email was sent successfully, or {@code false} otherwise
+	 * @return {@code true} If the email was sent successfully, or {@code false}
+	 *         otherwise
 	 */
 	public boolean sendEmail(String email, String subject, String body) {
 		System.out.println(String.format("Sending email to %s with subject=%s, body=%s", email, subject, body));

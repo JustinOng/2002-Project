@@ -16,10 +16,11 @@ import java.util.HashMap;
  */
 public class FileStorage implements IStorage {
 	/**
-	 * A hashmap storage object containing key value pairs for the serializable data.
+	 * A hashmap storage object containing key value pairs for the serializable
+	 * data.
 	 */
 	private HashMap<String, HashMap<String, Serializable>> storage = new HashMap<>();
-	
+
 	/**
 	 * The name of the file to write data to
 	 */
@@ -54,9 +55,10 @@ public class FileStorage implements IStorage {
 		}
 		return storage.get(type).get(id);
 	}
-	
+
 	/**
-	 * Returns an Arraylist containing all the entries corresponding to the ID in the storage object.
+	 * Returns an Arraylist containing all the entries corresponding to the ID in
+	 * the storage object.
 	 * 
 	 * @return The Arraylist of the storage object entries matching the type values.
 	 */
@@ -71,10 +73,10 @@ public class FileStorage implements IStorage {
 		try {
 			// Create a new object output stream using the filename.
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename));
-			
+
 			// Write the serializable data of the object to it.
 			out.writeObject(storage);
-			
+
 			// Close the stream when done.
 			out.close();
 		} catch (IOException e) {
@@ -90,10 +92,10 @@ public class FileStorage implements IStorage {
 		try {
 			// Create a new object input stream using the filename.
 			ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename));
-			
+
 			// Read in the serializable data to a hashmap object.
 			storage = (HashMap<String, HashMap<String, Serializable>>) in.readObject();
-			
+
 			// Close the stream when done.
 			in.close();
 		} catch (IOException | ClassNotFoundException e) {

@@ -17,8 +17,9 @@ import mystars.notifications.INotifyStudent;
 public class Entry {
 	/**
 	 * Main method which creates the MySTARS application object and initializes it.
-	 * Command line arguments passed to this application when initializing it include:
-	 * - The configuration file containing the information on the student's emails.
+	 * Command line arguments passed to this application when initializing it
+	 * include: - The configuration file containing the information on the student's
+	 * emails.
 	 * 
 	 * @param args Command line arguments to this application.
 	 * @throws IOException on UI exception
@@ -43,7 +44,7 @@ public class Entry {
 		} catch (FileNotFoundException e) {
 			System.err.println(String.format("Unable to find %s", configFile));
 		}
-		
+
 		if (notifier == null) {
 			System.err.println("Email notifications are disabled");
 		}
@@ -55,8 +56,8 @@ public class Entry {
 	/**
 	 * Creates the object to be used for sending email notifications to students
 	 * 
-	 * @param config	Configuration parameters
-	 * @return			Configured object
+	 * @param config Configuration parameters
+	 * @return Configured object
 	 */
 	public static INotifyStudent createNotifier(Properties config) {
 		String username = config.getProperty("username", null);

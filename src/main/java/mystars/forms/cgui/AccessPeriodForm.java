@@ -22,13 +22,13 @@ public class AccessPeriodForm {
 	private AccessPeriodResponse response;
 
 	/**
-	 * Sets the parameters for the graphical user interface administrators will use when
-	 * setting or modifying the access period starting and ending date and time.
-	 * Checks for invalid date range.
+	 * Sets the parameters for the graphical user interface administrators will use
+	 * when setting or modifying the access period starting and ending date and
+	 * time. Checks for invalid date range.
 	 * 
-	 * @param gui				The graphical user interface object.
-	 * @param curAccessPeriod	The current access period.
-	 * @return					The access period response object.
+	 * @param gui             The graphical user interface object.
+	 * @param curAccessPeriod The current access period.
+	 * @return The access period response object.
 	 */
 	public AccessPeriodResponse getResponse(MultiWindowTextGUI gui, String curAccessPeriod) {
 		final AbstractWindow window = new BasicWindow();

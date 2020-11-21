@@ -17,18 +17,19 @@ public class LoginForm {
 	 * The response object for the user login form.
 	 */
 	private LoginResponse response;
-	
+
 	/**
-	 * Sets the parameters for the graphical user interface users will use when logging in.
+	 * Sets the parameters for the graphical user interface users will use when
+	 * logging in.
 	 * 
-	 * @param gui	The graphical user interface object.
-	 * @return		The user login form response object.
+	 * @param gui The graphical user interface object.
+	 * @return The user login form response object.
 	 */
 	public LoginResponse getResponse(MultiWindowTextGUI gui) {
 		final AbstractWindow window = new BasicWindow();
-		
+
 		response = null;
-		
+
 		// Create new Jpanel object and set the layout as a grid.
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(2));
@@ -42,7 +43,7 @@ public class LoginForm {
 		passwordInput.setMask('*');
 
 		panel.addComponent(new EmptySpace(new TerminalSize(0, 0)));
-		
+
 		new Button("Login", new Runnable() {
 			public void run() {
 				String username = usernameInput.getText();
@@ -59,9 +60,9 @@ public class LoginForm {
 		window.setTitle("Login");
 		window.addWindowListener(listener);
 		window.setHints(Arrays.asList(Window.Hint.CENTERED));
-		
+
 		gui.addWindowAndWait(window);
-		
+
 		return response;
 	}
 }

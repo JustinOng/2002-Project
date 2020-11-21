@@ -11,8 +11,9 @@ import mystars.exceptions.AppException;
 /**
  * <h1>Class: CourseController</h1>
  * 
- * This courseController class manages the creation of course, course index and lesson. 
- * It also manages the registration of course, dropping of course and swopping of index.
+ * This courseController class manages the creation of course, course index and
+ * lesson. It also manages the registration of course, dropping of course and
+ * swopping of index.
  */
 
 public class CourseController {
@@ -116,7 +117,8 @@ public class CourseController {
 	 * 
 	 * @param student Student to register
 	 * @param indexNo Identifier of Index
-	 * @return {@code true} if student was successfully registered, or {@code false} if student was placed on the waitlist
+	 * @return {@code true} if student was successfully registered, or {@code false}
+	 *         if student was placed on the waitlist
 	 * @throws AppException if no index identified by {@code indexNo} is found
 	 * @throws AppException if {@code student} has already been registered for the
 	 *                      index identified by {@code indexNo}
@@ -227,9 +229,10 @@ public class CourseController {
 	public List<Index> getStudentIndexes(Student student) {
 		return student.getTimetable().getIndexes();
 	}
-	
+
 	/**
-	 * Returns the indexes that {@code student} is enrolled in, along with registration status (Registered or Waitlisted)
+	 * Returns the indexes that {@code student} is enrolled in, along with
+	 * registration status (Registered or Waitlisted)
 	 * 
 	 * @param student target to retrieve registrations of
 	 * @return list of registrations belonging to {@code student}

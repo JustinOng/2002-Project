@@ -14,12 +14,12 @@ import java.util.List;
  */
 public class DisplayStudentList {
 	/**
-	 * Sets the parameters for the graphical user interface administrators 
-	 * will use when displaying the list of all the students.
+	 * Sets the parameters for the graphical user interface administrators will use
+	 * when displaying the list of all the students.
 	 * 
-	 * @param gui		The graphical user interface object.
-	 * @param title		The title of the form.
-	 * @param students	The list of students.
+	 * @param gui      The graphical user interface object.
+	 * @param title    The title of the form.
+	 * @param students The list of students.
 	 */
 	public static void show(MultiWindowTextGUI gui, String title, List<String[]> students) {
 		final AbstractWindow window = new BasicWindow();

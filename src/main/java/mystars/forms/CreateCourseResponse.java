@@ -10,28 +10,29 @@ public class CreateCourseResponse {
 	 * The course code.
 	 */
 	private final String code;
-	
+
 	/**
 	 * The course name.
 	 */
 	private final String name;
-	
+
 	/**
 	 * The school object that the course belongs to.
 	 */
 	private final String school;
-	
+
 	/**
 	 * The academic units awarded by the course.
 	 */
 	private final int au;
-	
+
 	/**
 	 * Sets the parameters of the course: Code, name, school and academic units.
-	 * @param code		The course code.
-	 * @param name		The course name.
-	 * @param school	The school the course belongs to.
-	 * @param au		The academic units awarded by the course.
+	 * 
+	 * @param code   The course code.
+	 * @param name   The course name.
+	 * @param school The school the course belongs to.
+	 * @param au     The academic units awarded by the course.
 	 */
 	public CreateCourseResponse(String code, String name, String school, int au) {
 		this.code = code;
@@ -39,7 +40,7 @@ public class CreateCourseResponse {
 		this.school = school;
 		this.au = au;
 	}
-	
+
 	/**
 	 * Returns the course code.
 	 * 
@@ -48,7 +49,7 @@ public class CreateCourseResponse {
 	public String getCode() {
 		return code;
 	}
-	
+
 	/**
 	 * Returns the course name.
 	 * 
@@ -57,7 +58,7 @@ public class CreateCourseResponse {
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * Returns the school the course belongs to.
 	 * 
@@ -66,7 +67,7 @@ public class CreateCourseResponse {
 	public String getSchool() {
 		return school;
 	}
-	
+
 	/**
 	 * Returns the academic units awarded by the course.
 	 * 

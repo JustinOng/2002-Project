@@ -7,12 +7,14 @@ import mystars.entities.Student;
  */
 public interface INotifyStudent {
 	/**
-	 * Send a message{@code message} with the title {@code title} to a student {@code student}.
+	 * Send a message{@code message} with the title {@code title} to a student
+	 * {@code student}.
 	 * 
-	 * @param student 	The target to send notification to.
-	 * @param title   	The title of the notification.
-	 * @param message 	The message of the notification.
-	 * @return {@code true} If the student is notified successfully, or {@code false} otherwise
+	 * @param student The target to send notification to.
+	 * @param title   The title of the notification.
+	 * @param message The message of the notification.
+	 * @return {@code true} If the student is notified successfully, or
+	 *         {@code false} otherwise
 	 */
 	public boolean notify(Student student, String title, String message);
 }

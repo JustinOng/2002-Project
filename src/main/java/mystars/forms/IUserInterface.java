@@ -29,14 +29,16 @@ public interface IUserInterface {
 	/**
 	 * Displays admin menu with list of things the admin can do
 	 * 
-	 * @return Selected option, or {@code null} if the form is closed without any input
+	 * @return Selected option, or {@code null} if the form is closed without any
+	 *         input
 	 */
 	public AdminMenuResponse renderAdminMenuForm();
 
 	/**
 	 * Displays form requesting user input for swopping indexes
 	 * 
-	 * @return User input, or {@code null} if the form is cancelled/closed without any input
+	 * @return User input, or {@code null} if the form is cancelled/closed without
+	 *         any input
 	 */
 	public IndexSwopResponse renderIndexSwopForm();
 
@@ -45,7 +47,8 @@ public interface IUserInterface {
 	 * 
 	 * @param title Title to label form with
 	 * @param items List of items that can be selected
-	 * @return Selected item, or {@code null} if the form is cancelled/closed without any input
+	 * @return Selected item, or {@code null} if the form is cancelled/closed
+	 *         without any input
 	 */
 	public TextResponse renderItemSelectorForm(String title, List<String> items);
 
@@ -54,7 +57,8 @@ public interface IUserInterface {
 	 * 
 	 * @param genders       The list of genders that a student can assume
 	 * @param nationalities The list of nationalities that a student can atssume
-	 * @return User input to be used to create a new Student, or {@code null} if the form is cancelled/closed without any input
+	 * @return User input to be used to create a new Student, or {@code null} if the
+	 *         form is cancelled/closed without any input
 	 */
 	public CreateStudentResponse renderCreateStudentForm(List<String> genders, List<String> nationalities);
 
@@ -62,7 +66,8 @@ public interface IUserInterface {
 	 * Displays form requesting user input for creating a course
 	 * 
 	 * @param schools The list of schools that a course can belong to
-	 * @return User input to be used to create a new Course, or {@code null} if the form is cancelled/closed without any input
+	 * @return User input to be used to create a new Course, or {@code null} if the
+	 *         form is cancelled/closed without any input
 	 */
 	public CreateCourseResponse renderCreateCourseForm(List<String> schools);
 
@@ -70,7 +75,8 @@ public interface IUserInterface {
 	 * Displays form requesting user input for creating a course index
 	 * 
 	 * @param course Parent course name to be displayed on the form
-	 * @return User input to be used to create a new Index, or {@code null} if the form is cancelled/closed without any input
+	 * @return User input to be used to create a new Index, or {@code null} if the
+	 *         form is cancelled/closed without any input
 	 */
 	public CreateIndexResponse renderCreateIndexForm(String course);
 
@@ -80,7 +86,8 @@ public interface IUserInterface {
 	 * @param index      Parent index number to be displayed on the form
 	 * @param lessonType The list of lesson types that the lesson can take.
 	 * @param days       The list of days that the lesson can be conducted on.
-	 * @return User input to be used to create a new Lesson, or {@code null} if the form is cancelled/closed without any input
+	 * @return User input to be used to create a new Lesson, or {@code null} if the
+	 *         form is cancelled/closed without any input
 	 */
 	public CreateLessonResponse renderCreateLessonForm(String index, List<String> lessonType, List<String> days);
 
@@ -88,7 +95,8 @@ public interface IUserInterface {
 	 * Displays form requesting user input for setting the access period
 	 * 
 	 * @param curAccessPeriod Current access period to be displayed on the form
-	 * @return User input containing new access period, or {@code null} if the form is cancelled/closed without any input
+	 * @return User input containing new access period, or {@code null} if the form
+	 *         is cancelled/closed without any input
 	 */
 	public AccessPeriodResponse renderAccessPeriodForm(String curAccessPeriod);
 
@@ -97,7 +105,8 @@ public interface IUserInterface {
 	 * an action to perform on a course
 	 * 
 	 * @param courses List of courses that can be managed
-	 * @return Selected option, or {@code null} if the form is cancelled/closed without any input
+	 * @return Selected option, or {@code null} if the form is cancelled/closed
+	 *         without any input
 	 */
 	public CourseManagementResponse renderCourseManagementForm(List<String> courses);
 
@@ -107,7 +116,8 @@ public interface IUserInterface {
 	 * 
 	 * @param courseCode Course code to display in the form title
 	 * @param indexes    List of indexes that can be managed
-	 * @return Selected option, or {@code null} if the form is cancelled/closed without any input
+	 * @return Selected option, or {@code null} if the form is cancelled/closed
+	 *         without any input
 	 */
 	public IndexManagementResponse renderIndexManagementForm(String courseCode, List<String> indexes);
 
@@ -116,7 +126,8 @@ public interface IUserInterface {
 	 * 
 	 * @param title       The form title
 	 * @param description The form description
-	 * @return User input, or {@code null} if the form is cancelled/closed without any input
+	 * @return User input, or {@code null} if the form is cancelled/closed without
+	 *         any input
 	 */
 	public String getText(String title, String description);
 
@@ -125,7 +136,8 @@ public interface IUserInterface {
 	 * 
 	 * @param title       The form title.
 	 * @param description The for description.
-	 * @return User input, or {@code null} if the form is cancelled/closed without any input
+	 * @return User input, or {@code null} if the form is cancelled/closed without
+	 *         any input
 	 */
 	public Integer getInt(String title, String description);
 

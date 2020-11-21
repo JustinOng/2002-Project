@@ -9,8 +9,7 @@ import mystars.exceptions.AppException;
  * It inherits from the user class.
  */
 
-public class Admin extends User
-{
+public class Admin extends User {
 	/**
 	 * ID for versioning of serialized data.
 	 */
@@ -21,10 +20,10 @@ public class Admin extends User
 	 * 
 	 * @param username The administrator's username.
 	 * @param password The administrator's password.
-	 * @throws AppException if an user with the username {@code username} already exists 
+	 * @throws AppException if an user with the username {@code username} already
+	 *                      exists
 	 */
-	public Admin(String username, String password) throws AppException
-	{
+	public Admin(String username, String password) throws AppException {
 		super(username, password);
 		isAdmin = true;
 	}
