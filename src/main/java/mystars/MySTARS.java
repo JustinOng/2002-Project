@@ -51,8 +51,8 @@ public class MySTARS {
 	/**
 	 * Creates new instance of MySTARS with UI and notification mechanism to use.
 	 * 
-	 * @param ui     	User interface to be used to interact with user.
-	 * @param notifier 	Instance to use to notify students.
+	 * @param ui       User interface to be used to interact with user.
+	 * @param notifier Instance to use to notify students.
 	 */
 	public MySTARS(IUserInterface ui, INotifyStudent notifier) {
 		this.ui = ui;
@@ -60,16 +60,17 @@ public class MySTARS {
 	}
 
 	/**
-	 * Calls the created controller and its related objects declared above to start the MySTARS program.
-	 * Prompts the user to login with their credentials through the user interface's login form.
-	 * Notifies students if they have been allocated an index that was previously on their waitlist.
+	 * Calls the created controller and its related objects declared above to start
+	 * the MySTARS program. Prompts the user to login with their credentials through
+	 * the user interface's login form. Notifies students if they have been
+	 * allocated an index that was previously on their waitlist.
 	 */
 	public void start() {
 		storageController.start();
 		courseController.start();
 
 		Runtime.getRuntime().addShutdownHook(new Thread() {
-			
+
 			/**
 			 * Saves all the object data to disk.
 			 */
@@ -77,20 +78,21 @@ public class MySTARS {
 				storageController.writeToDisk();
 			}
 		});
-		
+
 		if (notifier != null) {
 			courseController.registerIndexObserver((Index index, Student student) -> {
-				notifier.notify(student, "Allocation of waitlisted Index", String.format("You have been allocated your waitlisted index %d ", index.getIndexNo()));
+				notifier.notify(student, "Allocation of waitlisted Index",
+						String.format("You have been allocated your waitlisted index %d ", index.getIndexNo()));
 			}, Index.Event.AllocatedWaitlist);
 		}
 
 		try {
 			// Create new administrator and student objects.
 			new Admin("admin", "1");
-			new Student("student1", "starsnotifications2021s1+student1@gmail.com", "u12345", "student1", "1", Gender.Male,
-					Nationality.Singaporean);
-			new Student("student2", "starsnotifications2021s1+student2@gmail.com", "u67890", "student2", "2", Gender.Female,
-					Nationality.Singaporean);
+			new Student("student1", "starsnotifications2021s1+student1@gmail.com", "u12345", "student1", "1",
+					Gender.Male, Nationality.Singaporean);
+			new Student("student2", "starsnotifications2021s1+student2@gmail.com", "u67890", "student2", "2",
+					Gender.Female, Nationality.Singaporean);
 
 			// Create new courses and indexes.
 			Course c = new Course("Course", "C1", School.CSE);
@@ -181,6 +183,9 @@ public class MySTARS {
 						break;
 
 					courseController.dropCourse(student, registeredInfo.get(textResponse.getText()));
+
+					ui.renderDialog("Drop Course",
+							String.format("You have dropped %s", registeredInfo.get(textResponse.getText())));
 					break;
 
 				// Change course index.
@@ -303,11 +308,11 @@ public class MySTARS {
 				// List the number of vacancies in a course index.
 				case ListVacancies:
 					Integer indexNo = ui.getInt("List vacancies", "Index No:");
-					
+
 					if (indexNo == null) {
 						break;
 					}
-					
+
 					ui.renderDialog(String.format("Index %d", indexNo), String.format("%d Vacancies\n%d max enrolled",
 							courseController.getVacancies(indexNo), courseController.getMaxEnrolled(indexNo)));
 					break;
