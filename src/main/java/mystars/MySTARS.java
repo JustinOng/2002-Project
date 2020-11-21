@@ -385,7 +385,6 @@ public class MySTARS {
 				default:
 					break;
 				}
-				break;
 			} catch (AppException e) {
 				ui.renderDialog("Error", e.getMessage());
 			}
@@ -412,6 +411,12 @@ public class MySTARS {
 				ui.renderDialog("Error", e.getMessage());
 				return;
 			}
+			
+			if (indexes.size() == 0) {
+				ui.renderDialog("Index Management", String.format("%s has no indexes", courseCode));
+				return;
+			}
+			
 			IndexManagementResponse indexMgmtResponse = ui.renderIndexManagementForm(courseCode,
 					new ArrayList<String>(indexes.keySet()));
 
