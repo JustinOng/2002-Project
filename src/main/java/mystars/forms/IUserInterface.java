@@ -9,134 +9,140 @@ import java.util.List;
  */
 public interface IUserInterface {
 	/**
-	 * Creates and returns the login response form.
+	 * Displays login form
 	 * 
-	 * @return The login response form.
+	 * @return {@code LoginResponse} containing user input
 	 */
 	public LoginResponse renderLoginForm();
-	
+
 	/**
-	 * Creates and returns the student menu form.
+	 * Displays list of options that a student can perform to manage courses. {@code
+	 * courses} is also displayed on the form. If {@code courses} is empty (ie the
+	 * student is not in any courses), the only option displayed is to register for
+	 * a course.
 	 * 
-	 * @param courses The list of courses available to students.
-	 * @return The student menu form.
+	 * @param courses List of courses that the student is currently in.
+	 * @return Selected option
 	 */
 	public StudentMenuResponse renderStudentMenuForm(List<String> courses);
-	
+
 	/**
-	 * Creates and returns the admin menu form.
+	 * Displays admin menu with list of things the admin can do
 	 * 
-	 * @return The admin menu form.
+	 * @return Selected option, or {@code null} if the form is closed without any input
 	 */
 	public AdminMenuResponse renderAdminMenuForm();
-	
+
 	/**
-	 * Creates and returns the course index swop form.
+	 * Displays form requesting user input for swopping indexes
 	 * 
-	 * @return The course index swop form.
+	 * @return User input, or {@code null} if the form is cancelled/closed without any input
 	 */
 	public IndexSwopResponse renderIndexSwopForm();
-	
+
 	/**
-	 * Creates and returns the ite selector form.
+	 * Displays a generic form requesting that the user select one of {@code items}
 	 * 
-	 * @param title	The title of the form.
-	 * @param items	The list of items in the form.
-	 * @return 		The item selector form.
+	 * @param title Title to label form with
+	 * @param items List of items that can be selected
+	 * @return Selected item, or {@code null} if the form is cancelled/closed without any input
 	 */
 	public TextResponse renderItemSelectorForm(String title, List<String> items);
-	
+
 	/**
-	 * Creates and returns the form to create students.
+	 * Displays form requesting user input for creating a student
 	 * 
-	 * @param genders 		The list of genders that a student can assume.
-	 * @param nationalities	The list of nationalities that a student can assume.
-	 * @return 				The form to create students.
+	 * @param genders       The list of genders that a student can assume
+	 * @param nationalities The list of nationalities that a student can atssume
+	 * @return User input to be used to create a new Student, or {@code null} if the form is cancelled/closed without any input
 	 */
 	public CreateStudentResponse renderCreateStudentForm(List<String> genders, List<String> nationalities);
-	
+
 	/**
-	 * Creates and returns the form to create courses.
+	 * Displays form requesting user input for creating a course
 	 * 
-	 * @param schools 	The list of schools that a course can belong to.
-	 * @return 			The form to create courses.
+	 * @param schools The list of schools that a course can belong to
+	 * @return User input to be used to create a new Course, or {@code null} if the form is cancelled/closed without any input
 	 */
 	public CreateCourseResponse renderCreateCourseForm(List<String> schools);
-	
+
 	/**
-	 * Creates and returns the form to create course indexes.
+	 * Displays form requesting user input for creating a course index
 	 * 
-	 * @param course	The list of courses that the index can come from.
-	 * @return 			The form to create course indexes.
+	 * @param course Parent course name to be displayed on the form
+	 * @return User input to be used to create a new Index, or {@code null} if the form is cancelled/closed without any input
 	 */
 	public CreateIndexResponse renderCreateIndexForm(String course);
-	
+
 	/**
-	 * Creates and returns the form to create course index lessons.
+	 * Displays form requesting user input for creating a lesson
 	 * 
-	 * @param index			The list of indexes that the lesson can come from.
-	 * @param lessonType	The list of lesson types that the lesson can take.
-	 * @param days			The list of days that the lesson will be conducted on.
-	 * @return 				The form to create course index lessons.
+	 * @param index      Parent index number to be displayed on the form
+	 * @param lessonType The list of lesson types that the lesson can take.
+	 * @param days       The list of days that the lesson can be conducted on.
+	 * @return User input to be used to create a new Lesson, or {@code null} if the form is cancelled/closed without any input
 	 */
 	public CreateLessonResponse renderCreateLessonForm(String index, List<String> lessonType, List<String> days);
-	
+
 	/**
-	 * Creates and returns the form for setting the access period.
+	 * Displays form requesting user input for setting the access period
 	 * 
-	 * @param curAccessPeriod	The current access period.
-	 * @return					The form for setting the access period.
+	 * @param curAccessPeriod Current access period to be displayed on the form
+	 * @return User input containing new access period, or {@code null} if the form is cancelled/closed without any input
 	 */
 	public AccessPeriodResponse renderAccessPeriodForm(String curAccessPeriod);
-	
+
 	/**
-	 * Creates and returns the form for managing courses.
+	 * Displays form with list of {@code courses} and request for the user to select
+	 * an action to perform on a course
 	 * 
-	 * @param courses	The list of courses that can be managed.
-	 * @return			The form for managing courses.
+	 * @param courses List of courses that can be managed
+	 * @return Selected option, or {@code null} if the form is cancelled/closed without any input
 	 */
 	public CourseManagementResponse renderCourseManagementForm(List<String> courses);
-	
+
 	/**
-	 * Creates and returns the form for managing course indexes.
+	 * Displays form with list of {@code indexes} and request for the user to select
+	 * an action to perform on an index
 	 * 
-	 * @param courseCode	The list of course codes that the index can come from.
-	 * @param indexes		The list of indexes.
-	 * @return				The form for managing course indexes.
+	 * @param courseCode Course code to display in the form title
+	 * @param indexes    List of indexes that can be managed
+	 * @return Selected option, or {@code null} if the form is cancelled/closed without any input
 	 */
 	public IndexManagementResponse renderIndexManagementForm(String courseCode, List<String> indexes);
-	
+
 	/**
-	 * Creates and returns the form text used for the user interface.
+	 * Displays form requesting for text input from the user
 	 * 
-	 * @param title			The form title.
-	 * @param description	The form description.
-	 * @return				The form text used for the user interface.
+	 * @param title       The form title
+	 * @param description The form description
+	 * @return User input, or {@code null} if the form is cancelled/closed without any input
 	 */
 	public String getText(String title, String description);
-	
+
 	/**
-	 * Returns the integer object matching the description.
+	 * Displays form requesting for integer input from the user
 	 * 
-	 * @param title			The form title.
-	 * @param description	The for description.
-	 * @return				The integer object matching the description.
+	 * @param title       The form title.
+	 * @param description The for description.
+	 * @return User input, or {@code null} if the form is cancelled/closed without any input
 	 */
 	public Integer getInt(String title, String description);
-	
+
 	/**
-	 * Creates the dialog used for the user interface.
+	 * Displays dialog with specified title and message
 	 * 
-	 * @param title	The dialog title.
-	 * @param msg	The dialog message.
+	 * @param title The dialog title.
+	 * @param msg   The dialog message.
 	 */
 	public void renderDialog(String title, String msg);
-	
+
 	/**
-	 * Creates the form for the list of students.
+	 * Displays a list of students with the given title
 	 * 
-	 * @param title		The title of the form.
-	 * @param students	The list of students.
+	 * @param title    The title of the form.
+	 * @param students The list of students. List of string arrays, ie { {"name",
+	 *                 "gender", "nationality}, ...}
 	 */
 	public void renderStudentList(String title, List<String[]> students);
 }

@@ -51,10 +51,10 @@ public class Index extends Entity {
 	private ArrayList<Student> waitlist;
 
 	/**
-	 * The ArrayList containing index call backs when they occur.
+	 * List of event callbacks to be triggered when an event occurs
 	 */
 	private static Map<Event, ArrayList<IndexCallback>> observers = new HashMap<Event, ArrayList<IndexCallback>>();
-	
+
 	/**
 	 * The events which can be observed on this class.
 	 */
@@ -71,22 +71,23 @@ public class Index extends Entity {
 	}
 
 	/**
-	 * Constructor for Index. This class is responsible for the creation of an index object.
+	 * Constructor for Index. This class is responsible for the creation of an index
+	 * object.
 	 * 
-	 * @param course      	The course the Index belongs to.
-	 * @param indexNo     	The index number of the Index.
-	 * @param maxEnrolled 	The maximum enrollment size assigned to the Index.
+	 * @param course      The course the Index belongs to.
+	 * @param indexNo     The index number of the Index.
+	 * @param maxEnrolled The maximum enrollment size assigned to the Index.
 	 * @throws AppException If the indexNo already existed.
 	 */
 	public Index(Course course, int indexNo, int maxEnrolled) throws AppException {
 		if (indexNo < 0) {
 			throw new AppException("Index Number has to be larger than 0");
 		}
-		
+
 		if (maxEnrolled <= 0) {
 			throw new AppException("Maximum Number of enrolled students has to be greater than 0");
 		}
-		
+
 		if (get("index", indexNo) != null) {
 			throw new AppException(String.format("Index %d already exists", indexNo));
 		}
@@ -100,11 +101,11 @@ public class Index extends Entity {
 	}
 
 	/**
-	 * Gets the index from indexNo input.
+	 * Retrieves the index identified by {@code indexNo}
 	 * 
-	 * @param courseCode 	This parameter is the course's course code.
-	 * @return Course 		This returns the Course that corresponds the course code input.
-	 * @throws AppException If the courseCode does not exist.
+	 * @param indexNo Index number of the Index to retrieve
+	 * @return This returns the Index with the corresponding {@code indexNo}
+	 * @throws AppException if no index indeified by {@code indexNo} exists
 	 */
 	public static Index getIndex(int indexNo) throws AppException {
 		Index index = (Index) get("index", indexNo);
@@ -117,25 +118,27 @@ public class Index extends Entity {
 	}
 
 	/**
-	 * Gets Index's index number.
+	 * Gets the index number of this index.
 	 * 
-	 * @return name This returns the Index's index number.
+	 * @return name This returns the index number of this index.
 	 */
 	public int getIndexNo() {
 		return indexNo;
 	}
 
 	/**
-	 * Creates a new lesson with the given information and adds it into an ArrayList of lesson objects.
+	 * Creates a new lesson with the given information.
 	 * 
 	 * @param type        The new Lesons's type.
 	 * @param day         The day the lesson is conducted.
 	 * @param location    The location the new lesson will be conducted at.
 	 * @param groupNo     The group number assigned to the particular lesson.
-	 * @param week        The list of weeks the lesson will be conducted on.
+	 * @param week        Array of booleans indicating whether this lesson is held
+	 *                    on the particular week
 	 * @param startPeriod The period the lessons commences.
 	 * @param endPeriod   The period the lessons concludes.
-	 * @throws AppException if invalid parameters are passed to the constructor of Lesson
+	 * @throws AppException if invalid parameters are passed to the constructor of
+	 *                      Lesson
 	 */
 	public void createLesson(LessonType type, Day day, String location, String groupNo, boolean[] week, int startPeriod,
 			int endPeriod) throws AppException {
@@ -144,17 +147,17 @@ public class Index extends Entity {
 	}
 
 	/**
-	 * Gets the vacancies of the Index.
+	 * Retrieves number of vacancies in this index
 	 * 
-	 * @return The available vacancy for the Index by subtracting the number of
-	 *         students enrolled from the maximum enrolment size.
+	 * @return number of vacancies in this index
 	 */
 	public int getVacancies() {
 		return this.maxEnrolled - enrolled.size();
 	}
-	
+
 	/**
 	 * Gets the maximum number of enrolled students for this Index
+	 * 
 	 * @return the maximum number of enrolled students for this Index
 	 */
 	public int getMaxEnrolled() {
@@ -164,19 +167,20 @@ public class Index extends Entity {
 	/**
 	 * Getting all of the students that enrolled in the Index.
 	 * 
-	 * @return enrolled This method returns all of the students that enrolled in the index.
+	 * @return enrolled This method returns all of the students that are enrolled in
+	 *         the index.
 	 */
 	public ArrayList<Student> getStudentList() {
 		return enrolled;
 	}
 
 	/**
-	 * Add student to index if they are not already enrolled and if there is still vacancy.
+	 * Add student to this index
 	 * 
-	 * @param student 			The student to be added into index.
-	 * @return {@code true} 	If the student was successfully registered.
-	 * @return {@code false}	If the student was placed on the waitlist.
-	 * @throws AppException 	If student is already enrolled in the index.
+	 * @param student The student to be added into this index.
+	 * @return {@code true} If the student was successfully registered, or
+	 *         {@code false} If the student was placed on the waitlist.
+	 * @throws AppException If student is already enrolled in the index.
 	 */
 	protected boolean addStudent(Student student) throws AppException {
 		if (enrolled.contains(student)) {
@@ -194,19 +198,20 @@ public class Index extends Entity {
 	}
 
 	/**
-	 * Remove student from index.
+	 * Remove student from this index.
 	 * 
-	 * @param student The student to be removed from index.
+	 * @param student The student to be removed from this index.
 	 */
-	protected void removeStudent(Student student) throws AppException {
+	protected void removeStudent(Student student) {
 		removeStudent(student, true);
 	}
 
 	/**
-	 * Remove student from index if student is already enrolled.
+	 * Remove student from this index.
 	 * 
-	 * @param student          	The student to be removed from index.
-	 * @param allocateWaitlist 	Check if student is allocated to waitlist.
+	 * @param student          The student to be removed from this index.
+	 * @param allocateWaitlist If {@code true}, move one student from the waitlist
+	 *                         to the enrolled list
 	 */
 	protected void removeStudent(Student student, boolean allocateWaitlist) {
 		if (this.enrolled.remove(student)) {
@@ -231,9 +236,10 @@ public class Index extends Entity {
 	public boolean hasStudent(Student student) {
 		return this.enrolled.contains(student) || this.waitlist.contains(student);
 	}
-	
+
 	/**
 	 * Check if the student is enrolled in this index
+	 * 
 	 * @param student The student to be checked
 	 * @return {@code true} if {@code student} is enrolled in this index
 	 */
@@ -245,6 +251,8 @@ public class Index extends Entity {
 	 * Check if index belongs in the same course as another index.
 	 * 
 	 * @param index The index object to be checked with current index object.
+	 * @return {@code true} if {@code index} belongs to the same course as this
+	 *         index, or {@code false} otherwise
 	 */
 	public boolean belongsToSameCourse(Index index) {
 		return this.course.equals(index.course);
@@ -254,7 +262,7 @@ public class Index extends Entity {
 	 * Check if 2 indexes clash.
 	 * 
 	 * @param index The index object to be checked with current index object.
-	 * @return true If there is a clash
+	 * @return {@code true} if there is a clash, or {@code false} otherwise
 	 */
 	public boolean clashesWith(Index index) {
 		// yes, this is inefficient, much smarter to handle clash in Timetable
@@ -272,16 +280,16 @@ public class Index extends Entity {
 	/**
 	 * Gets the course the index is a part of.
 	 * 
-	 * @return course The course object.
+	 * @return The course object.
 	 */
 	public Course getCourse() {
 		return course;
 	}
 
 	/**
-	 * Converts index number to string data type.
+	 * Returns string representation of this index
 	 * 
-	 * @return index The index number in specified string format.
+	 * @return string representation of this index
 	 */
 	public String toString() {
 		return String.format("Index %d", indexNo);
@@ -290,8 +298,9 @@ public class Index extends Entity {
 	/**
 	 * Register a listener for a particular event.
 	 * 
-	 * @param callback 	The function to execute when the event identified by {@code evt} occurs.
-	 * @param evt 		The event to register the listener for.
+	 * @param callback The function to execute when the event identified by
+	 *                 {@code evt} occurs.
+	 * @param evt      The event to register the listener for.
 	 */
 	public static void registerObserver(IndexCallback callback, Event evt) {
 		if (!observers.containsKey(evt)) {
@@ -304,9 +313,9 @@ public class Index extends Entity {
 	/**
 	 * Trigger the event identified by {@code evt}.
 	 * 
-	 * @param evt 		The event to trigger.
-	 * @param index 	The index on which the event occurred.
-	 * @param student 	The student on which the event occurred.
+	 * @param evt     The event to trigger.
+	 * @param index   The index on which the event occurred.
+	 * @param student The student on which the event occurred.
 	 */
 	private static void notify(Event evt, Index index, Student student) {
 		List<IndexCallback> callbacks = observers.get(evt);

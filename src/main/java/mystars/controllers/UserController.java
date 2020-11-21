@@ -31,11 +31,11 @@ public class UserController {
 	 * @param password    The student's password.
 	 * @param gender      The student's gender.
 	 * @param nationality The student's nationality.
-	 * @throws UserAlreadyExistsException If there already exists a student with the same username.
+	 * @throws AppException If there already exists a student with the same username.
 	 */
-	public void createStudent(String name, String email, String matricNo, String userName, String password,
+	public void createStudent(String name, String email, String matricNo, String username, String password,
 			Gender gender, Nationality nationality) throws AppException {
-		new Student(name, email, matricNo, userName, password, gender, nationality);
+		new Student(name, email, matricNo, username, password, gender, nationality);
 	}
 
 	/**
@@ -54,7 +54,7 @@ public class UserController {
 	 * 
 	 * @param username The user's username.
 	 * @param password The user's password.
-	 * @throws InvalidLoginException If the login is unsuccessful due to incorrect
+	 * @throws AppException If the login is unsuccessful due to incorrect
 	 *                               username or password.
 	 * @return The user object of the user successfully logging in.
 	 */
@@ -65,8 +65,8 @@ public class UserController {
 	/**
 	 * Check if the user is a student.
 	 * 
-	 * @param user The student object.
-	 * @return Boolean value indicating if the user is an instance of student.
+	 * @param user User to be checked
+	 * @return {@code true} if {@code user} is an student, or {@code false} otherwise
 	 */
 	public boolean isStudent(User user) {
 		return user instanceof Student;
@@ -75,8 +75,8 @@ public class UserController {
 	/**
 	 * Check if the user is an admin.
 	 * 
-	 * @param user The admin object.
-	 * @return Boolean value indicating if the user is an instance of admin.
+	 * @param user User to be checked
+	 * @return {@code true} if {@code user} is an admin, or {@code false} otherwise
 	 */
 	public boolean isAdmin(User user) {
 		return user instanceof Admin;
@@ -96,8 +96,7 @@ public class UserController {
 	 * Retrieve the period in which students are allowed to login as a string
 	 * 
 	 * @return "yyyy-mm-ddThh:mm:ss to yyyy-mm-ddThh:mm:ss" if a access period is
-	 *         set
-	 * @return {@code null} otherwise
+	 *         set, or {@code null} otherwise
 	 */
 	public String getStudentAccessPeriod() {
 		return Student.getAccessPeriod();

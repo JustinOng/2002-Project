@@ -87,7 +87,7 @@ public class CourseController {
 	 * @param indexNo     Identifier of Index
 	 * @param lessonType  Lesson type of the new lesson
 	 * @param day         Day that the new Lesson is held on
-	 * @param Location    Location where the Lesson is held
+	 * @param location    Location where the Lesson is held
 	 * @param groupNo     Group number of the lesson eg SEP1
 	 * @param week        boolean[13] representing whether the lesson is held in
 	 *                    that particular week eg week[0] == false signifies that
@@ -116,8 +116,7 @@ public class CourseController {
 	 * 
 	 * @param student Student to register
 	 * @param indexNo Identifier of Index
-	 * @return {@code true} if student was successfully registered
-	 * @return {@code false} if student was placed on the waitlist
+	 * @return {@code true} if student was successfully registered, or {@code false} if student was placed on the waitlist
 	 * @throws AppException if no index identified by {@code indexNo} is found
 	 * @throws AppException if {@code student} has already been registered for the
 	 *                      index identified by {@code indexNo}

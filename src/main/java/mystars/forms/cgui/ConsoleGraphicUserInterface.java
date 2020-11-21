@@ -19,8 +19,8 @@ import mystars.forms.*;
 /**
  * <h1>Class: ConsoleGraphicUserInterface</h1>
  * 
- * This class creates the respective form objects and manages the 
- * graphical user interfaces for the console that users will use.
+ * This class creates the respective form objects and manages the graphical user
+ * interfaces for the console that users will use.
  */
 public class ConsoleGraphicUserInterface implements IUserInterface {
 	/**
@@ -32,73 +32,77 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	 * The login form.
 	 */
 	private LoginForm loginForm = new LoginForm();
-	
+
 	/**
 	 * The student menu form.
 	 */
 	private StudentMenuForm studentMenuForm = new StudentMenuForm();
-	
+
 	/**
 	 * The administrators menu form.
 	 */
 	private AdminMenuForm adminMenuForm = new AdminMenuForm();
-	
+
 	/**
 	 * The item selector form.
 	 */
 	private ItemSelectorForm itemSelectorForm = new ItemSelectorForm();
-	
+
 	/**
 	 * The swop index form.
 	 */
 	private IndexSwopForm indexSwopForm = new IndexSwopForm();
-	
+
 	/**
 	 * The create new student form.
 	 */
 	private CreateStudentForm createStudentForm = new CreateStudentForm();
-	
+
 	/**
 	 * The create new course form.
 	 */
 	private CreateCourseForm createCourseForm = new CreateCourseForm();
-	
+
 	/**
 	 * The create new index form.
 	 */
 	private CreateIndexForm createIndexForm = new CreateIndexForm();
-	
+
 	/**
 	 * The create new lesson form.
 	 */
 	private CreateLessonForm createLessonForm = new CreateLessonForm();
-	
+
 	/**
 	 * The access period form.
 	 */
 	private AccessPeriodForm accessPeriodForm = new AccessPeriodForm();
-	
+
 	/**
 	 * The course management form.
 	 */
 	private CourseManagementForm courseManagementForm = new CourseManagementForm();
-	
+
 	/**
 	 * The index management form.
 	 */
 	private IndexManagementForm indexManagementForm = new IndexManagementForm();
 
 	/**
+	 * Creates a new instance of this class and initialises Lanterna gui. Attempt to
+	 * turn off anti-aliasing on the font used because it has resulted in blurry
+	 * fonts on certain machine configurations.
 	 * 
-	 * @throws IOException
+	 * @throws IOException if an UI error occured
 	 */
 	public ConsoleGraphicUserInterface() throws IOException {
 		DefaultTerminalFactory factory = new DefaultTerminalFactory();
-	    SwingTerminalFontConfiguration config = new SwingTerminalFontConfiguration(true, AWTTerminalFontConfiguration.BoldMode.NOTHING, new Font("Consolas", Font.PLAIN, 20));
-	    
-	    factory.setTerminalEmulatorFontConfiguration(config);
-	    
-	    Terminal terminal = factory.createTerminal();
+		SwingTerminalFontConfiguration config = new SwingTerminalFontConfiguration(true,
+				AWTTerminalFontConfiguration.BoldMode.NOTHING, new Font("Consolas", Font.PLAIN, 20));
+
+		factory.setTerminalEmulatorFontConfiguration(config);
+
+		Terminal terminal = factory.createTerminal();
 		Screen screen = new TerminalScreen(terminal);
 		screen.startScreen();
 

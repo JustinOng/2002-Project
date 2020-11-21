@@ -56,8 +56,7 @@ public class Timetable implements Serializable {
 	 * Check if {@code add} can be added to this timetable without any clash.
 	 * 
 	 * @param add 	The index to be added.
-	 * @return 		{@code true} if {@code add} can be added without any clash.
-	 * @return 		{@code false} otherwise.
+	 * @return 		{@code true} if {@code add} can be added without any clash, or {@code false} otherwise.
 	 */
 	public boolean canAddIndex(Index add) {
 		return canAddIndex(add, null);
@@ -68,8 +67,7 @@ public class Timetable implements Serializable {
 	 * 
 	 * @param add    	The index to be added.
 	 * @param remove 	The index to be removed.
-	 * @return 			{@code true} if {@code add} can be added without any clash.
-	 * @return 			{@code false} otherwise.
+	 * @return 			{@code true} if {@code add} can be added without any clash, or {@code false} otherwise.
 	 */
 	public boolean canAddIndex(Index add, Index remove) {
 		try {

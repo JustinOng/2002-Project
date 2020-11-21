@@ -21,6 +21,7 @@ public class Entry {
 	 * - The configuration file containing the information on the student's emails.
 	 * 
 	 * @param args Command line arguments to this application.
+	 * @throws IOException on UI exception
 	 */
 	public static void main(String[] args) throws IOException {
 		String configFile = "app.properties";
@@ -52,10 +53,10 @@ public class Entry {
 	}
 
 	/**
-	 * Creates a notification for students and sends it to their email.
+	 * Creates the object to be used for sending email notifications to students
 	 * 
-	 * @param config	
-	 * @return			An email notification to the student with required port parameters.
+	 * @param config	Configuration parameters
+	 * @return			Configured object
 	 */
 	public static INotifyStudent createNotifier(Properties config) {
 		String username = config.getProperty("username", null);

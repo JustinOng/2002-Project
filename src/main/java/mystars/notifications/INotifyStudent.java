@@ -12,8 +12,7 @@ public interface INotifyStudent {
 	 * @param student 	The target to send notification to.
 	 * @param title   	The title of the notification.
 	 * @param message 	The message of the notification.
-	 * @return {@code true} If the student is notified successfully.
-	 * @return {@code false} If the student is not notified successfully.
+	 * @return {@code true} If the student is notified successfully, or {@code false} otherwise
 	 */
 	public boolean notify(Student student, String title, String message);
 }

@@ -12,7 +12,7 @@ import java.util.HashMap;
 /**
  * <h1>Class: FileStorage</h1>
  * 
- * This class
+ * This class stores serializable data to a flat file on disk
  */
 public class FileStorage implements IStorage {
 	/**
@@ -21,24 +21,20 @@ public class FileStorage implements IStorage {
 	private HashMap<String, HashMap<String, Serializable>> storage = new HashMap<>();
 	
 	/**
-	 * The name of the file stored on disk.
+	 * The name of the file to write data to
 	 */
 	private String filename;
 
 	/**
-	 * Returns the name of the file stored on disk.
+	 * Creates a new instance of FileStorage
 	 * 
-	 * @param filename The name of the file stored on disk.
+	 * @param filename The name of the file to write data to
 	 */
 	public FileStorage(String filename) {
 		this.filename = filename;
 	}
 
 	@Override
-	/**
-	 * Stores a serializable data object into the storage object with the corresponding type and ID.
-	 * If no storage object exists, one is created.
-	 */
 	public void store(String type, String id, Serializable e) {
 		if (!storage.containsKey(type)) {
 			storage.put(type, new HashMap<>());

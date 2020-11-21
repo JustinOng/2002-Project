@@ -43,8 +43,7 @@ public class EmailNotifier implements INotifyStudent {
 	/**
 	 * Notify a student {@code student} with the given title {@code title} and message {@code message}.
 	 * 
-	 * @returns {@code true} 	If the notification was successful.
-	 * @returns {@code false}	If the notification was not successful.
+	 * @return {@code true} 	If the notification was successful, or {@code false} otherwise
 	 */
 	@Override
 	public boolean notify(Student student, String title, String message) {
@@ -55,11 +54,10 @@ public class EmailNotifier implements INotifyStudent {
 	 * Sends an email to an address {@code email} with the subject {@code subject} and body {@code body}
 	 * 
 	 * @param email The email address to send to.
-	 * @param title The title of the email.
+	 * @param subject The title of the email.
 	 * @param body  The body of the email.
 	 * 
-	 * @return {@code true} 	If the email was sent successfully.
-	 * @return {@code false} 	If the email was not sent successfully.
+	 * @return {@code true} 	If the email was sent successfully, or {@code false} otherwise
 	 */
 	public boolean sendEmail(String email, String subject, String body) {
 		System.out.println(String.format("Sending email to %s with subject=%s, body=%s", email, subject, body));

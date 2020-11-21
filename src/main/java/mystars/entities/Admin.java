@@ -21,8 +21,7 @@ public class Admin extends User
 	 * 
 	 * @param username The administrator's username.
 	 * @param password The administrator's password.
-	 * @param isAdmin Boolean variable set to true as objects from this class have admin rights.
-	 * @throws UserAlreadyExistsException 
+	 * @throws AppException if an user with the username {@code username} already exists 
 	 */
 	public Admin(String username, String password) throws AppException
 	{

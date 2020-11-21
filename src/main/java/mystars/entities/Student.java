@@ -74,8 +74,7 @@ public class Student extends User {
 	 * time is within the configured access period
 	 * 
 	 * @throws AppException if the student is not allowed to login right now
-	 * @return {@code true} if the student has logged in successfully
-	 * @return {@code false} otherwise
+	 * @return {@code true} if the student has logged in successfully, or {@code false} otherwise
 	 */
 	@Override
 	public boolean login(String password) throws AppException {
@@ -90,8 +89,7 @@ public class Student extends User {
 	 * access period configured. If the access period is not configured, this
 	 * function always returns false.
 	 * 
-	 * @return {@code true} 	If the student is allowed to login.
-	 * @return {@code false}	If the student is not allowed to login.
+	 * @return {@code true} 	If the student is allowed to login, or {@code false} otherwise
 	 */
 	private boolean canLogin() {
 		LocalDateTime now = LocalDateTime.now();
@@ -118,8 +116,7 @@ public class Student extends User {
 	/**
 	 * Retrieve the period in which students are allowed to login as a string.
 	 * 
-	 * @return "yyyy-mm-ddThh:mm:ss to yyyy-mm-ddThh:mm:ss" if a access period is set.
-	 * @return {@code null} otherwise.
+	 * @return "yyyy-mm-ddThh:mm:ss to yyyy-mm-ddThh:mm:ss" if a access period is set, or {@code null} otherwise.
 	 */
 	public static String getAccessPeriod() {
 		LocalDateTime accessPeriodStart = (LocalDateTime) get("student-accessperiod", "start");

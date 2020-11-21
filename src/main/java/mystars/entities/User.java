@@ -42,9 +42,9 @@ public abstract class User extends Entity {
 	 * Create a new user after ensuring that there is no other user with the same
 	 * username.
 	 * 
-	 * @param userName The user's username.
+	 * @param username The user's username.
 	 * @param password The user's password.
-	 * @throws UserAlreadyExistsException If there already exists a user with the
+	 * @throws AppException If there already exists a user with the
 	 *                                    same username.
 	 */
 	protected User(String username, String password) throws AppException {
@@ -84,9 +84,9 @@ public abstract class User extends Entity {
 	 * Validates a user's login by verifying that their username and password
 	 * matches the entry in the database.
 	 * 
-	 * @param userName The user's username.
+	 * @param username The user's username.
 	 * @param password The user's password.
-	 * @throws InvalidLoginException If the login is unsuccessful due to incorrect
+	 * @throws AppException If the login is unsuccessful due to incorrect
 	 *                               username or password.
 	 * @return The user object of the user successfully logging in.
 	 */
