@@ -308,6 +308,10 @@ public class Course extends Entity {
 	public void changeIndex(Student student, int targetIndexNo) throws AppException {
 		Index indexCur = getStudentIndex(student);
 		Index indexTarget = getIndex(targetIndexNo);
+		
+		if (indexCur == indexTarget) {
+			throw new AppException("You cannot change to the same index");
+		}
 
 		if (indexTarget.getVacancies() == 0) {
 			// we explicitly want vacancies here so that the student cannot be swop to a
