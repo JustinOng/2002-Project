@@ -228,6 +228,11 @@ public class MySTARS {
 					}
 					courseController.swopIndex(student, isResponse.getIndexA(), (Student) targetUser,
 							isResponse.getIndexB());
+
+					ui.renderDialog("Swop Index",
+							String.format("%s is now enrolled in Index %d\n%s is now enrolled in Index %d",
+									student.getName(), isResponse.getIndexB(), ((Student) targetUser).getName(),
+									isResponse.getIndexA()));
 					break;
 				}
 			} catch (AppException e) {
