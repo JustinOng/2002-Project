@@ -208,6 +208,9 @@ public class MySTARS {
 						break;
 
 					courseController.changeIndex(courseCode, student, indexInfo.get(textResponse.getText()));
+
+					ui.renderDialog("Change Index", String.format("You are now registered for Index %s",
+							indexInfo.get(textResponse.getText())));
 					break;
 
 				// Swop course index with another student.
