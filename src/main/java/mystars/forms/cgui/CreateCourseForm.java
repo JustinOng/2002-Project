@@ -17,24 +17,25 @@ import mystars.forms.*;
  */
 public class CreateCourseForm {
 	/**
-	 * The response object for the course creation form.
+	 * Object used to contain response of this form. Class attribute to avoid error
+	 * due to assignment from runnable
 	 */
 	private CreateCourseResponse response;
 
 	/**
-	 * Sets the parameters for the graphical user interface administrators will use
-	 * when creating courses.
+	 * Displays form requesting user input for creating a course
 	 * 
 	 * @param gui     The graphical user interface object.
-	 * @param schools The list of schools.
-	 * @return The course creation form response object.
+	 * @param schools The list of schools that a course can belong to
+	 * @return User input to be used to create a new Course, or {@code null} if the
+	 *         form is cancelled/closed without any input
 	 */
 	public CreateCourseResponse getResponse(MultiWindowTextGUI gui, List<String> schools) {
 		final AbstractWindow window = new BasicWindow();
 
 		response = null;
 
-		// Create new Jpanel object and set the layout as a grid.
+		// Create new panel object and set the layout as a grid.
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(2));
 

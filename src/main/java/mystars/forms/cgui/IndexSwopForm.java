@@ -17,23 +17,24 @@ import mystars.forms.*;
  */
 public class IndexSwopForm {
 	/**
-	 * The response object for the index swopping form.
+	 * Object used to contain response of this form. Class attribute to avoid error
+	 * due to assignment from runnable
 	 */
 	private IndexSwopResponse response;
 
 	/**
-	 * Sets the parameters for the graphical user interface students will use when
-	 * swopping their course index with another student.
+	 * Displays form requesting user input for swopping indexes
 	 * 
 	 * @param gui The graphical user interface object.
-	 * @return The index swopping form response object.
+	 * @return User input, or {@code null} if the form is cancelled/closed without
+	 *         any input
 	 */
 	public IndexSwopResponse getResponse(MultiWindowTextGUI gui) {
 		final AbstractWindow window = new BasicWindow();
 
 		response = null;
 
-		// Create new Jpanel object and set the layout as a grid.
+		// Create new panel object and set the layout as a grid.
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(2));
 

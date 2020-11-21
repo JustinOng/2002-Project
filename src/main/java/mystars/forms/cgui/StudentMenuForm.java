@@ -14,17 +14,21 @@ import mystars.forms.*;
  */
 public class StudentMenuForm {
 	/**
-	 * The response object for the student menu form.
+	 * Object used to contain response of this form. Class attribute to avoid error
+	 * due to assignment from runnable
 	 */
 	private StudentMenuResponse response;
 
 	/**
-	 * Sets the parameters for the graphical user interface students will use when
-	 * using MySTARS.
+	 * Displays list of options that a student can perform to manage courses. {@code
+	 * courses} is also displayed on the form. If {@code courses} is empty (ie the
+	 * student is not in any courses), the only option displayed is to register for
+	 * a course.
 	 * 
 	 * @param gui     The graphical user interface object.
-	 * @param courses The list of courses that students can register for.
-	 * @return The student menu form response object.
+	 * @param courses List of courses that the student is currently in.
+	 * @return Selected option, or {@code null} if the form is closed without any
+	 *         input
 	 */
 	public StudentMenuResponse getResponse(MultiWindowTextGUI gui, List<String> courses) {
 		final AbstractWindow window = new BasicWindow();

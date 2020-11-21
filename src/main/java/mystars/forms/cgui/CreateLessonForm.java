@@ -18,19 +18,20 @@ import mystars.forms.*;
  */
 public class CreateLessonForm {
 	/**
-	 * The response object for the course index lesson creation form.
+	 * Object used to contain response of this form. Class attribute to avoid error
+	 * due to assignment from runnable
 	 */
 	private CreateLessonResponse response;
 
 	/**
-	 * Sets the parameters for the graphical user interface administrators will use
-	 * when creating course index lessons.
+	 * Displays form requesting user input for creating a lesson
 	 * 
 	 * @param gui        The graphical user interface object.
-	 * @param index      The index of the course.
-	 * @param lessonType The lesson type of the index: Lecture, Tutorial or Lab.
-	 * @param days       The days of the week which the lesson will be conducted.
-	 * @return The course index lesson creation form response object.
+	 * @param index      Parent index number to be displayed on the form
+	 * @param lessonType The list of lesson types that the lesson can take.
+	 * @param days       The list of days that the lesson can be conducted on.
+	 * @return User input to be used to create a new Lesson, or {@code null} if the
+	 *         form is cancelled/closed without any input
 	 */
 	public CreateLessonResponse getResponse(MultiWindowTextGUI gui, String index, List<String> lessonType,
 			List<String> days) {
@@ -38,7 +39,7 @@ public class CreateLessonForm {
 
 		response = null;
 
-		// Create new Jpanel object and set the layout as a grid.
+		// Create new panel object and set the layout as a grid.
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(2));
 

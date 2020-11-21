@@ -15,7 +15,8 @@ import mystars.forms.*;
  */
 public class CreateStudentForm {
 	/**
-	 * The response object for the creation of new student form.
+	 * Object used to contain response of this form. Class attribute to avoid error
+	 * due to assignment from runnable
 	 */
 	private CreateStudentResponse response;
 
@@ -24,16 +25,17 @@ public class CreateStudentForm {
 	 * when creating new students.
 	 * 
 	 * @param gui           The graphical user interface object.
-	 * @param genders       The gender of the student.
-	 * @param nationalities The nationality of the student.
-	 * @return The creation of new student form response object.
+	 * @param genders       The list of genders that a student can assume
+	 * @param nationalities The list of nationalities that a student can atssume
+	 * @return User input to be used to create a new Student, or {@code null} if the
+	 *         form is cancelled/closed without any input
 	 */
 	public CreateStudentResponse getResponse(MultiWindowTextGUI gui, List<String> genders, List<String> nationalities) {
 		final AbstractWindow window = new BasicWindow();
 
 		response = null;
 
-		// Create new Jpanel object and set the layout as a grid.
+		// Create new panel object and set the layout as a grid.
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(2));
 

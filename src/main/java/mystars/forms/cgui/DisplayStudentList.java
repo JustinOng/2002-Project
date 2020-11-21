@@ -13,18 +13,16 @@ import java.util.List;
  * This manages the user interface for displaying the list of students.
  */
 public class DisplayStudentList {
-	/**
-	 * Sets the parameters for the graphical user interface administrators will use
-	 * when displaying the list of all the students.
-	 * 
+	/** 
 	 * @param gui      The graphical user interface object.
 	 * @param title    The title of the form.
-	 * @param students The list of students.
+	 * @param students The list of students. List of string arrays, ie { {"name",
+	 *                 "gender", "nationality}, ...}
 	 */
 	public static void show(MultiWindowTextGUI gui, String title, List<String[]> students) {
 		final AbstractWindow window = new BasicWindow();
 
-		// Create new Jpanel object and set the layout as a grid.
+		// Create new panel object and set the layout as a grid.
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(1));
 

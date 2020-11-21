@@ -14,7 +14,8 @@ import mystars.forms.*;
  */
 public class IndexManagementForm {
 	/**
-	 * The response object for the course index management form.
+	 * Object used to contain response of this form. Class attribute to avoid error
+	 * due to assignment from runnable
 	 */
 	private IndexManagementResponse response;
 
@@ -23,16 +24,17 @@ public class IndexManagementForm {
 	 * when managing course indexes.
 	 * 
 	 * @param gui        The graphical user interface object.
-	 * @param courseCode The course code.
-	 * @param indexes    The list of indexes for the course.
-	 * @return The course index management form response object.
+	 * @param courseCode Course code to display in the form title
+	 * @param indexes    List of indexes that can be managed
+	 * @return Selected option, or {@code null} if the form is cancelled/closed
+	 *         without any input
 	 */
 	public IndexManagementResponse getResponse(MultiWindowTextGUI gui, String courseCode, List<String> indexes) {
 		final AbstractWindow window = new BasicWindow();
 
 		response = null;
 
-		// Create new Jpanel object and set the layout as a grid.
+		// Create new panel object and set the layout as a grid.
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(3));
 

@@ -11,7 +11,8 @@ public interface IUserInterface {
 	/**
 	 * Displays login form
 	 * 
-	 * @return {@code LoginResponse} containing user input
+	 * @return {@code LoginResponse} containing user input, or {@code null} if the
+	 *         form is closed without any input
 	 */
 	public LoginResponse renderLoginForm();
 
@@ -22,7 +23,8 @@ public interface IUserInterface {
 	 * a course.
 	 * 
 	 * @param courses List of courses that the student is currently in.
-	 * @return Selected option
+	 * @return Selected option, or {@code null} if the form is closed without any
+	 *         input
 	 */
 	public StudentMenuResponse renderStudentMenuForm(List<String> courses);
 

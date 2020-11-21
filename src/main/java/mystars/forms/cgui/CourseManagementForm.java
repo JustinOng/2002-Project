@@ -14,24 +14,26 @@ import mystars.forms.*;
  */
 public class CourseManagementForm {
 	/**
-	 * The response object for the course management form.
+	 * Object used to contain response of this form. Class attribute to avoid error
+	 * due to assignment from runnable
 	 */
 	private CourseManagementResponse response;
 
 	/**
-	 * Sets the parameters for the graphical user interface administrators will use
-	 * when managing courses.
+	 * Displays form with list of {@code courses} and request for the user to select
+	 * an action to perform on a course
 	 * 
 	 * @param gui     The graphical user interface object.
 	 * @param courses The list of courses.
-	 * @return The course management form response object.
+	 * @return Selected option, or {@code null} if the form is cancelled/closed
+	 *         without any input
 	 */
 	public CourseManagementResponse getResponse(MultiWindowTextGUI gui, List<String> courses) {
 		final AbstractWindow window = new BasicWindow();
 
 		response = null;
 
-		// Create new Jpanel object and set the layout as a grid.
+		// Create new panel object and set the layout as a grid.
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(3));
 

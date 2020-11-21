@@ -16,24 +16,25 @@ import mystars.forms.*;
  */
 public class CreateIndexForm {
 	/**
-	 * The response object for for the course index creation form.
+	 * Object used to contain response of this form. Class attribute to avoid error
+	 * due to assignment from runnable
 	 */
 	private CreateIndexResponse response;
 
 	/**
-	 * Sets the parameters for the graphical user interface administrators will use
-	 * when creating course indexes.
+	 * Displays form requesting user input for creating a course index
 	 * 
 	 * @param gui    The graphical user interface object.
-	 * @param course The course name.
-	 * @return The course index creation form response object.
+	 * @param course Parent course name to be displayed on the form
+	 * @return User input to be used to create a new Index, or {@code null} if the
+	 *         form is cancelled/closed without any input
 	 */
 	public CreateIndexResponse getResponse(MultiWindowTextGUI gui, String course) {
 		final AbstractWindow window = new BasicWindow();
 
 		response = null;
 
-		// Create new Jpanel object and set the layout as a grid.
+		// Create new panel object and set the layout as a grid.
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(2));
 

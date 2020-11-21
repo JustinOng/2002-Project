@@ -13,23 +13,24 @@ import mystars.forms.*;
  */
 public class AdminMenuForm {
 	/**
-	 * The response object for the administrator menu form.
+	 * Object used to contain response of this form. Class attribute to avoid error
+	 * due to assignment from runnable
 	 */
 	private AdminMenuResponse response;
 
 	/**
-	 * Sets the parameters for the graphical user interface administrators will use
-	 * when managing MySTARS.
+	 * Displays admin menu with list of things the admin can do
 	 * 
 	 * @param gui The graphical user interface object.
-	 * @return The administrator menu form response object.
+	 * @return Selected option, or {@code null} if the form is closed without any
+	 *         input
 	 */
 	public AdminMenuResponse getResponse(MultiWindowTextGUI gui) {
 		final AbstractWindow window = new BasicWindow();
 
 		response = null;
 
-		// Create new Jpanel object and set the layout as a grid.
+		// Create new panel object and set the layout as a grid.
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(1));
 

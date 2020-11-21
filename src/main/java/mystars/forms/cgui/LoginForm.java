@@ -14,16 +14,17 @@ import java.util.Arrays;
  */
 public class LoginForm {
 	/**
-	 * The response object for the user login form.
+	 * Object used to contain response of this form. Class attribute to avoid error
+	 * due to assignment from runnable
 	 */
 	private LoginResponse response;
 
 	/**
-	 * Sets the parameters for the graphical user interface users will use when
-	 * logging in.
+	 * Displays login form
 	 * 
 	 * @param gui The graphical user interface object.
-	 * @return The user login form response object.
+	 * @return {@code LoginResponse} containing user input, or {@code null} if the
+	 *         form is closed without any input
 	 */
 	public LoginResponse getResponse(MultiWindowTextGUI gui) {
 		final AbstractWindow window = new BasicWindow();

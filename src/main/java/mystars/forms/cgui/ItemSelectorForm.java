@@ -19,7 +19,8 @@ public class ItemSelectorForm implements RadioBoxList.Listener {
 	private AbstractWindow window = new BasicWindow();
 
 	/**
-	 * The text response object.
+	 * Object used to contain response of this form. Class attribute to avoid error
+	 * due to assignment from runnable
 	 */
 	private TextResponse response;
 
@@ -29,13 +30,13 @@ public class ItemSelectorForm implements RadioBoxList.Listener {
 	private List<String> items;
 
 	/**
-	 * Sets the parameters for the graphical user interface users will use when
-	 * making selections for options listed on the form.
+	 * Displays a generic form requesting that the user select one of {@code items}
 	 * 
 	 * @param gui   The graphical user interface object.
-	 * @param title The title of the form.
-	 * @param items The list of options to be displayed on the form.
-	 * @return The text response object.
+	 * @param title Title to label form with
+	 * @param items List of items that can be selected
+	 * @return Selected item, or {@code null} if the form is cancelled/closed
+	 *         without any input
 	 */
 	public TextResponse getResponse(MultiWindowTextGUI gui, String title, List<String> items) {
 		response = null;

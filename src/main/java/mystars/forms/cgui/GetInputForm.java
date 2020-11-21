@@ -28,8 +28,7 @@ public class GetInputForm {
 
 	/**
 	 * Shows a dialog prompt for the user's input, and returns a numerical input
-	 * displayed by the user. Checks for the error of user's input not being
-	 * numerical.
+	 * entered by the user.
 	 * 
 	 * @param gui         The graphical user interface object.
 	 * @param title       The title of the prompt window.
