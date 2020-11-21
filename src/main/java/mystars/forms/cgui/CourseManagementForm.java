@@ -68,6 +68,8 @@ public class CourseManagementForm {
 
 		window.setTitle("Course Management");
 		window.setHints(Arrays.asList(Window.Hint.CENTERED));
+		KeyStrokeListener listener = new KeyStrokeListener();
+		window.addWindowListener(listener);
 
 		gui.addWindowAndWait(window);
 

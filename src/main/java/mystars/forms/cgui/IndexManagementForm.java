@@ -59,6 +59,8 @@ public class IndexManagementForm {
 
 		window.setTitle("Manage Course " + courseCode);
 		window.setHints(Arrays.asList(Window.Hint.CENTERED));
+		KeyStrokeListener listener = new KeyStrokeListener();
+		window.addWindowListener(listener);
 		
 		gui.addWindowAndWait(window);
 
