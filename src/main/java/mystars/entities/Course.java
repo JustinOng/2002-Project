@@ -54,6 +54,8 @@ public class Course extends Entity {
 		if (courseCode.isBlank()) {
 			throw new AppException("courseCode cannot be blank");
 		}
+		
+		courseCode = courseCode.toUpperCase();
 
 		if (get("course", courseCode) != null) {
 			throw new AppException(String.format("%s already exists", courseCode));
@@ -74,6 +76,7 @@ public class Course extends Entity {
 	 * @throws AppException If the courseCode does not exist.
 	 */
 	public static Course getCourse(String courseCode) throws AppException {
+		courseCode = courseCode.toUpperCase();
 		Course course = (Course) get("course", courseCode);
 		if (course != null) {
 			return course;
