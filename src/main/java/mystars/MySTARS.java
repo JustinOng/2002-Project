@@ -142,14 +142,20 @@ public class MySTARS {
 		HashMap<String, Integer> indexInfo = new HashMap<>();
 
 		while (true) {
+			// map of human-friendly course description:course code
 			HashMap<String, String> registeredInfo = new HashMap<>();
-
-			// List the course registration information for the student.
-			// Includes which courses and indexes he/she has registered for.
-			for (Index index : courseController.getStudentIndexes(student)) {
-				registeredInfo.put(String.format("%s: %s", index.getCourse(), index),
+			for (Registration reg: courseController.getStudentRegistrations(student)) {
+				Index index = reg.getIndex();
+				
+				if (reg.getStatus() == Registration.Status.Waitlist) {
+					registeredInfo.put(String.format("%s: %s (Waitlist)", index.getCourse(), index),
+							index.getCourse().getCourseCode());
+				} else {
+					registeredInfo.put(String.format("%s: %s", index.getCourse(), index),
 						index.getCourse().getCourseCode());
+				}
 			}
+			
 			StudentMenuResponse response = ui.renderStudentMenuForm(new ArrayList<String>(registeredInfo.keySet()));
 
 			if (response == null) {

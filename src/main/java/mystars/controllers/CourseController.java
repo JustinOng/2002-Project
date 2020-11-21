@@ -222,17 +222,27 @@ public class CourseController {
 	/**
 	 * Returns the indexes that {@code student} is enrolled in
 	 * 
-	 * @param student
+	 * @param student target to retrieve indexes of
 	 * @return list of indexes that {@code student} is enrolled in
 	 */
 	public List<Index> getStudentIndexes(Student student) {
-		List<Index> indexes = new ArrayList<Index>();
+		return student.getTimetable().getIndexes();
+	}
+	
+	/**
+	 * Returns the indexes that {@code student} is enrolled in, along with registration status (Registered or Waitlisted)
+	 * 
+	 * @param student target to retrieve registrations of
+	 * @return list of registrations belonging to {@code student}
+	 */
+	public List<Registration> getStudentRegistrations(Student student) {
+		List<Registration> regs = new ArrayList<Registration>();
 
-		for (Index index : student.getTimetable().getIndexes()) {
-			indexes.add(index);
+		for (Registration reg : student.getTimetable().getRegistrations()) {
+			regs.add(reg);
 		}
 
-		return indexes;
+		return regs;
 	}
 
 	/**
