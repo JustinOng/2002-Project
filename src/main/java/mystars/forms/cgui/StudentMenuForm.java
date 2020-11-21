@@ -32,7 +32,7 @@ public class StudentMenuForm {
 
 		// Create new Jpanel object and set the layout as a grid.
 		Panel panel = new Panel();
-		panel.setLayoutManager(new GridLayout(4));
+		panel.setLayoutManager(new GridLayout(5));
 
 		// Insert textboxes, labels and buttons as required.
 		if (courses != null) {
@@ -40,7 +40,7 @@ public class StudentMenuForm {
 					GridLayout.createHorizontallyFilledLayoutData(5));
 		} else {
 			panel.addComponent(new Label("No currently registered courses"),
-					GridLayout.createHorizontallyFilledLayoutData(4));
+					GridLayout.createHorizontallyFilledLayoutData(5));
 		}
 		
 		new Button("Register Course", new Runnable() {
@@ -68,6 +68,13 @@ public class StudentMenuForm {
 			new Button("Swop Index", new Runnable() {
 				public void run() {
 					response = new StudentMenuResponse(StudentMenuResponse.Selected.Swop);
+					window.close();
+				}
+			}).addTo(panel);
+			
+			new Button("Logout", new Runnable() {
+				public void run() {
+					response = new StudentMenuResponse(StudentMenuResponse.Selected.Logout);
 					window.close();
 				}
 			}).addTo(panel);

@@ -106,24 +106,26 @@ public class MySTARS {
 
 		try {
 			while (true) {
-				LoginResponse response = ui.renderLoginForm();
-
-				if (response == null)
-					continue;
-				try {
-					// Login the user after getting their respective and correct credentials.
-					user = userController.login(response.getUsername(), response.getPassword());
-					break;
-				} catch (AppException e) {
-					ui.renderDialog("Login Failed", e.getMessage());
+				while (true) {
+					LoginResponse response = ui.renderLoginForm();
+	
+					if (response == null)
+						continue;
+					try {
+						// Login the user after getting their respective and correct credentials.
+						user = userController.login(response.getUsername(), response.getPassword());
+						break;
+					} catch (AppException e) {
+						ui.renderDialog("Login Failed", e.getMessage());
+					}
 				}
-			}
-
-			// Check if the user is either an instance of student or administrators.
-			if (userController.isStudent(user)) {
-				loopStudent();
-			} else if (userController.isAdmin(user)) {
-				loopAdmin();
+	
+				// Check if the user is either an instance of student or administrators.
+				if (userController.isStudent(user)) {
+					loopStudent();
+				} else if (userController.isAdmin(user)) {
+					loopAdmin();
+				}
 			}
 		} catch (UIException e) {
 
@@ -234,6 +236,8 @@ public class MySTARS {
 									student.getName(), isResponse.getIndexB(), ((Student) targetUser).getName(),
 									isResponse.getIndexA()));
 					break;
+				case Logout:
+					return;
 				}
 			} catch (AppException e) {
 				ui.renderDialog("Error", e.getMessage());
@@ -326,8 +330,8 @@ public class MySTARS {
 					break;
 				case ListStudents:
 					displayStudents("All Students", userController.getAllStudents());
-				default:
-					break;
+				case Logout:
+					return;
 				}
 			} catch (AppException e) {
 				ui.renderDialog("Error", e.getMessage());
