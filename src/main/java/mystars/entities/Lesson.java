@@ -116,8 +116,8 @@ public class Lesson implements Serializable {
 				if (this.day == lesson.day) {
 					// if both lessons occur on the same week & day, compare the period they are
 					// conducted.
-					if ((this.startPeriod >= lesson.startPeriod && this.startPeriod <= lesson.endPeriod)
-							|| (lesson.startPeriod >= this.startPeriod && lesson.startPeriod <= this.endPeriod)) {
+					if ((this.startPeriod >= lesson.startPeriod && this.startPeriod < lesson.endPeriod)
+							|| (lesson.startPeriod >= this.startPeriod && lesson.startPeriod < this.endPeriod)) {
 						// if both lessons occur on the same week & day & overlaps in period, return
 						// true.
 						return true;
