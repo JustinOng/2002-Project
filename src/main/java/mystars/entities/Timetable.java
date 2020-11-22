@@ -15,7 +15,10 @@ public class Timetable implements Serializable {
 	/**
 	 * ID for versioning of serialized data.
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
+	
+	private static int maxAu = Integer.MAX_VALUE;
+	private int au = 0;
 
 	/**
 	 * List of indexes added to this timetable. Registration is used to hold an
@@ -49,6 +52,7 @@ public class Timetable implements Serializable {
 			registrations.add(new Registration(index, Registration.Status.Waitlist));
 		} else {
 			registrations.add(new Registration(index, Registration.Status.Registered));
+			au += index.getCourse().getAu();
 		}
 	}
 
@@ -96,13 +100,23 @@ public class Timetable implements Serializable {
 	 * removing {@code remove}.
 	 * 
 	 * @param add    The index to be added.
-	 * @param remove The index to be removed.
+	 * @param remove The index to be removed. Can be {@code null}
 	 * @throws AppException If another index of the same course of {@code add} has
 	 *                      already been added.
 	 * @throws AppException If adding {@code add} would result in a clash with
 	 *                      another index.
 	 */
 	public void assertAddIndex(Index add, Index remove) throws AppException {
+		int newAu = au + add.getCourse().getAu();
+		
+		if (remove != null) {
+			newAu -= remove.getCourse().getAu();
+		}
+		
+		if (newAu > maxAu) {
+			throw new AppException(String.format("You can only register for %d AU of courses", maxAu));
+		}
+		
 		for (Registration reg : registrations) {
 			Index i = reg.getIndex();
 			if (i == remove)
@@ -136,6 +150,7 @@ public class Timetable implements Serializable {
 			return;
 		}
 		registrations.remove(remove);
+		au -= remove.getIndex().getCourse().getAu();
 	}
 
 	/**
@@ -185,8 +200,13 @@ public class Timetable implements Serializable {
 		for (Registration reg : registrations) {
 			if (reg.getIndex() == index) {
 				reg.setRegistered();
+				au += index.getCourse().getAu();
 				return;
 			}
 		}
+	}
+	
+	public void setMaxAu(int max) {
+		maxAu = max;
 	}
 }
