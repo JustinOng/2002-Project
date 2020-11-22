@@ -7,6 +7,8 @@ import java.util.List;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialogBuilder;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialogButton;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
@@ -168,8 +170,13 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	public CreateLessonResponse renderCreateLessonForm(String index, List<String> lessonType, List<String> days) {
 		return createLessonForm.getResponse(gui, index, lessonType, days);
 	}
-	
+
 	public void renderStudentList(String title, List<String[]> students) {
 		DisplayStudentList.show(gui, title, students);
+	}
+
+	public boolean renderConfirmation(String title, String msg) {
+		return new MessageDialogBuilder().setTitle(title).setText(msg).addButton(MessageDialogButton.Cancel)
+				.addButton(MessageDialogButton.OK).build().showDialog(gui) == MessageDialogButton.OK;
 	}
 }

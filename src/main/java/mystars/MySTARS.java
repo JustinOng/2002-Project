@@ -190,6 +190,11 @@ public class MySTARS {
 					if (textResponse == null)
 						break;
 
+					if (!ui.renderConfirmation("Confirm Drop Course",
+							String.format("Drop %s?", textResponse.getText()))) {
+						break;
+					}
+
 					courseController.dropCourse(student, registeredInfo.get(textResponse.getText()));
 
 					ui.renderDialog("Drop Course",

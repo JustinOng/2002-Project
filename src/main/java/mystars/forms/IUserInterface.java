@@ -137,7 +137,7 @@ public interface IUserInterface {
 	 * Displays form requesting for integer input from the user
 	 * 
 	 * @param title       The form title.
-	 * @param description The for description.
+	 * @param description The form description.
 	 * @return User input, or {@code null} if the form is cancelled/closed without
 	 *         any input
 	 */
@@ -150,6 +150,15 @@ public interface IUserInterface {
 	 * @param msg   The dialog message.
 	 */
 	public void renderDialog(String title, String msg);
+	
+	/**
+	 * Displays dialog with specified title and message requesting user confirmation
+	 * 
+	 * @param title The dialog title.
+	 * @param msg The dialog message.
+	 * @return {@code true} if the user confirmed, or {@code false} otherwise
+	 */
+	public boolean renderConfirmation(String title, String msg);
 
 	/**
 	 * Displays a list of students with the given title
