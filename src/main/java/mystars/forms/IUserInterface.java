@@ -179,4 +179,16 @@ public interface IUserInterface {
 	 *                "Time", "Venue"}
 	 */
 	public void renderIndexInfo(String title, Map<String, List<String[]>> indexes);
+
+	/**
+	 * @param title
+	 * @param description
+	 * @param labelA
+	 * @param lessonsA
+	 * @param labelB
+	 * @param lessonsB
+	 * @return
+	 */
+	public boolean renderIndexChangeConfirmation(String title, String description, String labelA,
+			List<String[]> lessonsA, String labelB, List<String[]> lessonsB);
 }

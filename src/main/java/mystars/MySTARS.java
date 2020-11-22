@@ -65,7 +65,7 @@ public class MySTARS {
 	}
 
 	/**
-	 * Performs initialisation
+	 * Initialises controllers and configures saving of data on exit
 	 */
 	public void start() {
 		storageController.start();
@@ -146,20 +146,19 @@ public class MySTARS {
 	private void loopStudent() {
 		Student student = (Student) user;
 		TextResponse textResponse;
-		HashMap<String, Integer> indexInfo = new HashMap<>();
+		HashMap<String, Index> indexInfo = new HashMap<>();
+		List<String[]> lessonsA, lessonsB;
 
 		while (true) {
 			// map of human-friendly course description:course code
-			HashMap<String, String> registeredInfo = new HashMap<>();
+			HashMap<String, Index> registeredInfo = new HashMap<>();
 			for (Registration reg : courseController.getStudentRegistrations(student)) {
 				Index index = reg.getIndex();
 
 				if (reg.getStatus() == Registration.Status.Waitlist) {
-					registeredInfo.put(String.format("%s: %s (Waitlist)", index.getCourse(), index),
-							index.getCourse().getCourseCode());
+					registeredInfo.put(String.format("%s: %s (Waitlist)", index.getCourse(), index), index);
 				} else {
-					registeredInfo.put(String.format("%s: %s", index.getCourse(), index),
-							index.getCourse().getCourseCode());
+					registeredInfo.put(String.format("%s: %s", index.getCourse(), index), index);
 				}
 			}
 
@@ -202,7 +201,8 @@ public class MySTARS {
 						break;
 					}
 
-					courseController.dropCourse(student, registeredInfo.get(textResponse.getText()));
+					courseController.dropCourse(student,
+							registeredInfo.get(textResponse.getText()).getCourse().getCourseCode());
 
 					ui.renderDialog("Drop Course",
 							String.format("You have dropped %s", registeredInfo.get(textResponse.getText())));
@@ -216,10 +216,11 @@ public class MySTARS {
 					if (textResponse == null)
 						break;
 
-					String courseCode = registeredInfo.get(textResponse.getText());
+					Index indexSource = registeredInfo.get(textResponse.getText());
+					String courseCode = indexSource.getCourse().getCourseCode();
 
 					for (Index index : courseController.getCourseIndexes(courseCode)) {
-						indexInfo.put(index.toString(), index.getIndexNo());
+						indexInfo.put(index.toString(), index);
 					}
 					textResponse = ui.renderItemSelectorForm("Select New Index",
 							new ArrayList<String>(indexInfo.keySet()));
@@ -227,9 +228,32 @@ public class MySTARS {
 					if (textResponse == null)
 						break;
 
-					courseController.changeIndex(courseCode, student, indexInfo.get(textResponse.getText()));
+					Index indexTarget = indexInfo.get(textResponse.getText());
 
-					ui.renderDialog("Change Index", String.format("You are now registered for Index %s",
+					if (indexSource == indexTarget) {
+						ui.renderDialog("Index Change", "You cannot change to the same index");
+						break;
+					}
+
+					lessonsA = new ArrayList<String[]>();
+					for (Lesson lesson : indexSource.getLessons()) {
+						lessonsA.add(extractLessonProperties(lesson));
+					}
+
+					lessonsB = new ArrayList<String[]>();
+					for (Lesson lesson : indexTarget.getLessons()) {
+						lessonsB.add(extractLessonProperties(lesson));
+					}
+
+					if (!ui.renderIndexChangeConfirmation("Confirm Index Change",
+							String.format("Change from %s to %s", indexSource, indexTarget), indexSource.toString(),
+							lessonsA, indexTarget.toString(), lessonsB)) {
+						break;
+					}
+
+					courseController.changeIndex(courseCode, student, indexTarget.getIndexNo());
+
+					ui.renderDialog("Change Index", String.format("You are now registered for %s",
 							indexInfo.get(textResponse.getText())));
 					break;
 
@@ -240,12 +264,32 @@ public class MySTARS {
 					if (isResponse == null)
 						break;
 
-					// Get the login credentials of the peer student whose index is to be swapped
-					// with.
+					// Validate credentials of peer
 					User targetUser = userController.login(isResponse.getUsername(), isResponse.getPassword());
 					if (!userController.isStudent(targetUser)) {
 						throw new AppException("Invalid peer");
 					}
+
+					Index indexA = courseController.getIndex(isResponse.getIndexA());
+					Index indexB = courseController.getIndex(isResponse.getIndexB());
+
+					lessonsA = new ArrayList<String[]>();
+					for (Lesson lesson : indexA.getLessons()) {
+						lessonsA.add(extractLessonProperties(lesson));
+					}
+
+					lessonsB = new ArrayList<String[]>();
+					for (Lesson lesson : indexB.getLessons()) {
+						lessonsB.add(extractLessonProperties(lesson));
+					}
+
+					if (!ui.renderIndexChangeConfirmation("Confirm Index Swop", "Current Indexes:", 
+							String.format("%s: %s", ((Student) user).getName(), indexA.toString()),
+							lessonsA,  
+							String.format("%s: %s", ((Student) targetUser).getName(), indexB.toString()), lessonsB)) {
+						break;
+					}
+
 					courseController.swopIndex(student, isResponse.getIndexA(), (Student) targetUser,
 							isResponse.getIndexB());
 
@@ -471,14 +515,13 @@ public class MySTARS {
 					List<String[]> lessons = new ArrayList<>();
 
 					for (Lesson lesson : index.getLessons()) {
-						lessons.add(new String[] { lesson.getLessonType().toString(), lesson.getGroupNo(),
-								lesson.getDay().toString(), lesson.getTimeString().toString(), lesson.getLocation() });
+						lessons.add(extractLessonProperties(lesson));
 					}
 
 					Map<String, List<String[]>> indexLessonMap = new HashMap<>();
 
 					indexLessonMap.put(index.toString(), lessons);
-					
+
 					ui.renderIndexInfo("Lessons", indexLessonMap);
 					break;
 				case ListStudents:
@@ -508,6 +551,11 @@ public class MySTARS {
 			data.add(new String[] { s.getName(), s.getGender().toString(), s.getNationality().toString() });
 		}
 		ui.renderStudentList(title, data);
+	}
+
+	private String[] extractLessonProperties(Lesson lesson) {
+		return new String[] { lesson.getLessonType().toString(), lesson.getGroupNo(), lesson.getDay().toString(),
+				lesson.getTimeString().toString(), lesson.getLocation() };
 	}
 
 	public void loadIndexes(String dataPath) {

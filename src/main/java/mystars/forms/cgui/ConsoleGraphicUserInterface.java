@@ -90,6 +90,11 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	 * The index management form.
 	 */
 	private IndexManagementForm indexManagementForm = new IndexManagementForm();
+	
+	/**
+	 * Generic form to confirm changing between two indexes
+	 */
+	private IndexChangeConfirmationForm indexChangeConfirmationForm = new IndexChangeConfirmationForm();
 
 	/**
 	 * Creates a new instance of this class and initialises Lanterna gui. Attempt to
@@ -183,5 +188,10 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 
 	public void renderIndexInfo(String title, Map<String, List<String[]>> indexes) {
 		DisplayIndexList.show(gui, title, indexes);
+	}
+
+	public boolean renderIndexChangeConfirmation(String title, String description, String labelA,
+			List<String[]> lessonsA, String labelB, List<String[]> lessonsB) {
+		return indexChangeConfirmationForm.confirm(gui, title, description, labelA, lessonsA, labelB, lessonsB);
 	}
 }
