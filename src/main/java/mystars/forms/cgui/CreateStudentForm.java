@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 
 import mystars.forms.*;
 
@@ -69,9 +70,20 @@ public class CreateStudentForm {
 
 		new Button("Create", new Runnable() {
 			public void run() {
-				response = new CreateStudentResponse(usernameInput.getText(), passwordInput.getText(),
-						nameInput.getText(), emailInput.getText(), matricNoInput.getText(), genderBox.getSelectedItem(),
-						nationalityBox.getSelectedItem());
+				String username = usernameInput.getText();
+				String password = passwordInput.getText();
+				String name = nameInput.getText();
+				String email = emailInput.getText();
+				String matricNo = matricNoInput.getText();
+
+				if (username.isBlank() || password.isBlank() || name.isBlank() || email.isBlank()
+						|| matricNo.isBlank()) {
+					MessageDialog.showMessageDialog(gui, "Error", "All fields must be filled out");
+					return;
+				}
+
+				response = new CreateStudentResponse(username, password, name, email, matricNo,
+						genderBox.getSelectedItem(), nationalityBox.getSelectedItem());
 				window.close();
 			}
 		}).addTo(panel);
