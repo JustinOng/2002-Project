@@ -81,6 +81,17 @@ public class MySTARS {
 			}
 		});
 	}
+	
+	/**
+	 * Creates admin account with hardcoded credentials admin:admin
+	 */
+	public void createAdmin() {
+		try {
+			new Admin("admin", "admin");
+			System.out.println("Created admin account - username: admin, password: admin");
+		} catch (AppException e) {
+		}
+	}
 
 	/**
 	 * Main UI loop
@@ -95,7 +106,6 @@ public class MySTARS {
 
 		try {
 			// Create new administrator and student objects.
-			new Admin("admin", "1");
 			new Student("student1", "starsnotifications2021s1+student1@gmail.com", "u12345", "student1", "1",
 					Gender.Male, Nationality.Singaporean);
 			new Student("student2", "starsnotifications2021s1+student2@gmail.com", "u67890", "student2", "2",

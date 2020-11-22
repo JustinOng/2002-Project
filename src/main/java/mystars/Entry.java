@@ -21,7 +21,8 @@ public class Entry {
 	 * --config=/path/to/file - path to properties file containing parameters for
 	 * email sending<br>
 	 * --load-indexes=/path/to/file - path to txt file containing course
-	 * information. See {@link MySTARS#loadIndexes(String)} for format information
+	 * information. See {@link MySTARS#loadIndexes(String)} for format information<br>
+	 * --create-admin - create admin account. See {@link MySTARS#createAdmin()} for more information
 	 * 
 	 * @param args Command line arguments to this application.
 	 * @throws IOException on UI exception
@@ -29,12 +30,16 @@ public class Entry {
 	public static void main(String[] args) throws IOException {
 		String configFile = "app.properties";
 		String indexDataFile = null;
+		
+		boolean createAdmin = false;
 
 		for (String arg : args) {
 			if (arg.startsWith("--config=")) {
 				configFile = arg.replaceFirst("--config=", "");
 			} else if (arg.startsWith("--load-indexes=")) {
 				indexDataFile = arg.replaceFirst("--load-indexes=", "");
+			} else if (arg.startsWith("--create-admin")) {
+				createAdmin = true;
 			}
 		}
 		INotifyStudent notifier = null;
@@ -61,6 +66,10 @@ public class Entry {
 
 		if (indexDataFile != null) {
 			app.loadIndexes(indexDataFile);
+		}
+		
+		if (createAdmin) {
+			app.createAdmin();
 		}
 
 		app.loop();
