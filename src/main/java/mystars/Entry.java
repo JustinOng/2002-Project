@@ -27,6 +27,8 @@ public class Entry {
 		for (String arg : args) {
 			if (arg.startsWith("--config=")) {
 				configFile = arg.replaceFirst("--config=", "");
+			} else if (arg.startsWith("--load-indexes=")) {
+				indexDataFile = arg.replaceFirst("--load-indexes=", "");
 			}
 		}
 
@@ -51,6 +53,11 @@ public class Entry {
 
 		MySTARS app = new MySTARS(new ConsoleGraphicUserInterface(), notifier);
 		app.start();
+		
+		if (indexDataFile != null) {
+			app.loadIndexes(indexDataFile);
+		}
+		
 		app.loop();
 	}
 
