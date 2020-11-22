@@ -392,6 +392,7 @@ public class MySTARS {
 					break;
 				case ListStudents:
 					displayStudents("All Students", userController.getAllStudents());
+					break;
 				case Logout:
 					return;
 				}
