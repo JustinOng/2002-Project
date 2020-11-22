@@ -76,7 +76,7 @@ public class Lesson implements Serializable {
 	 * @param endPeriod   The Lesson's end period.
 	 * @throws AppException if invalid parameters are provided
 	 */
-	public Lesson(Index index, LessonType lessonType, Day day, String groupNo, String location, boolean[] weeks,
+	public Lesson(Index index, LessonType lessonType, Day day, String location, String groupNo, boolean[] weeks,
 			int startPeriod, int endPeriod) throws AppException {
 
 		if (groupNo.isBlank()) {
