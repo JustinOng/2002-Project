@@ -87,7 +87,8 @@ public class MySTARS {
 	 */
 	public void createAdmin() {
 		try {
-			new Admin("admin", "admin");
+			userController.createAdmin("admin", "admin");
+			
 			System.out.println("Created admin account - username: admin, password: admin");
 		} catch (AppException e) {
 		}

@@ -15,14 +15,14 @@ import mystars.exceptions.AppException;
  * manages the verification of a user's password when logging in.
  */
 
-public abstract class User extends Entity {
+public class User extends Entity {
 	/**
 	 * ID for versioning of serialized data.
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * The user name assigned to the admin or student user.
+	 * The user name assigned to the user
 	 */
 	protected String username;
 
@@ -33,10 +33,9 @@ public abstract class User extends Entity {
 	private byte[] passwordHash;
 
 	/**
-	 * Boolean variable to determine if a user has admin rights. Students do not
-	 * have admin rights. Administrators have admin rights.
+	 * Boolean variable to determine if a user has admin rights.
 	 */
-	protected boolean isAdmin = false;
+	private boolean isAdmin = false;
 
 	/**
 	 * Create a new user after ensuring that there is no other user with the same
@@ -46,7 +45,7 @@ public abstract class User extends Entity {
 	 * @param password The user's password.
 	 * @throws AppException If there already exists a user with the same username.
 	 */
-	protected User(String username, String password) throws AppException {
+	public User(String username, String password) throws AppException {
 		if (get("user", username) != null) {
 			throw new AppException(String.format("%s already exists", username));
 		}
@@ -59,8 +58,8 @@ public abstract class User extends Entity {
 	/**
 	 * Calculates the SHA-256 hash for an input string.
 	 * 
-	 * @param input The user's password.
-	 * @return The SHA-256 hash of the user's password.
+	 * @param input Input string to calculate hash of
+	 * @return SHA-256(input)
 	 */
 	private static byte[] hashString(String input) {
 		// Static getInstance method is called with hashing SHA.
@@ -69,7 +68,7 @@ public abstract class User extends Entity {
 		try {
 			md = MessageDigest.getInstance("SHA-256");
 		} catch (NoSuchAlgorithmException e) {
-			// Convert to unchecked AppException (since if it happens, treat it as fatal).
+			// Convert to unchecked Exception (since if it happens, treat it as fatal).
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
@@ -106,8 +105,7 @@ public abstract class User extends Entity {
 	 * for that user in the database.
 	 * 
 	 * @param password The user's password.
-	 * @return Boolean value indicating if the hash of the entered password matches
-	 *         the stored hash.
+	 * @return {@code true} if the user has logged in successfully, oor {@code false} otherwise
 	 * @throws AppException If the login failed
 	 */
 	public boolean login(String password) throws AppException {
@@ -122,5 +120,23 @@ public abstract class User extends Entity {
 	@SuppressWarnings("unchecked")
 	public static ArrayList<User> getAllUsers() {
 		return (ArrayList<User>) (ArrayList<?>) getAll("user");
+	}
+	
+	/**
+	 * Mark/unmark this user as an admin
+	 * 
+	 * @param isAdmin Mark this user as an admin if {@code true}, unmark otherwise
+	 */
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+	
+	/**
+	 * Returns whether this user is an admin or not
+	 * 
+	 * @return {@code true} if this user is an admin, or {@code false} otherwise
+	 */
+	public boolean isAdmin() {
+		return this.isAdmin;
 	}
 }

@@ -68,6 +68,11 @@ public class Student extends User {
 		this.gender = gender;
 		this.nationality = nationality;
 	}
+	
+	@Override
+	public void setAdmin(boolean isAdmin) {
+		throw new RuntimeException("Students cannot be administrators");
+	}
 
 	/**
 	 * Override the base login to only allow the student to login if the current

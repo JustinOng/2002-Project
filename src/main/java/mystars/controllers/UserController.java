@@ -47,7 +47,8 @@ public class UserController {
 	 * @throws AppException If the administrator object cannot be created.
 	 */
 	public void createAdmin(String username, String password) throws AppException {
-		new Admin(username, password);
+		User user = new User(username, password);
+		user.setAdmin(true);
 	}
 
 	/**
@@ -81,7 +82,7 @@ public class UserController {
 	 * @return {@code true} if {@code user} is an admin, or {@code false} otherwise
 	 */
 	public boolean isAdmin(User user) {
-		return user instanceof Admin;
+		return user.isAdmin();
 	}
 
 	/**
