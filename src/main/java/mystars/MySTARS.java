@@ -253,8 +253,8 @@ public class MySTARS {
 
 					courseController.changeIndex(courseCode, student, indexTarget.getIndexNo());
 
-					ui.renderDialog("Change Index", String.format("You are now registered for %s",
-							indexInfo.get(textResponse.getText())));
+					ui.renderDialog("Change Index",
+							String.format("You are now registered for %s", indexInfo.get(textResponse.getText())));
 					break;
 
 				// Swop course index with another student.
@@ -283,9 +283,8 @@ public class MySTARS {
 						lessonsB.add(extractLessonProperties(lesson));
 					}
 
-					if (!ui.renderIndexChangeConfirmation("Confirm Index Swop", "Current Indexes:", 
-							String.format("%s: %s", ((Student) user).getName(), indexA.toString()),
-							lessonsA,  
+					if (!ui.renderIndexChangeConfirmation("Confirm Index Swop", "Current Indexes:",
+							String.format("%s: %s", ((Student) user).getName(), indexA.toString()), lessonsA,
 							String.format("%s: %s", ((Student) targetUser).getName(), indexB.toString()), lessonsB)) {
 						break;
 					}
@@ -554,11 +553,26 @@ public class MySTARS {
 		ui.renderStudentList(title, data);
 	}
 
+	/**
+	 * Retrieve key properties of Lesson to be displayed on the UI, specifically, {
+	 * lesson type, group number, day, time string, location }
+	 * 
+	 * @param lesson Lesson to extract properties of
+	 * @return string array containing the properties
+	 */
 	private String[] extractLessonProperties(Lesson lesson) {
 		return new String[] { lesson.getLessonType().toString(), lesson.getGroupNo(), lesson.getDay().toString(),
 				lesson.getTimeString().toString(), lesson.getLocation() };
 	}
 
+	/**
+	 * Load courses, indexes and lessons from a text file. Example format:
+	 * course:|CE1105|DIGITAL LOGIC|CSE|3 index:|10005
+	 * lesson:|10005|Lecture|Tuesday|LT2A|CE1|1,1,1,1,1,1,1,1,1,1,1,1,1|11|13
+	 * lesson:|10005|Lecture|Thursday|LT2A|CE1|1,1,1,1,1,1,1,1,1,1,1,1,1|15|17
+	 * 
+	 * @param dataPath path to file to read
+	 */
 	public void loadIndexes(String dataPath) {
 		System.out.println("Loading indexes");
 		FileReader fr;
