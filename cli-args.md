@@ -8,7 +8,7 @@
     smtpHost=smtp.gmail.com
     smtpPort=587
     ```
-- `--load-indexes=/path/to/file`: Specifies path to file to load courses, indexes and lessons from.
+- `--load-indexes=/path/to/file`: Specifies path to file to load courses, indexes and lessons from. A copy of the file with the expected format has been uploaded into the repository, using `--load-indexes=courseinfo.txt` will load info.
   - This file is expected to contain data in the following format:
     ```
     course:|CE1105|DIGITAL LOGIC|CSE|3
