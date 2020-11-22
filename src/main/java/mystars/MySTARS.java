@@ -92,6 +92,20 @@ public class MySTARS {
 		} catch (AppException e) {
 		}
 	}
+	
+	/**
+	 * Create test student accounts with hardcoded credentials
+	 */
+	public void createStudents() {
+		try {
+			new Student("student1", "starsnotifications2021s1+student1@gmail.com", "U12345", "student1", "1",
+					Gender.Male, Nationality.Singaporean);
+			new Student("student2", "starsnotifications2021s1+student2@gmail.com", "U67890", "student2", "2",
+					Gender.Female, Nationality.Singaporean);
+			System.out.println("Created students");
+		} catch (AppException e) {
+		}
+	}
 
 	/**
 	 * Main UI loop
@@ -102,23 +116,6 @@ public class MySTARS {
 				notifier.notify(student, "Allocation of waitlisted Index",
 						String.format("You have been allocated your waitlisted index %d ", index.getIndexNo()));
 			}, Index.Event.AllocatedWaitlist);
-		}
-
-		try {
-			// Create new administrator and student objects.
-			new Student("student1", "starsnotifications2021s1+student1@gmail.com", "u12345", "student1", "1",
-					Gender.Male, Nationality.Singaporean);
-			new Student("student2", "starsnotifications2021s1+student2@gmail.com", "u67890", "student2", "2",
-					Gender.Female, Nationality.Singaporean);
-
-			// Create new courses and indexes.
-			Course c = new Course("Course", "C1", School.CSE, 1);
-			c.createIndex(1, 1);
-			c.createIndex(2, 1);
-
-			// courseController.registerCourse(s, "C1", 1);
-		} catch (Exception e1) {
-			e1.printStackTrace();
 		}
 
 		try {
@@ -631,8 +628,10 @@ public class MySTARS {
 				}
 			}
 
-			System.out.println(String.format("Loaded %d courses, %d indexes and %d lessons", loadedCourses,
-					loadedIndexes, loadedLessons));
+			if (loadedCourses + loadedIndexes + loadedLessons > 0) {
+				System.out.println(String.format("Loaded %d courses, %d indexes and %d lessons", loadedCourses,
+						loadedIndexes, loadedLessons));
+			}
 		} catch (IOException e) {
 			System.err.println("Failed to load indexes:");
 			e.printStackTrace();

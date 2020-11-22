@@ -32,6 +32,7 @@ public class Entry {
 		String indexDataFile = null;
 		
 		boolean createAdmin = false;
+		boolean createStudents = false;
 
 		for (String arg : args) {
 			if (arg.startsWith("--config=")) {
@@ -40,6 +41,8 @@ public class Entry {
 				indexDataFile = arg.replaceFirst("--load-indexes=", "");
 			} else if (arg.startsWith("--create-admin")) {
 				createAdmin = true;
+			} else if (arg.startsWith("--create-students")) {
+				createStudents = true;
 			}
 		}
 		INotifyStudent notifier = null;
@@ -70,6 +73,10 @@ public class Entry {
 		
 		if (createAdmin) {
 			app.createAdmin();
+		}
+		
+		if (createStudents) {
+			app.createStudents();
 		}
 
 		app.loop();
