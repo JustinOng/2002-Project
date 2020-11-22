@@ -598,6 +598,10 @@ public class MySTARS {
 
 		String line;
 		String courseCode = null;
+
+		int loadedCourses = 0;
+		int loadedIndexes = 0;
+		int loadedLessons = 0;
 		try {
 			while ((line = br.readLine()) != null) {
 				try {
@@ -607,8 +611,10 @@ public class MySTARS {
 						courseCode = parts[1];
 						courseController.createCourse(parts[2], parts[1], School.valueOf(parts[3]),
 								Integer.parseInt(parts[4]));
+						loadedCourses++;
 					} else if (parts[0].equals("index:")) {
 						courseController.createIndex(courseCode, Integer.parseInt(parts[1]), 3);
+						loadedIndexes++;
 					} else if (parts[0].equals("lesson:")) {
 						boolean[] weeks = new boolean[13];
 						String[] weekParts = parts[6].split(",");
@@ -619,12 +625,16 @@ public class MySTARS {
 						courseController.createLesson(courseCode, Integer.parseInt(parts[1]),
 								LessonType.valueOf(parts[2]), Day.valueOf(parts[3]), parts[4], parts[5], weeks,
 								Integer.parseInt(parts[7]), Integer.parseInt(parts[8]));
+						loadedLessons++;
 					}
 				} catch (AppException e1) {
-					e1.printStackTrace();
 				}
 			}
+
+			System.out.println(String.format("Loaded %d courses, %d indexes and %d lessons", loadedCourses,
+					loadedIndexes, loadedLessons));
 		} catch (IOException e) {
+			System.err.println("Failed to load indexes:");
 			e.printStackTrace();
 			return;
 		}
