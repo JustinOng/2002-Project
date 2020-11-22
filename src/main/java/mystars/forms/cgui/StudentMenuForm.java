@@ -76,14 +76,14 @@ public class StudentMenuForm {
 					window.close();
 				}
 			}).addTo(panel);
-
-			new Button("Logout", new Runnable() {
-				public void run() {
-					response = new StudentMenuResponse(StudentMenuResponse.Selected.Logout);
-					window.close();
-				}
-			}).addTo(panel);
 		}
+
+		new Button("Logout", new Runnable() {
+			public void run() {
+				response = new StudentMenuResponse(StudentMenuResponse.Selected.Logout);
+				window.close();
+			}
+		}).addTo(panel);
 
 		window.setComponent(panel);
 
