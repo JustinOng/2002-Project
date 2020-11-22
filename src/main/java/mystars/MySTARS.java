@@ -88,7 +88,7 @@ public class MySTARS {
 	public void createAdmin() {
 		try {
 			userController.createAdmin("admin", "admin");
-			
+
 			System.out.println("Created admin account - username: admin, password: admin");
 		} catch (AppException e) {
 		}
@@ -191,7 +191,26 @@ public class MySTARS {
 					ui.renderDialog(String.format("Index %d", indexNo), String.format("%d Vacancies\n%d max enrolled",
 							courseController.getVacancies(indexNo), courseController.getMaxEnrolled(indexNo)));
 					break;
+				case ListIndexes:
+					HashMap<String, Course> courses = new HashMap<>();
 
+					// Display information about the selected course.
+					for (Course course : courseController.getAllCourses()) {
+						courses.put(course.toString(), course);
+					}
+
+					if (courses.size() == 0) {
+						ui.renderDialog("Select Courses", "There are no courses.");
+						return;
+					}
+
+					TextResponse courseResponse = ui.renderItemSelectorForm("Select Course",
+							new ArrayList<String>(courses.keySet()));
+
+					Course course = courses.get(courseResponse.getText());
+
+					ui.renderIndexInfo(course.toString(), course.getIndexes());
+					break;
 				// Register for course.
 				case Register:
 					indexNo = ui.getInt("Register for Index", "Index No:");
@@ -416,12 +435,12 @@ public class MySTARS {
 			for (Course course : courseController.getAllCourses()) {
 				courses.put(course.toString(), course.getCourseCode());
 			}
-			
+
 			if (courses.size() == 0) {
 				ui.renderDialog("Course Management", "There are no courses to manage");
 				return;
 			}
-			
+
 			CourseManagementResponse courseMgmtResponse = ui
 					.renderCourseManagementForm(new ArrayList<String>(courses.keySet()));
 

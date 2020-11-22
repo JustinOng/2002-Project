@@ -39,7 +39,7 @@ public class StudentMenuForm {
 
 		// Create new panel object and set the layout as a grid.
 		Panel panel = new Panel();
-		panel.setLayoutManager(new GridLayout(5));
+		panel.setLayoutManager(new GridLayout(4));
 
 		if (regs != null && regs.size() > 0) {
 			Table<String> table = new Table<String>("Course", "Title", "Index", "Status");
@@ -50,10 +50,10 @@ public class StudentMenuForm {
 				table.getTableModel().addRow(new String[] { course.getCourseCode(), course.getName(),
 						Integer.toString(index.getIndexNo()), reg.getStatus().toString() });
 			}
-			panel.addComponent(table, GridLayout.createHorizontallyFilledLayoutData(5));
+			panel.addComponent(table, GridLayout.createHorizontallyFilledLayoutData(4));
 		} else {
 			panel.addComponent(new Label("No currently registered courses"),
-					GridLayout.createHorizontallyFilledLayoutData(5));
+					GridLayout.createHorizontallyFilledLayoutData(4));
 		}
 
 		new Button("List Registered Courses", new Runnable() {
@@ -66,6 +66,13 @@ public class StudentMenuForm {
 		new Button("Check Vacancies", new Runnable() {
 			public void run() {
 				response = new StudentMenuResponse(StudentMenuResponse.Selected.ListVacancies);
+				window.close();
+			}
+		}).addTo(panel);
+		
+		new Button("List Indexes", new Runnable() {
+			public void run() {
+				response = new StudentMenuResponse(StudentMenuResponse.Selected.ListIndexes);
 				window.close();
 			}
 		}).addTo(panel);
