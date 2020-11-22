@@ -23,6 +23,7 @@ public class Entry {
 	 * --load-indexes=/path/to/file - path to txt file containing course
 	 * information. See {@link MySTARS#loadIndexes(String)} for format information<br>
 	 * --create-admin - create admin account. See {@link MySTARS#createAdmin()} for more information
+	 * --create-students - create student accounts. See {@link MySTARS#createStudents()} for more information
 	 * 
 	 * @param args Command line arguments to this application.
 	 * @throws IOException on UI exception
