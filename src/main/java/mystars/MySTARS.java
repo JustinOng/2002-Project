@@ -415,6 +415,12 @@ public class MySTARS {
 			for (Course course : courseController.getAllCourses()) {
 				courses.put(course.toString(), course.getCourseCode());
 			}
+			
+			if (courses.size() == 0) {
+				ui.renderDialog("Course Management", "There are no courses to manage");
+				return;
+			}
+			
 			CourseManagementResponse courseMgmtResponse = ui
 					.renderCourseManagementForm(new ArrayList<String>(courses.keySet()));
 

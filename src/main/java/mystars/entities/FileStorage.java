@@ -63,6 +63,10 @@ public class FileStorage implements IStorage {
 	 * @return The Arraylist of the storage object entries matching the type values.
 	 */
 	public ArrayList<Serializable> getAll(String type) {
+		if (storage.get(type) == null) {
+			return new ArrayList<>();
+		}
+		
 		return new ArrayList<Serializable>(storage.get(type).values());
 	}
 
