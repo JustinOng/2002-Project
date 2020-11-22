@@ -10,7 +10,7 @@ public class StudentMenuResponse {
 	 * Enum containing the options for students to manage their courses.
 	 */
 	public enum Selected {
-		Register, Drop, Change, Swop, Logout
+		ListRegistered, Register, Drop, Change, Swop, Logout
 	};
 
 	/**

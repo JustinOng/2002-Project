@@ -3,6 +3,8 @@ package mystars.forms;
 import java.util.List;
 import java.util.Map;
 
+import mystars.entities.Registration;
+
 /**
  * <h1>Interface: IUserInterface</h1>
  * 
@@ -181,14 +183,24 @@ public interface IUserInterface {
 	public void renderIndexInfo(String title, Map<String, List<String[]>> indexes);
 
 	/**
-	 * @param title
-	 * @param description
-	 * @param labelA
-	 * @param lessonsA
-	 * @param labelB
-	 * @param lessonsB
-	 * @return
+	 * Display detailed information about two indexes and request for the user to confirm an action
+	 * 
+	 * @param title Title of the form
+	 * @param description Description to be shown on the form
+	 * @param labelA text to label {@code lessonsA} with
+	 * @param lessonsA lessons from the first index
+	 * @param labelB text to label {@code lessonsB} with
+	 * @param lessonsB lessons from the second index
+	 * @return {@code true} if the user confirmed the action, or {@code false} otherwise
 	 */
 	public boolean renderIndexChangeConfirmation(String title, String description, String labelA,
 			List<String[]> lessonsA, String labelB, List<String[]> lessonsB);
+	
+	/**
+	 * Display a list of courses and their individual lessons
+	 * 
+	 * @param title Title of the form
+	 * @param regs List of Registrations to display
+	 */
+	public void renderRegisteredCourses(String title, List<Registration> regs);
 }

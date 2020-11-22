@@ -177,6 +177,9 @@ public class MySTARS {
 
 			try {
 				switch (response.getSelected()) {
+				case ListRegistered:
+					ui.renderRegisteredCourses("Registered Courses", student.getTimetable().getRegistrations());
+					break;
 
 				// Register for course.
 				case Register:
@@ -306,6 +309,8 @@ public class MySTARS {
 					break;
 				case Logout:
 					return;
+				default:
+					break;
 				}
 			} catch (AppException e) {
 				ui.renderDialog("Error", e.getMessage());

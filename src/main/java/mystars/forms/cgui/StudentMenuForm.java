@@ -47,7 +47,14 @@ public class StudentMenuForm {
 			panel.addComponent(new Label("No currently registered courses"),
 					GridLayout.createHorizontallyFilledLayoutData(5));
 		}
-
+		
+		new Button("List Registered Courses", new Runnable() {
+			public void run() {
+				response = new StudentMenuResponse(StudentMenuResponse.Selected.ListRegistered);
+				window.close();
+			}
+		}).addTo(panel);
+		
 		new Button("Register Course", new Runnable() {
 			public void run() {
 				response = new StudentMenuResponse(StudentMenuResponse.Selected.Register);

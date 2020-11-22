@@ -17,6 +17,7 @@ import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFontConfiguration;
 
+import mystars.entities.Registration;
 import mystars.forms.*;
 
 /**
@@ -193,5 +194,9 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	public boolean renderIndexChangeConfirmation(String title, String description, String labelA,
 			List<String[]> lessonsA, String labelB, List<String[]> lessonsB) {
 		return indexChangeConfirmationForm.confirm(gui, title, description, labelA, lessonsA, labelB, lessonsB);
+	}
+
+	public void renderRegisteredCourses(String title, List<Registration> regs) {
+		DisplayRegisteredCourses.display(gui, title, regs);
 	}
 }
