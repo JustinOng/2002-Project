@@ -41,7 +41,7 @@ public class StudentMenuForm {
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(5));
 
-		if (regs != null) {
+		if (regs != null && regs.size() > 0) {
 			Table<String> table = new Table<String>("Course", "Title", "Index", "Status");
 			for (Registration reg : regs) {
 				Index index = reg.getIndex();
