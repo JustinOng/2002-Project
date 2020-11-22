@@ -4,9 +4,10 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.gui2.table.Table;
 
+import mystars.entities.*;
+
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <h1>Class: DisplayStudentList</h1>
@@ -15,28 +16,26 @@ import java.util.Map;
  */
 public class DisplayIndexList {
 	/**
+	 * Displays a list of indexes with the given title
+	 * 
 	 * @param gui     The graphical user interface object.
 	 * @param title   The title of the form.
-	 * @param indexes Map of index number to index info, where index info is a list
-	 *                of string arrays containing {"Class Type", "Group", "Day",
-	 *                "Time", "Venue"}
+	 * @param indexes List of indexes to display
 	 */
-	public static void show(MultiWindowTextGUI gui, String title, Map<String, List<String[]>> indexes) {
+	public static void show(MultiWindowTextGUI gui, String title, List<Index> indexes) {
 		final AbstractWindow window = new BasicWindow();
 
 		// Create new panel object and set the layout as a grid.
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(1));
 
-		for (Map.Entry<String, List<String[]>> entry : indexes.entrySet()) {
-			String indexLabel = entry.getKey();
-			List<String[]> lessons = entry.getValue();
-			
-			panel.addComponent(new Label(indexLabel));
+		for (Index index : indexes) {
+			panel.addComponent(new Label(index.toString()));
 
 			Table<String> table = new Table<String>("Type", "Group", "Day", "Time", "Venue");
-			for (String[] data : lessons) {
-				table.getTableModel().addRow(data);
+			for (Lesson lesson : index.getLessons()) {
+				table.getTableModel().addRow(new String[] { lesson.getLessonType().toString(), lesson.getGroupNo(),
+						lesson.getDay().toString(), lesson.getTimeString().toString(), lesson.getLocation() });
 			}
 			panel.addComponent(table);
 		}

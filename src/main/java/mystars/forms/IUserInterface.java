@@ -1,9 +1,8 @@
 package mystars.forms;
 
 import java.util.List;
-import java.util.Map;
 
-import mystars.entities.Registration;
+import mystars.entities.*;
 
 /**
  * <h1>Interface: IUserInterface</h1>
@@ -20,16 +19,16 @@ public interface IUserInterface {
 	public LoginResponse renderLoginForm();
 
 	/**
-	 * Displays list of options that a student can perform to manage courses. {@code
-	 * courses} is also displayed on the form. If {@code courses} is empty (ie the
-	 * student is not in any courses), the only option displayed is to register for
-	 * a course.
+	 * Displays list of options that a student can perform to manage courses. A list
+	 * of courses that the student is currently enrolled/on the waitlist for is also
+	 * displayed. If the student is currently not registered for any courses, they
+	 * will not have the option to drop/change/swop indexes.
 	 * 
-	 * @param courses List of courses that the student is currently in.
+	 * @param regs List of courses that the student is currently in.
 	 * @return Selected option, or {@code null} if the form is closed without any
 	 *         input
 	 */
-	public StudentMenuResponse renderStudentMenuForm(List<String> courses);
+	public StudentMenuResponse renderStudentMenuForm(List<Registration> regs);
 
 	/**
 	 * Displays admin menu with list of things the admin can do
@@ -61,7 +60,7 @@ public interface IUserInterface {
 	 * Displays form requesting user input for creating a student
 	 * 
 	 * @param genders       The list of genders that a student can assume
-	 * @param nationalities The list of nationalities that a student can atssume
+	 * @param nationalities The list of nationalities that a student can assume
 	 * @return User input to be used to create a new Student, or {@code null} if the
 	 *         form is cancelled/closed without any input
 	 */
@@ -167,40 +166,39 @@ public interface IUserInterface {
 	 * Displays a list of students with the given title
 	 * 
 	 * @param title    The title of the form.
-	 * @param students The list of students. List of string arrays, ie { {"name",
-	 *                 "gender", "nationality}, ...}
+	 * @param students The list of students.
 	 */
-	public void renderStudentList(String title, List<String[]> students);
+	public void renderStudentList(String title, List<Student> students);
 
 	/**
 	 * Displays a list of indexes with the given title
 	 * 
 	 * @param title   The title of the form.
-	 * @param indexes Map of index number to index info, where index info is a list
-	 *                of string arrays containing {"Class Type", "Group", "Day",
-	 *                "Time", "Venue"}
+	 * @param indexes List of indexes to display
 	 */
-	public void renderIndexInfo(String title, Map<String, List<String[]>> indexes);
+	public void renderIndexInfo(String title, List<Index> indexes);
 
 	/**
-	 * Display detailed information about two indexes and request for the user to confirm an action
+	 * Display detailed information about two indexes and request for the user to
+	 * confirm an action
 	 * 
-	 * @param title Title of the form
+	 * @param title       Title of the form
 	 * @param description Description to be shown on the form
-	 * @param labelA text to label {@code lessonsA} with
-	 * @param lessonsA lessons from the first index
-	 * @param labelB text to label {@code lessonsB} with
-	 * @param lessonsB lessons from the second index
-	 * @return {@code true} if the user confirmed the action, or {@code false} otherwise
+	 * @param labelA      Text to label {@code indexA} with
+	 * @param indedxA     First index to display
+	 * @param labelB      Text to label {@code indexB} with
+	 * @param indexB      Second index to display
+	 * @return {@code true} if the user confirmed the action, or {@code false}
+	 *         otherwise
 	 */
-	public boolean renderIndexChangeConfirmation(String title, String description, String labelA,
-			List<String[]> lessonsA, String labelB, List<String[]> lessonsB);
-	
+	public boolean renderIndexChangeConfirmation(String title, String description, String labelA, Index indexA,
+			String labelB, Index indexB);
+
 	/**
 	 * Display a list of courses and their individual lessons
 	 * 
 	 * @param title Title of the form
-	 * @param regs List of Registrations to display
+	 * @param regs  List of Registrations to display
 	 */
 	public void renderRegisteredCourses(String title, List<Registration> regs);
 }

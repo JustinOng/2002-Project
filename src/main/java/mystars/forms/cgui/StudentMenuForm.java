@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.googlecode.lanterna.gui2.*;
+import com.googlecode.lanterna.gui2.table.Table;
 
+import mystars.entities.*;
 import mystars.forms.*;
 
 /**
@@ -30,31 +32,37 @@ public class StudentMenuForm {
 	 * @return Selected option, or {@code null} if the form is closed without any
 	 *         input
 	 */
-	public StudentMenuResponse getResponse(MultiWindowTextGUI gui, List<String> courses) {
+	public StudentMenuResponse getResponse(MultiWindowTextGUI gui, List<Registration> regs) {
 		final AbstractWindow window = new BasicWindow();
 
 		response = null;
 
-		// Create new Jpanel object and set the layout as a grid.
+		// Create new panel object and set the layout as a grid.
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(5));
 
-		// Insert textboxes, labels and buttons as required.
-		if (courses != null) {
-			panel.addComponent(new Label("Registered Courses:\r\n" + String.join("\r\n", courses)),
-					GridLayout.createHorizontallyFilledLayoutData(5));
+		if (regs != null) {
+			Table<String> table = new Table<String>("Course", "Title", "Index", "Status");
+			for (Registration reg : regs) {
+				Index index = reg.getIndex();
+				Course course = index.getCourse();
+
+				table.getTableModel().addRow(new String[] { course.getCourseCode(), course.getName(),
+						Integer.toString(index.getIndexNo()), reg.getStatus().toString() });
+			}
+			panel.addComponent(table, GridLayout.createHorizontallyFilledLayoutData(5));
 		} else {
 			panel.addComponent(new Label("No currently registered courses"),
 					GridLayout.createHorizontallyFilledLayoutData(5));
 		}
-		
+
 		new Button("List Registered Courses", new Runnable() {
 			public void run() {
 				response = new StudentMenuResponse(StudentMenuResponse.Selected.ListRegistered);
 				window.close();
 			}
 		}).addTo(panel);
-		
+
 		new Button("Register Course", new Runnable() {
 			public void run() {
 				response = new StudentMenuResponse(StudentMenuResponse.Selected.Register);
@@ -62,7 +70,7 @@ public class StudentMenuForm {
 			}
 		}).addTo(panel);
 
-		if (courses != null && courses.size() > 0) {
+		if (regs != null && regs.size() > 0) {
 			new Button("Drop Course", new Runnable() {
 				public void run() {
 					response = new StudentMenuResponse(StudentMenuResponse.Selected.Drop);

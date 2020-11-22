@@ -81,7 +81,7 @@ public class MySTARS {
 			}
 		});
 	}
-	
+
 	/**
 	 * Creates admin account with hardcoded credentials admin:admin
 	 */
@@ -92,7 +92,7 @@ public class MySTARS {
 		} catch (AppException e) {
 		}
 	}
-	
+
 	/**
 	 * Create test student accounts with hardcoded credentials
 	 */
@@ -154,7 +154,6 @@ public class MySTARS {
 		Student student = (Student) user;
 		TextResponse textResponse;
 		HashMap<String, Index> indexInfo = new HashMap<>();
-		List<String[]> lessonsA, lessonsB;
 
 		while (true) {
 			// map of human-friendly course description:course code
@@ -169,7 +168,7 @@ public class MySTARS {
 				}
 			}
 
-			StudentMenuResponse response = ui.renderStudentMenuForm(new ArrayList<String>(registeredInfo.keySet()));
+			StudentMenuResponse response = ui.renderStudentMenuForm(student.getTimetable().getRegistrations());
 
 			if (response == null) {
 				continue;
@@ -245,19 +244,9 @@ public class MySTARS {
 						break;
 					}
 
-					lessonsA = new ArrayList<String[]>();
-					for (Lesson lesson : indexSource.getLessons()) {
-						lessonsA.add(extractLessonProperties(lesson));
-					}
-
-					lessonsB = new ArrayList<String[]>();
-					for (Lesson lesson : indexTarget.getLessons()) {
-						lessonsB.add(extractLessonProperties(lesson));
-					}
-
 					if (!ui.renderIndexChangeConfirmation("Confirm Index Change",
 							String.format("Change from %s to %s", indexSource, indexTarget), indexSource.toString(),
-							lessonsA, indexTarget.toString(), lessonsB)) {
+							indexSource, indexTarget.toString(), indexTarget)) {
 						break;
 					}
 
@@ -283,19 +272,9 @@ public class MySTARS {
 					Index indexA = courseController.getIndex(isResponse.getIndexA());
 					Index indexB = courseController.getIndex(isResponse.getIndexB());
 
-					lessonsA = new ArrayList<String[]>();
-					for (Lesson lesson : indexA.getLessons()) {
-						lessonsA.add(extractLessonProperties(lesson));
-					}
-
-					lessonsB = new ArrayList<String[]>();
-					for (Lesson lesson : indexB.getLessons()) {
-						lessonsB.add(extractLessonProperties(lesson));
-					}
-
 					if (!ui.renderIndexChangeConfirmation("Confirm Index Swop", "Current Indexes:",
-							String.format("%s: %s", ((Student) user).getName(), indexA.toString()), lessonsA,
-							String.format("%s: %s", ((Student) targetUser).getName(), indexB.toString()), lessonsB)) {
+							String.format("%s: %s", ((Student) user).getName(), indexA.toString()), indexA,
+							String.format("%s: %s", ((Student) targetUser).getName(), indexB.toString()), indexB)) {
 						break;
 					}
 
@@ -402,7 +381,7 @@ public class MySTARS {
 							courseController.getVacancies(indexNo), courseController.getMaxEnrolled(indexNo)));
 					break;
 				case ListStudents:
-					displayStudents("All Students", userController.getAllStudents());
+					ui.renderStudentList("All Students", userController.getAllStudents());
 					break;
 				case Logout:
 					return;
@@ -452,7 +431,7 @@ public class MySTARS {
 
 				// List all the students registered for a course index.
 				case ListStudents:
-					displayStudents("Students registered for " + courseCode,
+					ui.renderStudentList("Students registered for " + courseCode,
 							courseController.getStudentsByCourse(courseCode));
 					break;
 
@@ -524,20 +503,10 @@ public class MySTARS {
 					break;
 				case ListLessons:
 					Index index = courseController.getIndex(indexNo);
-					List<String[]> lessons = new ArrayList<>();
-
-					for (Lesson lesson : index.getLessons()) {
-						lessons.add(extractLessonProperties(lesson));
-					}
-
-					Map<String, List<String[]>> indexLessonMap = new HashMap<>();
-
-					indexLessonMap.put(index.toString(), lessons);
-
-					ui.renderIndexInfo("Lessons", indexLessonMap);
+					ui.renderIndexInfo("Lessons", Arrays.asList(index));
 					break;
 				case ListStudents:
-					displayStudents(String.format("Students registered for Index %d", indexNo),
+					ui.renderStudentList(String.format("Students registered for Index %d", indexNo),
 							courseController.getStudentsByIndex(indexNo));
 					break;
 				default:
@@ -547,34 +516,6 @@ public class MySTARS {
 				ui.renderDialog("Error", e.getMessage());
 			}
 		}
-	}
-
-	/**
-	 * Displays a titled list of all the students and their information
-	 * 
-	 * @param title    Title to use when displaying the list
-	 * @param students The list of students.
-	 */
-	private void displayStudents(String title, List<Student> students) {
-		List<String[]> data = new ArrayList<>();
-
-		// For each student, get and display their information.
-		for (Student s : students) {
-			data.add(new String[] { s.getName(), s.getGender().toString(), s.getNationality().toString() });
-		}
-		ui.renderStudentList(title, data);
-	}
-
-	/**
-	 * Retrieve key properties of Lesson to be displayed on the UI, specifically, {
-	 * lesson type, group number, day, time string, location }
-	 * 
-	 * @param lesson Lesson to extract properties of
-	 * @return string array containing the properties
-	 */
-	private String[] extractLessonProperties(Lesson lesson) {
-		return new String[] { lesson.getLessonType().toString(), lesson.getGroupNo(), lesson.getDay().toString(),
-				lesson.getTimeString().toString(), lesson.getLocation() };
 	}
 
 	/**

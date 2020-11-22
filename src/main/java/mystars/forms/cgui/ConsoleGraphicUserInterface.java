@@ -3,7 +3,6 @@ package mystars.forms.cgui;
 import java.awt.Font;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.*;
@@ -17,7 +16,7 @@ import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFontConfiguration;
 
-import mystars.entities.Registration;
+import mystars.entities.*;
 import mystars.forms.*;
 
 /**
@@ -122,8 +121,8 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 		return loginForm.getResponse(gui);
 	}
 
-	public StudentMenuResponse renderStudentMenuForm(List<String> courses) {
-		return studentMenuForm.getResponse(gui, courses);
+	public StudentMenuResponse renderStudentMenuForm(List<Registration> regs) {
+		return studentMenuForm.getResponse(gui, regs);
 	}
 
 	public TextResponse renderItemSelectorForm(String title, List<String> items) {
@@ -178,7 +177,7 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 		return createLessonForm.getResponse(gui, index, lessonType, days);
 	}
 
-	public void renderStudentList(String title, List<String[]> students) {
+	public void renderStudentList(String title, List<Student> students) {
 		DisplayStudentList.show(gui, title, students);
 	}
 
@@ -187,13 +186,13 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 				.addButton(MessageDialogButton.OK).build().showDialog(gui) == MessageDialogButton.OK;
 	}
 
-	public void renderIndexInfo(String title, Map<String, List<String[]>> indexes) {
+	public void renderIndexInfo(String title, List<Index> indexes) {
 		DisplayIndexList.show(gui, title, indexes);
 	}
 
 	public boolean renderIndexChangeConfirmation(String title, String description, String labelA,
-			List<String[]> lessonsA, String labelB, List<String[]> lessonsB) {
-		return indexChangeConfirmationForm.confirm(gui, title, description, labelA, lessonsA, labelB, lessonsB);
+			Index indexA, String labelB, Index indexB) {
+		return indexChangeConfirmationForm.confirm(gui, title, description, labelA, indexA, labelB, indexB);
 	}
 
 	public void renderRegisteredCourses(String title, List<Registration> regs) {

@@ -1,10 +1,11 @@
 package mystars.forms.cgui;
 
 import java.util.Arrays;
-import java.util.List;
 
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.gui2.table.Table;
+
+import mystars.entities.*;
 
 /**
  * <h1>Class: IndexChangeConfirmationForm</h1>
@@ -13,31 +14,47 @@ import com.googlecode.lanterna.gui2.table.Table;
  */
 public class IndexChangeConfirmationForm {
 	private boolean response;
-	
-	public boolean confirm(MultiWindowTextGUI gui, String title, String description, String labelA,
-			List<String[]> lessonsA, String labelB, List<String[]> lessonsB) {
+
+	/**
+	 * Display detailed information about two indexes and request for the user to
+	 * confirm an action
+	 * 
+	 * @param gui         The graphical user interface object.
+	 * @param title       Title of the form
+	 * @param description Description to be shown on the form
+	 * @param labelA      Text to label {@code indexA} with
+	 * @param indedxA     First index to display
+	 * @param labelB      Text to label {@code indexB} with
+	 * @param indexB      Second index to display
+	 * @return {@code true} if the user confirmed the action, or {@code false}
+	 *         otherwise
+	 */
+	public boolean confirm(MultiWindowTextGUI gui, String title, String description, String labelA, Index indexA,
+			String labelB, Index indexB) {
 		final AbstractWindow window = new BasicWindow();
-		
+
 		response = false;
 
 		// Create new panel object and set the layout as a grid.
 		Panel panel = new Panel();
 		panel.setLayoutManager(new GridLayout(2));
-		
+
 		panel.addComponent(new Label(description), GridLayout.createHorizontallyFilledLayoutData(2));
-		
+
 		panel.addComponent(new Label(labelA));
 		panel.addComponent(new Label(labelB));
-		
+
 		Table<String> tableA = new Table<String>("Class Type", "Group", "Day", "Time", "Venue");
-		for (String[] data : lessonsA) {
-			tableA.getTableModel().addRow(data);
+		for (Lesson lesson : indexA.getLessons()) {
+			tableA.getTableModel().addRow(new String[] { lesson.getLessonType().toString(), lesson.getGroupNo(),
+					lesson.getDay().toString(), lesson.getTimeString().toString(), lesson.getLocation() });
 		}
 		panel.addComponent(tableA);
-		
+
 		Table<String> tableB = new Table<String>("Class Type", "Group", "Day", "Time", "Venue");
-		for (String[] data : lessonsB) {
-			tableB.getTableModel().addRow(data);
+		for (Lesson lesson : indexB.getLessons()) {
+			tableB.getTableModel().addRow(new String[] { lesson.getLessonType().toString(), lesson.getGroupNo(),
+					lesson.getDay().toString(), lesson.getTimeString().toString(), lesson.getLocation() });
 		}
 		panel.addComponent(tableB);
 
