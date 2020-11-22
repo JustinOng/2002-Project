@@ -154,6 +154,7 @@ public class MySTARS {
 		Student student = (Student) user;
 		TextResponse textResponse;
 		HashMap<String, Index> indexInfo = new HashMap<>();
+		Integer indexNo;
 
 		while (true) {
 			// map of human-friendly course description:course code
@@ -179,10 +180,20 @@ public class MySTARS {
 				case ListRegistered:
 					ui.renderRegisteredCourses("Registered Courses", student.getTimetable().getRegistrations());
 					break;
+				case ListVacancies:
+					indexNo = ui.getInt("List vacancies", "Index No:");
+
+					if (indexNo == null) {
+						break;
+					}
+
+					ui.renderDialog(String.format("Index %d", indexNo), String.format("%d Vacancies\n%d max enrolled",
+							courseController.getVacancies(indexNo), courseController.getMaxEnrolled(indexNo)));
+					break;
 
 				// Register for course.
 				case Register:
-					Integer indexNo = ui.getInt("Register for Index", "Index No:");
+					indexNo = ui.getInt("Register for Index", "Index No:");
 
 					if (indexNo == null)
 						break;

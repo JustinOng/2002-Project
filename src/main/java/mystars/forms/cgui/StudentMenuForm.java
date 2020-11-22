@@ -62,6 +62,13 @@ public class StudentMenuForm {
 				window.close();
 			}
 		}).addTo(panel);
+		
+		new Button("Check Vacancies", new Runnable() {
+			public void run() {
+				response = new StudentMenuResponse(StudentMenuResponse.Selected.ListVacancies);
+				window.close();
+			}
+		}).addTo(panel);
 
 		new Button("Register Course", new Runnable() {
 			public void run() {

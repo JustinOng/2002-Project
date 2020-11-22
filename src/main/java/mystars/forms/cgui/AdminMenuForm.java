@@ -63,7 +63,7 @@ public class AdminMenuForm {
 			}
 		}).addTo(panel);
 
-		new Button("List Vacancies", new Runnable() {
+		new Button("Check Vacancies", new Runnable() {
 			public void run() {
 				response = new AdminMenuResponse(AdminMenuResponse.Selected.ListVacancies);
 				window.close();
