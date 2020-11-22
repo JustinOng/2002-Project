@@ -165,4 +165,35 @@ public class Lesson implements Serializable {
 	public String getLocation() {
 		return location;
 	}
+
+	/**
+	 * Retrieves the day on which this lesson will be held
+	 * 
+	 * @return The day on which this lesson will be held
+	 */
+	public Day getDay() {
+		return day;
+	}
+
+	/**
+	 * Retrieves time of this lesson as 24h time string eg "0800-0930"
+	 * 
+	 * @return Time of this lesson as 24h time string
+	 */
+	public String getTimeString() {
+		return periodToString(startPeriod) + "-" + periodToString(endPeriod);
+	}
+
+	/**
+	 * Converts numerical period index into 24h time string, where 0 is 0800 and 31
+	 * is 2330
+	 * 
+	 * @param i Period index
+	 * @return 24h time string representation of {@code i}
+	 */
+	private String periodToString(int i) {
+		int hour = 8 + (i / 2);
+		int minute = i % 2 == 1 ? 30 : 0;
+		return String.format("%02d:%02d", hour, minute);
+	}
 }

@@ -1,6 +1,7 @@
 package mystars.forms;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <h1>Interface: IUserInterface</h1>
@@ -150,12 +151,12 @@ public interface IUserInterface {
 	 * @param msg   The dialog message.
 	 */
 	public void renderDialog(String title, String msg);
-	
+
 	/**
 	 * Displays dialog with specified title and message requesting user confirmation
 	 * 
 	 * @param title The dialog title.
-	 * @param msg The dialog message.
+	 * @param msg   The dialog message.
 	 * @return {@code true} if the user confirmed, or {@code false} otherwise
 	 */
 	public boolean renderConfirmation(String title, String msg);
@@ -168,4 +169,14 @@ public interface IUserInterface {
 	 *                 "gender", "nationality}, ...}
 	 */
 	public void renderStudentList(String title, List<String[]> students);
+
+	/**
+	 * Displays a list of indexes with the given title
+	 * 
+	 * @param title   The title of the form.
+	 * @param indexes Map of index number to index info, where index info is a list
+	 *                of string arrays containing {"Class Type", "Group", "Day",
+	 *                "Time", "Venue"}
+	 */
+	public void renderIndexInfo(String title, Map<String, List<String[]>> indexes);
 }

@@ -11,7 +11,7 @@ public class IndexManagementResponse {
 	 * Enum containing the options for managing course indexes.
 	 */
 	public enum Selected {
-		CreateLesson, ListStudents
+		CreateLesson, ListStudents, ListLessons
 	};
 
 	/**

@@ -3,6 +3,7 @@ package mystars.forms.cgui;
 import java.awt.Font;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.*;
@@ -178,5 +179,9 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	public boolean renderConfirmation(String title, String msg) {
 		return new MessageDialogBuilder().setTitle(title).setText(msg).addButton(MessageDialogButton.Cancel)
 				.addButton(MessageDialogButton.OK).build().showDialog(gui) == MessageDialogButton.OK;
+	}
+
+	public void renderIndexInfo(String title, Map<String, List<String[]>> indexes) {
+		DisplayIndexList.show(gui, title, indexes);
 	}
 }

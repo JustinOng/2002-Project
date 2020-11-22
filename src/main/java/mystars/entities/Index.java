@@ -150,6 +150,14 @@ public class Index extends Entity {
 		
 		this.lessons.add(l);
 	}
+	
+	/**
+	 * Retrieves lessons belonging to this index
+	 * @return List of lessons belonging to this index
+	 */
+	public List<Lesson> getLessons() {
+		return lessons;
+	}
 
 	/**
 	 * Retrieves number of vacancies in this index

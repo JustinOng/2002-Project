@@ -424,7 +424,6 @@ public class MySTARS {
 		while (true) {
 			HashMap<String, Integer> indexes = new HashMap<String, Integer>();
 
-			// Display all the indexes of the selected course.
 			try {
 				for (Index index : courseController.getAllIndexes(courseCode)) {
 					indexes.put(index.toString(), index.getIndexNo());
@@ -450,7 +449,6 @@ public class MySTARS {
 			try {
 				switch (indexMgmtResponse.getSelected()) {
 
-				// Create a new index lesson.
 				case CreateLesson:
 					List<String> lessonTypes = Stream.of(LessonType.values()).map(Enum::name)
 							.collect(Collectors.toList());
@@ -468,8 +466,21 @@ public class MySTARS {
 							lessonResponse.getGroupNo(), lessonResponse.getWeeks(), lessonResponse.getStartPeriod(),
 							lessonResponse.getEndPeriod());
 					break;
+				case ListLessons:
+					Index index = courseController.getIndex(indexNo);
+					List<String[]> lessons = new ArrayList<>();
 
-				// List all the students registered for an index.
+					for (Lesson lesson : index.getLessons()) {
+						lessons.add(new String[] { lesson.getLessonType().toString(), lesson.getGroupNo(),
+								lesson.getDay().toString(), lesson.getTimeString().toString(), lesson.getLocation() });
+					}
+
+					Map<String, List<String[]>> indexLessonMap = new HashMap<>();
+
+					indexLessonMap.put(index.toString(), lessons);
+					
+					ui.renderIndexInfo("Lessons", indexLessonMap);
+					break;
 				case ListStudents:
 					displayStudents(String.format("Students registered for Index %d", indexNo),
 							courseController.getStudentsByIndex(indexNo));

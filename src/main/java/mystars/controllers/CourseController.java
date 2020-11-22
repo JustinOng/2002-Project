@@ -80,6 +80,16 @@ public class CourseController {
 		Course course = Course.getCourse(courseCode);
 		return course.getIndexes();
 	}
+	
+	/**
+	 * Retrieves Index given indexNo
+	 * @param indexNo Index number of the index to retrieve
+	 * @return Index
+	 * @throws AppException If no index identified by {@code indexNo} is found
+	 */
+	public Index getIndex(int indexNo) throws AppException {
+		return Index.getIndex(indexNo);
+	}
 
 	/**
 	 * Creates a new lesson on the index and course identified by {@code indexNo}
