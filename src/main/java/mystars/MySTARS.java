@@ -566,10 +566,11 @@ public class MySTARS {
 	}
 
 	/**
-	 * Load courses, indexes and lessons from a text file. Example format:
-	 * course:|CE1105|DIGITAL LOGIC|CSE|3 index:|10005
-	 * lesson:|10005|Lecture|Tuesday|LT2A|CE1|1,1,1,1,1,1,1,1,1,1,1,1,1|11|13
-	 * lesson:|10005|Lecture|Thursday|LT2A|CE1|1,1,1,1,1,1,1,1,1,1,1,1,1|15|17
+	 * Load courses, indexes and lessons from a text file. Example format:<br>
+	 * {@code course:|CE1105|DIGITAL LOGIC|CSE|3}<br>
+	 * {@code index:|10005}<br>
+	 * {@code lesson:|10005|Lecture|Tuesday|LT2A|CE1|1,1,1,1,1,1,1,1,1,1,1,1,1|11|13}<br>
+	 * {@code lesson:|10005|Lecture|Thursday|LT2A|CE1|1,1,1,1,1,1,1,1,1,1,1,1,1|15|17}<br>
 	 * 
 	 * @param dataPath path to file to read
 	 */

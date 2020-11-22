@@ -17,9 +17,11 @@ import mystars.notifications.INotifyStudent;
 public class Entry {
 	/**
 	 * Main method which creates the MySTARS application object and initializes it.
-	 * Command line arguments passed to this application when initializing it
-	 * include: - The configuration file containing the information on the student's
-	 * emails.
+	 * Command line arguments that can be passed to the application:<br>
+	 * --config=/path/to/file - path to properties file containing parameters for
+	 * email sending<br>
+	 * --load-indexes=/path/to/file - path to txt file containing course
+	 * information. See {@link MySTARS#loadIndexes(String)} for format information
 	 * 
 	 * @param args Command line arguments to this application.
 	 * @throws IOException on UI exception
@@ -27,7 +29,7 @@ public class Entry {
 	public static void main(String[] args) throws IOException {
 		String configFile = "app.properties";
 		String indexDataFile = null;
-		
+
 		for (String arg : args) {
 			if (arg.startsWith("--config=")) {
 				configFile = arg.replaceFirst("--config=", "");
@@ -56,11 +58,11 @@ public class Entry {
 
 		MySTARS app = new MySTARS(new ConsoleGraphicUserInterface(), notifier);
 		app.start();
-		
+
 		if (indexDataFile != null) {
 			app.loadIndexes(indexDataFile);
 		}
-		
+
 		app.loop();
 	}
 
