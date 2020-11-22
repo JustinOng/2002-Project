@@ -143,6 +143,11 @@ public class Index extends Entity {
 	public void createLesson(LessonType type, Day day, String location, String groupNo, boolean[] week, int startPeriod,
 			int endPeriod) throws AppException {
 		Lesson l = new Lesson(this, type, day, location, groupNo, week, startPeriod, endPeriod);
+		
+		if (clashesWith(l)) {
+			throw new AppException("The new lesson clashes with an existing lesson");
+		}
+		
 		this.lessons.add(l);
 	}
 
@@ -261,7 +266,7 @@ public class Index extends Entity {
 	/**
 	 * Check if 2 indexes clash.
 	 * 
-	 * @param index The index object to be checked with current index object.
+	 * @param index The index to compare with the current index
 	 * @return {@code true} if there is a clash, or {@code false} otherwise
 	 */
 	public boolean clashesWith(Index index) {
@@ -274,6 +279,22 @@ public class Index extends Entity {
 			}
 		}
 
+		return false;
+	}
+	
+	/**
+	 * Check if {@code lesson} clashes any lesson in this index
+	 * 
+	 * @param index The index to compare with the current index
+	 * @return {@code true} if there is a clash, or {@code false} otherwise
+	 */
+	public boolean clashesWith(Lesson lesson) {
+		for (Lesson l1 : lessons) {
+			if (l1.clashesWith(lesson)) {
+				return true;
+			}
+		}
+		
 		return false;
 	}
 
