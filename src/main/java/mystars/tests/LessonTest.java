@@ -1,7 +1,6 @@
 package mystars.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import mystars.entities.*;
@@ -38,6 +37,6 @@ public class LessonTest {
 		Lesson c5 = new Lesson(null, LessonType.Lecture, Day.Monday, "TR+1", "AAA",
 				new boolean[] { true, true, true, true, true, true, true, true, true, true, true, true, true }, 1, 2);
 
-		assertFalse(base.clashesWith(c4), "base starts immediately after c5");
+		assertFalse(base.clashesWith(c5), "base starts immediately after c5");
 	}
 }
