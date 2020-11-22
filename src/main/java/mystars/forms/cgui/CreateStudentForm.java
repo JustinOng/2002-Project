@@ -2,6 +2,7 @@ package mystars.forms.cgui;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
@@ -30,6 +31,12 @@ public class CreateStudentForm {
 	 * @return User input to be used to create a new Student, or {@code null} if the
 	 *         form is cancelled/closed without any input
 	 */
+	/**
+	 * @param gui
+	 * @param genders
+	 * @param nationalities
+	 * @return
+	 */
 	public CreateStudentResponse getResponse(MultiWindowTextGUI gui, List<String> genders, List<String> nationalities) {
 		final AbstractWindow window = new BasicWindow();
 
@@ -45,18 +52,22 @@ public class CreateStudentForm {
 
 		panel.addComponent(new Label("Username:"));
 		final TextBox usernameInput = new TextBox().addTo(panel);
+		usernameInput.setValidationPattern(Pattern.compile("^[a-zA-Z0-9]+$"));
 
 		panel.addComponent(new Label("Password:"));
 		final TextBox passwordInput = new TextBox().addTo(panel);
 
 		panel.addComponent(new Label("Name:"));
 		final TextBox nameInput = new TextBox().addTo(panel);
+		usernameInput.setValidationPattern(Pattern.compile("^[a-zA-Z0-9, ]+$"));
 
 		panel.addComponent(new Label("Email:"));
 		final TextBox emailInput = new TextBox().addTo(panel);
+		emailInput.setValidationPattern(Pattern.compile("^[a-zA-Z0-9\\.\\+@]+$"));
 
 		panel.addComponent(new Label("Matric. No.:"));
 		final TextBox matricNoInput = new TextBox().addTo(panel);
+		matricNoInput.setValidationPattern(Pattern.compile("^[A-Z0-9]+$"));
 
 		panel.addComponent(new Label("Gender:"));
 		final ComboBox<String> genderBox = new ComboBox<String>(genders);
