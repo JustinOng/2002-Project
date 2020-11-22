@@ -343,7 +343,7 @@ public class MySTARS {
 					ui.renderDialog("Student Access Period", "Changed successfully");
 					break;
 
-				// Create a new student with all of that student's required information.
+				// Create a new student
 				case CreateStudent:
 					// https://stackoverflow.com/a/29465971
 					List<String> genders = Stream.of(Gender.values()).map(Enum::name).collect(Collectors.toList());
