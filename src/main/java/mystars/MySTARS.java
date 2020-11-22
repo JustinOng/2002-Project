@@ -1,5 +1,10 @@
 package mystars;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -60,10 +65,7 @@ public class MySTARS {
 	}
 
 	/**
-	 * Calls the created controller and its related objects declared above to start
-	 * the MySTARS program. Prompts the user to login with their credentials through
-	 * the user interface's login form. Notifies students if they have been
-	 * allocated an index that was previously on their waitlist.
+	 * Performs initialisation
 	 */
 	public void start() {
 		storageController.start();
@@ -78,7 +80,12 @@ public class MySTARS {
 				storageController.writeToDisk();
 			}
 		});
+	}
 
+	/**
+	 * Main UI loop
+	 */
+	public void loop() {
 		if (notifier != null) {
 			courseController.registerIndexObserver((Index index, Student student) -> {
 				notifier.notify(student, "Allocation of waitlisted Index",
@@ -95,7 +102,7 @@ public class MySTARS {
 					Gender.Female, Nationality.Singaporean);
 
 			// Create new courses and indexes.
-			Course c = new Course("Course", "C1", School.CSE);
+			Course c = new Course("Course", "C1", School.CSE, 1);
 			c.createIndex(1, 1);
 			c.createIndex(2, 1);
 
@@ -318,7 +325,7 @@ public class MySTARS {
 					}
 
 					courseController.createCourse(courseResponse.getName(), courseResponse.getCode(),
-							School.valueOf(courseResponse.getSchool()));
+							School.valueOf(courseResponse.getSchool()), courseResponse.getAu());
 
 					ui.renderDialog("Course Creation", "Course created successfully");
 					break;
@@ -490,5 +497,51 @@ public class MySTARS {
 			data.add(new String[] { s.getName(), s.getGender().toString(), s.getNationality().toString() });
 		}
 		ui.renderStudentList(title, data);
+	}
+
+	public void loadIndexes(String dataPath) {
+		System.out.println("Loading indexes");
+		FileReader fr;
+		try {
+			fr = new FileReader(new File(dataPath));
+		} catch (FileNotFoundException e) {
+			System.err.println(String.format("Unable to find %s to load indexes from\n", dataPath));
+			return;
+		}
+
+		BufferedReader br = new BufferedReader(fr);
+
+		String line;
+		String courseCode = null;
+		try {
+			while ((line = br.readLine()) != null) {
+				try {
+					String[] parts = line.split("\\|");
+
+					if (parts[0].equals("course:")) {
+						courseCode = parts[1];
+						courseController.createCourse(parts[2], parts[1], School.valueOf(parts[3]),
+								Integer.parseInt(parts[4]));
+					} else if (parts[0].equals("index:")) {
+						courseController.createIndex(courseCode, Integer.parseInt(parts[1]), 3);
+					} else if (parts[0].equals("lesson:")) {
+						boolean[] weeks = new boolean[13];
+						String[] weekParts = parts[6].split(",");
+
+						for (int i = 0; i < 13; i++) {
+							weeks[i] = weekParts[i].equals("1");
+						}
+						courseController.createLesson(courseCode, Integer.parseInt(parts[1]),
+								LessonType.valueOf(parts[2]), Day.valueOf(parts[3]), parts[4], parts[5], weeks,
+								Integer.parseInt(parts[7]), Integer.parseInt(parts[8]));
+					}
+				} catch (AppException e1) {
+					e1.printStackTrace();
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
 	}
 }

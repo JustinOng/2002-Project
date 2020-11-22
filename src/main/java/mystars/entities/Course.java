@@ -34,6 +34,11 @@ public class Course extends Entity {
 	protected School school;
 
 	/**
+	 * Number of AUs this Course is worth
+	 */
+	protected int au;
+
+	/**
 	 * Map of index number to Index. Stores indexes belonging to this course
 	 */
 	protected HashMap<Integer, Index> indexes = new HashMap<Integer, Index>();
@@ -44,9 +49,10 @@ public class Course extends Entity {
 	 * @param name       The Course's name.
 	 * @param courseCode The Course Code.
 	 * @param school     The Course's school.
+	 * @param au         The number of AUs this Course is worth
 	 * @throws AppException If a course with {@code courseCode} already exists.
 	 */
-	public Course(String name, String courseCode, School school) throws AppException {
+	public Course(String name, String courseCode, School school, int au) throws AppException {
 		if (name.isBlank()) {
 			throw new AppException("name cannot be blank");
 		}
@@ -64,6 +70,7 @@ public class Course extends Entity {
 		this.name = name;
 		this.courseCode = courseCode;
 		this.school = school;
+		this.au = au;
 		store("course", courseCode, this);
 	}
 
@@ -110,6 +117,14 @@ public class Course extends Entity {
 	public School getSchool() {
 		return this.school;
 	}
+	
+	/**
+	 * Gets the number of AUs this Course is worth
+	 * @return the number of AUs this Course is worth
+	 */
+	public int getAu() {
+		return this.au;
+	}
 
 	/**
 	 * Creates a new Index with the given index number and maximum enrolled number
@@ -148,11 +163,10 @@ public class Course extends Entity {
 	 * @param day         Which day the lesson is on
 	 * @param location    The location the lesson is at
 	 * @param groupNo     The group number the lesson belongs to
-	 * @param week        Array of booleans indicating whether this lesson is held
-	 *                    on the particular week
-	 * @param startPeriod The starting time of the lesson
-	 * @param endPeriod   The ending time of the lesson
-	 * @throws AppException If the index number is not found in this course
+	 * @param week        Whether the lesson falls on odd or even
+	 * @param startPeriod The starting time when the lesson begins
+	 * @param endPeriod   The ending time when the lesson begins
+	 * @throws AppException if the index number is not found in the index
 	 * @throws AppException if invalid parameters are passed to the constructor of
 	 *                      Lesson
 	 */

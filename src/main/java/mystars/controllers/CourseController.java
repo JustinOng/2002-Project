@@ -32,14 +32,15 @@ public class CourseController {
 	 * @param name       The course's name.
 	 * @param courseCode The course's code.
 	 * @param school     The course's school.
+	 * @param au     The number of AUs this course is worth.
 	 * @throws AppException if another course identified by {@code courseCode}
 	 *                      already exists
 	 * @throws AppException if invalid parameters are passed to the constructor of
 	 *                      Course
 	 */
 
-	public void createCourse(String name, String courseCode, School school) throws AppException {
-		new Course(name, courseCode, school);
+	public void createCourse(String name, String courseCode, School school, int au) throws AppException {
+		new Course(name, courseCode, school, au);
 	}
 
 	/**

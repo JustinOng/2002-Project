@@ -26,9 +26,14 @@ public class Entry {
 	 */
 	public static void main(String[] args) throws IOException {
 		String configFile = "app.properties";
-
-		if (args.length > 0) {
-			configFile = args[0];
+		String indexDataFile = null;
+		
+		for (String arg : args) {
+			if (arg.startsWith("--config=")) {
+				configFile = arg.replaceFirst("--config=", "");
+			} else if (arg.startsWith("--load-indexes=")) {
+				indexDataFile = arg.replaceFirst("--load-indexes=", "");
+			}
 		}
 		INotifyStudent notifier = null;
 
@@ -51,6 +56,12 @@ public class Entry {
 
 		MySTARS app = new MySTARS(new ConsoleGraphicUserInterface(), notifier);
 		app.start();
+		
+		if (indexDataFile != null) {
+			app.loadIndexes(indexDataFile);
+		}
+		
+		app.loop();
 	}
 
 	/**
