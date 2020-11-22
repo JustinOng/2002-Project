@@ -46,6 +46,8 @@ public class User extends Entity {
 	 * @throws AppException If there already exists a user with the same username.
 	 */
 	public User(String username, String password) throws AppException {
+		username = username.toLowerCase();
+
 		if (get("user", username) != null) {
 			throw new AppException(String.format("%s already exists", username));
 		}
@@ -105,7 +107,8 @@ public class User extends Entity {
 	 * for that user in the database.
 	 * 
 	 * @param password The user's password.
-	 * @return {@code true} if the user has logged in successfully, oor {@code false} otherwise
+	 * @return {@code true} if the user has logged in successfully, oor
+	 *         {@code false} otherwise
 	 * @throws AppException If the login failed
 	 */
 	public boolean login(String password) throws AppException {
@@ -121,7 +124,7 @@ public class User extends Entity {
 	public static ArrayList<User> getAllUsers() {
 		return (ArrayList<User>) (ArrayList<?>) getAll("user");
 	}
-	
+
 	/**
 	 * Mark/unmark this user as an admin
 	 * 
@@ -130,7 +133,7 @@ public class User extends Entity {
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
-	
+
 	/**
 	 * Returns whether this user is an admin or not
 	 * 
