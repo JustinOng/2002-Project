@@ -315,11 +315,11 @@ public class Course extends Entity {
 		}
 
 		if (!indexA.hasEnrolledStudent(studentA)) {
-			throw new AppException(String.format("%s is not enrolled in index %d", studentA.getMatricNo(), indexNoA));
+			throw new AppException(String.format("%s is not enrolled in index %d", studentA.getName(), indexNoA));
 		}
 
 		if (!indexB.hasEnrolledStudent(studentB)) {
-			throw new AppException(String.format("%s is not enrolled in index %d", studentB.getMatricNo(), indexNoB));
+			throw new AppException(String.format("%s is not enrolled in index %d", studentB.getName(), indexNoB));
 		}
 
 		if (indexNoA == indexNoB) {
