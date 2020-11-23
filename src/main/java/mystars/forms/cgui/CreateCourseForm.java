@@ -42,9 +42,11 @@ public class CreateCourseForm {
 		// Insert textboxes, labels and buttons as required.
 		panel.addComponent(new Label("Code:"));
 		final TextBox codeInput = new TextBox().addTo(panel);
+		codeInput.setValidationPattern(Pattern.compile("^[A-Z0-9]+$"));
 
 		panel.addComponent(new Label("Name:"));
 		final TextBox nameInput = new TextBox().addTo(panel);
+		nameInput.setValidationPattern(Pattern.compile("^[a-zA-Z0-9 ]+$"));
 
 		panel.addComponent(new Label("School:"));
 		final ComboBox<String> schoolComboBox = new ComboBox<String>(schools).addTo(panel);
@@ -62,6 +64,11 @@ public class CreateCourseForm {
 
 				if (code.isBlank()) {
 					MessageDialog.showMessageDialog(gui, "Error", "Code cannot be blank!");
+					return;
+				}
+				
+				if (!code.matches("^[A-Z]+[0-9]+$")) {
+					MessageDialog.showMessageDialog(gui, "Error", "Invalid course code format");
 					return;
 				}
 

@@ -3,6 +3,7 @@ package mystars.forms.cgui;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
@@ -49,6 +50,7 @@ public class CreateLessonForm {
 
 		panel.addComponent(new Label("Group Number:"));
 		final TextBox groupInput = new TextBox().addTo(panel);
+		groupInput.setValidationPattern(Pattern.compile("^[A-Z0-9]+$"));
 
 		panel.addComponent(new Label("Location:"));
 		final TextBox locationInput = new TextBox().addTo(panel);

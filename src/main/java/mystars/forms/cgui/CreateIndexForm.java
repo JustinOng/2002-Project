@@ -60,6 +60,7 @@ public class CreateIndexForm {
 					MessageDialog.showMessageDialog(gui, "Error", "Error parsing number");
 					return;
 				}
+
 				response = new CreateIndexResponse(indexNumber, maxEnrolled);
 				window.close();
 			}
