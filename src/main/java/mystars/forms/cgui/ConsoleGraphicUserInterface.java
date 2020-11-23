@@ -90,7 +90,7 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	 * The index management form.
 	 */
 	private IndexManagementForm indexManagementForm = new IndexManagementForm();
-	
+
 	/**
 	 * Generic form to confirm changing between two indexes
 	 */
@@ -116,14 +116,14 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 
 		gui = new AppUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
 	}
-	
+
 	// the following functions will inherit the javadocs from IUserInterface
 
 	@Override
 	public LoginResponse renderLoginForm() {
 		return loginForm.getResponse(gui);
 	}
-	
+
 	@Override
 	public StudentMenuResponse renderStudentMenuForm(List<Registration> regs) {
 		return studentMenuForm.getResponse(gui, regs);
@@ -196,7 +196,10 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 
 	@Override
 	public void renderStudentList(String title, List<Student> students) {
-		DisplayStudentList.show(gui, title, students);
+		DisplayList<Student> display = new DisplayList<>();
+
+		display.show(gui, title, "No students", new String[] { "Name", "Gender", "Nationality" }, students,
+				(s) -> new String[] { s.getName(), s.getGender().toString(), s.getNationality().toString() });
 	}
 
 	@Override
@@ -211,8 +214,8 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	}
 
 	@Override
-	public boolean renderIndexChangeConfirmation(String title, String description, String labelA,
-			Index indexA, String labelB, Index indexB) {
+	public boolean renderIndexChangeConfirmation(String title, String description, String labelA, Index indexA,
+			String labelB, Index indexB) {
 		return indexChangeConfirmationForm.confirm(gui, title, description, labelA, indexA, labelB, indexB);
 	}
 
