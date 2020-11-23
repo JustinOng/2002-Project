@@ -116,85 +116,107 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 
 		gui = new AppUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
 	}
+	
+	// the following functions will inherit the javadocs from IUserInterface
 
+	@Override
 	public LoginResponse renderLoginForm() {
 		return loginForm.getResponse(gui);
 	}
-
+	
+	@Override
 	public StudentMenuResponse renderStudentMenuForm(List<Registration> regs) {
 		return studentMenuForm.getResponse(gui, regs);
 	}
 
+	@Override
 	public TextResponse renderItemSelectorForm(String title, List<String> items) {
 		return itemSelectorForm.getResponse(gui, title, items);
 	}
 
+	@Override
 	public IndexSwopResponse renderIndexSwopForm() {
 		return indexSwopForm.getResponse(gui);
 	}
 
+	@Override
 	public CreateStudentResponse renderCreateStudentForm(List<String> genders, List<String> nationalities) {
 		return createStudentForm.getResponse(gui, genders, nationalities);
 	}
 
+	@Override
 	public CreateCourseResponse renderCreateCourseForm(List<String> schools) {
 		return createCourseForm.getResponse(gui, schools);
 	}
 
+	@Override
 	public CreateIndexResponse renderCreateIndexForm(String course) {
 		return createIndexForm.getResponse(gui, course);
 	}
 
+	@Override
 	public String getText(String title, String description) {
 		return GetInputForm.getText(gui, title, description);
 	}
 
+	@Override
 	public Integer getInt(String title, String description) {
 		return GetInputForm.getInt(gui, title, description);
 	}
 
+	@Override
 	public void renderDialog(String title, String msg) {
 		MessageDialog.showMessageDialog(gui, title, msg);
 	}
 
+	@Override
 	public AdminMenuResponse renderAdminMenuForm() {
 		return adminMenuForm.getResponse(gui);
 	}
 
+	@Override
 	public AccessPeriodResponse renderAccessPeriodForm(String curAccessPeriod) {
 		return accessPeriodForm.getResponse(gui, curAccessPeriod);
 	}
 
+	@Override
 	public CourseManagementResponse renderCourseManagementForm(List<String> courses) {
 		return courseManagementForm.getResponse(gui, courses);
 	}
 
+	@Override
 	public IndexManagementResponse renderIndexManagementForm(String courseCode, List<String> indexes) {
 		return indexManagementForm.getResponse(gui, courseCode, indexes);
 	}
 
+	@Override
 	public CreateLessonResponse renderCreateLessonForm(String index, List<String> lessonType, List<String> days) {
 		return createLessonForm.getResponse(gui, index, lessonType, days);
 	}
 
+	@Override
 	public void renderStudentList(String title, List<Student> students) {
 		DisplayStudentList.show(gui, title, students);
 	}
 
+	@Override
 	public boolean renderConfirmation(String title, String msg) {
 		return new MessageDialogBuilder().setTitle(title).setText(msg).addButton(MessageDialogButton.Cancel)
 				.addButton(MessageDialogButton.OK).build().showDialog(gui) == MessageDialogButton.OK;
 	}
 
+	@Override
 	public void renderIndexInfo(String title, List<Index> indexes) {
 		DisplayIndexList.show(gui, title, indexes);
 	}
 
+	@Override
 	public boolean renderIndexChangeConfirmation(String title, String description, String labelA,
 			Index indexA, String labelB, Index indexB) {
 		return indexChangeConfirmationForm.confirm(gui, title, description, labelA, indexA, labelB, indexB);
 	}
 
+	@Override
 	public void renderRegisteredCourses(String title, List<Registration> regs) {
 		DisplayRegisteredCourses.display(gui, title, regs);
 	}

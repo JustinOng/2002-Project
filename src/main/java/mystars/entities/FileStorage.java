@@ -44,11 +44,6 @@ public class FileStorage implements IStorage {
 	}
 
 	@Override
-	/**
-	 * Retrieves an entry from a storage object based on its ID.
-	 * 
-	 * @return The storage object's entries matching the type and ID.
-	 */
 	public Serializable get(String type, String id) {
 		if (!storage.containsKey(type) || !storage.get(type).containsKey(id)) {
 			return null;
@@ -62,6 +57,7 @@ public class FileStorage implements IStorage {
 	 * 
 	 * @return The Arraylist of the storage object entries matching the type values.
 	 */
+	@Override
 	public ArrayList<Serializable> getAll(String type) {
 		if (storage.get(type) == null) {
 			return new ArrayList<>();
@@ -88,10 +84,10 @@ public class FileStorage implements IStorage {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	/**
 	 * Reads data from disk.
 	 */
+	@SuppressWarnings("unchecked")
 	public void loadFromDisk() {
 		try {
 			// Create a new object input stream using the filename.
