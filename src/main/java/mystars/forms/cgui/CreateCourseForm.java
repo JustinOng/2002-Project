@@ -86,7 +86,7 @@ public class CreateCourseForm {
 		window.setComponent(panel);
 
 		KeyStrokeListener listener = new KeyStrokeListener();
-		window.setTitle("Login");
+		window.setTitle("Create Course");
 		window.addWindowListener(listener);
 		window.setHints(Arrays.asList(Window.Hint.CENTERED));
 
