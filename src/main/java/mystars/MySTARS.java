@@ -387,6 +387,8 @@ public class MySTARS {
 							gender, nationality);
 
 					ui.renderDialog("Student Creation", "Student created successfully");
+
+					ui.renderStudentList("All Students", userController.getAllStudents());
 					break;
 
 				// Create a new course.
