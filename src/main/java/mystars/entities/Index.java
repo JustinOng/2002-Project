@@ -96,7 +96,10 @@ public class Index extends Entity {
 		this.maxEnrolled = maxEnrolled;
 		this.enrolled = new ArrayList<Student>();
 		this.waitlist = new ArrayList<Student>();
-
+	}
+	
+	@Override
+	public void markPersistent() {
 		store("index", indexNo, this);
 	}
 

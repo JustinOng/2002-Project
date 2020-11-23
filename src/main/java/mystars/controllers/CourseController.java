@@ -40,7 +40,8 @@ public class CourseController {
 	 */
 
 	public void createCourse(String name, String courseCode, School school, int au) throws AppException {
-		new Course(name, courseCode, school, au);
+		Course course = new Course(name, courseCode, school, au);
+		course.markPersistent();
 	}
 
 	/**

@@ -36,7 +36,8 @@ public class UserController {
 	 */
 	public void createStudent(String name, String email, String matricNo, String username, String password,
 			Gender gender, Nationality nationality) throws AppException {
-		new Student(name, email, matricNo, username, password, gender, nationality);
+		Student student = new Student(name, email, matricNo, username, password, gender, nationality);
+		student.markPersistent();
 	}
 
 	/**
@@ -49,6 +50,7 @@ public class UserController {
 	public void createAdmin(String username, String password) throws AppException {
 		User user = new User(username, password);
 		user.setAdmin(true);
+		user.markPersistent();
 	}
 
 	/**

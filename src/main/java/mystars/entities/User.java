@@ -45,7 +45,7 @@ public class User extends Entity {
 	 * @param password The user's password.
 	 * @throws AppException If there already exists a user with the same username.
 	 */
-	public User(String username, String password) throws AppException {
+	public User(String username, String password) throws AppException {		
 		username = username.toLowerCase();
 
 		if (get("user", username) != null) {
@@ -53,7 +53,10 @@ public class User extends Entity {
 		}
 		this.username = username;
 		this.passwordHash = hashString(password);
-
+	}
+	
+	@Override
+	public void markPersistent() {
 		store("user", username, this);
 	}
 

@@ -71,6 +71,10 @@ public class Course extends Entity {
 		this.courseCode = courseCode;
 		this.school = school;
 		this.au = au;
+	}
+
+	@Override
+	public void markPersistent() {
 		store("course", courseCode, this);
 	}
 
@@ -139,6 +143,8 @@ public class Course extends Entity {
 	 */
 	public Index createIndex(int indexNo, int maxEnrolled) throws AppException {
 		Index index = new Index(this, indexNo, maxEnrolled);
+		index.markPersistent();
+
 		indexes.put(indexNo, index);
 
 		return index;
