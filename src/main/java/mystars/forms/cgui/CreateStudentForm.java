@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
@@ -53,7 +56,7 @@ public class CreateStudentForm {
 
 		panel.addComponent(new Label("Name:"));
 		final TextBox nameInput = new TextBox().addTo(panel);
-		usernameInput.setValidationPattern(Pattern.compile("^[a-zA-Z0-9, ]+$"));
+		nameInput.setValidationPattern(Pattern.compile("^[a-zA-Z0-9, ]+$"));
 
 		panel.addComponent(new Label("Email:"));
 		final TextBox emailInput = new TextBox().addTo(panel);
@@ -84,6 +87,22 @@ public class CreateStudentForm {
 				if (username.isBlank() || password.isBlank() || name.isBlank() || email.isBlank()
 						|| matricNo.isBlank()) {
 					MessageDialog.showMessageDialog(gui, "Error", "All fields must be filled out");
+					return;
+				}
+
+				try {
+					InternetAddress.parse(email, true);
+					if (!email.matches("^[a-zA-Z0-9+\\.]+@[a-zA-Z0-9+\\.]+$")) {
+						throw new AddressException();
+					}
+				} catch (AddressException e) {
+					MessageDialog.showMessageDialog(gui, "Error", "Please enter a valid email address");
+					return;
+				}
+
+				// https://github.com/idf/idf.github.io-deprecated/blob/master/_posts/2014-03-17-the-secret-behind-ntu-matriculation-numbers.md
+				if (!matricNo.matches("^[U|G|N|P|D][0-9]{7}[ABCDEFGHJKL]$")) {
+					MessageDialog.showMessageDialog(gui, "Error", "Please enter a valid matriculation number");
 					return;
 				}
 
