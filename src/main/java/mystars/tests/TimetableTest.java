@@ -11,7 +11,7 @@ public class TimetableTest {
 	@Test
 	void test_timetable() throws AppException {
 		Timetable timetable = new Timetable();
-		timetable.setMaxAu(21);
+		Timetable.setMaxAu(21);
 
 		FileStorage storage = new FileStorage("");
 		Entity.setStorage(storage);
