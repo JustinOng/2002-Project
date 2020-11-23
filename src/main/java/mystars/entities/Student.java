@@ -84,10 +84,12 @@ public class Student extends User {
 	 */
 	@Override
 	public boolean login(String password) throws AppException {
+		if (!super.login(password)) return false;
+		
 		if (!canLogin()) {
 			throw new AppException("User is not allowed to login right now");
 		}
-		return super.login(password);
+		return true;
 	}
 
 	/**
