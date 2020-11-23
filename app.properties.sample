@@ -2,3 +2,4 @@ username=changeme@gmail.com
 password=password here
 smtpHost=smtp.gmail.com
 smtpPort=587
+maxAUs=21

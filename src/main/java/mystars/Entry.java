@@ -19,11 +19,13 @@ public class Entry {
 	 * Main method which creates the MySTARS application object and initializes it.
 	 * Command line arguments that can be passed to the application:<br>
 	 * --config=/path/to/file - path to properties file containing parameters for
-	 * email sending<br>
+	 * the application<br>
 	 * --load-indexes=/path/to/file - path to txt file containing course
-	 * information. See {@link MySTARS#loadIndexes(String)} for format information<br>
-	 * --create-admin - create admin account. See {@link MySTARS#createAdmin()} for more information
-	 * --create-students - create student accounts. See {@link MySTARS#createStudents()} for more information
+	 * information. See {@link MySTARS#loadIndexes(String)} for format
+	 * information<br>
+	 * --create-admin - create admin account. See {@link MySTARS#createAdmin()} for
+	 * more information --create-students - create student accounts. See
+	 * {@link MySTARS#createStudents()} for more information
 	 * 
 	 * @param args Command line arguments to this application.
 	 * @throws IOException on UI exception
@@ -31,9 +33,10 @@ public class Entry {
 	public static void main(String[] args) throws IOException {
 		String configFile = "app.properties";
 		String indexDataFile = null;
-		
+
 		boolean createAdmin = false;
 		boolean createStudents = false;
+		int maxAUs = -1;
 
 		for (String arg : args) {
 			if (arg.startsWith("--config=")) {
@@ -51,6 +54,8 @@ public class Entry {
 		try {
 			Properties config = new Properties();
 			config.load(new FileInputStream(configFile));
+			
+			maxAUs = Integer.parseInt(config.getProperty("maxAUs", "-1"));
 
 			notifier = createNotifier(config);
 
@@ -71,13 +76,20 @@ public class Entry {
 		if (indexDataFile != null) {
 			app.loadIndexes(indexDataFile);
 		}
-		
+
 		if (createAdmin) {
 			app.createAdmin();
 		}
-		
+
 		if (createStudents) {
 			app.createStudents();
+		}
+		
+		if (maxAUs == -1) {
+			System.out.println("Defaulting max AUs to 21 because no value specified");
+			app.setMaxAUs(21);
+		} else {
+			app.setMaxAUs(maxAUs);
 		}
 
 		app.loop();

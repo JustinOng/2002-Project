@@ -206,7 +206,11 @@ public class Timetable implements Serializable {
 		}
 	}
 	
-	public void setMaxAu(int max) {
+	/**
+	 * Set the maximum number of AUs a timetable can contain
+	 * @param max Maximum number of AUs a timetable can contain
+	 */
+	public static void setMaxAu(int max) {
 		maxAu = max;
 	}
 }

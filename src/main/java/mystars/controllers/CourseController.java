@@ -32,7 +32,7 @@ public class CourseController {
 	 * @param name       The course's name.
 	 * @param courseCode The course's code.
 	 * @param school     The course's school.
-	 * @param au     The number of AUs this course is worth.
+	 * @param au         The number of AUs this course is worth.
 	 * @throws AppException if another course identified by {@code courseCode}
 	 *                      already exists
 	 * @throws AppException if invalid parameters are passed to the constructor of
@@ -80,9 +80,10 @@ public class CourseController {
 		Course course = Course.getCourse(courseCode);
 		return course.getIndexes();
 	}
-	
+
 	/**
 	 * Retrieves Index given indexNo
+	 * 
 	 * @param indexNo Index number of the index to retrieve
 	 * @return Index
 	 * @throws AppException If no index identified by {@code indexNo} is found
@@ -319,5 +320,14 @@ public class CourseController {
 
 	public void registerIndexObserver(Index.IndexCallback callback, Index.Event evt) {
 		Index.registerObserver(callback, evt);
+	}
+
+	/**
+	 * Set the maximum number of AUs a timetable can contain
+	 * 
+	 * @param max Maximum number of AUs a timetable can contain
+	 */
+	public void setMaxAUs(int max) {
+		Timetable.setMaxAu(max);
 	}
 }

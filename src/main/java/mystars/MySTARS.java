@@ -109,6 +109,15 @@ public class MySTARS {
 	}
 
 	/**
+	 * Set the maximum number of AUs a timetable can contain
+	 * 
+	 * @param max Maximum number of AUs a timetable can contain
+	 */
+	public void setMaxAUs(int max) {
+		courseController.setMaxAUs(max);
+	}
+
+	/**
 	 * Main UI loop
 	 */
 	public void loop() {

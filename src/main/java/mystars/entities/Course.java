@@ -117,9 +117,10 @@ public class Course extends Entity {
 	public School getSchool() {
 		return this.school;
 	}
-	
+
 	/**
 	 * Gets the number of AUs this Course is worth
+	 * 
 	 * @return the number of AUs this Course is worth
 	 */
 	public int getAu() {
@@ -132,12 +133,15 @@ public class Course extends Entity {
 	 * 
 	 * @param indexNo     The new Index's Index number
 	 * @param maxEnrolled The maximum number of enrolled students in the new Index
+	 * @return The newly created Index
 	 * @throws AppException if invalid parameters are passed to the constructor of
 	 *                      Index
 	 */
-	public void createIndex(int indexNo, int maxEnrolled) throws AppException {
+	public Index createIndex(int indexNo, int maxEnrolled) throws AppException {
 		Index index = new Index(this, indexNo, maxEnrolled);
 		indexes.put(indexNo, index);
+
+		return index;
 	}
 
 	/**
