@@ -99,9 +99,9 @@ public class MySTARS {
 	 */
 	public void createStudents() {
 		try {
-			new Student("student1", "starsnotifications2021s1+student1@gmail.com", "U12345", "student1", "1",
+			userController.createStudent("student1", "starsnotifications2021s1+student1@gmail.com", "U12345", "student1", "1",
 					Gender.Male, Nationality.Singaporean);
-			new Student("student2", "starsnotifications2021s1+student2@gmail.com", "U67890", "student2", "2",
+			userController.createStudent("student2", "starsnotifications2021s1+student2@gmail.com", "U67890", "student2", "2",
 					Gender.Female, Nationality.Singaporean);
 			System.out.println("Created students");
 		} catch (AppException e) {
