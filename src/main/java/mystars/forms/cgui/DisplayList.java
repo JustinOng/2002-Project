@@ -22,6 +22,7 @@ public class DisplayList<T> {
 	 * 
 	 * @param gui     The graphical user interface object.
 	 * @param title   The title of the form.
+	 * @param emptyMessage Message to display if {@code items} is empty
 	 * @param headers List of table headers
 	 * @param items   List of items to display. {@code handler.getProperties} is
 	 *                called on every item to get the properties to display.
