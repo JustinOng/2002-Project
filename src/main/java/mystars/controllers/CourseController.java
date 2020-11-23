@@ -179,7 +179,7 @@ public class CourseController {
 		Course course = Course.getCourse(courseCode);
 		Index curIndex = course.getStudentIndex(student);
 		Index newIndex = Index.getIndex(targetIndexNo);
-		
+
 		course.assertChangeIndex(student, targetIndexNo);
 
 		student.getTimetable().assertAddIndex(newIndex, curIndex);
@@ -200,7 +200,7 @@ public class CourseController {
 		Course course = Course.getCourse(courseCode);
 		Index curIndex = course.getStudentIndex(student);
 		Index newIndex = Index.getIndex(targetIndexNo);
-		
+
 		assertChangeIndex(courseCode, student, targetIndexNo);
 
 		course.changeIndex(student, targetIndexNo);

@@ -308,7 +308,7 @@ public class MySTARS {
 
 					Index indexA = courseController.getIndex(isResponse.getIndexA());
 					Index indexB = courseController.getIndex(isResponse.getIndexB());
-					
+
 					courseController.assertSwopIndex(student, isResponse.getIndexA(), (Student) targetUser,
 							isResponse.getIndexB());
 
@@ -364,7 +364,8 @@ public class MySTARS {
 
 					userController.setStudentAccessPeriod(accessResponse.getStart(), accessResponse.getEnd());
 
-					ui.renderDialog("Student Access Period", "Set new access period: " + userController.getStudentAccessPeriod());
+					ui.renderDialog("Student Access Period",
+							"Set new access period: " + userController.getStudentAccessPeriod());
 					break;
 
 				// Create a new student
@@ -404,7 +405,7 @@ public class MySTARS {
 							School.valueOf(courseResponse.getSchool()), courseResponse.getAu());
 
 					ui.renderDialog("Course Creation", "Course created successfully");
-					
+
 					ui.renderCourseList("All Courses", courseController.getAllCourses());
 					break;
 

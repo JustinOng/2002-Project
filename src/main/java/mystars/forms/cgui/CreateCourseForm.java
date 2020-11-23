@@ -66,7 +66,7 @@ public class CreateCourseForm {
 					MessageDialog.showMessageDialog(gui, "Error", "Code cannot be blank!");
 					return;
 				}
-				
+
 				if (!code.matches("^[A-Z]+[0-9]+$")) {
 					MessageDialog.showMessageDialog(gui, "Error", "Invalid course code format");
 					return;

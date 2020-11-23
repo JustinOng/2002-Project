@@ -62,7 +62,7 @@ public class FileStorage implements IStorage {
 		if (storage.get(type) == null) {
 			return new ArrayList<>();
 		}
-		
+
 		return new ArrayList<Serializable>(storage.get(type).values());
 	}
 

@@ -97,7 +97,7 @@ public class Index extends Entity {
 		this.enrolled = new ArrayList<Student>();
 		this.waitlist = new ArrayList<Student>();
 	}
-	
+
 	@Override
 	public void markPersistent() {
 		store("index", indexNo, this);
@@ -146,16 +146,17 @@ public class Index extends Entity {
 	public void createLesson(LessonType type, Day day, String location, String groupNo, boolean[] week, int startPeriod,
 			int endPeriod) throws AppException {
 		Lesson l = new Lesson(this, type, day, location, groupNo, week, startPeriod, endPeriod);
-		
+
 		if (clashesWith(l)) {
 			throw new AppException("The new lesson clashes with an existing lesson");
 		}
-		
+
 		this.lessons.add(l);
 	}
-	
+
 	/**
 	 * Retrieves lessons belonging to this index
+	 * 
 	 * @return List of lessons belonging to this index
 	 */
 	public List<Lesson> getLessons() {
@@ -292,7 +293,7 @@ public class Index extends Entity {
 
 		return false;
 	}
-	
+
 	/**
 	 * Check if {@code lesson} clashes any lesson in this index
 	 * 
@@ -305,7 +306,7 @@ public class Index extends Entity {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 

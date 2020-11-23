@@ -40,7 +40,7 @@ public class ItemSelectorForm {
 				window.close();
 			}
 		});
-		
+
 		for (String s : items) {
 			radioBoxList.addItem(s);
 		}

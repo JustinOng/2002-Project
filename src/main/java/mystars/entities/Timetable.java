@@ -16,7 +16,7 @@ public class Timetable implements Serializable {
 	 * ID for versioning of serialized data.
 	 */
 	private static final long serialVersionUID = 2L;
-	
+
 	private static int maxAu = Integer.MAX_VALUE;
 	private int au = 0;
 
@@ -108,15 +108,15 @@ public class Timetable implements Serializable {
 	 */
 	public void assertAddIndex(Index add, Index remove) throws AppException {
 		int newAu = au + add.getCourse().getAu();
-		
+
 		if (remove != null) {
 			newAu -= remove.getCourse().getAu();
 		}
-		
+
 		if (newAu > maxAu) {
 			throw new AppException(String.format("You can only register for %d AU of courses", maxAu));
 		}
-		
+
 		for (Registration reg : registrations) {
 			Index i = reg.getIndex();
 			if (i == remove)
@@ -205,9 +205,10 @@ public class Timetable implements Serializable {
 			}
 		}
 	}
-	
+
 	/**
 	 * Set the maximum number of AUs a timetable can contain
+	 * 
 	 * @param max Maximum number of AUs a timetable can contain
 	 */
 	public static void setMaxAu(int max) {

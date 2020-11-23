@@ -99,10 +99,10 @@ public class Entry {
 	 * Creates the object to be used for sending email notifications to students.
 	 * {@code config} is expected to contain the following properties:<br>
 	 * <ul>
-	 * 	<li>{@code username}: username of email account
-	 * 	<li>{@code password}: password of email account
-	 * 	<li>{@code smtpHost}: Hostname of the SMTP server to connect to
-	 *  <li>{@code smtpPort}: Port of the SMTP server to connect to
+	 * <li>{@code username}: username of email account
+	 * <li>{@code password}: password of email account
+	 * <li>{@code smtpHost}: Hostname of the SMTP server to connect to
+	 * <li>{@code smtpPort}: Port of the SMTP server to connect to
 	 * </ul>
 	 * 
 	 * If any of the above properties are not provided, null is returned.

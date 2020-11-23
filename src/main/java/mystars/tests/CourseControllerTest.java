@@ -102,7 +102,8 @@ class CourseControllerTest {
 	 * @throws AppException Shows error message if any of the tests fail.
 	 */
 	void test_dropping() throws AppException {
-		Student student = new Student("name", "email@example.com", "matric no", "user", "password", Gender.Male, Nationality.Singaporean);
+		Student student = new Student("name", "email@example.com", "matric no", "user", "password", Gender.Male,
+				Nationality.Singaporean);
 		controller.createCourse("course name", "CZ0001", School.CSE, 1);
 
 		// Create the new course index and register the student for it, before dropping

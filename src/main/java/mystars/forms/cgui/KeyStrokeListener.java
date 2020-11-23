@@ -32,6 +32,6 @@ public class KeyStrokeListener implements WindowListener {
 	}
 
 	public void onResized(Window window, TerminalSize oldSize, TerminalSize newSize) {
-		 return;
+		return;
 	}
 }

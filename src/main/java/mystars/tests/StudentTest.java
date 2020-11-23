@@ -22,15 +22,15 @@ public class StudentTest {
 
 		new Student("Student One", "email1@example.com", "U1234567A", "student1", "password", Gender.Male,
 				Nationality.Singaporean).markPersistent();
-		
+
 		// should succeed: unique username
 		new Student("Student Two", "email2@example.com", "U1234568A", "student2", "password", Gender.Male,
 				Nationality.Singaporean).markPersistent();
-		
-		assertThrows(AppException.class, () -> new Student("Student Three", "email3@example.com", "U1234569A", "student1", "password", Gender.Male,
-				Nationality.Singaporean), "username already exists");
-		
-		assertThrows(AppException.class, () -> new Student("Student Three", "email3@example.com", "U1234568A", "student3", "password", Gender.Male,
-				Nationality.Singaporean), "duplicate matric number");
+
+		assertThrows(AppException.class, () -> new Student("Student Three", "email3@example.com", "U1234569A",
+				"student1", "password", Gender.Male, Nationality.Singaporean), "username already exists");
+
+		assertThrows(AppException.class, () -> new Student("Student Three", "email3@example.com", "U1234568A",
+				"student3", "password", Gender.Male, Nationality.Singaporean), "duplicate matric number");
 	}
 }

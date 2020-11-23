@@ -93,7 +93,7 @@ public abstract class Entity implements Serializable {
 	public static void setStorage(IStorage _storage) {
 		storage = _storage;
 	}
-	
+
 	/**
 	 * Marks this instance as persistent (ie keep in storage)
 	 */

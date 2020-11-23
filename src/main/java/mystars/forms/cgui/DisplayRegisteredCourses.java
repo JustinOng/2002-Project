@@ -18,9 +18,9 @@ public class DisplayRegisteredCourses {
 	 * 
 	 * Display a list of courses and their individual lessons
 	 * 
-	 * @param gui The graphical user interface object
+	 * @param gui   The graphical user interface object
 	 * @param title Title of the form
-	 * @param regs List of Registrations to display
+	 * @param regs  List of Registrations to display
 	 */
 	public static void display(MultiWindowTextGUI gui, String title, List<Registration> regs) {
 		final AbstractWindow window = new BasicWindow();
