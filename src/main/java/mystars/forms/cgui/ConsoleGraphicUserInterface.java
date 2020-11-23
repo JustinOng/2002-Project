@@ -203,6 +203,15 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	}
 
 	@Override
+	public void renderCourseList(String title, List<Course> courses) {
+		DisplayList<Course> display = new DisplayList<>();
+
+		display.show(gui, title, "No courses", new String[] { "Course Code", "Name", "School", "AU" }, courses,
+				(c) -> new String[] { c.getCourseCode(), c.getName(), c.getSchool().toString(),
+						Integer.toString(c.getAu()) });
+	}
+
+	@Override
 	public boolean renderConfirmation(String title, String msg) {
 		return new MessageDialogBuilder().setTitle(title).setText(msg).addButton(MessageDialogButton.Cancel)
 				.addButton(MessageDialogButton.OK).build().showDialog(gui) == MessageDialogButton.OK;

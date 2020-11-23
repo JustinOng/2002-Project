@@ -169,6 +169,14 @@ public interface IUserInterface {
 	 * @param students The list of students.
 	 */
 	public void renderStudentList(String title, List<Student> students);
+	
+	/**
+	 * Displays a list of courses with the given title
+	 * 
+	 * @param title    The title of the form.
+	 * @param students The list of students.
+	 */
+	public void renderCourseList(String title, List<Course> courses);
 
 	/**
 	 * Displays a list of indexes with the given title

@@ -404,6 +404,8 @@ public class MySTARS {
 							School.valueOf(courseResponse.getSchool()), courseResponse.getAu());
 
 					ui.renderDialog("Course Creation", "Course created successfully");
+					
+					ui.renderCourseList("All Courses", courseController.getAllCourses());
 					break;
 
 				// Manage an existing course.

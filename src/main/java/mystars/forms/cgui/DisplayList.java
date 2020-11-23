@@ -36,6 +36,8 @@ public class DisplayList<T> {
 
 		if (items.size() > 0) {
 			Table<String> table = new Table<String>(headers);
+			table.setVisibleRows(10);
+			
 			for (T item : items) {
 				table.getTableModel().addRow(handler.run(item));
 			}
