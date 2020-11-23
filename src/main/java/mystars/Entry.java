@@ -54,7 +54,7 @@ public class Entry {
 		try {
 			Properties config = new Properties();
 			config.load(new FileInputStream(configFile));
-			
+
 			maxAUs = Integer.parseInt(config.getProperty("maxAUs", "-1"));
 
 			notifier = createNotifier(config);
@@ -84,7 +84,7 @@ public class Entry {
 		if (createStudents) {
 			app.createStudents();
 		}
-		
+
 		if (maxAUs == -1) {
 			System.out.println("Defaulting max AUs to 21 because no value specified");
 			app.setMaxAUs(21);
@@ -96,7 +96,16 @@ public class Entry {
 	}
 
 	/**
-	 * Creates the object to be used for sending email notifications to students
+	 * Creates the object to be used for sending email notifications to students.
+	 * {@code config} is expected to contain the following properties:<br>
+	 * <ul>
+	 * 	<li>{@code username}: username of email account
+	 * 	<li>{@code password}: password of email account
+	 * 	<li>{@code smtpHost}: Hostname of the SMTP server to connect to
+	 *  <li>{@code smtpPort}: Port of the SMTP server to connect to
+	 * </ul>
+	 * 
+	 * If any of the above properties are not provided, null is returned.
 	 * 
 	 * @param config Configuration parameters
 	 * @return Configured object
