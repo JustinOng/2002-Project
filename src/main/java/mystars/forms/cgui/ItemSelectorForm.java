@@ -12,22 +12,12 @@ import mystars.forms.*;
  * 
  * This class manages the user interface for selection of options on a form.
  */
-public class ItemSelectorForm implements RadioBoxList.Listener {
-	/**
-	 * The new window to be generated as a prompt.
-	 */
-	private AbstractWindow window = new BasicWindow();
-
+public class ItemSelectorForm {
 	/**
 	 * Object used to contain response of this form. Class attribute to avoid error
 	 * due to assignment from runnable
 	 */
 	private TextResponse response;
-
-	/**
-	 * The list of options to be displayed on the form.
-	 */
-	private List<String> items;
 
 	/**
 	 * Displays a generic form requesting that the user select one of {@code items}
@@ -39,13 +29,18 @@ public class ItemSelectorForm implements RadioBoxList.Listener {
 	 *         without any input
 	 */
 	public TextResponse getResponse(MultiWindowTextGUI gui, String title, List<String> items) {
+		AbstractWindow window = new BasicWindow();
 		response = null;
-
-		this.items = items;
 
 		// Create a radio button list and their listeners.
 		RadioBoxList<String> radioBoxList = new RadioBoxList<String>();
-		radioBoxList.addListener(this);
+		radioBoxList.addListener(new RadioBoxList.Listener() {
+			public void onSelectionChanged(int selectedIndex, int previousSelection) {
+				response = new TextResponse(items.get(selectedIndex));
+				window.close();
+			}
+		});
+		
 		for (String s : items) {
 			radioBoxList.addItem(s);
 		}
@@ -60,16 +55,5 @@ public class ItemSelectorForm implements RadioBoxList.Listener {
 		gui.addWindowAndWait(window);
 
 		return response;
-	}
-
-	/**
-	 * Change the corresponding selection when the user chooses a different option.
-	 * 
-	 * @param selectedIndex     The currently selected option index.
-	 * @param previousSelection The previously selected option index.
-	 */
-	public void onSelectionChanged(int selectedIndex, int previousSelection) {
-		response = new TextResponse(items.get(selectedIndex));
-		window.close();
 	}
 }
