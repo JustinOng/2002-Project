@@ -31,12 +31,6 @@ public class CreateStudentForm {
 	 * @return User input to be used to create a new Student, or {@code null} if the
 	 *         form is cancelled/closed without any input
 	 */
-	/**
-	 * @param gui
-	 * @param genders
-	 * @param nationalities
-	 * @return
-	 */
 	public CreateStudentResponse getResponse(MultiWindowTextGUI gui, List<String> genders, List<String> nationalities) {
 		final AbstractWindow window = new BasicWindow();
 

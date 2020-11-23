@@ -293,7 +293,7 @@ public class Index extends Entity {
 	/**
 	 * Check if {@code lesson} clashes any lesson in this index
 	 * 
-	 * @param index The index to compare with the current index
+	 * @param lesson The lesson to compare with all lessons in this index
 	 * @return {@code true} if there is a clash, or {@code false} otherwise
 	 */
 	public boolean clashesWith(Lesson lesson) {

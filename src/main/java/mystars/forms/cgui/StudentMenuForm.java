@@ -23,12 +23,12 @@ public class StudentMenuForm {
 
 	/**
 	 * Displays list of options that a student can perform to manage courses. {@code
-	 * courses} is also displayed on the form. If {@code courses} is empty (ie the
-	 * student is not in any courses), the only option displayed is to register for
-	 * a course.
+	 * regs} is also displayed on the form. If {@code regs} is empty (ie the student
+	 * is not in any courses), the only option displayed is to register for a
+	 * course.
 	 * 
-	 * @param gui     The graphical user interface object.
-	 * @param courses List of courses that the student is currently in.
+	 * @param gui  The graphical user interface object.
+	 * @param regs List of Registrations of the current user
 	 * @return Selected option, or {@code null} if the form is closed without any
 	 *         input
 	 */
@@ -62,14 +62,14 @@ public class StudentMenuForm {
 				window.close();
 			}
 		}).addTo(panel);
-		
+
 		new Button("Check Vacancies", new Runnable() {
 			public void run() {
 				response = new StudentMenuResponse(StudentMenuResponse.Selected.ListVacancies);
 				window.close();
 			}
 		}).addTo(panel);
-		
+
 		new Button("List Indexes", new Runnable() {
 			public void run() {
 				response = new StudentMenuResponse(StudentMenuResponse.Selected.ListIndexes);

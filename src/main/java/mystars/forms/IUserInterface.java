@@ -185,7 +185,7 @@ public interface IUserInterface {
 	 * @param title       Title of the form
 	 * @param description Description to be shown on the form
 	 * @param labelA      Text to label {@code indexA} with
-	 * @param indedxA     First index to display
+	 * @param indexA     First index to display
 	 * @param labelB      Text to label {@code indexB} with
 	 * @param indexB      Second index to display
 	 * @return {@code true} if the user confirmed the action, or {@code false}
