@@ -279,10 +279,7 @@ public class MySTARS {
 
 					Index indexTarget = indexInfo.get(textResponse.getText());
 
-					if (indexSource == indexTarget) {
-						ui.renderDialog("Index Change", "You cannot change to the same index");
-						break;
-					}
+					courseController.assertChangeIndex(courseCode, student, indexTarget.getIndexNo());
 
 					if (!ui.renderIndexChangeConfirmation("Confirm Index Change",
 							String.format("Change from %s to %s", indexSource, indexTarget), indexSource.toString(),
@@ -311,6 +308,9 @@ public class MySTARS {
 
 					Index indexA = courseController.getIndex(isResponse.getIndexA());
 					Index indexB = courseController.getIndex(isResponse.getIndexB());
+					
+					courseController.assertSwopIndex(student, isResponse.getIndexA(), (Student) targetUser,
+							isResponse.getIndexB());
 
 					if (!ui.renderIndexChangeConfirmation("Confirm Index Swop", "Current Indexes:",
 							String.format("%s: %s", ((Student) user).getName(), indexA.toString()), indexA,

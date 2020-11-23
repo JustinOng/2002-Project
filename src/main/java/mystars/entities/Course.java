@@ -282,24 +282,31 @@ public class Course extends Entity {
 	}
 
 	/**
-	 * Swop indexNoA of StudentA with indexNoB of StudentB.
+	 * Asserts that {@code studentA} can swop {@code indexNoA} with
+	 * {@code studentB}'s index, {@code indexNoB}
 	 * 
 	 * @param studentA The first student that wants to swop index
-	 * @param studentB The second student that wants to swop index
 	 * @param indexNoA The index that the first student wants to swop
+	 * @param studentB The second student that wants to swop index
 	 * @param indexNoB The index that the second student wants to swop
 	 * @throws AppException If indexNoA and indexNoB are the same
 	 * @throws AppException If studentA is not enrolled in indexNoA
 	 * @throws AppException If studentB is not enrolled in indexNoB
 	 */
-	public void swopIndex(Student studentA, int indexNoA, Student studentB, int indexNoB) throws AppException {
-
-		if (indexNoA == indexNoB) {
-			throw new AppException("Both indexes must be different");
+	public void assertSwopIndex(Student studentA, int indexNoA, Student studentB, int indexNoB) throws AppException {
+		if (studentA == studentB) {
+			throw new AppException("You cannot swap modules with yourself");
 		}
 
-		Index indexA = getIndex(indexNoA);
-		Index indexB = getIndex(indexNoB);
+		Index indexA;
+		Index indexB;
+
+		try {
+			indexA = getIndex(indexNoA);
+			indexB = getIndex(indexNoB);
+		} catch (AppException e) {
+			throw new AppException(String.format("%s does not contain Index %d", this.toString(), indexNoA));
+		}
 
 		if (!indexA.hasEnrolledStudent(studentA)) {
 			throw new AppException(String.format("%s is not enrolled in index %d", studentA.getMatricNo(), indexNoA));
@@ -309,6 +316,27 @@ public class Course extends Entity {
 			throw new AppException(String.format("%s is not enrolled in index %d", studentB.getMatricNo(), indexNoB));
 		}
 
+		if (indexNoA == indexNoB) {
+			throw new AppException("Both indexes must be different");
+		}
+	}
+
+	/**
+	 * Swop indexNoA of StudentA with indexNoB of StudentB.
+	 * 
+	 * @param studentA The first student that wants to swop index
+	 * @param studentB The second student that wants to swop index
+	 * @param indexNoA Identifier of Index which Student A would like to swap
+	 * @param indexNoB Identifier of Index which Student B would like to swap
+	 * @throws AppException If invalid parameters are passed in, see
+	 *                      {@link #assertSwopIndex(Student, int, Student, int)}
+	 */
+	public void swopIndex(Student studentA, int indexNoA, Student studentB, int indexNoB) throws AppException {
+		assertSwopIndex(studentA, indexNoA, studentB, indexNoB);
+
+		Index indexA = getIndex(indexNoA);
+		Index indexB = getIndex(indexNoB);
+
 		indexA.removeStudent(studentA, false);
 		indexB.removeStudent(studentB, false);
 		indexA.addStudent(studentB);
@@ -316,8 +344,7 @@ public class Course extends Entity {
 	}
 
 	/**
-	 * Change {@code student} from their existing index to the index identified by
-	 * {@code targetIndexNo}
+	 * Asserts that {@code student} can change index to {@code targetIndexno}
 	 * 
 	 * @param student       The student that wants to change index
 	 * @param targetIndexNo The index number that the student wants to change to
@@ -325,7 +352,7 @@ public class Course extends Entity {
 	 * @throws AppException If targetIndexNo is not found
 	 * @throws AppException If targetIndexNo of the student has no more vacancies.
 	 */
-	public void changeIndex(Student student, int targetIndexNo) throws AppException {
+	public void assertChangeIndex(Student student, int targetIndexNo) throws AppException {
 		Index indexCur = getStudentIndex(student);
 		Index indexTarget = getIndex(targetIndexNo);
 
@@ -334,11 +361,26 @@ public class Course extends Entity {
 		}
 
 		if (indexTarget.getVacancies() == 0) {
-			// we explicitly want vacancies here so that the student cannot be swop to a
+			// we explicitly want vacancies here so that the student cannot be swopped to a
 			// waitlisted index
 			throw new AppException(String.format("%s has no more vacancies", indexTarget));
 		}
+	}
 
+	/**
+	 * Change {@code student} from their existing index to the index identified by
+	 * {@code targetIndexNo}
+	 * 
+	 * @param student       The student that wants to change index
+	 * @param targetIndexNo The index number that the student wants to change to
+	 * @throws AppException if invalid parameters are passed, see
+	 *                      {@link #assertChangeIndex(Student, int)}
+	 */
+	public void changeIndex(Student student, int targetIndexNo) throws AppException {
+		assertChangeIndex(student, targetIndexNo);
+
+		Index indexCur = getStudentIndex(student);
+		Index indexTarget = getIndex(targetIndexNo);
 		indexCur.removeStudent(student);
 		indexTarget.addStudent(student);
 	}

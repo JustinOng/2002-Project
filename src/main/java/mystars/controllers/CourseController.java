@@ -165,31 +165,66 @@ public class CourseController {
 	}
 
 	/**
+	 * Asserts that {@code student} can change index to {@code targetIndexNo}
+	 * 
+	 * @param courseCode    Identifier of Course
+	 * @param student       Student to change index
+	 * @param targetIndexNo The index number that the student wants to change to
+	 * @throws AppException if invalid parameters are passed, see
+	 *                      {@link Course#assertChangeIndex(Student, int)}
+	 * @throws AppException if changing indexes will result in a timetable clash
+	 */
+	public void assertChangeIndex(String courseCode, Student student, int targetIndexNo) throws AppException {
+		Course course = Course.getCourse(courseCode);
+		Index curIndex = course.getStudentIndex(student);
+		Index newIndex = Index.getIndex(targetIndexNo);
+		
+		course.assertChangeIndex(student, targetIndexNo);
+
+		student.getTimetable().assertAddIndex(newIndex, curIndex);
+	}
+
+	/**
 	 * This method changes the student's index from the current index to the
 	 * targeted index of targetIndexNo
 	 * 
 	 * @param courseCode    Identifier of Course
 	 * @param student       Student to change index
 	 * @param targetIndexNo The index number that the student wants to change to
-	 * @throws AppException if no course identified by {@code courseCode}
-	 * @throws AppException if student is not enrolled in the course identified by
-	 *                      {@code courseCode}
-	 * @throws AppException if no index identified by {@code targetIndexNo} is found
-	 * @throws AppException if the index identified by {@code targetIndexNo} has no
-	 *                      more vacancies
-	 * @throws AppException if adding the index identified by {@code targetIndexNo}
-	 *                      after removing the current index would result in a clash
+	 * @throws AppException if invalid parameters are passed, see
+	 *                      {@link #assertChangeIndex(String, Student, int)}
 	 * 
 	 */
 	public void changeIndex(String courseCode, Student student, int targetIndexNo) throws AppException {
 		Course course = Course.getCourse(courseCode);
 		Index curIndex = course.getStudentIndex(student);
 		Index newIndex = Index.getIndex(targetIndexNo);
+		
+		assertChangeIndex(courseCode, student, targetIndexNo);
 
-		student.getTimetable().assertAddIndex(newIndex, curIndex);
 		course.changeIndex(student, targetIndexNo);
 		student.getTimetable().removeIndex(curIndex);
 		student.getTimetable().addIndex(newIndex);
+	}
+
+	/**
+	 * Asserts whether {@code studentA} and {@code studentB} can swop index
+	 * 
+	 * @param studentA Student A
+	 * @param indexNoA Identifier of Index which Student A would like to swap
+	 * @param studentB Student B
+	 * @param indexNoB Identifier of Index which Student B would like to swap
+	 * @throws AppException if invalid parameters are passed in, see
+	 *                      {@link Course#assertSwopIndex(Student, int, Student, int)}
+	 * @throws AppException if swopping the index will result in a timetable clash
+	 */
+	public void assertSwopIndex(Student studentA, int indexNoA, Student studentB, int indexNoB) throws AppException {
+		Index indexA = Index.getIndex(indexNoA);
+		Index indexB = Index.getIndex(indexNoB);
+
+		indexA.getCourse().assertSwopIndex(studentA, indexNoA, studentB, indexNoB);
+		studentA.getTimetable().assertAddIndex(indexB, indexA);
+		studentB.getTimetable().assertAddIndex(indexA, indexB);
 	}
 
 	/**
@@ -199,30 +234,13 @@ public class CourseController {
 	 * @param indexNoA Identifier of Index which Student A would like to swap
 	 * @param studentB Student B
 	 * @param indexNoB Identifier of Index which Student B would like to swap
-	 * @throws AppException if {@code studentA} is the same as {@code studentB} or
-	 *                      {@code indexNoA} is the same as {@code indexNoB}
-	 * @throws AppException if {@code indexNoA} or {@code indexNoB} do not identify
-	 *                      valid indexes
-	 * @throws AppException if {@code indexNoA} or {@code indexNoB} belong to the
-	 *                      same course
-	 * @throws AppException if {@code studentA} or {@code studentB} is not enrolled
-	 *                      in the indexes they would like to swap
-	 * @throws AppException if swopping the index will result in a timetable clash
+	 * @throws AppException if invalid parameters are passed in, see
+	 *                      {@link Course#assertSwopIndex(Student, int, Student, int)}
 	 * 
 	 */
-
 	public void swopIndex(Student studentA, int indexNoA, Student studentB, int indexNoB) throws AppException {
-		if (studentA == studentB)
-			throw new AppException("You cannot swap modules with yourself");
-
 		Index indexA = Index.getIndex(indexNoA);
 		Index indexB = Index.getIndex(indexNoB);
-
-		if (indexA.getCourse() != indexB.getCourse())
-			throw new AppException("Both indexes must be from the same course");
-
-		studentA.getTimetable().assertAddIndex(indexB, indexA);
-		studentB.getTimetable().assertAddIndex(indexA, indexB);
 
 		indexA.getCourse().swopIndex(studentA, indexNoA, studentB, indexNoB);
 
