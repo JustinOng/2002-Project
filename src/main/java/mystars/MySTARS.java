@@ -364,7 +364,7 @@ public class MySTARS {
 
 					userController.setStudentAccessPeriod(accessResponse.getStart(), accessResponse.getEnd());
 
-					ui.renderDialog("Student Access Period", "Changed successfully");
+					ui.renderDialog("Student Access Period", "Set new access period: " + userController.getStudentAccessPeriod());
 					break;
 
 				// Create a new student
