@@ -60,8 +60,15 @@ public class AccessPeriodForm {
 		new Button("Save", new Runnable() {
 			public void run() {
 				try {
-					response = new AccessPeriodResponse(LocalDateTime.parse(startInput.getText()),
-							LocalDateTime.parse(endInput.getText()));
+					LocalDateTime start = LocalDateTime.parse(startInput.getText());
+					LocalDateTime end = LocalDateTime.parse(endInput.getText());
+
+					if (start.isAfter(end)) {
+						MessageDialog.showMessageDialog(gui, "Error", "Start time must be before end time");
+						return;
+					}
+
+					response = new AccessPeriodResponse(start, end);
 					window.close();
 				} catch (DateTimeParseException e) {
 					MessageDialog.showMessageDialog(gui, "Error", "Invalid date");
