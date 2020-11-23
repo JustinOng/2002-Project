@@ -67,8 +67,15 @@ public class Student extends User {
 		this.matricNo = matricNo;
 		this.gender = gender;
 		this.nationality = nationality;
+
+		for (Student s : getAllStudents()) {
+			if (s.getMatricNo().equals(matricNo)) {
+				throw new AppException(
+						String.format("A Student with matriculation number %s already exists", matricNo));
+			}
+		}
 	}
-	
+
 	@Override
 	public void setAdmin(boolean isAdmin) {
 		throw new RuntimeException("Students cannot be administrators");
@@ -84,8 +91,9 @@ public class Student extends User {
 	 */
 	@Override
 	public boolean login(String password) throws AppException {
-		if (!super.login(password)) return false;
-		
+		if (!super.login(password))
+			return false;
+
 		if (!canLogin()) {
 			throw new AppException("User is not allowed to login right now");
 		}
