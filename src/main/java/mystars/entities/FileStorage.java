@@ -71,6 +71,7 @@ public class FileStorage implements IStorage {
 	 */
 	public void writeToDisk() {
 		try {
+			System.out.println("Saving data");
 			// Create a new object output stream using the filename.
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename));
 
@@ -79,7 +80,9 @@ public class FileStorage implements IStorage {
 
 			// Close the stream when done.
 			out.close();
+			System.out.println("Done saving");
 		} catch (IOException e) {
+			System.err.println("Failed to save data");
 			e.printStackTrace();
 		}
 	}
