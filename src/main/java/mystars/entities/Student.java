@@ -94,9 +94,7 @@ public class Student extends User {
 		if (!super.login(password))
 			return false;
 
-		if (!canLogin()) {
-			throw new AppException("User is not allowed to login right now");
-		}
+		assertCanLogin();
 		return true;
 	}
 
@@ -105,18 +103,24 @@ public class Student extends User {
 	 * access period configured. If the access period is not configured, this
 	 * function always returns false.
 	 * 
-	 * @return {@code true} If the student is allowed to login, or {@code false}
-	 *         otherwise
+	 * @throws AppException if the student is not allowed to login right now
 	 */
-	private boolean canLogin() {
+	private void assertCanLogin() throws AppException {
 		LocalDateTime now = LocalDateTime.now();
 		LocalDateTime accessPeriodStart = (LocalDateTime) get("student-accessperiod", "start");
 		LocalDateTime accessPeriodEnd = (LocalDateTime) get("student-accessperiod", "end");
 
-		if (accessPeriodStart == null || accessPeriodEnd == null)
-			return false;
+		if (accessPeriodStart == null || accessPeriodEnd == null) {
+			throw new AppException("Access period not set");
+		}
 
-		return (now.isAfter(accessPeriodStart) && now.isBefore(accessPeriodEnd));
+		if (now.isBefore(accessPeriodStart)) {
+			throw new AppException(String.format("Only allowed to login after %s", accessPeriodStart));
+		}
+
+		if (now.isAfter(accessPeriodEnd)) {
+			throw new AppException(String.format("Only allowed to login before %s", accessPeriodEnd));
+		}
 	}
 
 	/**
