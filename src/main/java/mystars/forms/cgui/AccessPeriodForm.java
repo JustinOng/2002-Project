@@ -63,7 +63,7 @@ public class AccessPeriodForm {
 					LocalDateTime start = LocalDateTime.parse(startInput.getText());
 					LocalDateTime end = LocalDateTime.parse(endInput.getText());
 
-					if (start.isAfter(end)) {
+					if (start.isAfter(end) || start.isEqual(end)) {
 						MessageDialog.showMessageDialog(gui, "Error", "Start time must be before end time");
 						return;
 					}
