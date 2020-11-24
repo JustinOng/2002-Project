@@ -37,6 +37,7 @@ public class Entry {
 		boolean createAdmin = false;
 		boolean createStudents = false;
 		int maxAUs = -1;
+		int telnetPort = -1;
 
 		for (String arg : args) {
 			if (arg.startsWith("--config=")) {
@@ -47,6 +48,8 @@ public class Entry {
 				createAdmin = true;
 			} else if (arg.startsWith("--create-students")) {
 				createStudents = true;
+			} else if (arg.startsWith("--telnet=")) {
+				telnetPort = Integer.parseInt(arg.replaceFirst("--telnet=", ""));
 			}
 		}
 		INotifyStudent notifier = null;
@@ -70,7 +73,7 @@ public class Entry {
 			System.err.println("Email notifications are disabled");
 		}
 
-		MySTARS app = new MySTARS(new ConsoleGraphicUserInterface(), notifier);
+		MySTARS app = new MySTARS(new ConsoleGraphicUserInterface(telnetPort), notifier);
 		app.start();
 
 		if (indexDataFile != null) {

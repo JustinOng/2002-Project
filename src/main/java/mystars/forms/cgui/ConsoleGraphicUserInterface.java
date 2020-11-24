@@ -97,28 +97,47 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	private IndexChangeConfirmationForm indexChangeConfirmationForm = new IndexChangeConfirmationForm();
 
 	/**
-	 * Creates a new instance of this class and initialises Lanterna gui. Attempt to
-	 * turn off anti-aliasing on the font used because it has resulted in blurry
-	 * fonts on certain machine configurations.
-	 * 
-	 * @throws IOException if an UI error occured
+	 * @throws IOException
 	 */
 	public ConsoleGraphicUserInterface() throws IOException {
+		this(-1);
+	}
+
+	/**
+	 * Creates a new instance of this class and initialises Lanterna gui. If
+	 * {@code telnetPort} != -1, start a telnet server listening on
+	 * {@code telnetPort}. Otherwise, attempt to turn off anti-aliasing on the font
+	 * used because it has resulted in blurry fonts on certain machine
+	 * configurations and display to console.
+	 * 
+	 * @param telnetPort Port for telnet server. {@code -1} to disable.
+	 * @throws IOException if an UI error occured
+	 */
+	public ConsoleGraphicUserInterface(int telnetPort) throws IOException {
 		DefaultTerminalFactory factory = new DefaultTerminalFactory();
 
-		try {
-			SwingTerminalFontConfiguration config = new SwingTerminalFontConfiguration(true,
-					AWTTerminalFontConfiguration.BoldMode.NOTHING, new Font("Consolas", Font.PLAIN, 20));
+		Terminal terminal;
 
-			factory.setTerminalEmulatorFontConfiguration(config);
-		} catch (IllegalArgumentException e) {
-			// this can fail if Consolas isn't monospaced
-			// observed to fail only in terminal environments so we're just going to swallow
-			// the exception silently since the default font in a terminal environment isn't
-			// going to be blurry
+		if (telnetPort == -1) {
+			try {
+				SwingTerminalFontConfiguration config = new SwingTerminalFontConfiguration(true,
+						AWTTerminalFontConfiguration.BoldMode.NOTHING, new Font("Consolas", Font.PLAIN, 20));
+
+				factory.setTerminalEmulatorFontConfiguration(config);
+			} catch (IllegalArgumentException e) {
+				// this can fail if Consolas isn't monospaced
+				// observed to fail only in terminal environments so we're just going to swallow
+				// the exception silently since the default font in a terminal environment isn't
+				// going to be blurry
+			}
+
+			terminal = factory.createTerminal();
+		} else {
+			factory.setTelnetPort(telnetPort);
+			terminal = factory.createTelnetTerminal();
+			System.out.printf("Listening on port %d\n", telnetPort);
 		}
 
-		Terminal terminal = factory.createTerminal();
 		Screen screen = new TerminalScreen(terminal);
 		screen.startScreen();
 
