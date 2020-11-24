@@ -19,17 +19,17 @@ public class Course extends Entity {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * The name of the course.
+	 * Name of the course
 	 */
 	protected String name;
 
 	/**
-	 * The course code of the course.
+	 * Course code of the course
 	 */
 	protected String courseCode;
 
 	/**
-	 * The school that the course belongs to.
+	 * School that the course belongs to
 	 */
 	protected School school;
 
@@ -39,7 +39,7 @@ public class Course extends Entity {
 	protected int au;
 
 	/**
-	 * Map of index number to Index. Stores indexes belonging to this course
+	 * Map of index number to Index class. Stores indexes belonging to this course
 	 */
 	protected HashMap<Integer, Index> indexes = new HashMap<Integer, Index>();
 
@@ -234,6 +234,7 @@ public class Course extends Entity {
 			if (i.hasStudent(student))
 				return i;
 		}
+		
 		return null;
 	}
 

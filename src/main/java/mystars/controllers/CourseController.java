@@ -38,7 +38,6 @@ public class CourseController {
 	 * @throws AppException if invalid parameters are passed to the constructor of
 	 *                      Course
 	 */
-
 	public void createCourse(String name, String courseCode, School school, int au) throws AppException {
 		Course course = new Course(name, courseCode, school, au);
 		course.markPersistent();
@@ -54,7 +53,6 @@ public class CourseController {
 	 * @throws AppException if invalid parameters are passed to the constructor of
 	 *                      Index
 	 */
-
 	public void createIndex(String courseCode, int indexNo, int maxEnrolled) throws AppException {
 		Course c = Course.getCourse(courseCode);
 		c.createIndex(indexNo, maxEnrolled);
@@ -118,7 +116,6 @@ public class CourseController {
 	 * @throws AppException if invalid parameters are passed to the constructor of
 	 *                      Lesson
 	 */
-
 	public void createLesson(String courseCode, int indexNo, LessonType lessonType, Day day, String location,
 			String groupNo, boolean[] week, int startPeriod, int endPeriod) throws AppException {
 		Course c = Course.getCourse(courseCode);
@@ -337,6 +334,12 @@ public class CourseController {
 		return Index.getIndex(indexNo).getMaxEnrolled();
 	}
 
+	/**
+	 * Registers the student observers (listeners) for a particular event. 
+	 * 
+	 * @param callback Event callback that is triggered when an event is called
+	 * @param evt Event
+	 */
 	public void registerIndexObserver(Index.IndexCallback callback, Index.Event evt) {
 		Index.registerObserver(callback, evt);
 	}

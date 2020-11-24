@@ -118,7 +118,7 @@ public class MySTARS {
 	}
 
 	/**
-	 * Main UI loop
+	 * Main User Interface loop
 	 */
 	public void loop() {
 		if (notifier != null) {
@@ -232,7 +232,6 @@ public class MySTARS {
 					if (indexNo == null)
 						break;
 
-					// If there are still vacancies and the registration was successful.
 					if (courseController.registerCourse(student, indexNo)) {
 						ui.renderDialog("Registration",
 								String.format("You have successfully registered for Index %d", indexNo));

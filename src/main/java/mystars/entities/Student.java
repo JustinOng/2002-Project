@@ -77,6 +77,9 @@ public class Student extends User {
 	}
 
 	@Override
+	/**
+	 * Sets the user as an admin if they are not a student
+	 */
 	public void setAdmin(boolean isAdmin) {
 		throw new RuntimeException("Students cannot be administrators");
 	}

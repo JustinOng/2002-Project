@@ -15,24 +15,17 @@ import mystars.exceptions.AppException;
  */
 public class UserController {
 	/**
-	 * Class constructor.
-	 */
-	public UserController() {
-
-	}
-
-	/**
-	 * Create a new student object.
+	 * Create a new student object
 	 * 
-	 * @param name        The student's name.
-	 * @param email       The student's email.
-	 * @param matricNo    The student's matriculation number.
-	 * @param username    The student's username.
-	 * @param password    The student's password.
-	 * @param gender      The student's gender.
-	 * @param nationality The student's nationality.
+	 * @param name        The student's name
+	 * @param email       The student's email
+	 * @param matricNo    The student's matriculation number
+	 * @param username    The student's username
+	 * @param password    The student's password
+	 * @param gender      The student's gender
+	 * @param nationality The student's nationality
 	 * @throws AppException If there already exists a student with the same
-	 *                      username.
+	 *                      username
 	 */
 	public void createStudent(String name, String email, String matricNo, String username, String password,
 			Gender gender, Nationality nationality) throws AppException {
@@ -41,11 +34,11 @@ public class UserController {
 	}
 
 	/**
-	 * Create a new administrator object.
+	 * Create a new administrator object
 	 * 
-	 * @param username The admin's username.
-	 * @param password The admin's password.
-	 * @throws AppException If the administrator object cannot be created.
+	 * @param username The admin's username
+	 * @param password The admin's password
+	 * @throws AppException If the administrator object cannot be created
 	 */
 	public void createAdmin(String username, String password) throws AppException {
 		User user = new User(username, password);
@@ -54,20 +47,20 @@ public class UserController {
 	}
 
 	/**
-	 * Manage the user's login.
+	 * Manage the user's login
 	 * 
-	 * @param username The user's username.
-	 * @param password The user's password.
+	 * @param username The user's username
+	 * @param password The user's password
 	 * @throws AppException If the login is unsuccessful due to incorrect username
-	 *                      or password.
-	 * @return The user object of the user successfully logging in.
+	 *                      or password
+	 * @return The user object of the user successfully logging in
 	 */
 	public User login(String username, String password) throws AppException {
 		return User.login(username, password);
 	}
 
 	/**
-	 * Check if the user is a student.
+	 * Check if the user is a student
 	 * 
 	 * @param user User to be checked
 	 * @return {@code true} if {@code user} is an student, or {@code false}
@@ -78,7 +71,7 @@ public class UserController {
 	}
 
 	/**
-	 * Check if the user is an admin.
+	 * Check if the user is an admin
 	 * 
 	 * @param user User to be checked
 	 * @return {@code true} if {@code user} is an admin, or {@code false} otherwise

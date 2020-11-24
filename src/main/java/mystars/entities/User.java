@@ -56,6 +56,9 @@ public class User extends Entity {
 	}
 
 	@Override
+	/**
+	 * Store the data so it persists after the program is terminated
+	 */
 	public void markPersistent() {
 		store("user", username, this);
 	}

@@ -125,84 +125,132 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 		gui = new AppUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
 	}
 
-	// the following functions will inherit the javadocs from IUserInterface
+	// The following functions will inherit the javadocs from IUserInterface
 
 	@Override
+	/**
+	 * Render and get a response from the form for the user's login. 
+	 */
 	public LoginResponse renderLoginForm() {
 		return loginForm.getResponse(gui);
 	}
 
 	@Override
+	/**
+	 * Render and get a response from the form for the student menu.
+	 */
 	public StudentMenuResponse renderStudentMenuForm(List<Registration> regs) {
 		return studentMenuForm.getResponse(gui, regs);
 	}
 
 	@Override
+	/**
+	 * Render and get a response from the form for the item selector.
+	 */
 	public TextResponse renderItemSelectorForm(String title, List<String> items) {
 		return itemSelectorForm.getResponse(gui, title, items);
 	}
 
 	@Override
+	/**
+	 * Render and get a response from the form for swopping index with peer.
+	 */
 	public IndexSwopResponse renderIndexSwopForm() {
 		return indexSwopForm.getResponse(gui);
 	}
 
 	@Override
+	/**
+	 * Render and get a response from the form for the creation of students.
+	 */
 	public CreateStudentResponse renderCreateStudentForm(List<String> genders, List<String> nationalities) {
 		return createStudentForm.getResponse(gui, genders, nationalities);
 	}
 
 	@Override
+	/**
+	 * Render and get a response from the form for the creation of courses.
+	 */
 	public CreateCourseResponse renderCreateCourseForm(List<String> schools) {
 		return createCourseForm.getResponse(gui, schools);
 	}
 
 	@Override
+	/**
+	 * Render and get a response from the form for the creation of course indexes.
+	 */
 	public CreateIndexResponse renderCreateIndexForm(String course) {
 		return createIndexForm.getResponse(gui, course);
 	}
 
 	@Override
+	/**
+	 * Render and get a response from the input form in text format. 
+	 */
 	public String getText(String title, String description) {
 		return GetInputForm.getText(gui, title, description);
 	}
 
 	@Override
+	/**
+	 * Render and get a response from the input form in numerical format.
+	 */
 	public Integer getInt(String title, String description) {
 		return GetInputForm.getInt(gui, title, description);
 	}
 
 	@Override
+	/**
+	 * Render and get a response from the form for the dialog prompt.
+	 */
 	public void renderDialog(String title, String msg) {
 		MessageDialog.showMessageDialog(gui, title, msg);
 	}
 
 	@Override
+	/**
+	 * Render and get a response from the form for the administrator menu.
+	 */
 	public AdminMenuResponse renderAdminMenuForm() {
 		return adminMenuForm.getResponse(gui);
 	}
 
 	@Override
+	/**
+	 * Render and get a response from the form for the changing of access period.
+	 */
 	public AccessPeriodResponse renderAccessPeriodForm(String curAccessPeriod) {
 		return accessPeriodForm.getResponse(gui, curAccessPeriod);
 	}
 
 	@Override
+	/**
+	 * Render and get a response from the form for management of courses.
+	 */
 	public CourseManagementResponse renderCourseManagementForm(List<String> courses) {
 		return courseManagementForm.getResponse(gui, courses);
 	}
 
 	@Override
+	/**
+	 * Render and get a response from the form for the management of course indexes.
+	 */
 	public IndexManagementResponse renderIndexManagementForm(String courseCode, List<String> indexes) {
 		return indexManagementForm.getResponse(gui, courseCode, indexes);
 	}
 
 	@Override
+	/**
+	 * Render and get a response from the form for the creation of lessons.
+	 */
 	public CreateLessonResponse renderCreateLessonForm(String index, List<String> lessonType, List<String> days) {
 		return createLessonForm.getResponse(gui, index, lessonType, days);
 	}
 
 	@Override
+	/**
+	 * Render and get a response from the form for displaying the list of students.
+	 */
 	public void renderStudentList(String title, List<Student> students) {
 		DisplayList<Student> display = new DisplayList<>();
 
@@ -211,6 +259,9 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	}
 
 	@Override
+	/**
+	 * Render and get a response from the form for displaying the list of courses.
+	 */
 	public void renderCourseList(String title, List<Course> courses) {
 		DisplayList<Course> display = new DisplayList<>();
 
@@ -220,23 +271,35 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	}
 
 	@Override
+	/**
+	 * Render and get a response from the form for displaying the confirmation prompt.
+	 */
 	public boolean renderConfirmation(String title, String msg) {
 		return new MessageDialogBuilder().setTitle(title).setText(msg).addButton(MessageDialogButton.Cancel)
 				.addButton(MessageDialogButton.OK).build().showDialog(gui) == MessageDialogButton.OK;
 	}
 
 	@Override
+	/**
+	 * Render and get a response from the form for displaying index information.
+	 */
 	public void renderIndexInfo(String title, List<Index> indexes) {
 		DisplayIndexList.show(gui, title, indexes);
 	}
 
 	@Override
+	/**
+	 * Render and get a response from the form for displaying the confirmation to change index.
+	 */
 	public boolean renderIndexChangeConfirmation(String title, String description, String labelA, Index indexA,
 			String labelB, Index indexB) {
 		return indexChangeConfirmationForm.confirm(gui, title, description, labelA, indexA, labelB, indexB);
 	}
 
 	@Override
+	/**
+	 * Render and get a response from the form for displaying the list of registered courses.
+	 */
 	public void renderRegisteredCourses(String title, List<Registration> regs) {
 		DisplayRegisteredCourses.display(gui, title, regs);
 	}

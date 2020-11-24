@@ -99,6 +99,9 @@ public class Index extends Entity {
 	}
 
 	@Override
+	/**
+	 * Stores the data so it persists after the program is terminated.
+	 */
 	public void markPersistent() {
 		store("index", indexNo, this);
 	}
