@@ -215,6 +215,10 @@ public class MySTARS {
 
 					TextResponse courseResponse = ui.renderItemSelectorForm("Select Course",
 							new ArrayList<String>(courses.keySet()));
+					
+					if (courseResponse == null) {
+						break;
+					}
 
 					Course course = courses.get(courseResponse.getText());
 
