@@ -85,6 +85,7 @@ public class EmailNotifier implements INotifyStudent {
 			return true;
 		} catch (MessagingException e) {
 			System.err.println("Failed to send email");
+			System.err.println("If you have Antivirus like Avast or AVG, please try disabling them.");
 			e.printStackTrace();
 		}
 		return false;
