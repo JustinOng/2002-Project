@@ -105,10 +105,18 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 	 */
 	public ConsoleGraphicUserInterface() throws IOException {
 		DefaultTerminalFactory factory = new DefaultTerminalFactory();
-		SwingTerminalFontConfiguration config = new SwingTerminalFontConfiguration(true,
-				AWTTerminalFontConfiguration.BoldMode.NOTHING, new Font("Consolas", Font.PLAIN, 20));
 
-		factory.setTerminalEmulatorFontConfiguration(config);
+		try {
+			SwingTerminalFontConfiguration config = new SwingTerminalFontConfiguration(true,
+					AWTTerminalFontConfiguration.BoldMode.NOTHING, new Font("Consolas", Font.PLAIN, 20));
+
+			factory.setTerminalEmulatorFontConfiguration(config);
+		} catch (IllegalArgumentException e) {
+			// this can fail if Consolas isn't monospaced
+			// observed to fail only in terminal environments so we're just going to swallow
+			// the exception silently since the default font in a terminal environment isn't
+			// going to be blurry
+		}
 
 		Terminal terminal = factory.createTerminal();
 		Screen screen = new TerminalScreen(terminal);
