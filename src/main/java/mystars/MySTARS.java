@@ -272,9 +272,11 @@ public class MySTARS {
 					Index indexSource = registeredInfo.get(textResponse.getText());
 					String courseCode = indexSource.getCourse().getCourseCode();
 
+					indexInfo.clear();
 					for (Index index : courseController.getCourseIndexes(courseCode)) {
 						indexInfo.put(index.toString(), index);
 					}
+					
 					textResponse = ui.renderItemSelectorForm("Select New Index",
 							new ArrayList<String>(indexInfo.keySet()));
 
