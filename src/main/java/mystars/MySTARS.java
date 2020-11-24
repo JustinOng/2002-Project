@@ -150,6 +150,7 @@ public class MySTARS {
 				} else if (userController.isAdmin(user)) {
 					loopAdmin();
 				}
+				storageController.writeToDisk();
 			}
 		} catch (UIException e) {
 
