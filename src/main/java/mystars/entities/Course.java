@@ -309,9 +309,14 @@ public class Course extends Entity {
 
 		try {
 			indexA = getIndex(indexNoA);
-			indexB = getIndex(indexNoB);
 		} catch (AppException e) {
 			throw new AppException(String.format("%s does not contain Index %d", this.toString(), indexNoA));
+		}
+
+		try {
+			indexB = getIndex(indexNoB);
+		} catch (AppException e) {
+			throw new AppException(String.format("%s does not contain Index %d", this.toString(), indexNoB));
 		}
 
 		if (!indexA.hasEnrolledStudent(studentA)) {
