@@ -181,7 +181,7 @@ class CourseControllerTest {
 		assertTrue(controller.registerCourse(studentA, 1), "student A should have registered successfully");
 		assertFalse(controller.registerCourse(studentB, 1), "student B should have been placed on the waitlist");
 
-		assertFalse(Index.getIndex(1).hasStudent(studentB), "student B should not be enrolled");
+		assertFalse(Index.getIndex(1).hasEnrolledStudent(studentB), "student B should not be enrolled");
 		List<Registration> registrations = studentB.getTimetable().getRegistrations();
 
 		// Check if the values are equal to within a positive delta range, and throw an
