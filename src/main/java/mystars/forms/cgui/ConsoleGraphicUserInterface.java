@@ -60,7 +60,7 @@ public class ConsoleGraphicUserInterface implements IUserInterface {
 		gui = new AppUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
 	}
 
-	// the following functions will inherit the javadocs from IUserInterface
+	// The following functions will inherit the javadocs from IUserInterface
 
 	@Override
 	public LoginResponse renderLoginForm() {

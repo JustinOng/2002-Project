@@ -72,13 +72,8 @@ public class FileStorage implements IStorage {
 	public void writeToDisk() {
 		try {
 			System.out.println("Saving data");
-			// Create a new object output stream using the filename.
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename));
-
-			// Write the serializable data of the object to it.
 			out.writeObject(storage);
-
-			// Close the stream when done.
 			out.close();
 			System.out.println("Done saving");
 		} catch (IOException e) {
@@ -93,13 +88,8 @@ public class FileStorage implements IStorage {
 	@SuppressWarnings("unchecked")
 	public void loadFromDisk() {
 		try {
-			// Create a new object input stream using the filename.
 			ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename));
-
-			// Read in the serializable data to a hashmap object.
 			storage = (HashMap<String, HashMap<String, Serializable>>) in.readObject();
-
-			// Close the stream when done.
 			in.close();
 		} catch (IOException | ClassNotFoundException e) {
 			storage = new HashMap<>();

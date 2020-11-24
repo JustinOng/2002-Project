@@ -23,14 +23,24 @@ public class KeyStrokeListener implements WindowListener {
 		}
 	}
 
+	/**
+	 * Prevents triggering of unintended action when pressing a key that may serve
+	 * different functions in different contexts in the program
+	 */
 	public void onUnhandledInput(Window basePane, KeyStroke keyStroke, AtomicBoolean hasBeenHandled) {
 		return;
 	}
 
+	/**
+	 * When the user interface window changes position
+	 */
 	public void onMoved(Window window, TerminalPosition oldPosition, TerminalPosition newPosition) {
 		return;
 	}
 
+	/**
+	 * When the user interface window is resized
+	 */
 	public void onResized(Window window, TerminalSize oldSize, TerminalSize newSize) {
 		return;
 	}

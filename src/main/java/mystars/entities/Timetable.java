@@ -17,7 +17,14 @@ public class Timetable implements Serializable {
 	 */
 	private static final long serialVersionUID = 2L;
 
+	/**
+	 * Fix maximum number of AUs a student can take in a semester.
+	 */
 	private static int maxAu = Integer.MAX_VALUE;
+	
+	/**
+	 * Number of AUs.
+	 */
 	private int au = 0;
 
 	/**
