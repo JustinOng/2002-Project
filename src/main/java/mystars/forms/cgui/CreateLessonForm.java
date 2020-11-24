@@ -106,8 +106,17 @@ public class CreateLessonForm {
 				}
 
 				boolean[] weeks = new boolean[13];
+				boolean hasLesson = false;
 				for (int i = 0; i < 13; i++) {
 					weeks[i] = weekCheckBoxes.isChecked(i);
+					if (weeks[i]) {
+						hasLesson = true;
+					}
+				}
+				
+				if (!hasLesson) {
+					MessageDialog.showMessageDialog(gui, "Error", "Lessons must be held on at least one week");
+					return;
 				}
 
 				response = new CreateLessonResponse(typeComboBox.getSelectedItem(), dayComboBox.getSelectedItem(),
