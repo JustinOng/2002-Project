@@ -17,7 +17,7 @@ public class ItemSelectorForm {
 	 * Object used to contain response of this form. Class attribute to avoid error
 	 * due to assignment from runnable
 	 */
-	private TextResponse response;
+	private static TextResponse response;
 
 	/**
 	 * Displays a generic form requesting that the user select one of {@code items}
@@ -28,7 +28,7 @@ public class ItemSelectorForm {
 	 * @return Selected item, or {@code null} if the form is cancelled/closed
 	 *         without any input
 	 */
-	public TextResponse getResponse(MultiWindowTextGUI gui, String title, List<String> items) {
+	public static TextResponse getResponse(MultiWindowTextGUI gui, String title, List<String> items) {
 		AbstractWindow window = new BasicWindow();
 		response = null;
 

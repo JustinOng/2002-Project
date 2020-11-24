@@ -17,9 +17,10 @@ import mystars.forms.*;
  */
 public class AccessPeriodForm {
 	/**
-	 * The response object for the access period form.
+	 * Object used to contain response of this form. Class attribute to avoid error
+	 * due to assignment from runnable
 	 */
-	private AccessPeriodResponse response;
+	private static AccessPeriodResponse response;
 
 	/**
 	 * Sets the parameters for the graphical user interface administrators will use
@@ -30,7 +31,7 @@ public class AccessPeriodForm {
 	 * @param curAccessPeriod The current access period.
 	 * @return The access period response object.
 	 */
-	public AccessPeriodResponse getResponse(MultiWindowTextGUI gui, String curAccessPeriod) {
+	public static AccessPeriodResponse getResponse(MultiWindowTextGUI gui, String curAccessPeriod) {
 		final AbstractWindow window = new BasicWindow();
 
 		response = null;

@@ -20,7 +20,7 @@ public class CreateCourseForm {
 	 * Object used to contain response of this form. Class attribute to avoid error
 	 * due to assignment from runnable
 	 */
-	private CreateCourseResponse response;
+	private static CreateCourseResponse response;
 
 	/**
 	 * Displays form requesting user input for creating a course
@@ -30,7 +30,7 @@ public class CreateCourseForm {
 	 * @return User input to be used to create a new Course, or {@code null} if the
 	 *         form is cancelled/closed without any input
 	 */
-	public CreateCourseResponse getResponse(MultiWindowTextGUI gui, List<String> schools) {
+	public static CreateCourseResponse getResponse(MultiWindowTextGUI gui, List<String> schools) {
 		final AbstractWindow window = new BasicWindow();
 
 		response = null;

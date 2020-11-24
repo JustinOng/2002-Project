@@ -22,7 +22,7 @@ public class CreateLessonForm {
 	 * Object used to contain response of this form. Class attribute to avoid error
 	 * due to assignment from runnable
 	 */
-	private CreateLessonResponse response;
+	private static CreateLessonResponse response;
 
 	/**
 	 * Displays form requesting user input for creating a lesson
@@ -34,7 +34,7 @@ public class CreateLessonForm {
 	 * @return User input to be used to create a new Lesson, or {@code null} if the
 	 *         form is cancelled/closed without any input
 	 */
-	public CreateLessonResponse getResponse(MultiWindowTextGUI gui, String index, List<String> lessonType,
+	public static CreateLessonResponse getResponse(MultiWindowTextGUI gui, String index, List<String> lessonType,
 			List<String> days) {
 		final AbstractWindow window = new BasicWindow();
 

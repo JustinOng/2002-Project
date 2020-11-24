@@ -17,7 +17,7 @@ public class LoginForm {
 	 * Object used to contain response of this form. Class attribute to avoid error
 	 * due to assignment from runnable
 	 */
-	private LoginResponse response;
+	private static LoginResponse response;
 
 	/**
 	 * Displays login form
@@ -26,7 +26,7 @@ public class LoginForm {
 	 * @return {@code LoginResponse} containing user input, or {@code null} if the
 	 *         form is closed without any input
 	 */
-	public LoginResponse getResponse(MultiWindowTextGUI gui) {
+	public static LoginResponse getResponse(MultiWindowTextGUI gui) {
 		final AbstractWindow window = new BasicWindow();
 
 		response = null;

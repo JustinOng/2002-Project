@@ -16,7 +16,7 @@ public class AdminMenuForm {
 	 * Object used to contain response of this form. Class attribute to avoid error
 	 * due to assignment from runnable
 	 */
-	private AdminMenuResponse response;
+	private static AdminMenuResponse response;
 
 	/**
 	 * Displays admin menu with list of things the admin can do
@@ -25,7 +25,7 @@ public class AdminMenuForm {
 	 * @return Selected option, or {@code null} if the form is closed without any
 	 *         input
 	 */
-	public AdminMenuResponse getResponse(MultiWindowTextGUI gui) {
+	public static AdminMenuResponse getResponse(MultiWindowTextGUI gui) {
 		final AbstractWindow window = new BasicWindow();
 
 		response = null;

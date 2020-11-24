@@ -23,7 +23,7 @@ public class CreateStudentForm {
 	 * Object used to contain response of this form. Class attribute to avoid error
 	 * due to assignment from runnable
 	 */
-	private CreateStudentResponse response;
+	private static CreateStudentResponse response;
 
 	/**
 	 * Displays form requesting user input for creating a student
@@ -34,7 +34,7 @@ public class CreateStudentForm {
 	 * @return User input to be used to create a new Student, or {@code null} if the
 	 *         form is cancelled/closed without any input
 	 */
-	public CreateStudentResponse getResponse(MultiWindowTextGUI gui, List<String> genders, List<String> nationalities) {
+	public static CreateStudentResponse getResponse(MultiWindowTextGUI gui, List<String> genders, List<String> nationalities) {
 		final AbstractWindow window = new BasicWindow();
 
 		response = null;

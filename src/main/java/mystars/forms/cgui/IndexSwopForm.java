@@ -20,7 +20,7 @@ public class IndexSwopForm {
 	 * Object used to contain response of this form. Class attribute to avoid error
 	 * due to assignment from runnable
 	 */
-	private IndexSwopResponse response;
+	private static IndexSwopResponse response;
 
 	/**
 	 * Displays form requesting user input for swopping indexes
@@ -29,7 +29,7 @@ public class IndexSwopForm {
 	 * @return User input, or {@code null} if the form is cancelled/closed without
 	 *         any input
 	 */
-	public IndexSwopResponse getResponse(MultiWindowTextGUI gui) {
+	public static IndexSwopResponse getResponse(MultiWindowTextGUI gui) {
 		final AbstractWindow window = new BasicWindow();
 
 		response = null;

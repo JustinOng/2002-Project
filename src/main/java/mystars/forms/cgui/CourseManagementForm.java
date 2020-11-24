@@ -17,7 +17,7 @@ public class CourseManagementForm {
 	 * Object used to contain response of this form. Class attribute to avoid error
 	 * due to assignment from runnable
 	 */
-	private CourseManagementResponse response;
+	private static CourseManagementResponse response;
 
 	/**
 	 * Displays form with list of {@code courses} and request for the user to select
@@ -28,7 +28,7 @@ public class CourseManagementForm {
 	 * @return Selected option, or {@code null} if the form is cancelled/closed
 	 *         without any input
 	 */
-	public CourseManagementResponse getResponse(MultiWindowTextGUI gui, List<String> courses) {
+	public static CourseManagementResponse getResponse(MultiWindowTextGUI gui, List<String> courses) {
 		final AbstractWindow window = new BasicWindow();
 
 		response = null;

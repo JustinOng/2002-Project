@@ -17,7 +17,7 @@ public class IndexManagementForm {
 	 * Object used to contain response of this form. Class attribute to avoid error
 	 * due to assignment from runnable
 	 */
-	private IndexManagementResponse response;
+	private static IndexManagementResponse response;
 
 	/**
 	 * Sets the parameters for the graphical user interface administrators will use
@@ -29,7 +29,7 @@ public class IndexManagementForm {
 	 * @return Selected option, or {@code null} if the form is cancelled/closed
 	 *         without any input
 	 */
-	public IndexManagementResponse getResponse(MultiWindowTextGUI gui, String courseCode, List<String> indexes) {
+	public static IndexManagementResponse getResponse(MultiWindowTextGUI gui, String courseCode, List<String> indexes) {
 		final AbstractWindow window = new BasicWindow();
 
 		response = null;

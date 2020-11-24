@@ -13,7 +13,11 @@ import mystars.entities.*;
  * This class manages the user interface for confirming an index change.
  */
 public class IndexChangeConfirmationForm {
-	private boolean response;
+	/**
+	 * Object used to contain response of this form. Class attribute to avoid error
+	 * due to assignment from runnable
+	 */
+	private static boolean response;
 
 	/**
 	 * Display detailed information about two indexes and request for the user to
@@ -29,7 +33,7 @@ public class IndexChangeConfirmationForm {
 	 * @return {@code true} if the user confirmed the action, or {@code false}
 	 *         otherwise
 	 */
-	public boolean confirm(MultiWindowTextGUI gui, String title, String description, String labelA, Index indexA,
+	public static boolean confirm(MultiWindowTextGUI gui, String title, String description, String labelA, Index indexA,
 			String labelB, Index indexB) {
 		final AbstractWindow window = new BasicWindow();
 

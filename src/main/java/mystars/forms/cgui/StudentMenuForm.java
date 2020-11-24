@@ -19,7 +19,7 @@ public class StudentMenuForm {
 	 * Object used to contain response of this form. Class attribute to avoid error
 	 * due to assignment from runnable
 	 */
-	private StudentMenuResponse response;
+	private static StudentMenuResponse response;
 
 	/**
 	 * Displays list of options that a student can perform to manage courses. {@code
@@ -32,7 +32,7 @@ public class StudentMenuForm {
 	 * @return Selected option, or {@code null} if the form is closed without any
 	 *         input
 	 */
-	public StudentMenuResponse getResponse(MultiWindowTextGUI gui, List<Registration> regs) {
+	public static StudentMenuResponse getResponse(MultiWindowTextGUI gui, List<Registration> regs) {
 		final AbstractWindow window = new BasicWindow();
 
 		response = null;

@@ -19,7 +19,7 @@ public class CreateIndexForm {
 	 * Object used to contain response of this form. Class attribute to avoid error
 	 * due to assignment from runnable
 	 */
-	private CreateIndexResponse response;
+	private static CreateIndexResponse response;
 
 	/**
 	 * Displays form requesting user input for creating a course index
@@ -29,7 +29,7 @@ public class CreateIndexForm {
 	 * @return User input to be used to create a new Index, or {@code null} if the
 	 *         form is cancelled/closed without any input
 	 */
-	public CreateIndexResponse getResponse(MultiWindowTextGUI gui, String course) {
+	public static CreateIndexResponse getResponse(MultiWindowTextGUI gui, String course) {
 		final AbstractWindow window = new BasicWindow();
 
 		response = null;
