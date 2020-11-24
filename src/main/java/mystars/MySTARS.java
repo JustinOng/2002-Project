@@ -557,6 +557,8 @@ public class MySTARS {
 					courseController.createLesson(courseCode, indexNo, lessonType, day, lessonResponse.getLocation(),
 							lessonResponse.getGroupNo(), lessonResponse.getWeeks(), lessonResponse.getStartPeriod(),
 							lessonResponse.getEndPeriod());
+					
+					ui.renderDialog("Lesson Creation", "Lesson created successfully");
 					break;
 				case ListLessons:
 					Index index = courseController.getIndex(indexNo);
