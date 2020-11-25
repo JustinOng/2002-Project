@@ -8,7 +8,16 @@ import mystars.enums.Gender;
 import mystars.enums.Nationality;
 import mystars.exceptions.AppException;
 
+/**
+ * This class tests the behavior of Student
+ */
 public class StudentTest {
+	/**
+	 * Ensure that detection of students with duplicate username/matric no functions
+	 * correctly
+	 * 
+	 * @throws AppException On unexpected behavior
+	 */
 	@Test
 	void test_unique() throws AppException {
 		FileStorage storage = new FileStorage("");

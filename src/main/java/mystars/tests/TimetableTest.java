@@ -7,7 +7,15 @@ import mystars.entities.*;
 import mystars.enums.School;
 import mystars.exceptions.AppException;
 
+/**
+ * This class tests the behavior of Timetable
+ */
 public class TimetableTest {
+	/**
+	 * Ensure that the max AU limit is applied correctly
+	 * 
+	 * @throws AppException On unexpected behavior
+	 */
 	@Test
 	void test_timetable() throws AppException {
 		Timetable timetable = new Timetable();

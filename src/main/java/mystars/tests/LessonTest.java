@@ -8,7 +8,14 @@ import mystars.enums.Day;
 import mystars.enums.LessonType;
 import mystars.exceptions.AppException;
 
+/**
+ * This class tests the behavior of Lesson
+ */
 public class LessonTest {
+	/**
+	 * Ensure that lesson clashing is handled correctly
+	 * @throws AppException On unexpected behavior
+	 */
 	@Test
 	void test_clash() throws AppException {
 		Lesson base = new Lesson(null, LessonType.Lecture, Day.Monday, "TR+1", "AAA",
