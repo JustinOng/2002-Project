@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"mystars"},{"l":"mystars.controllers"},{"l":"mystars.entities"},{"l":"mystars.enums"},{"l":"mystars.exceptions"},{"l":"mystars.forms"},{"l":"mystars.forms.cgui"},{"l":"mystars.notifications"},{"l":"mystars.tests"}]

@@ -1,0 +1,9 @@
+mystars
+mystars.controllers
+mystars.entities
+mystars.enums
+mystars.exceptions
+mystars.forms
+mystars.forms.cgui
+mystars.notifications
+mystars.tests
