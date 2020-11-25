@@ -6,8 +6,6 @@ import mystars.enums.*;
 import mystars.exceptions.AppException;
 
 /**
- * <h1>Class: Lesson</h1>
- *
  * This class represents a Lesson. Eg: A Tutorial held on Monday between
  * 0830-0930.
  */

@@ -8,8 +8,6 @@ import mystars.enums.*;
 import mystars.exceptions.AppException;
 
 /**
- * <h1>Class: UserController</h1>
- * 
  * This userController class manages the creation of a new student, and the
  * logins of students or administrators.
  */

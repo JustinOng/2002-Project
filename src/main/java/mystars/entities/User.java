@@ -9,8 +9,6 @@ import java.security.NoSuchAlgorithmException;
 import mystars.exceptions.AppException;
 
 /**
- * <h1>Class: User</h1>
- * 
  * This user class serves as the superclass for 'admin' and 'student'. It
  * manages the verification of a user's password when logging in.
  */

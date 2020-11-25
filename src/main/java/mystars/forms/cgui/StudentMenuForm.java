@@ -10,8 +10,6 @@ import mystars.entities.*;
 import mystars.forms.*;
 
 /**
- * <h1>Class: StudentMenuForm</h1>
- * 
  * This class manages the user interface for the student menu form.
  */
 public class StudentMenuForm {
@@ -27,7 +25,7 @@ public class StudentMenuForm {
 	 * is not in any courses), the only option displayed is to register for a
 	 * course.
 	 * 
-	 * @param gui  The graphical user interface object.
+	 * @param gui  The graphical user interface object to display the UI on
 	 * @param regs List of Registrations of the current user
 	 * @return Selected option, or {@code null} if the form is closed without any
 	 *         input

@@ -8,8 +8,6 @@ import com.googlecode.lanterna.gui2.*;
 import mystars.forms.*;
 
 /**
- * <h1>Class: ItemSelectorForm</h1>
- * 
  * This class manages the user interface for selection of options on a form.
  */
 public class ItemSelectorForm {
@@ -22,7 +20,7 @@ public class ItemSelectorForm {
 	/**
 	 * Displays a generic form requesting that the user select one of {@code items}
 	 * 
-	 * @param gui   The graphical user interface object.
+	 * @param gui   The graphical user interface object to display the UI on
 	 * @param title Title to label form with
 	 * @param items List of items that can be selected
 	 * @return Selected item, or {@code null} if the form is cancelled/closed

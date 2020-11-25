@@ -1,8 +1,6 @@
 package mystars.forms;
 
 /**
- * <h1>Class: IndexSwopResponse</h1>
- * 
  * This class manages the form for students to swap their index with another
  * student.
  */

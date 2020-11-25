@@ -1,8 +1,6 @@
 package mystars.forms;
 
 /**
- * <h1>Class: StudentMenuResponse</h1>
- * 
  * This class manages the form for students with the relevant options.
  */
 public class StudentMenuResponse {

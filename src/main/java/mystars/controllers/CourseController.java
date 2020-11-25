@@ -9,8 +9,6 @@ import mystars.entities.*;
 import mystars.exceptions.AppException;
 
 /**
- * <h1>Class: CourseController</h1>
- * 
  * This courseController class manages the creation of course, course index and
  * lesson. It also manages the registration of course, dropping of course and
  * swopping of index.
@@ -335,10 +333,10 @@ public class CourseController {
 	}
 
 	/**
-	 * Registers the student observers (listeners) for a particular event. 
+	 * Register a listener for a particular event on an Index
 	 * 
 	 * @param callback Event callback that is triggered when an event is called
-	 * @param evt Event
+	 * @param evt      Event
 	 */
 	public void registerIndexObserver(Index.IndexCallback callback, Index.Event evt) {
 		Index.registerObserver(callback, evt);

@@ -8,8 +8,6 @@ import mystars.enums.*;
 import mystars.exceptions.AppException;
 
 /**
- * <h1>Class: Student</h1>
- * 
  * This student class inherits from the user class, and is responsible for the
  * creation of a new student object.
  */

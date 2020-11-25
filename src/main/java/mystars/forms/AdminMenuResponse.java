@@ -1,8 +1,6 @@
 package mystars.forms;
 
 /**
- * <h1>Class: AdminMenuResponse</h1>
- * 
  * This class manages the form for administrators with relevant options.
  */
 public class AdminMenuResponse {

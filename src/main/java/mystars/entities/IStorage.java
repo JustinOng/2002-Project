@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * <h1>Interface: IStorage</h1>
- * 
  * This Istorage interface contains the abstract methods for storing and
  * retrieving serializable objects. Objects can be identified by a category and
  * id. For example, students can be stored all be stored with the category

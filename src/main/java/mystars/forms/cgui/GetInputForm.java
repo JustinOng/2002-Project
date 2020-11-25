@@ -7,8 +7,6 @@ import com.googlecode.lanterna.gui2.dialogs.TextInputDialog;
 import com.googlecode.lanterna.gui2.dialogs.TextInputDialogBuilder;
 
 /**
- * <h1>Class: GetInputForm</h1>
- * 
  * This manages the user interface when getting inputs from the user as a string
  * or numerical value.
  */
@@ -17,7 +15,7 @@ public class GetInputForm {
 	 * Shows a dialog prompt for the user's input, and returns a string input
 	 * obtained from the user.
 	 * 
-	 * @param gui         The graphical user interface object.
+	 * @param gui         The graphical user interface object to display the UI on
 	 * @param title       The title of the prompt window.
 	 * @param description The description for the input in the prompt window.
 	 * @return The string containing the user's input.

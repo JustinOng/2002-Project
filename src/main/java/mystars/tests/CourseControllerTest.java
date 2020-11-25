@@ -13,8 +13,6 @@ import mystars.controllers.CourseController;
 import mystars.exceptions.AppException;
 
 /**
- * <h1>Class: CourseControllerTest</h1>
- * 
  * This class performs the required testing and validation to ensure that the
  * respective controllers are able to perform their required functionality
  * correctly.
@@ -33,30 +31,30 @@ class CourseControllerTest {
 	/**
 	 * Create a new course controller and storage object.
 	 * 
-	 * @throws AppException Shows error message if the initialization fails.
+	 * @throws AppException On unexpected behavior
 	 */
 	CourseControllerTest() throws AppException {
 		Entity.setStorage(storage);
 		controller.start();
 	}
 
-	@BeforeEach
 	/**
 	 * Before each test, this method wipes the storage object since no valid file
 	 * was found.
 	 * 
-	 * @throws Exception Shows error message if the file loading fails.
+	 * @throws AppException On unexpected behavior
 	 */
-	void setUp() throws Exception {
+	@BeforeEach
+	void setUp() throws AppException {
 		storage.loadFromDisk();
 	}
 
-	@Test
 	/**
 	 * Test for the creation of a new course in a selected school.
 	 * 
-	 * @throws AppException Shows error message if any of the tests fail.
+	 * @throws AppException On unexpected behavior
 	 */
+	@Test
 	void test_creation() throws AppException {
 		String courseCode = "CZ0001";
 
@@ -65,12 +63,12 @@ class CourseControllerTest {
 		Course.getCourse(courseCode);
 	}
 
-	@Test
 	/**
 	 * Test for the registration of a course by a student.
 	 * 
-	 * @throws AppException Shows error message if any of the tests fail.
+	 * @throws AppException On unexpected behavior
 	 */
+	@Test
 	void test_registration() throws AppException {
 		// Create a new student.
 		Student student = new Student("name", "email@example.com", "matric no", "user", "password", Gender.Male,
@@ -95,12 +93,12 @@ class CourseControllerTest {
 				"student's timetable should contain index 1");
 	}
 
-	@Test
 	/**
 	 * Test for the dropping of a course by a student.
 	 * 
-	 * @throws AppException Shows error message if any of the tests fail.
+	 * @throws AppException On unexpected behavior
 	 */
+	@Test
 	void test_dropping() throws AppException {
 		Student student = new Student("name", "email@example.com", "matric no", "user", "password", Gender.Male,
 				Nationality.Singaporean);
@@ -119,12 +117,12 @@ class CourseControllerTest {
 				"student's timetable should no longer contain index 1");
 	}
 
-	@Test
 	/**
 	 * Test for the swopping of an index by a student with another student.
 	 * 
-	 * @throws AppException Shows error message if any of the tests fail.
+	 * @throws AppException On unexpected behavior
 	 */
+	@Test
 	void test_swop() throws AppException {
 		// Create two new students to swop index with each other.
 		Student studentA = new Student("name", "email@example.com", "matric no", "userA", "password", Gender.Male,
@@ -158,14 +156,14 @@ class CourseControllerTest {
 				"studentB should have indexA in their timetable");
 	}
 
-	@Test
 	/**
 	 * Test for the successful assigning of a student to the index if there are
 	 * vaccancies. Test for the placement of a student onto the waitlist if there
 	 * are no vaccancies.
 	 * 
-	 * @throws AppException Shows error message if any of the tests fail.
+	 * @throws AppException On unexpected behavior
 	 */
+	@Test
 	void test_waitlist() throws AppException {
 		// Create two new students. One to be successfully allocated an index, with the
 		// other put on a waitlist.

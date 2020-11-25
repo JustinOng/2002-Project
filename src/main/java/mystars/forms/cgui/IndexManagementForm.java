@@ -8,8 +8,6 @@ import com.googlecode.lanterna.gui2.*;
 import mystars.forms.*;
 
 /**
- * <h1>Class: IndexManagementForm</h1>
- * 
  * This class manages the user interface for the course index management form.
  */
 public class IndexManagementForm {
@@ -23,7 +21,7 @@ public class IndexManagementForm {
 	 * Sets the parameters for the graphical user interface administrators will use
 	 * when managing course indexes.
 	 * 
-	 * @param gui        The graphical user interface object.
+	 * @param gui        The graphical user interface object to display the UI on
 	 * @param courseCode Course code to display in the form title
 	 * @param indexes    List of indexes that can be managed
 	 * @return Selected option, or {@code null} if the form is cancelled/closed

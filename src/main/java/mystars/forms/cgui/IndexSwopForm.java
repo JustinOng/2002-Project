@@ -10,8 +10,6 @@ import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import mystars.forms.*;
 
 /**
- * <h1>Class: IndexSwopForm</h1>
- * 
  * This class manages the user interface for the form for swopping of course
  * indexes between two students.
  */
@@ -25,7 +23,7 @@ public class IndexSwopForm {
 	/**
 	 * Displays form requesting user input for swopping indexes
 	 * 
-	 * @param gui The graphical user interface object.
+	 * @param gui The graphical user interface object to display the UI on
 	 * @return User input, or {@code null} if the form is cancelled/closed without
 	 *         any input
 	 */

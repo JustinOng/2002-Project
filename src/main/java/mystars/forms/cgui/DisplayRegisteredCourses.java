@@ -8,9 +8,7 @@ import com.googlecode.lanterna.gui2.table.Table;
 
 import mystars.entities.*;
 
-/**
- * <h1>Class: IndexChangeConfirmationForm</h1>
- * 
+/** 
  * This class displays full information about a course, including lessons.
  */
 public class DisplayRegisteredCourses {
@@ -18,7 +16,7 @@ public class DisplayRegisteredCourses {
 	 * 
 	 * Display a list of courses and their individual lessons
 	 * 
-	 * @param gui   The graphical user interface object
+	 * @param gui   The graphical user interface object to display the UI on
 	 * @param title Title of the form
 	 * @param regs  List of Registrations to display
 	 */

@@ -10,26 +10,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * <h1>Class: FileStorage</h1>
- * 
  * This class stores serializable data to a flat file on disk
  */
 public class FileStorage implements IStorage {
 	/**
-	 * A hashmap storage object containing key value pairs for the serializable
-	 * data.
+	 * HashMap to store objects. Two layers to store each object with
+	 * {@code <category, id}
 	 */
 	private HashMap<String, HashMap<String, Serializable>> storage = new HashMap<>();
 
 	/**
-	 * The name of the file to write data to
+	 * The name of the file to read/write data from/to
 	 */
 	private String filename;
 
 	/**
 	 * Creates a new instance of FileStorage
 	 * 
-	 * @param filename The name of the file to write data to
+	 * @param filename The name of the file to read/write data from/to
 	 */
 	public FileStorage(String filename) {
 		this.filename = filename;
@@ -51,12 +49,6 @@ public class FileStorage implements IStorage {
 		return storage.get(type).get(id);
 	}
 
-	/**
-	 * Returns an Arraylist containing all the entries corresponding to the ID in
-	 * the storage object.
-	 * 
-	 * @return The Arraylist of the storage object entries matching the type values.
-	 */
 	@Override
 	public ArrayList<Serializable> getAll(String type) {
 		if (storage.get(type) == null) {

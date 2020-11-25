@@ -3,8 +3,6 @@ package mystars.forms;
 import java.time.LocalDateTime;
 
 /**
- * <h1>Class: AccessPeriodResponse</h1>
- * 
  * This class holds the information for the MySTARS access period starting and
  * ending date and time.
  */

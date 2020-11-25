@@ -8,8 +8,6 @@ import com.googlecode.lanterna.gui2.table.Table;
 import mystars.entities.*;
 
 /**
- * <h1>Class: IndexChangeConfirmationForm</h1>
- * 
  * This class manages the user interface for confirming an index change.
  */
 public class IndexChangeConfirmationForm {
@@ -23,7 +21,7 @@ public class IndexChangeConfirmationForm {
 	 * Display detailed information about two indexes and request for the user to
 	 * confirm an action
 	 * 
-	 * @param gui         The graphical user interface object.
+	 * @param gui         The graphical user interface object to display the UI on
 	 * @param title       Title of the form
 	 * @param description Description to be shown on the form
 	 * @param labelA      Text to label {@code indexA} with

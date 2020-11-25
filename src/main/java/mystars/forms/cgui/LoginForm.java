@@ -8,8 +8,6 @@ import mystars.forms.*;
 import java.util.Arrays;
 
 /**
- * <h1>Class: LoginForm</h1>
- * 
  * This class manages the user interface for the user login form.
  */
 public class LoginForm {
@@ -22,7 +20,7 @@ public class LoginForm {
 	/**
 	 * Displays login form
 	 * 
-	 * @param gui The graphical user interface object.
+	 * @param gui The graphical user interface object to display the UI on
 	 * @return {@code LoginResponse} containing user input, or {@code null} if the
 	 *         form is closed without any input
 	 */

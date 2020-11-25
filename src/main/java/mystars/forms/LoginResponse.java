@@ -1,8 +1,6 @@
 package mystars.forms;
 
 /**
- * <h1>Class: LoginResponse</h1>
- * 
  * This class manages the form for the user's login.
  */
 public class LoginResponse {

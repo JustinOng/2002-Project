@@ -7,8 +7,6 @@ import com.googlecode.lanterna.gui2.*;
 import mystars.forms.*;
 
 /**
- * <h1>Class: AdminMenuForm</h1>
- * 
  * This class manages user interface for the administrator menu form.
  */
 public class AdminMenuForm {
@@ -21,7 +19,7 @@ public class AdminMenuForm {
 	/**
 	 * Displays admin menu with list of things the admin can do
 	 * 
-	 * @param gui The graphical user interface object.
+	 * @param gui The graphical user interface object to display the UI on
 	 * @return Selected option, or {@code null} if the form is closed without any
 	 *         input
 	 */

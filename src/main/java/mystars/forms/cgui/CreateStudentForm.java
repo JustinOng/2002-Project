@@ -14,8 +14,6 @@ import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import mystars.forms.*;
 
 /**
- * <h1>Class: CreateStudentForm</h1>
- * 
  * This manages the user interface for the creation of new student form.
  */
 public class CreateStudentForm {
@@ -28,13 +26,14 @@ public class CreateStudentForm {
 	/**
 	 * Displays form requesting user input for creating a student
 	 * 
-	 * @param gui           The graphical user interface object.
+	 * @param gui           The graphical user interface object to display the UI on
 	 * @param genders       The list of genders that a student can assume
 	 * @param nationalities The list of nationalities that a student can assume
 	 * @return User input to be used to create a new Student, or {@code null} if the
 	 *         form is cancelled/closed without any input
 	 */
-	public static CreateStudentResponse getResponse(MultiWindowTextGUI gui, List<String> genders, List<String> nationalities) {
+	public static CreateStudentResponse getResponse(MultiWindowTextGUI gui, List<String> genders,
+			List<String> nationalities) {
 		final AbstractWindow window = new BasicWindow();
 
 		response = null;

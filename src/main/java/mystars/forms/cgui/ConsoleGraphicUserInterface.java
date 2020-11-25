@@ -20,8 +20,6 @@ import mystars.entities.*;
 import mystars.forms.*;
 
 /**
- * <h1>Class: ConsoleGraphicUserInterface</h1>
- * 
  * This class creates the respective form objects and manages the graphical user
  * interfaces for the console that users will use.
  */

@@ -8,25 +8,35 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * <h1>Class: DisplayList</h1>
- * 
  * This class displays a list of items
  */
 public class DisplayList<T> {
+	/**
+	 * Interface defining callback function
+	 * 
+	 * @param <T> Type of item to retrieve properties for
+	 */
 	public interface GetProperties<T> {
+		/**
+		 * Called on every item passed to {@code show(...)} to retrieve properties for
+		 * display
+		 * 
+		 * @param item item to retrieve properties from
+		 * @return String[] containing list of properties to display
+		 */
 		String[] run(T item);
 	}
 
 	/**
 	 * Displays a list of items with the given title in a table
 	 * 
-	 * @param gui     The graphical user interface object.
-	 * @param title   The title of the form.
+	 * @param gui          The graphical user interface object to display the UI on
+	 * @param title        The title of the form.
 	 * @param emptyMessage Message to display if {@code items} is empty
-	 * @param headers List of table headers
-	 * @param items   List of items to display. {@code handler.getProperties} is
-	 *                called on every item to get the properties to display.
-	 * @param handler Function to be called to expand item into its properties
+	 * @param headers      List of table headers
+	 * @param items        List of items to display. {@code handler.getProperties}
+	 *                     is called on every item to get the properties to display.
+	 * @param handler      Function to be called to expand item into its properties
 	 */
 	public void show(MultiWindowTextGUI gui, String title, String emptyMessage, String[] headers, List<T> items,
 			GetProperties<T> handler) {

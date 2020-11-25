@@ -16,7 +16,7 @@ import mystars.exceptions.UIException;
  */
 public class AppUI extends MultiWindowTextGUI {
 	/**
-	 * Inherit the features of the user interface from the superclass.
+	 * Pass through constructor arguments to super
 	 * 
 	 * @param screen        The screen object.
 	 * @param windowManager The window manager object.
@@ -26,25 +26,21 @@ public class AppUI extends MultiWindowTextGUI {
 		super(screen, windowManager, background);
 	}
 
-	@Override
 	/**
-	 * Adds an additional window to the user interface, such as for a prompt, and
-	 * waits for the user to handle or acknowledge the prompt before closing.
+	 * In our use case, since we only display one window at a time, we shoudn't have
+	 * an active window at this point because 'addWindowAndWait' should only return
+	 * once the window closes.
+	 * 
+	 * This handles the case where the application window has been closed (eg by
+	 * clicking X), {@code addWindowAndWait} returns immediately and there is still an
+	 * active window. We throw an exception which will bubble up to the main thread
+	 * to terminate the application.
 	 */
+	@Override
 	public WindowBasedTextGUI addWindowAndWait(Window window) {
 		super.addWindowAndWait(window);
 
 		if (getActiveWindow() != null) {
-			/*
-			 * In our use case, since we only display one window at a time, we shoudn't have
-			 * an active window at this point because 'addWindowAndWait' should only return
-			 * once the window closes.
-			 * 
-			 * This handles the case where the application window has been closed (eg by X),
-			 * 'addWindowAndWait' returns immediately and there is still an active window.
-			 * We throw an exception which will bubble up to the main thread to terminate
-			 * the application.
-			 */
 			throw new UIException("UI exited");
 		}
 		return this;

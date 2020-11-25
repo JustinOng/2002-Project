@@ -8,8 +8,6 @@ import com.googlecode.lanterna.gui2.*;
 import mystars.forms.*;
 
 /**
- * <h1>Class: CourseManagementForm</h1>
- * 
  * This class manages the user interface for the course management form.
  */
 public class CourseManagementForm {
@@ -23,7 +21,7 @@ public class CourseManagementForm {
 	 * Displays form with list of {@code courses} and request for the user to select
 	 * an action to perform on a course
 	 * 
-	 * @param gui     The graphical user interface object.
+	 * @param gui     The graphical user interface object to display the UI on
 	 * @param courses The list of courses.
 	 * @return Selected option, or {@code null} if the form is cancelled/closed
 	 *         without any input

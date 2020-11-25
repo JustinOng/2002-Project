@@ -3,8 +3,6 @@ package mystars.controllers;
 import mystars.entities.*;
 
 /**
- * <h1>Class: StorageController</h1>
- * 
  * This StorageController class manages the storage and application specific
  * configuration for MySTARS.
  */

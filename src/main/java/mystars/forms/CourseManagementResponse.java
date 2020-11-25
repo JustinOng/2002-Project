@@ -1,8 +1,6 @@
 package mystars.forms;
 
 /**
- * <h1>Class: CourseManagementResponse</h1>
- * 
  * This class manages the form for the management of courses with the relevant
  * options.
  */

@@ -10,15 +10,13 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * <h1>Class: DisplayStudentList</h1>
- * 
  * This class displays a list of lessons for the given index(s)
  */
 public class DisplayIndexList {
 	/**
 	 * Displays a list of indexes with the given title
 	 * 
-	 * @param gui     The graphical user interface object.
+	 * @param gui     The graphical user interface object to display the UI on
 	 * @param title   The title of the form.
 	 * @param indexes List of indexes to display
 	 */

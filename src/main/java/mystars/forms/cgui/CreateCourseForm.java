@@ -11,8 +11,6 @@ import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import mystars.forms.*;
 
 /**
- * <h1>Class: CreateCourseForm</h1>
- * 
  * This class manages the user interface for the course creation form.
  */
 public class CreateCourseForm {
@@ -25,7 +23,7 @@ public class CreateCourseForm {
 	/**
 	 * Displays form requesting user input for creating a course
 	 * 
-	 * @param gui     The graphical user interface object.
+	 * @param gui     The graphical user interface object to display the UI on
 	 * @param schools The list of schools that a course can belong to
 	 * @return User input to be used to create a new Course, or {@code null} if the
 	 *         form is cancelled/closed without any input

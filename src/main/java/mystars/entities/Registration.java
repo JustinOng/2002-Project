@@ -3,8 +3,6 @@ package mystars.entities;
 import java.io.Serializable;
 
 /**
- * <h1>Class: Registration</h1>
- * 
  * This class represents one index added to a timetable and tracks the current
  * status of this relationship.
  */

@@ -13,8 +13,6 @@ import javax.mail.internet.MimeMessage;
 import mystars.entities.Student;
 
 /**
- * <h1>Class: EmailNotifier</h1>
- * 
  * This class sends an email to the student to notify them of changes to their
  * course registration.
  */
@@ -24,7 +22,7 @@ public class EmailNotifier implements INotifyStudent {
 	private String password;
 
 	/**
-	 * This class sets the parameters for the email notifier object,
+	 * This class sets the parameters for the email notifier object
 	 * 
 	 * @param username The student's username.
 	 * @param password The student's password.
@@ -42,8 +40,7 @@ public class EmailNotifier implements INotifyStudent {
 	}
 
 	/**
-	 * Notify a student {@code student} with the given title {@code title} and
-	 * message {@code message}.
+	 * Notify a {@code student} with the given {@code title} and {@code message}.
 	 * 
 	 * @return {@code true} If the notification was successful, or {@code false}
 	 *         otherwise
@@ -54,8 +51,8 @@ public class EmailNotifier implements INotifyStudent {
 	}
 
 	/**
-	 * Sends an email to an address {@code email} with the subject {@code subject}
-	 * and body {@code body}
+	 * Sends an email to an address {@code email} with the {@code subject} and
+	 * {@code body}
 	 * 
 	 * @param email   The email address to send to.
 	 * @param subject The title of the email.

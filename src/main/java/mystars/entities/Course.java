@@ -7,8 +7,6 @@ import mystars.enums.*;
 import mystars.exceptions.AppException;
 
 /**
- * <h1>Class: Course</h1>
- * 
  * This class performs all the functions required for courseController. It
  * inherits from the Entity class.
  */

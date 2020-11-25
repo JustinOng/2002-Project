@@ -7,8 +7,7 @@ import mystars.entities.Student;
  */
 public interface INotifyStudent {
 	/**
-	 * Send a message{@code message} with the title {@code title} to a student
-	 * {@code student}.
+	 * Send a {@code message} with the {@code title} to a {@code student}.
 	 * 
 	 * @param student The target to send notification to.
 	 * @param title   The title of the notification.

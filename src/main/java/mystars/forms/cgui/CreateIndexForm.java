@@ -10,8 +10,6 @@ import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import mystars.forms.*;
 
 /**
- * <h1>Class: CreateIndexForm</h1>
- * 
  * This class manages the user interface for the course index creation form.
  */
 public class CreateIndexForm {
@@ -24,7 +22,7 @@ public class CreateIndexForm {
 	/**
 	 * Displays form requesting user input for creating a course index
 	 * 
-	 * @param gui    The graphical user interface object.
+	 * @param gui    The graphical user interface object to display the UI on
 	 * @param course Parent course name to be displayed on the form
 	 * @return User input to be used to create a new Index, or {@code null} if the
 	 *         form is cancelled/closed without any input

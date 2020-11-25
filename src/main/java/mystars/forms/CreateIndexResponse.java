@@ -1,8 +1,6 @@
 package mystars.forms;
 
 /**
- * <h1>Class: CreateIndexResponse</h1>
- * 
  * This class manages the form for the creation of course indexes.
  */
 public class CreateIndexResponse {

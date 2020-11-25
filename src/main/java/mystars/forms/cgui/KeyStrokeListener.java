@@ -9,14 +9,14 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
 /**
- * <h1>Class: KeyStrokeListener</h1>
- * 
  * This class listens for keypresses and closes the pane if escape is closed
  */
 public class KeyStrokeListener implements WindowListener {
 	/**
-	 * When the user enters keystrokes.
+	 * Override {@code onInput} to close the base pane if escape is pressed to allow
+	 * for "go back" behavior
 	 */
+	@Override
 	public void onInput(Window basePane, KeyStroke keyStroke, AtomicBoolean deliverEvent) {
 		if (keyStroke.getKeyType() == KeyType.Escape) {
 			basePane.close();
@@ -27,6 +27,7 @@ public class KeyStrokeListener implements WindowListener {
 	 * Prevents triggering of unintended action when pressing a key that may serve
 	 * different functions in different contexts in the program
 	 */
+	@Override
 	public void onUnhandledInput(Window basePane, KeyStroke keyStroke, AtomicBoolean hasBeenHandled) {
 		return;
 	}
@@ -34,6 +35,7 @@ public class KeyStrokeListener implements WindowListener {
 	/**
 	 * When the user interface window changes position
 	 */
+	@Override
 	public void onMoved(Window window, TerminalPosition oldPosition, TerminalPosition newPosition) {
 		return;
 	}
@@ -41,6 +43,7 @@ public class KeyStrokeListener implements WindowListener {
 	/**
 	 * When the user interface window is resized
 	 */
+	@Override
 	public void onResized(Window window, TerminalSize oldSize, TerminalSize newSize) {
 		return;
 	}

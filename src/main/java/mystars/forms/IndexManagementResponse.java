@@ -1,8 +1,6 @@
 package mystars.forms;
 
 /**
- * <h1>Class: IndexManagementResponse</h1>
- * 
  * This class manages the the form for the management of course indexes with the
  * relevant options.
  */

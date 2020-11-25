@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * <h1>Class: Entity</h1>
- * 
  * This class provides helper functions for persistance of child classes.
  * Classes that need to be retrievable directly (ie be retrievable from an id)
  * inherit from this class.

@@ -5,8 +5,6 @@ import java.util.List;
 import mystars.entities.*;
 
 /**
- * <h1>Interface: IUserInterface</h1>
- * 
  * This interface manages the respective forms for the operation of MySTARS.
  */
 public interface IUserInterface {

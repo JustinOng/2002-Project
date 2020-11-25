@@ -17,8 +17,6 @@ import mystars.forms.*;
 import mystars.notifications.INotifyStudent;
 
 /**
- * <h1>Class: MySTARS</h1>
- * 
  * This class manages the overall operation of the MySTARS program.
  */
 public class MySTARS {

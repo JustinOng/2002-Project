@@ -10,22 +10,23 @@ import mystars.notifications.EmailNotifier;
 import mystars.notifications.INotifyStudent;
 
 /**
- * <h1>Class: Entry</h1>
- * 
  * This class defines the entry point into the MySTARS program.
  */
 public class Entry {
 	/**
 	 * Main method which creates the MySTARS application object and initializes it.
-	 * Command line arguments that can be passed to the application:<br>
-	 * --config=/path/to/file - path to properties file containing parameters for
-	 * the application<br>
-	 * --load-indexes=/path/to/file - path to txt file containing course
+	 * Command line arguments that can be passed to the application:
+	 * <ul>
+	 * <li>{@code --config=/path/to/file} - path to properties file containing
+	 * parameters for the application</li>
+	 * <li>{@code --load-indexes=/path/to/file} - path to txt file containing course
 	 * information. See {@link MySTARS#loadIndexes(String)} for format
-	 * information<br>
-	 * --create-admin - create admin account. See {@link MySTARS#createAdmin()} for
-	 * more information --create-students - create student accounts. See
-	 * {@link MySTARS#createStudents()} for more information
+	 * information</li>
+	 * <li>{@code --create-admin} - create admin account. See
+	 * {@link MySTARS#createAdmin()} for more information</li>
+	 * <li>{@code --create-students} - create student accounts. See
+	 * {@link MySTARS#createStudents()} for more information</li>
+	 * </ul>
 	 * 
 	 * @param args Command line arguments to this application.
 	 * @throws IOException on UI exception

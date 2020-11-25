@@ -12,8 +12,6 @@ import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import mystars.forms.*;
 
 /**
- * <h1>Class: CreateLessonForm</h1>
- * 
  * This class manages the user interface for the course index lesson creation
  * form.
  */
@@ -27,7 +25,7 @@ public class CreateLessonForm {
 	/**
 	 * Displays form requesting user input for creating a lesson
 	 * 
-	 * @param gui        The graphical user interface object.
+	 * @param gui        The graphical user interface object to display the UI on
 	 * @param index      Parent index number to be displayed on the form
 	 * @param lessonType The list of lesson types that the lesson can take.
 	 * @param days       The list of days that the lesson can be conducted on.
@@ -113,7 +111,7 @@ public class CreateLessonForm {
 						hasLesson = true;
 					}
 				}
-				
+
 				if (!hasLesson) {
 					MessageDialog.showMessageDialog(gui, "Error", "Lessons must be held on at least one week");
 					return;

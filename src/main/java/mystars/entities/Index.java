@@ -9,8 +9,6 @@ import mystars.enums.*;
 import mystars.exceptions.AppException;
 
 /**
- * <h1>Class: Index</h1>
- *
  * This index class manages creation of lessons within an index and the
  * relationship between student and index. It inherits from the Entity Class.
  */

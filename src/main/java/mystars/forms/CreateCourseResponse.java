@@ -1,8 +1,6 @@
 package mystars.forms;
 
 /**
- * <h1>Class: CreateCourseResponse</h1>
- * 
  * This class manages the form for the creation of courses.
  */
 public class CreateCourseResponse {
